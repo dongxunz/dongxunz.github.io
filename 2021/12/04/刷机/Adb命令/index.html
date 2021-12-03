@@ -1,0 +1,489 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="dongxun">
+  <meta name="keywords" content="">
+  <meta name="description" content="ADB官方介绍  ADB全称为：Android Debug Bridge，可翻译为Android 调试桥(adb)，是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。   查看使用帮助1adb help  启动adb服务：1adb start-server  杀死ad">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Adb命令">
+<meta property="og:url" content="http://example.com/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ADB官方介绍  ADB全称为：Android Debug Bridge，可翻译为Android 调试桥(adb)，是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。   查看使用帮助1adb help  启动adb服务：1adb start-server  杀死ad">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-03T16:19:25.000Z">
+<meta property="article:modified_time" content="2021-12-03T17:14:23.866Z">
+<meta property="article:author" content="dongxun">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="adb">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Adb命令 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Adb命令">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-04 00:19" pubdate>
+        2021年12月4日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Adb命令</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.android.com/studio/command-line/adb">ADB官方介绍</a></p>
+<blockquote>
+<p>ADB全称为：Android Debug Bridge，可翻译为Android 调试桥(adb)，是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。</p>
+</blockquote>
+</blockquote>
+<h2 id="查看使用帮助"><a href="#查看使用帮助" class="headerlink" title="查看使用帮助"></a>查看使用帮助</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb <span class="hljs-built_in">help</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="启动adb服务："><a href="#启动adb服务：" class="headerlink" title="启动adb服务："></a>启动adb服务：</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">adb <span class="hljs-keyword">start</span>-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="杀死adb服务："><a href="#杀死adb服务：" class="headerlink" title="杀死adb服务："></a>杀死adb服务：</h2><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">adb kill-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="通过-Wi-Fi-连接到设备"><a href="#通过-Wi-Fi-连接到设备" class="headerlink" title="通过 Wi-Fi 连接到设备"></a>通过 Wi-Fi 连接到设备</h2><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lasso">adb <span class="hljs-built_in">pair</span> ipaddr:port #Android版本 &gt;= <span class="hljs-number">11</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="启动网络adb服务："><a href="#启动网络adb服务：" class="headerlink" title="启动网络adb服务："></a>启动网络adb服务：</h2><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">adb connect ipaddr:port<br></code></pre></td></tr></table></figure>
+
+<h2 id="断开网络adb服务"><a href="#断开网络adb服务" class="headerlink" title="断开网络adb服务:"></a>断开网络adb服务:</h2><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">adb</span> disconnent ipaddr:<span class="hljs-keyword">port</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="设置网络adb端口号"><a href="#设置网络adb端口号" class="headerlink" title="设置网络adb端口号"></a>设置网络adb端口号</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">adb</span> forward tcp:<span class="hljs-number">5555</span> tcp:<span class="hljs-number">8888</span> #网络adb默认端口号为：<span class="hljs-number">5555</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="使用adb重启手机进入-recovery-bootloader："><a href="#使用adb重启手机进入-recovery-bootloader：" class="headerlink" title="使用adb重启手机进入 recovery/bootloader："></a>使用adb重启手机进入 recovery/bootloader：</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">adb</span> reboot recovery/bootloader<br></code></pre></td></tr></table></figure>
+
+<h2 id="拷贝手机里的文件到电脑上-默认拷贝路径为命令行所在路径-："><a href="#拷贝手机里的文件到电脑上-默认拷贝路径为命令行所在路径-：" class="headerlink" title="拷贝手机里的文件到电脑上(默认拷贝路径为命令行所在路径)："></a>拷贝手机里的文件到电脑上(默认拷贝路径为命令行所在路径)：</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">adb pull <span class="hljs-regexp">/system/</span>etc/hosts <span class="hljs-comment">#拷贝手机文件到电脑命令行所在路径</span><br><br>adb pull <span class="hljs-regexp">/system/</span>etc/hosts D:\ <span class="hljs-comment">#拷贝手机文件到电脑指定路径</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="拷贝电脑的文件到手机上："><a href="#拷贝电脑的文件到手机上：" class="headerlink" title="拷贝电脑的文件到手机上："></a>拷贝电脑的文件到手机上：</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">adb</span> push Markdown语法.md /storage/<span class="hljs-number">92</span>C<span class="hljs-number">4</span>-<span class="hljs-number">1</span>BE<span class="hljs-number">6</span><br>    <br><span class="hljs-attribute">adb</span> push D:\hosts /storage/<span class="hljs-number">92</span>C<span class="hljs-number">4</span>-<span class="hljs-number">1</span>BE<span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="在命令行中访问手机目录："><a href="#在命令行中访问手机目录：" class="headerlink" title="在命令行中访问手机目录："></a>在命令行中访问手机目录：</h2><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">adb <span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用<code>adb shell</code>进入Android设备目录后，如需退出，输入<code>exit</code>即可回到cmd</p>
+</blockquote>
+<h2 id="显示当前连接的全部安卓设备："><a href="#显示当前连接的全部安卓设备：" class="headerlink" title="显示当前连接的全部安卓设备："></a>显示当前连接的全部安卓设备：</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adb devices -l</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="安装APP"><a href="#安装APP" class="headerlink" title="安装APP"></a>安装APP</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">adb <span class="hljs-keyword">install</span> xxx.apk<br></code></pre></td></tr></table></figure>
+
+<h2 id="卸载APP"><a href="#卸载APP" class="headerlink" title="卸载APP"></a>卸载APP</h2><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">adb</span> uninstall apk_package_name <span class="hljs-comment">#卸载包名为apk_package_name的APP</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="对指定设备执行命令"><a href="#对指定设备执行命令" class="headerlink" title="对指定设备执行命令"></a>对指定设备执行命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb -s devices_id <span class="hljs-built_in">command</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>devices_id：设备ID<br>command：命令</p>
+</blockquote>
+<h2 id="打印Log信息"><a href="#打印Log信息" class="headerlink" title="打印Log信息"></a>打印Log信息</h2><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">adb logcat -s <span class="hljs-keyword">tag</span> <span class="hljs-title">#在命令行中查看标签名为tag</span>的Log信息<br></code></pre></td></tr></table></figure>
+
+<h2 id="使adb获取Root权限"><a href="#使adb获取Root权限" class="headerlink" title="使adb获取Root权限"></a>使adb获取Root权限</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adb root</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="启动对应包名的MainActivity"><a href="#启动对应包名的MainActivity" class="headerlink" title="启动对应包名的MainActivity"></a>启动对应包名的MainActivity</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">adb <span class="hljs-built_in">shell</span> am <span class="hljs-built_in">start</span> -n apk_package_name <span class="hljs-comment">#启动包名为apk_package_name的MainActivity</span><br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%88%B7%E6%9C%BA/">刷机</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                    
+                      <a class="hover-with-bg" href="/tags/adb/">adb</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/">
+                        <span class="hidden-mobile">Hexo进阶</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":145,"height":315,"hOffset":30},"mobile":{"show":true,"scale":0.5},"dialog":{"enable":true,"hitokoto":true},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
+</html>
