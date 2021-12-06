@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>一加6刷机笔记</title>
+    <link href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/"/>
+    <url>/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h2 id="刷机步骤"><a href="#刷机步骤" class="headerlink" title="刷机步骤"></a>刷机步骤</h2><h3 id="1-开启USB调试模式"><a href="#1-开启USB调试模式" class="headerlink" title="1. 开启USB调试模式"></a>1. 开启USB调试模式</h3><p>进入 <em>设置 &gt; 关于手机</em>，连续点击 <em>版本号</em> 5次，开启 <strong>开发者选项</strong></p><h3 id="2-进入Bootloder模式"><a href="#2-进入Bootloder模式" class="headerlink" title="2. 进入Bootloder模式"></a>2. 进入Bootloder模式</h3><p>手机关机，按住 <em>开机键+音量下键</em> 进入Bootloder模式</p><h3 id="3-解OEM锁"><a href="#3-解OEM锁" class="headerlink" title="3. 解OEM锁"></a>3. 解OEM锁</h3><p>使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入<code>adb start-server</code>连接手机，然后输入<code>fastboot oem unlock</code>解锁，此时手机上会有解锁风险提示，使用音量上下键，选择最下面的选项，按一下开机键确认解锁，系统会擦除原有手机数据，完成解锁。</p><h3 id="4-刷入Recovery"><a href="#4-刷入Recovery" class="headerlink" title="4. 刷入Recovery"></a>4. 刷入Recovery</h3><p>老方法：</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">fastboot</span> flash recovery recovery.img<br></code></pre></td></tr></table></figure><p>由于一加6采用双系统（a/b），所以不能按老方法直接使用命令刷入第三方recovery</p><p>新方法：  </p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">fastboot flash <span class="hljs-keyword">boot </span>recovery.img <span class="hljs-comment">#获取临时第三方recovery</span><br></code></pre></td></tr></table></figure><p>然后使用<code>fastboot reboot recovery</code>重启进入临时第三方recovery，在recovery里刷入第三方recovery的zip包即可获得永久recovery。</p><h3 id="5-刷入第三方刷机包"><a href="#5-刷入第三方刷机包" class="headerlink" title="5. 刷入第三方刷机包"></a>5. 刷入第三方刷机包</h3><p>将下载好的第三方刷机包，放入手机目录，进入第三方Recovery刷入即可。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>刷机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+      <tag>一加6</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Fastboot命令</title>
+    <link href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/"/>
+    <url>/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>Fastboot：英文翻译为快速启动的意思；在Android手机中Fastboot是一种比Recovery更底层的刷机模式；是使用USB数据线连接手机进行刷机的工具（俗称线刷）。</p></blockquote><h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><h3 id="1-重启进入系统"><a href="#1-重启进入系统" class="headerlink" title="1. 重启进入系统"></a>1. 重启进入系统</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">fastboot reboot</span><br></code></pre></td></tr></table></figure><h3 id="2-解锁OEM锁"><a href="#2-解锁OEM锁" class="headerlink" title="2. 解锁OEM锁"></a>2. 解锁OEM锁</h3><ul><li>对于新款设备（2015 年及之后发布的设备）：<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">fastboot flashing unlock</span><br></code></pre></td></tr></table></figure></li><li>对于老款设备（2014 年及之前发布的设备）：<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">fastboot oem unlock</span><br></code></pre></td></tr></table></figure></li></ul><h3 id="3-OEM上锁"><a href="#3-OEM上锁" class="headerlink" title="3. OEM上锁"></a>3. OEM上锁</h3><ul><li>对于新款设备（2015 年及之后发布的设备）：<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">fastboot flashing <span class="hljs-keyword">lock</span><br></code></pre></td></tr></table></figure></li><li>对于老款设备（2014 年及之前发布的设备）：<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">fastboot oem <span class="hljs-keyword">lock</span><br></code></pre></td></tr></table></figure></li></ul><hr><h2 id="刷机相关"><a href="#刷机相关" class="headerlink" title="刷机相关"></a>刷机相关</h2><h3 id="1-切换到分区a"><a href="#1-切换到分区a" class="headerlink" title="1. 切换到分区a"></a>1. 切换到分区a</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">fastboot set_active <span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure><h3 id="2-擦除对应分区"><a href="#2-擦除对应分区" class="headerlink" title="2. 擦除对应分区"></a>2. 擦除对应分区</h3><figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dos">fastboot <span class="hljs-built_in">erase</span> &#123;partition&#125;<br></code></pre></td></tr></table></figure><blockquote><p>{partition} 可选参数：<br><code>recovery</code>：Recovery分区<br><code>system</code>：系统分区<br><code>boot</code>：Boot分区<br><code>cache</code>：缓存分区<br><code>userdata</code>：用户数据分区</p></blockquote><h3 id="3-刷入对应分区"><a href="#3-刷入对应分区" class="headerlink" title="3. 刷入对应分区"></a>3. 刷入对应分区</h3><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="xml">fastboot flash </span><span class="hljs-template-variable">&#123;partition&#125;</span><span class="xml"> </span><span class="hljs-template-variable">&#123;img&#125;</span><span class="xml">：刷入对应分区的镜像文件</span><br></code></pre></td></tr></table></figure><blockquote><p>{partition} 和 {img} 是配合使用的命令参数，使用方法为：<br><code>recovery recovery.img</code>：刷入recovery<br><code>boot boot.img</code>：刷入boot<br><code>system system.img</code>：刷入system<br><code>persist persist.img</code>：刷入persist  </p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>刷机</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Android</tag>
+      
+      <tag>Fastboot</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Adb命令</title>
     <link href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/"/>
     <url>/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/</url>
