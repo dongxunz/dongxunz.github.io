@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.PNG">
 <meta property="article:published_time" content="2021-12-08T12:08:00.000Z">
-<meta property="article:modified_time" content="2021-12-08T16:12:18.505Z">
+<meta property="article:modified_time" content="2021-12-08T16:53:10.612Z">
 <meta property="article:author" content="dongxun">
 <meta property="article:tag" content="OpenMediaVault">
 <meta property="article:tag" content="NAS">
@@ -213,7 +213,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.4k 字
     </span>
   
 
@@ -304,7 +304,10 @@
 
 <p>但是新系统，resolv.conf被系统自动管理，所以需要使用以下方法：</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">nano <span class="hljs-regexp">/etc/</span>systemd/resolved.conf<br></code></pre></td></tr></table></figure>
-<p>将<code>#DNS=</code>改为<code>DNS=8.8.8.8</code><br>Ctrl+X，输入Y，回车保存退出即可</p>
+<p>将<code>#DNS=</code>改为<code>DNS=8.8.8.8</code>，Ctrl+X，输入Y，回车保存退出即可。</p>
+<p>输入以下命令，重启systemd-resolved服务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl restart systemd-resolved</span><br></code></pre></td></tr></table></figure>
+
 <h3 id="开启社区插件"><a href="#开启社区插件" class="headerlink" title="开启社区插件"></a>开启社区插件</h3><h3 id="更改OpenMediaVault为国内源"><a href="#更改OpenMediaVault为国内源" class="headerlink" title="更改OpenMediaVault为国内源"></a>更改OpenMediaVault为国内源</h3>
             </div>
             <hr>
