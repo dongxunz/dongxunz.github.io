@@ -18,21 +18,23 @@
   <meta name="description" content="">
   <meta name="author" content="dongxun">
   <meta name="keywords" content="">
-  <meta name="description" content="刷机步骤1. 开启USB调试模式进入 设置 &gt; 关于手机，连续点击 版本号 5次，开启 开发者选项 2. 进入Bootloder模式手机关机，按住 开机键+音量下键 进入Bootloder模式 3. 解OEM锁使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入adb start-server连接手机，然后输入fastboot oem unlock解锁，此时手机上会有解锁风险提示，使用">
+  <meta name="description" content="OpenMediaVault官网  OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一加6刷机笔记">
-<meta property="og:url" content="http://example.com/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="OpenMediaVault安装与配置">
+<meta property="og:url" content="http://example.com/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="刷机步骤1. 开启USB调试模式进入 设置 &gt; 关于手机，连续点击 版本号 5次，开启 开发者选项 2. 进入Bootloder模式手机关机，按住 开机键+音量下键 进入Bootloder模式 3. 解OEM锁使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入adb start-server连接手机，然后输入fastboot oem unlock解锁，此时手机上会有解锁风险提示，使用">
+<meta property="og:description" content="OpenMediaVault官网  OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-06T14:42:47.000Z">
-<meta property="article:modified_time" content="2021-12-06T15:09:33.421Z">
+<meta property="og:image" content="http://example.com/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.PNG">
+<meta property="article:published_time" content="2021-12-08T12:08:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T16:12:18.505Z">
 <meta property="article:author" content="dongxun">
-<meta property="article:tag" content="Android">
-<meta property="article:tag" content="一加6">
+<meta property="article:tag" content="OpenMediaVault">
+<meta property="article:tag" content="NAS">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.PNG">
   
-  <title>一加6刷机笔记 - Hexo</title>
+  <title>OpenMediaVault安装与配置 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -190,7 +192,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="一加6刷机笔记">
+            <span class="h2" id="subtitle" title="OpenMediaVault安装与配置">
               
             </span>
 
@@ -200,8 +202,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-06 22:42" pubdate>
-        2021年12月6日 晚上
+      <time datetime="2021-12-08 20:08" pubdate>
+        2021年12月8日 晚上
       </time>
     </span>
   
@@ -211,7 +213,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      504 字
+      1.3k 字
     </span>
   
 
@@ -220,7 +222,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      4 分钟
     </span>
   
 
@@ -249,28 +251,61 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一加6刷机笔记</h1>
+            <h1 style="display: none">OpenMediaVault安装与配置</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2021年12月6日 晚上
+                  本文最后更新于：2021年12月9日 凌晨
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="刷机步骤"><a href="#刷机步骤" class="headerlink" title="刷机步骤"></a>刷机步骤</h2><h3 id="1-开启USB调试模式"><a href="#1-开启USB调试模式" class="headerlink" title="1. 开启USB调试模式"></a>1. 开启USB调试模式</h3><p>进入 <em>设置 &gt; 关于手机</em>，连续点击 <em>版本号</em> 5次，开启 <strong>开发者选项</strong></p>
-<h3 id="2-进入Bootloder模式"><a href="#2-进入Bootloder模式" class="headerlink" title="2. 进入Bootloder模式"></a>2. 进入Bootloder模式</h3><p>手机关机，按住 <em>开机键+音量下键</em> 进入Bootloder模式</p>
-<h3 id="3-解OEM锁"><a href="#3-解OEM锁" class="headerlink" title="3. 解OEM锁"></a>3. 解OEM锁</h3><p>使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入<code>adb start-server</code>连接手机，然后输入<code>fastboot oem unlock</code>解锁，此时手机上会有解锁风险提示，使用音量上下键，选择最下面的选项，按一下开机键确认解锁，系统会擦除原有手机数据，完成解锁。</p>
-<h3 id="4-刷入Recovery"><a href="#4-刷入Recovery" class="headerlink" title="4. 刷入Recovery"></a>4. 刷入Recovery</h3><p>老方法：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">fastboot</span> flash recovery recovery.img<br></code></pre></td></tr></table></figure>
+              <p><a target="_blank" rel="noopener" href="https://www.openmediavault.org/">OpenMediaVault官网</a></p>
+<blockquote>
+<p>OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB/CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。<br>OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无需深入了解。</p>
+</blockquote>
+<h2 id="安装OpenMediaVault"><a href="#安装OpenMediaVault" class="headerlink" title="安装OpenMediaVault"></a>安装OpenMediaVault</h2><h3 id="1-下载镜像文件"><a href="#1-下载镜像文件" class="headerlink" title="1. 下载镜像文件"></a>1. 下载镜像文件</h3><h3 id="2-烧写镜像文件"><a href="#2-烧写镜像文件" class="headerlink" title="2. 烧写镜像文件"></a>2. 烧写镜像文件</h3><h3 id="3-开机启动"><a href="#3-开机启动" class="headerlink" title="3. 开机启动"></a>3. 开机启动</h3><h2 id="配置OpenMediaVault"><a href="#配置OpenMediaVault" class="headerlink" title="配置OpenMediaVault"></a>配置OpenMediaVault</h2><h3 id="开启WIFI"><a href="#开启WIFI" class="headerlink" title="开启WIFI"></a>开启WIFI</h3><h4 id="1-查看WIFI网卡名称："><a href="#1-查看WIFI网卡名称：" class="headerlink" title="1. 查看WIFI网卡名称："></a>1. 查看WIFI网卡名称：</h4><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">iwconfig</span><br></code></pre></td></tr></table></figure>
+<p>如下图，其中<code>wlp4s0</code>就是我的WIFI网卡名称：<br><img src="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.PNG" srcset="/img/loading.gif" lazyload alt="查看WIFI网卡名称">.</p>
+<h4 id="2-使用nano编辑器编辑相关文件："><a href="#2-使用nano编辑器编辑相关文件：" class="headerlink" title="2. 使用nano编辑器编辑相关文件："></a>2. 使用nano编辑器编辑相关文件：</h4><p>由于最新的系统中，interface文件被系统自动管理，该方法暂时被弃用：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gradle">nano <span class="hljs-regexp">/etc/</span>network/<span class="hljs-keyword">interface</span><br></code></pre></td></tr></table></figure>
 
-<p>由于一加6采用双系统（a/b），所以不能按老方法直接使用命令刷入第三方recovery</p>
-<p>新方法：  </p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">fastboot flash <span class="hljs-keyword">boot </span>recovery.img <span class="hljs-comment">#获取临时第三方recovery</span><br></code></pre></td></tr></table></figure>
+<p>请使用以下操作：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">nano <span class="hljs-regexp">/etc/</span>network<span class="hljs-regexp">/interface.d/</span>&#123;wifi_card_name&#125;<br></code></pre></td></tr></table></figure>
 
-<p>然后使用<code>fastboot reboot recovery</code>重启进入临时第三方recovery，在recovery里刷入第三方recovery的zip包即可获得永久recovery。</p>
-<h3 id="5-刷入第三方刷机包"><a href="#5-刷入第三方刷机包" class="headerlink" title="5. 刷入第三方刷机包"></a>5. 刷入第三方刷机包</h3><p>将下载好的第三方刷机包，放入手机目录，进入第三方Recovery刷入即可。</p>
+<blockquote>
+<p>{wifi_card_name}：步骤1中查询到的WIFI网卡名称</p>
+</blockquote>
+<h4 id="3-输入以下对应的网络配置："><a href="#3-输入以下对应的网络配置：" class="headerlink" title="3. 输入以下对应的网络配置："></a>3. 输入以下对应的网络配置：</h4><ul>
+<li><p>配置一：自动获取IP：</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs puppet"><span class="hljs-keyword">auto</span> &#123;wifi_card_name&#125;<br><span class="hljs-keyword">iface</span> &#123;wifi_card_name&#125; <span class="hljs-keyword">inet</span> <span class="hljs-keyword">dhcp</span><br><span class="hljs-keyword">wpa_conf</span> /etc/wpa.conf<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>{wifi_card_name}：步骤1中查询到的WIFI网卡名称</p>
+</blockquote>
+</li>
+<li><p>配置二：设置静态IP：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-attribute">auto</span> &#123;wifi_card_name&#125;<br>iface &#123;wifi_card_name&#125; inet static<br><span class="hljs-selector-tag">address</span> <span class="hljs-number">192</span><span class="hljs-selector-class">.xxx</span><span class="hljs-selector-class">.xxx</span><span class="hljs-selector-class">.xxx</span><br>netmask <span class="hljs-number">255.255</span>.<span class="hljs-number">255.0</span><br>gateway <span class="hljs-number">192.168</span><span class="hljs-selector-class">.xxx</span>.xxx<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>上面两个网络配置，按实际需求选一种就行；输入完成后，按Ctrl+X，输入Y，回车保存</p>
+<h4 id="4-新建一个名称为wpa-conf文件"><a href="#4-新建一个名称为wpa-conf文件" class="headerlink" title="4. 新建一个名称为wpa.conf文件"></a>4. 新建一个名称为<code>wpa.conf</code>文件</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">touch <span class="hljs-regexp">/etc/</span>wpa.conf<br></code></pre></td></tr></table></figure>
 
+<h4 id="5-输入以下命令，"><a href="#5-输入以下命令，" class="headerlink" title="5. 输入以下命令，"></a>5. 输入以下命令，</h4><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">wpa_passphrase &#123;wifi_name&#125; &#123;wifi_password&#125; &gt;&gt; <span class="hljs-regexp">/etc/</span>wpa.conf<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>{wifi_name}：要连接的WIFI名称<br>{wifi_password}：对应WIFI密码</p>
+</blockquote>
+<h4 id="6-启动网卡"><a href="#6-启动网卡" class="headerlink" title="6. 启动网卡"></a>6. 启动网卡</h4><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-class">ifup </span>&#123;wifi_card_name&#125;<br></code></pre></td></tr></table></figure>
+<blockquote>
+<p>{wifi_card_name}：WIFI网卡名称</p>
+</blockquote>
+<hr>
+<h3 id="配置OpenMediaVault的DNS"><a href="#配置OpenMediaVault的DNS" class="headerlink" title="配置OpenMediaVault的DNS"></a>配置OpenMediaVault的DNS</h3><blockquote>
+<p>老办法是直接修改<code>/etc/resolv.conf</code>文件，在最后面添加</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">nameserver</span> <span class="hljs-number">8.8.8.8</span><br></code></pre></td></tr></table></figure>
+
+<p>但是新系统，resolv.conf被系统自动管理，所以需要使用以下方法：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">nano <span class="hljs-regexp">/etc/</span>systemd/resolved.conf<br></code></pre></td></tr></table></figure>
+<p>将<code>#DNS=</code>改为<code>DNS=8.8.8.8</code><br>Ctrl+X，输入Y，回车保存退出即可</p>
+<h3 id="开启社区插件"><a href="#开启社区插件" class="headerlink" title="开启社区插件"></a>开启社区插件</h3><h3 id="更改OpenMediaVault为国内源"><a href="#更改OpenMediaVault为国内源" class="headerlink" title="更改OpenMediaVault为国内源"></a>更改OpenMediaVault为国内源</h3>
             </div>
             <hr>
             <div>
@@ -279,7 +314,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%88%B7%E6%9C%BA/">刷机</a>
+                      <a class="hover-with-bg" href="/categories/OpenMediaVault/">OpenMediaVault</a>
                     
                   </div>
                 
@@ -287,9 +322,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                      <a class="hover-with-bg" href="/tags/OpenMediaVault/">OpenMediaVault</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%B8%80%E5%8A%A06/">一加6</a>
+                      <a class="hover-with-bg" href="/tags/NAS/">NAS</a>
                     
                   </div>
                 
@@ -306,9 +341,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+                      <a href="/2021/12/08/OpenMediaVault/test/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OpenMediaVault安装与配置</span>
+                        <span class="hidden-mobile">test</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -316,8 +351,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/">
-                        <span class="hidden-mobile">Fastboot命令</span>
+                      <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">一加6刷机笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
