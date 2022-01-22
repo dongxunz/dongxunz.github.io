@@ -15,14 +15,14 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="dongxunz&#39;s blogs">
   <meta name="author" content="dongxun">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="写作,记录,发现,感悟">
   <meta name="description" content="参考链接： Lean的Openwrt源码仓库 小米路由器R3G编译OpenWRT固件方法  编译固件前准备工作 不要用root用户进行编译 请全局使用魔法 默认登陆IP：192.168.1.1 密码：password  安装编译固件所需软件编译环境：Ubuntu 20.04 LTS 1sudo apt-get -y install build-essential asciidoc binutil">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小米路由器R3G编译OpenWRT固件">
-<meta property="og:url" content="http://example.com/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://dongxunz.github.io/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
 <meta property="og:description" content="参考链接： Lean的Openwrt源码仓库 小米路由器R3G编译OpenWRT固件方法  编译固件前准备工作 不要用root用户进行编译 请全局使用魔法 默认登陆IP：192.168.1.1 密码：password  安装编译固件所需软件编译环境：Ubuntu 20.04 LTS 1sudo apt-get -y install build-essential asciidoc binutil">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-06T17:25:57.000Z">
@@ -32,7 +32,7 @@
 <meta property="article:tag" content="编译固件">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>小米路由器R3G编译OpenWRT固件 - Hexo</title>
+  <title>小米路由器R3G编译OpenWRT固件 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -44,7 +44,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
     
   
 
@@ -66,10 +66,14 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":80,"cursorChar":"💖","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":80,"cursorChar":"💖","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -281,16 +285,16 @@
 <li>默认登陆IP：192.168.1.1 密码：password</li>
 </ol>
 <h1 id="安装编译固件所需软件"><a href="#安装编译固件所需软件" class="headerlink" title="安装编译固件所需软件"></a>安装编译固件所需软件</h1><p>编译环境：<strong>Ubuntu 20.04 LTS</strong></p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt-get -y install build-essential asciidoc binutils bzip<span class="hljs-number">2</span> gawk gettext git libncurses<span class="hljs-number">5</span>-dev libz-dev patch python<span class="hljs-number">3</span> python<span class="hljs-number">2</span>.<span class="hljs-number">7</span> unzip zlib<span class="hljs-number">1</span>g-dev lib<span class="hljs-number">32</span>gcc<span class="hljs-number">1</span> libc<span class="hljs-number">6</span>-dev-i<span class="hljs-number">386</span> subversion flex uglifyjs git-core gcc-multilib p<span class="hljs-number">7</span>zip p<span class="hljs-number">7</span>zip-full msmtp libssl-dev texinfo libglib<span class="hljs-number">2</span>.<span class="hljs-number">0</span>-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr<span class="hljs-number">3</span> gperf wget curl swig rsync<br></code></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt-get -y install build-essential asciidoc binutils bzip<span class="hljs-number">2</span> gawk gettext git libncurses<span class="hljs-number">5</span>-dev libz-dev patch python<span class="hljs-number">3</span> python<span class="hljs-number">2</span>.<span class="hljs-number">7</span> unzip zlib<span class="hljs-number">1</span>g-dev lib<span class="hljs-number">32</span>gcc<span class="hljs-number">1</span> libc<span class="hljs-number">6</span>-dev-i<span class="hljs-number">386</span> subversion flex uglifyjs git-core gcc-multilib p<span class="hljs-number">7</span>zip p<span class="hljs-number">7</span>zip-full msmtp libssl-dev texinfo libglib<span class="hljs-number">2</span>.<span class="hljs-number">0</span>-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr<span class="hljs-number">3</span> gperf wget curl swig rsync<br></code></pre></div></td></tr></table></figure>
 
-<h1 id="下载Lean的OpenWRT源码"><a href="#下载Lean的OpenWRT源码" class="headerlink" title="下载Lean的OpenWRT源码"></a>下载Lean的OpenWRT源码</h1><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/coolsnowwolf/</span>lede<br></code></pre></td></tr></table></figure>
+<h1 id="下载Lean的OpenWRT源码"><a href="#下载Lean的OpenWRT源码" class="headerlink" title="下载Lean的OpenWRT源码"></a>下载Lean的OpenWRT源码</h1><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/coolsnowwolf/</span>lede<br></code></pre></div></td></tr></table></figure>
 
 <p>下载完成后，<code>cd lede</code> 进入lede目录，分别执行以下命令，此过程可能<strong>需要一些时间</strong>，请耐心等待完成配置。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">.<span class="hljs-regexp">/scripts/</span>feeds update -a<br><br>.<span class="hljs-regexp">/scripts/</span>feeds install -a<br><br>make menuconfig <span class="hljs-comment">#请按照实际硬件选择配置</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/scripts/</span>feeds update -a<br><br>.<span class="hljs-regexp">/scripts/</span>feeds install -a<br><br>make menuconfig <span class="hljs-comment">#请按照实际硬件选择配置</span><br></code></pre></div></td></tr></table></figure>
 
-<h1 id="下载dl库"><a href="#下载dl库" class="headerlink" title="下载dl库"></a>下载dl库</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">make -j8 download <span class="hljs-attribute">V</span>=s<br></code></pre></td></tr></table></figure>
+<h1 id="下载dl库"><a href="#下载dl库" class="headerlink" title="下载dl库"></a>下载dl库</h1><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">make -j8 download <span class="hljs-attribute">V</span>=s<br></code></pre></div></td></tr></table></figure>
 
-<h1 id="完成配置后，开始编译固件"><a href="#完成配置后，开始编译固件" class="headerlink" title="完成配置后，开始编译固件"></a>完成配置后，开始编译固件</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">make -j1 <span class="hljs-attribute">V</span>=s<br></code></pre></td></tr></table></figure>
+<h1 id="完成配置后，开始编译固件"><a href="#完成配置后，开始编译固件" class="headerlink" title="完成配置后，开始编译固件"></a>完成配置后，开始编译固件</h1><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">make -j1 <span class="hljs-attribute">V</span>=s<br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
 <p>编译完成后输出路径：<strong>bin/targets</strong></p>
@@ -357,10 +361,10 @@
 </li>
 </ul>
 <h2 id="二次编译"><a href="#二次编译" class="headerlink" title="二次编译"></a>二次编译</h2><p>请分别执行以下命令：</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> lede<br><br>git pull<br><br>./scripts/feeds <span class="hljs-keyword">update</span> -<span class="hljs-keyword">a</span> &amp;&amp; ./scripts/feeds install -<span class="hljs-keyword">a</span><br><br><span class="hljs-keyword">make</span> defconfig<br><br><span class="hljs-keyword">make</span> -j8 download<br><br><span class="hljs-keyword">make</span> -<span class="hljs-keyword">j</span>$(($(nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> lede<br><br>git pull<br><br>./scripts/feeds <span class="hljs-keyword">update</span> -<span class="hljs-keyword">a</span> &amp;&amp; ./scripts/feeds install -<span class="hljs-keyword">a</span><br><br><span class="hljs-keyword">make</span> defconfig<br><br><span class="hljs-keyword">make</span> -j8 download<br><br><span class="hljs-keyword">make</span> -<span class="hljs-keyword">j</span>$(($(nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="重新配置"><a href="#重新配置" class="headerlink" title="重新配置"></a>重新配置</h2><p>请分别执行以下命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> ./tmp &amp;&amp; <span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> .config<br><br>make menuconfig<br><br>make <span class="hljs-literal">-j</span><span class="hljs-variable">$</span>((<span class="hljs-variable">$</span>(nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> ./tmp &amp;&amp; <span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> .config<br><br>make menuconfig<br><br>make <span class="hljs-literal">-j</span><span class="hljs-variable">$</span>((<span class="hljs-variable">$</span>(nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></div></td></tr></table></figure>
 
 
             </div>

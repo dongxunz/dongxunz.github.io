@@ -15,14 +15,14 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="dongxunz&#39;s blogs">
   <meta name="author" content="dongxun">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="写作,记录,发现,感悟">
   <meta name="description" content="刷机步骤1. 开启USB调试模式进入 设置 &gt; 关于手机，连续点击 版本号 5次，开启 开发者选项 2. 进入Bootloder模式手机关机，按住 开机键+音量下键 进入Bootloder模式 3. 解OEM锁使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入adb start-server连接手机，然后输入fastboot oem unlock解锁，此时手机上会有解锁风险提示，使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一加6刷机笔记">
-<meta property="og:url" content="http://example.com/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="https://dongxunz.github.io/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
 <meta property="og:description" content="刷机步骤1. 开启USB调试模式进入 设置 &gt; 关于手机，连续点击 版本号 5次，开启 开发者选项 2. 进入Bootloder模式手机关机，按住 开机键+音量下键 进入Bootloder模式 3. 解OEM锁使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入adb start-server连接手机，然后输入fastboot oem unlock解锁，此时手机上会有解锁风险提示，使用">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-06T14:42:47.000Z">
@@ -32,7 +32,7 @@
 <meta property="article:tag" content="一加6">
 <meta name="twitter:card" content="summary_large_image">
   
-  <title>一加6刷机笔记 - Hexo</title>
+  <title>一加6刷机笔记 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -44,7 +44,7 @@
     
     
       
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
     
   
 
@@ -66,10 +66,14 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":80,"cursorChar":"💖","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":80,"cursorChar":"💖","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -274,11 +278,11 @@
 <h3 id="2-进入Bootloder模式"><a href="#2-进入Bootloder模式" class="headerlink" title="2. 进入Bootloder模式"></a>2. 进入Bootloder模式</h3><p>手机关机，按住 <em>开机键+音量下键</em> 进入Bootloder模式</p>
 <h3 id="3-解OEM锁"><a href="#3-解OEM锁" class="headerlink" title="3. 解OEM锁"></a>3. 解OEM锁</h3><p>使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入<code>adb start-server</code>连接手机，然后输入<code>fastboot oem unlock</code>解锁，此时手机上会有解锁风险提示，使用音量上下键，选择最下面的选项，按一下开机键确认解锁，系统会擦除原有手机数据，完成解锁。</p>
 <h3 id="4-刷入Recovery"><a href="#4-刷入Recovery" class="headerlink" title="4. 刷入Recovery"></a>4. 刷入Recovery</h3><p>老方法：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">fastboot</span> flash recovery recovery.img<br></code></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">fastboot</span> flash recovery recovery.img<br></code></pre></div></td></tr></table></figure>
 
 <p>由于一加6采用双系统（a/b），所以不能按老方法直接使用命令刷入第三方recovery</p>
 <p>新方法：  </p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">fastboot flash <span class="hljs-keyword">boot </span>recovery.img <span class="hljs-comment">#获取临时第三方recovery</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">fastboot flash <span class="hljs-keyword">boot </span>recovery.img <span class="hljs-comment">#获取临时第三方recovery</span><br></code></pre></div></td></tr></table></figure>
 
 <p>然后使用<code>fastboot reboot recovery</code>重启进入临时第三方recovery，在recovery里刷入第三方recovery的zip包即可获得永久recovery。</p>
 <h3 id="5-刷入第三方刷机包"><a href="#5-刷入第三方刷机包" class="headerlink" title="5. 刷入第三方刷机包"></a>5. 刷入第三方刷机包</h3><p>将下载好的第三方刷机包，放入手机目录，进入第三方Recovery刷入即可。</p>
