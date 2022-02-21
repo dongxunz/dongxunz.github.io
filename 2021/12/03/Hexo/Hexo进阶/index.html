@@ -26,7 +26,7 @@
 <meta property="og:description" content="Hexo生成的Blog主要目录结构使用hexo init &lt;folder&gt;创建博客根目录后，在该目录下安装默认插件npm install后，目录组成如下： 1234567891011121314.├── node_modules&#x3D;：Hexo第三方插件安装目录├── scaffolds：新建文章时使用的Markdown文件模板|   ├── draft.md：草稿模板，生成的文章位于so">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-03T15:57:46.000Z">
-<meta property="article:modified_time" content="2022-01-06T17:21:10.004Z">
+<meta property="article:modified_time" content="2022-02-21T13:00:30.223Z">
 <meta property="article:author" content="dongxun">
 <meta property="article:tag" content="主题">
 <meta property="article:tag" content="Hexo">
@@ -230,7 +230,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.3k 字
+      3.4k 字
     </span>
   
 
@@ -272,12 +272,12 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年1月7日 凌晨
+                  本文最后更新于：2022年2月21日 晚上
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="Hexo生成的Blog主要目录结构"><a href="#Hexo生成的Blog主要目录结构" class="headerlink" title="Hexo生成的Blog主要目录结构"></a>Hexo生成的Blog主要目录结构</h1><p>使用<code>hexo init &lt;folder&gt;</code>创建博客根目录后，在该目录下安装默认插件<code>npm install</code>后，目录组成如下：</p>
+              <h2 id="Hexo生成的Blog主要目录结构"><a href="#Hexo生成的Blog主要目录结构" class="headerlink" title="Hexo生成的Blog主要目录结构"></a>Hexo生成的Blog主要目录结构</h2><p>使用<code>hexo init &lt;folder&gt;</code>创建博客根目录后，在该目录下安装默认插件<code>npm install</code>后，目录组成如下：</p>
 <figure class="highlight sqf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sqf">.<br>├── node_modules=：Hexo第三方插件安装目录<br>├── scaffolds：新建文章时使用的Markdown文件模板<br>|   ├── draft.md：草稿模板，生成的文章位于source/<span class="hljs-variable">_drafts</span><br>|   ├── page.md：分页模板，生成的文章位于source<br>|   └── post.md：默认文章模板，生成的文章位于source/<span class="hljs-variable">_posts</span><br>├── source用于存放原始的Markdown文章和图片<br>|   ├── <span class="hljs-variable">_drafts</span>：存放草稿文章的目录<br>|   └── <span class="hljs-variable">_posts</span>：存放主要文章的目录<br>├── themes：主题存放目录<br>├── <span class="hljs-variable">_config</span>.landscape.yml：默认主题配置文件<br>├── <span class="hljs-variable">_config</span>.yml：博客网站配置文件<br>├── package.json：Hexo相关脚本与包管理信息<br>└── package-<span class="hljs-built_in">lock</span>.json：第三方插件信息<br></code></pre></div></td></tr></table></figure>
 
 <p>相关链接：  </p>
@@ -285,8 +285,9 @@
 <li><a target="_blank" rel="noopener" href="https://hexo.io/docs/configuration">_config.yml配置介绍</a>  </li>
 </ul>
 <hr>
-<h1 id="Hexo使用模板文件生成文章"><a href="#Hexo使用模板文件生成文章" class="headerlink" title="Hexo使用模板文件生成文章"></a>Hexo使用模板文件生成文章</h1><p>生成文章命令：<br><code>hexo new [layout] &lt;title&gt;</code></p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">[layout] : draft <span class="hljs-regexp">/ page /</span> post<br></code></pre></div></td></tr></table></figure>
+<h2 id="Hexo使用模板文件生成文章"><a href="#Hexo使用模板文件生成文章" class="headerlink" title="Hexo使用模板文件生成文章"></a>Hexo使用模板文件生成文章</h2><figure class="highlight gauss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss">生成文章命令：<br>hexo <span class="hljs-keyword">new</span> [layout] &lt;<span class="hljs-built_in">title</span>&gt;   <span class="hljs-meta">#该方法生成的文章文件全部存放于`_posts`下</span><br><br>[layout] : draft / page / post<br>&lt;<span class="hljs-built_in">title</span>&gt;  : 文章名称<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">生成文章并新建相应的路径文件夹：<br>hexo new [layout] --<span class="hljs-built_in">path</span> [<span class="hljs-built_in">path</span>] &lt;<span class="hljs-built_in">title</span>&gt;<br><br>[layout] : draft / <span class="hljs-built_in">page</span> / post<br>[<span class="hljs-built_in">path</span>]   : 文章路径名称<br>&lt;<span class="hljs-built_in">title</span>&gt;  : 文章名称<br></code></pre></div></td></tr></table></figure>
 
 <ul>
 <li><p>draft（草稿）：<br>文件路径为： <strong>./source/_drafts</strong></p>
@@ -310,7 +311,7 @@
 <li><a target="_blank" rel="noopener" href="https://hexo.io/docs/writing#Scaffolds">scaffolds使用方法</a></li>
 </ul>
 <hr>
-<h1 id="Hexo资源文件夹"><a href="#Hexo资源文件夹" class="headerlink" title="Hexo资源文件夹"></a>Hexo资源文件夹</h1><ul>
+<h2 id="Hexo资源文件夹"><a href="#Hexo资源文件夹" class="headerlink" title="Hexo资源文件夹"></a>Hexo资源文件夹</h2><ul>
 <li><p>资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
 </li>
 <li><p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>_config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 true 来打开。</p>
@@ -350,11 +351,11 @@
 </li>
 </ul>
 <hr>
-<h1 id="Hexo主题"><a href="#Hexo主题" class="headerlink" title="Hexo主题"></a>Hexo主题</h1><ul>
+<h2 id="Hexo主题"><a href="#Hexo主题" class="headerlink" title="Hexo主题"></a>Hexo主题</h2><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">Hexo-Theme-Fluid - 一款 Material Design 风格的主题</a></li>
 </ul>
 <hr>
-<h1 id="Hexo-Live2D"><a href="#Hexo-Live2D" class="headerlink" title="Hexo Live2D"></a>Hexo Live2D</h1><ol>
+<h2 id="Hexo-Live2D"><a href="#Hexo-Live2D" class="headerlink" title="Hexo Live2D"></a>Hexo Live2D</h2><ol>
 <li>安装模块<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-helper-live2d</span><br></code></pre></div></td></tr></table></figure></li>
 <li>配置模块<br>请向Hexo的 _config.yml 文件或主题的 _config.yml 文件中添加配置.<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">live2d:</span><br><span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">scriptFrom:</span> <span class="hljs-string">local</span><br><span class="hljs-attr">pluginRootPath:</span> <span class="hljs-string">live2dw/</span><br><span class="hljs-attr">pluginJsPath:</span> <span class="hljs-string">lib/</span><br><span class="hljs-attr">pluginModelPath:</span> <span class="hljs-string">assets/</span><br><span class="hljs-attr">tagMode:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">debug:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">model:</span><br> <span class="hljs-attr">use:</span> <span class="hljs-string">live2d-widget-model-wanko</span>  <span class="hljs-comment">#模型文件名称</span><br><span class="hljs-attr">display:</span><br> <span class="hljs-attr">position:</span> <span class="hljs-string">right</span> <span class="hljs-comment">#模型位于网页中的位置</span><br> <span class="hljs-attr">width:</span> <span class="hljs-number">150</span><br> <span class="hljs-attr">height:</span> <span class="hljs-number">300</span><br><span class="hljs-attr">mobile:</span><br> <span class="hljs-attr">show:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">react:</span><br> <span class="hljs-attr">opacity:</span> <span class="hljs-number">0.7</span><br></code></pre></div></td></tr></table></figure></li>
 <li>下载模型<blockquote>
