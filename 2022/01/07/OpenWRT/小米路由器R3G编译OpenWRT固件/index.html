@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://dongxunz.github.io/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/xiaomi_router_r3g.png">
 <meta property="og:image" content="https://dongxunz.github.io/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/luci_applications_config.png">
 <meta property="article:published_time" content="2022-01-06T17:25:57.000Z">
-<meta property="article:modified_time" content="2022-01-23T16:43:40.220Z">
+<meta property="article:modified_time" content="2022-05-10T15:54:22.637Z">
 <meta property="article:author" content="dongxun">
 <meta property="article:tag" content="路由器">
 <meta property="article:tag" content="编译固件">
@@ -231,7 +231,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      13k 字
+      14k 字
     </span>
   
 
@@ -240,7 +240,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      42 分钟
+      43 分钟
     </span>
   
 
@@ -273,7 +273,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年1月24日 凌晨
+                  本文最后更新于：2022年5月10日 晚上
                 
               </p>
             
@@ -295,7 +295,7 @@
 <h2 id="下载Lean的OpenWRT源码"><a href="#下载Lean的OpenWRT源码" class="headerlink" title="下载Lean的OpenWRT源码"></a>下载Lean的OpenWRT源码</h2><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/coolsnowwolf/</span>lede<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="扩展OpenWRT插件源"><a href="#扩展OpenWRT插件源" class="headerlink" title="扩展OpenWRT插件源"></a>扩展OpenWRT插件源</h2><p>下载完OpenWRT源码后，<code>cd lede</code>，分别执行以下命令，此过程可能<strong>需要一些时间</strong>，请耐心等待完成配置。</p>
-<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus"><br>sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git kenzo https://github.com/kenzok8/openwrt-packages&#x27;</span> feeds<span class="hljs-selector-class">.conf</span><span class="hljs-selector-class">.default</span><br><br>sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git small https://github.com/kenzok8/small&#x27;</span> feeds<span class="hljs-selector-class">.conf</span><span class="hljs-selector-class">.default</span><br><br>git pull<br><br>./scripts/feeds update -<span class="hljs-selector-tag">a</span><br><br>./scripts/feeds install -<span class="hljs-selector-tag">a</span><br><br>make menuconfig<br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git helloworld https://github.com/fw876/helloworld&#x27;</span>  #科学上网插件仓库<br><br>sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git src-git passwall https://github.com/xiaorouji/openwrt-passwall&#x27;</span>  #科学上网插件仓库<br><br>sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git kenzo https://github.com/kenzok8/openwrt-packages&#x27;</span> feeds<span class="hljs-selector-class">.conf</span><span class="hljs-selector-class">.default</span>  #openwrt插件合集仓库<br><br>sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git small https://github.com/kenzok8/small&#x27;</span> feeds<span class="hljs-selector-class">.conf</span><span class="hljs-selector-class">.default</span> #openwrt插件合集仓库（每天更新）<br><br>git pull<br><br>./scripts/feeds update -<span class="hljs-selector-tag">a</span><br><br>./scripts/feeds install -<span class="hljs-selector-tag">a</span><br><br>make menuconfig<br><br></code></pre></div></td></tr></table></figure>
 
 <h2 id="选择编译目标设置"><a href="#选择编译目标设置" class="headerlink" title="选择编译目标设置"></a>选择编译目标设置</h2><p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/xiaomi_router_r3g.png" srcset="/img/loading.gif" lazyload alt="小米路由器R3G对应的编译设置"></p>
 <h2 id="添加插件"><a href="#添加插件" class="headerlink" title="添加插件"></a>添加插件</h2><p>OpenWRT通过LuCI来管理插件：</p>
@@ -322,21 +322,23 @@
 
 <h2 id="编译丰富插件时，建议修改下面两项默认大小，留足扩展空间"><a href="#编译丰富插件时，建议修改下面两项默认大小，留足扩展空间" class="headerlink" title="编译丰富插件时，建议修改下面两项默认大小，留足扩展空间"></a>编译丰富插件时，建议修改下面两项默认大小，留足扩展空间</h2><figure class="highlight less"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs less"><span class="hljs-selector-tag">Target</span> <span class="hljs-selector-tag">Images</span> <span class="hljs-selector-tag">---</span>&gt; (<span class="hljs-number">16</span>) <span class="hljs-selector-tag">Kernel</span> <span class="hljs-selector-tag">partition</span> <span class="hljs-selector-tag">size</span> (in MB) #默认是 (<span class="hljs-number">16</span>) 建议修改 (<span class="hljs-number">256</span>)<br><br><span class="hljs-selector-tag">Target</span> <span class="hljs-selector-tag">Images</span> <span class="hljs-selector-tag">---</span>&gt; (<span class="hljs-number">160</span>) <span class="hljs-selector-tag">Root</span> <span class="hljs-selector-tag">filesystem</span> <span class="hljs-selector-tag">partition</span> <span class="hljs-selector-tag">size</span> (in MB) #默认是 (<span class="hljs-number">160</span>) 建议修改 (<span class="hljs-number">512</span>)<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="下载dl库"><a href="#下载dl库" class="headerlink" title="下载dl库"></a>下载dl库</h2><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">make -j8 download <span class="hljs-attribute">V</span>=s<br></code></pre></div></td></tr></table></figure>
+<h2 id="下载dl库"><a href="#下载dl库" class="headerlink" title="下载dl库"></a>下载dl库</h2><figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">make</span> download -j<span class="hljs-number">8</span><br></code></pre></div></td></tr></table></figure>
 
-<h2 id="完成配置后，开始编译固件"><a href="#完成配置后，开始编译固件" class="headerlink" title="完成配置后，开始编译固件"></a>完成配置后，开始编译固件</h2><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">make -j1 <span class="hljs-attribute">V</span>=s<br></code></pre></div></td></tr></table></figure>
+<h2 id="完成配置后，开始编译固件"><a href="#完成配置后，开始编译固件" class="headerlink" title="完成配置后，开始编译固件"></a>完成配置后，开始编译固件</h2><figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">make <span class="hljs-attribute">V</span>=s -j1<br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
 <p>编译完成后输出路径：<strong>lede/bin/targets/.</strong></p>
 </blockquote>
 <h2 id="二次编译"><a href="#二次编译" class="headerlink" title="二次编译"></a>二次编译</h2><p>请分别执行以下命令：</p>
-<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> lede<br><br>git pull<br><br>./scripts/feeds <span class="hljs-keyword">update</span> -<span class="hljs-keyword">a</span> &amp;&amp; ./scripts/feeds install -<span class="hljs-keyword">a</span><br><br><span class="hljs-keyword">make</span> defconfig<br><br><span class="hljs-keyword">make</span> -j8 download<br><br><span class="hljs-keyword">make</span> -<span class="hljs-keyword">j</span>$(($(nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> lede<br><br>git pull<br><br>./scripts/feeds <span class="hljs-keyword">update</span> -<span class="hljs-keyword">a</span> &amp;&amp; ./scripts/feeds install -<span class="hljs-keyword">a</span><br><br><span class="hljs-keyword">make</span> defconfig<br><br><span class="hljs-keyword">make</span> download -j8<br><br><span class="hljs-keyword">make</span> V=s -<span class="hljs-keyword">j</span>$(nproc)<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="重新配置"><a href="#重新配置" class="headerlink" title="重新配置"></a>重新配置</h2><p>请分别执行以下命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> ./tmp &amp;&amp; <span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> .config<br><br>make menuconfig<br><br>make <span class="hljs-literal">-j</span><span class="hljs-variable">$</span>((<span class="hljs-variable">$</span>(nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> ./tmp &amp;&amp; <span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> .config<br><br>make menuconfig<br><br>make V=s <span class="hljs-literal">-j</span><span class="hljs-variable">$</span>(nproc)<br></code></pre></div></td></tr></table></figure>
 
 <hr>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="如果使用的编译环境是WSL-Windows-Subsystem-for-Linux-，请使用以下命令进行编译："><a href="#如果使用的编译环境是WSL-Windows-Subsystem-for-Linux-，请使用以下命令进行编译：" class="headerlink" title="如果使用的编译环境是WSL(Windows Subsystem for Linux)，请使用以下命令进行编译："></a>如果使用的编译环境是WSL(Windows Subsystem for Linux)，请使用以下命令进行编译：</h3><p>首次编译：</p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="OpenWRT-更新软件包-和-安装软件包-命令"><a href="#OpenWRT-更新软件包-和-安装软件包-命令" class="headerlink" title="OpenWRT 更新软件包 和 安装软件包 命令"></a>OpenWRT 更新软件包 和 安装软件包 命令</h3><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">opkg update <span class="hljs-comment">#更新软件包</span><br><br>opkg <span class="hljs-keyword">install</span> pack_name.ipk  <span class="hljs-comment">#安装软件包</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="如果使用的编译环境是WSL-Windows-Subsystem-for-Linux-，请使用以下命令进行编译："><a href="#如果使用的编译环境是WSL-Windows-Subsystem-for-Linux-，请使用以下命令进行编译：" class="headerlink" title="如果使用的编译环境是WSL(Windows Subsystem for Linux)，请使用以下命令进行编译："></a>如果使用的编译环境是WSL(Windows Subsystem for Linux)，请使用以下命令进行编译：</h3><p>首次编译：</p>
 <figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">PATH=<span class="hljs-regexp">/usr/local</span><span class="hljs-regexp">/sbin:/usr</span><span class="hljs-regexp">/local/bin</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/bin</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/bin</span> make -j1 V=s<br></code></pre></div></td></tr></table></figure>
 
 <p>二次编译：</p>
