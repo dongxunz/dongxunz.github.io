@@ -18,22 +18,39 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="dongxunz&#39;s blogs">
-<meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="https://dongxunz.github.io/archives/2021/index.html">
+    <meta name="description" content="前言由于之前做的3D打印机每次打印时只能打印一种颜色，打印出来的物品色彩略显得单调，所以才有了想做一个多色打印模块，来满足更多色彩的打印需求；目前市面上比较成熟的3D打印多色模块有2个：EnragedRabbitProjec[1]、MULTI MATERIAL UPGRADE 2S[2]，前者有点复杂，而且必须配合Klipper[3]固件使用，而我那台3D打印机目前使用的固件是Marlin，所以想">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组装一台多色打印模块-MMU2S">
+<meta property="og:url" content="https://dongxunz.github.io/2023/01/20/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0%E5%A4%9A%E8%89%B2%E6%89%93%E5%8D%B0%E6%A8%A1%E5%9D%97-MMU2S/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言由于之前做的3D打印机每次打印时只能打印一种颜色，打印出来的物品色彩略显得单调，所以才有了想做一个多色打印模块，来满足更多色彩的打印需求；目前市面上比较成熟的3D打印多色模块有2个：EnragedRabbitProjec[1]、MULTI MATERIAL UPGRADE 2S[2]，前者有点复杂，而且必须配合Klipper[3]固件使用，而我那台3D打印机目前使用的固件是Marlin，所以想">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-20T11:23:17.000Z">
+<meta property="article:modified_time" content="2023-01-20T11:50:36.671Z">
 <meta property="article:author" content="dongxunz">
-<meta property="article:tag" content="写作,记录,发现,感悟">
+<meta property="article:tag" content="MMU2S">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>归档 - dongxunz&#39;s blogs</title>
+  <title>组装一台多色打印模块-MMU2S - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
@@ -64,7 +81,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -233,9 +250,51 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="组装一台多色打印模块-MMU2S">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-20 19:23" pubdate>
+        2023年1月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      352 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      2 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
 
             
           </div>
@@ -248,94 +307,103 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 25 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux工具进阶</span>
-      <time style="float: right;">12-11</time>
-    </a>
-  
-    
-    <a href="/2021/12/10/Linux/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Linux基础命令</span>
-      <time style="float: right;">12-10</time>
-    </a>
-  
-    
-    <a href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">OpenMediaVault安装与配置</span>
-      <time style="float: right;">12-08</time>
-    </a>
-  
-    
-    <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">一加6刷机笔记</span>
-      <time style="float: right;">12-06</time>
-    </a>
-  
-    
-    <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Fastboot命令</span>
-      <time style="float: right;">12-06</time>
-    </a>
-  
-    
-    <a href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Adb命令</span>
-      <time style="float: right;">12-04</time>
-    </a>
-  
-    
-    <a href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Hexo进阶</span>
-      <time style="float: right;">12-03</time>
-    </a>
-  
-    
-    <a href="/2021/12/03/Hexo/%E9%80%9A%E8%BF%87Github%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8D%9A%E5%AE%A2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">通过Github搭建Hexo博客，实现远程访问博客</span>
-      <time style="float: right;">12-03</time>
-    </a>
-  
-    
-    <a href="/2021/12/02/Markdown/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Markdown基本语法</span>
-      <time style="float: right;">12-02</time>
-    </a>
-  
-    
-    <a href="/2021/11/30/Hello%20World/hello-world/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Hello World</span>
-      <time style="float: right;">11-30</time>
-    </a>
-  
-</div>
 
-
-
-
-
-              </div>
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">组装一台多色打印模块-MMU2S</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2023年1月20日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于之前做的3D打印机每次打印时只能打印一种颜色，打印出来的物品色彩略显得单调，所以才有了想做一个多色打印模块，来满足更多色彩的打印需求；目前市面上比较成熟的3D打印多色模块有2个：EnragedRabbitProjec<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="EnragedRabbitProjec Github
+">[1]</span></a></sup>、MULTI MATERIAL UPGRADE 2S<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="MULTI MATERIAL UPGRADE 2S官方介绍
+">[2]</span></a></sup>，前者有点复杂，而且必须配合Klipper<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="Klipper固件官网
+">[3]</span></a></sup>固件使用，而我那台3D打印机目前使用的固件是Marlin，所以想先做个MMU2S，等测试通过后，如果有时间就做一台VORON<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="VORON官网
+">[4]</span></a></sup> + EnragedRabbitProject，搭配Klipper固件。（挖坑…）</p>
+<h2 id="所需材料"><a href="#所需材料" class="headerlink" title="所需材料"></a>所需材料</h2><h2 id="组装"><a href="#组装" class="headerlink" title="组装"></a>组装</h2><h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h2 id><a href="#" class="headerlink" title></a></h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/EtteGit/EnragedRabbitProject">EnragedRabbitProjec Github</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.prusa3d.com/product/original-prusa-i3-mmu2s-upgrade-kit-for-mk2-5s-mk3s-org/">MULTI MATERIAL UPGRADE 2S官方介绍</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.klipper3d.org/zh/">Klipper固件官网</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://vorondesign.com/">VORON官网</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/3D%E6%89%93%E5%8D%B0/">3D打印</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MMU2S/">MMU2S</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/">
+                        <span class="hidden-mobile">ATmega32U4下载Bootloader</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -442,6 +510,19 @@
   
 
 
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
 
 
