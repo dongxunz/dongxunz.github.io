@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="组装一台Prusa i3 MK3S+ &amp; Bear Frame Upgrade框架部分 框架部分没有使用原版 Prusa i3 MK3S+ 的固定支架，而是使用 Bear Frame Upgrade 支架，后者支架比前者更稳定，但组装难度也有所提升。  型材 欧标2040V型材： 290mm * 1  331mm * 2  359mm * 2  370mm * 2  光轴 X轴光轴尺寸：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="组装一台Prusa i3 MK3S+">
+<meta property="og:url" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="组装一台Prusa i3 MK3S+ &amp; Bear Frame Upgrade框架部分 框架部分没有使用原版 Prusa i3 MK3S+ 的固定支架，而是使用 Bear Frame Upgrade 支架，后者支架比前者更稳定，但组装难度也有所提升。  型材 欧标2040V型材： 290mm * 1  331mm * 2  359mm * 2  370mm * 2  光轴 X轴光轴尺寸：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/profiles.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/linear_optical_axis.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_mk3s+_x-axis_assembly.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_bear_upgrade_y_axis_assembly.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_bear_upgrade_z_axis_assembly.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_mk3s+_e-axis_assembly.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/arduino_mega_2560_rev3.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/ramps_1.4.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/A4988_reprap_stepper_driver_pinout.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/DRV8825_stepper_driver_pinout.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/42_series_two_phase_stepper_motor.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/42_linear_t8_screw_stepper_motor.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/magnetic_heatbed_MK52_24V.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_v6_hotend.jpg">
+<meta property="article:published_time" content="2022-03-08T13:26:34.000Z">
+<meta property="article:modified_time" content="2022-06-25T08:50:56.586Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="Prusa i3">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/profiles.jpg">
+  
+  
+  <title>组装一台Prusa i3 MK3S+ - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                分享
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/">
+                    <i class="iconfont icon-apple-fill"></i>
+                    电路
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    结构
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/">
+                    <i class="iconfont icon-music"></i>
+                    音乐
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/">
+                    <i class="iconfont icon-steam"></i>
+                    游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/">
+                    <i class="iconfont icon-book"></i>
+                    阅读角
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/clover.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="组装一台Prusa i3 MK3S+">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-08 21:26" pubdate>
+        2022年3月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">组装一台Prusa i3 MK3S+</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年6月25日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="组装一台Prusa-i3-MK3S-amp-Bear-Frame-Upgrade"><a href="#组装一台Prusa-i3-MK3S-amp-Bear-Frame-Upgrade" class="headerlink" title="组装一台Prusa i3 MK3S+ &amp; Bear Frame Upgrade"></a>组装一台Prusa i3 MK3S+ &amp; Bear Frame Upgrade</h2><h3 id="框架部分"><a href="#框架部分" class="headerlink" title="框架部分"></a>框架部分</h3><blockquote>
+<p>框架部分没有使用原版 Prusa i3 MK3S+ 的固定支架，而是使用 Bear Frame Upgrade 支架，后者支架比前者更稳定，但组装难度也有所提升。</p>
+</blockquote>
+<h4 id="型材"><a href="#型材" class="headerlink" title="型材"></a>型材</h4><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/profiles.jpg" srcset="/img/loading.gif" lazyload alt="所需型材"></p>
+<p>欧标2040V型材：<br><font color="#ff8f28"> <strong>290mm * 1</strong> </font><br><font color="#16db80"> <strong>331mm * 2</strong> </font><br><font color="#2143e8"> <strong>359mm * 2</strong> </font><br><font color="#dc53bb"> <strong>370mm * 2</strong> </font></p>
+<h4 id="光轴"><a href="#光轴" class="headerlink" title="光轴"></a>光轴</h4><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/linear_optical_axis.png" srcset="/img/loading.gif" lazyload alt="所需光轴"></p>
+<p>X轴光轴尺寸：<font color="#a349a4"> <strong>370mm * 2</strong> </font><br>Y轴光轴尺寸：<font color="#2343e8"> <strong>330mm * 2</strong> </font><br>Z轴光轴尺寸：<font color="#22b14c"> <strong>320mm * 2</strong> </font></p>
+<h4 id="框架脚垫"><a href="#框架脚垫" class="headerlink" title="框架脚垫"></a>框架脚垫</h4><blockquote>
+<p>点击下列部件名称可快速下载相应的STL文件。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/foot.stl">foot.stl * 4</a></p>
+<hr>
+<h3 id="3D打印部件"><a href="#3D打印部件" class="headerlink" title="3D打印部件"></a>3D打印部件</h3><blockquote>
+<p>由于 <strong>挤出机喷嘴（工作时温度：300℃左右）</strong> 工作时温度比较高，所以打印一些关键部件时需要使用耐高温的打印材料，以下列出的部件如需使用耐高温材料，均会在后面加上<code>⚠</code>进行标记。</p>
+</blockquote>
+<p>  各打印耗材对应的温度参数：</p>
+<table>
+<thead>
+<tr>
+<th align="center">打印耗材</th>
+<th align="center">打印温度(℃)</th>
+<th align="center">打印底板温度(℃)</th>
+<th align="center">是否需要冷却风扇</th>
+<th align="left">热变形温度(℃)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ABS</td>
+<td align="center">210~250</td>
+<td align="center">80~110</td>
+<td align="center">否</td>
+<td align="left">93~118</td>
+</tr>
+<tr>
+<td align="center">PLA</td>
+<td align="center">180~230</td>
+<td align="center">20~60</td>
+<td align="center">是</td>
+<td align="left">?</td>
+</tr>
+<tr>
+<td align="center">PETG</td>
+<td align="center">220~250</td>
+<td align="center">50~75</td>
+<td align="center">是</td>
+<td align="left">65~70</td>
+</tr>
+<tr>
+<td align="center">PA</td>
+<td align="center">240~260</td>
+<td align="center">70~100</td>
+<td align="center">否</td>
+<td align="left">?</td>
+</tr>
+<tr>
+<td align="center">TPU</td>
+<td align="center">210~230</td>
+<td align="center">30~60</td>
+<td align="center">?</td>
+<td align="left">?</td>
+</tr>
+</tbody></table>
+<h4 id="X轴"><a href="#X轴" class="headerlink" title="X轴"></a>X轴</h4><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_mk3s+_x-axis_assembly.jpg" srcset="/img/loading.gif" lazyload alt="X轴总成"></p>
+<blockquote>
+<p>点击下列部件名称可快速下载相应的STL文件。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567909_76ce3256-1d9d-4b45-9d7f-0067d518b1d3/x-end-motor.stl#_ga=2.8802934.213837010.1646667293-425094109.1646143956">x-end-motor.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567908_061a6c4a-ec0e-4f13-876f-a1a8ea914516/x-end-idler.stl#_ga=2.8802934.213837010.1646667293-425094109.1646143956">x-end-idler.stl * 1</a></p>
+<h4 id="Y轴"><a href="#Y轴" class="headerlink" title="Y轴"></a>Y轴</h4><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_bear_upgrade_y_axis_assembly.jpg" srcset="/img/loading.gif" lazyload alt="Y轴总成"></p>
+<blockquote>
+<p>点击下列部件名称可快速下载相应的STL文件。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/y_rod_holder.stl">y_rod_holder.stl * 4</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/y_idler_mount.stl">y_idler_mount.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/mk3_mk3s/stl/y_bearing_holder.stl">y_bearing_holder.stl * 3</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/mk3_mk3s/stl/y_belt_holder.stl">y_belt_holder.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/mk3_mk3s/stl/y_motor_mount.stl">y_motor_mount.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/y_idler_tensioner.stl">y_idler_tensioner.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/build_helper_y.stl">build_helper_y.stl * 1</a></p>
+<h4 id="Z轴"><a href="#Z轴" class="headerlink" title="Z轴"></a>Z轴</h4><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_bear_upgrade_z_axis_assembly.jpg" srcset="/img/loading.gif" lazyload alt="Z轴总成"></p>
+<blockquote>
+<p>点击下列部件名称可快速下载相应的STL文件。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/z_leadscrew_cap.stl">z_leadscrew_cap.stl * 2</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/z_motor_mounts.stl">z_motor_mounts.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/mk3_mk3s/stl/z_tops.stl">z_tops.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/gregsaun/prusa_i3_bear_upgrade/blob/master/printed_parts/common_to_all_versions/stl/build_helper_z.stl">build_helper_z.stl * 1</a> —&gt; <font color="#d656b9"> <strong>长度为106mm ± 0.5mm</strong> </font></p>
+<h4 id="E轴"><a href="#E轴" class="headerlink" title="E轴"></a>E轴</h4><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_i3_mk3s+_e-axis_assembly.jpg" srcset="/img/loading.gif" lazyload alt="E轴总成"></p>
+<blockquote>
+<p>点击下列部件名称可快速下载相应的STL文件。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567897_39181fe1-f21a-497d-932b-3ffdaa10f12d/extruder-body.stl#_ga=2.12959092.213837010.1646667293-425094109.1646143956">extruder-body.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567896_23528d05-2742-48bc-843f-af3365256fdd/adapter-printer.stl#_ga=2.12959092.213837010.1646667293-425094109.1646143956">adapter-printer.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567895_ec3088f3-d1d8-406c-90d9-ba55e308d980/fs-lever.stl#_ga=2.12959092.213837010.1646667293-425094109.1646143956">fs-lever.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567894_f790322a-c664-4b68-b2e0-a928c507258c/extruder-motor-plate.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">extruder-motor-plate.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567898_4824aaeb-5ada-4ec2-b166-e31f6ba7398f/extruder-cover.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">extruder-cover.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567900_08f0474f-105a-471d-a054-712ec968dd9a/extruder-idler.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">extruder-idler.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/752046_1f2c64ca-0a53-4dcc-a712-564c74c8b8d6/x-carriage.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">x-carriage.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567901_2630115a-f92f-4efc-914d-a5443eedcd77/fs-cover.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">fs-cover.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567902_189de1d6-c89d-48d2-837d-e598af502205/print-fan-support.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">print-fan-support.stl * 1</a> <code>⚠</code></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567903_46ebf83d-21be-433f-af9f-315ebdc1d8a0/fan-shroud.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">fan-shroud.stl * 1</a> <code>⚠</code> # Please print this part with ASA or PC-Blend!!!</p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/567905_8901a08c-4f1e-492e-8c6f-369c74f592b3/cable-holder.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">cable-holder.stl * 1</a></p>
+<p><a target="_blank" rel="noopener" href="https://media.prusaprinters.org/media/prints/57217/stls/752045_bebd3938-ebb9-49f4-82d4-fd8bc8010c8c/x-carriage-back.stl#_ga=2.152411386.213837010.1646667293-425094109.1646143956">x-carriage-back.stl * 1</a></p>
+<hr>
+<h3 id="硬件部分"><a href="#硬件部分" class="headerlink" title="硬件部分"></a>硬件部分</h3><h4 id="主控板"><a href="#主控板" class="headerlink" title="主控板"></a>主控板</h4><p><a target="_blank" rel="noopener" href="https://docs.arduino.cc/hardware/mega-2560">Arduino Mega 2560 Rev3 官方硬件参数</a></p>
+<p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/arduino_mega_2560_rev3.png" srcset="/img/loading.gif" lazyload alt="Arduino Mega 2560 Rev3"></p>
+<h4 id="3D打印机控制板"><a href="#3D打印机控制板" class="headerlink" title="3D打印机控制板"></a>3D打印机控制板</h4><p><a target="_blank" rel="noopener" href="https://reprap.org/wiki/RAMPS_1.4">RAMPS_1.4 官方Wiki</a></p>
+<p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/ramps_1.4.jpg" srcset="/img/loading.gif" lazyload alt="(RepRap Arduino Mega Polulu Shield)RAMPS 1.4"></p>
+<h4 id="步进电机驱动板"><a href="#步进电机驱动板" class="headerlink" title="步进电机驱动板"></a>步进电机驱动板</h4><h5 id="A4988步进驱动板"><a href="#A4988步进驱动板" class="headerlink" title="A4988步进驱动板"></a>A4988步进驱动板</h5><p>A4988 需要配置 <strong>RSENSE</strong> 和 <strong>VREF</strong> ，来决定最大输出电流，请按照芯片文档来配置实际输出最大电流，否则可能造成步进电机损坏！！！</p>
+<p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/A4988_reprap_stepper_driver_pinout.jpg" srcset="/img/loading.gif" lazyload alt="A4988步进驱动板"></p>
+<h5 id="DRV8825步进驱动板"><a href="#DRV8825步进驱动板" class="headerlink" title="DRV8825步进驱动板"></a>DRV8825步进驱动板</h5><p>DRV8825 需要配置 <strong>VREF</strong> ，来决定最大输出电流，请按照芯片文档来配置实际输出最大电流，否则可能造成步进电机损坏！！！</p>
+<p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/DRV8825_stepper_driver_pinout.jpg" srcset="/img/loading.gif" lazyload alt="DRV8825步进驱动板"></p>
+<p><a target="_blank" rel="noopener" href="https://reprap.org/wiki/A4988_vs_DRV8825_Chinese_Stepper_Driver_Boards">A4988与DRV8825驱动板对比</a></p>
+<hr>
+<h3 id="其他部件"><a href="#其他部件" class="headerlink" title="其他部件"></a>其他部件</h3><h4 id="驱动件"><a href="#驱动件" class="headerlink" title="驱动件"></a>驱动件</h4><h6 id="42系列两相步进电机"><a href="#42系列两相步进电机" class="headerlink" title="42系列两相步进电机"></a>42系列两相步进电机</h6><table style="width:100%">
+  <tr>
+    <th rowspan="5"><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/42_series_two_phase_stepper_motor.jpg" srcset="/img/loading.gif" lazyload></th>
+    <th colspan="2" style="width:61%">电气特性</th>
+  </tr>
+  <tr>
+    <td>相数</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>步距角</td>
+    <td>1.8°</td>
+  </tr>
+    <tr>
+    <td>额定电流</td>
+    <td>1.5A</td>
+  </tr>
+    
+    <tr>
+    <td>保持力矩</td>
+    <td>40N·m</td>
+  </tr>
+</table>
+
+<h6 id="42直线T8丝杆步进电机"><a href="#42直线T8丝杆步进电机" class="headerlink" title="42直线T8丝杆步进电机"></a>42直线T8丝杆步进电机</h6><table style="width:100%">
+  <tr>
+    <th rowspan="9"><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/42_linear_t8_screw_stepper_motor.jpg" srcset="/img/loading.gif" lazyload></th>
+    <th colspan="2" style="width:61%">电气特性</th>
+  </tr>
+  <tr>
+    <td>相数</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>步距角</td>
+    <td>1.8°</td>
+  </tr>
+  <tr>
+    <td>步距角精度</td>
+    <td>±5%</td>
+  </tr>
+    <tr>
+    <td>转子惯量</td>
+    <td>57gf·cm<sup>2</sup></td>
+  </tr>
+  <tr>
+    <td>额定电流</td>
+    <td>1.5A</td>
+  </tr>
+    
+    <tr>
+    <td>保持力矩</td>
+    <td>40N·m</td>
+  </tr>
+  
+    <tr>
+    <td>丝杆导程</td>
+    <td>8mm</td>
+  </tr>
+  
+    <tr>
+    <td>丝杆长度</td>
+    <td>300mm</td>
+  </tr>
+</table>
+
+<h4 id="加热件"><a href="#加热件" class="headerlink" title="加热件"></a>加热件</h4><h5 id="热床"><a href="#热床" class="headerlink" title="热床"></a>热床</h5><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/magnetic_heatbed_MK52_24V.png" srcset="/img/loading.gif" lazyload alt="Magnetic heatbed MK52 24V"></p>
+<h5 id="打印热端"><a href="#打印热端" class="headerlink" title="打印热端"></a>打印热端</h5><p><img src="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/prusa_v6_hotend.jpg" srcset="/img/loading.gif" lazyload alt="Prusa V6 HotEnd (MK2 &amp; MK3 variants)"></p>
+<h4 id="紧固件"><a href="#紧固件" class="headerlink" title="紧固件"></a>紧固件</h4><h5 id="M2"><a href="#M2" class="headerlink" title="M2"></a>M2</h5><h5 id="M3"><a href="#M3" class="headerlink" title="M3"></a>M3</h5><h5 id="M4"><a href="#M4" class="headerlink" title="M4"></a>M4</h5><h5 id="M5"><a href="#M5" class="headerlink" title="M5"></a>M5</h5><h5 id="M6"><a href="#M6" class="headerlink" title="M6"></a>M6</h5><hr>
+<h3 id="组装教程"><a href="#组装教程" class="headerlink" title="组装教程"></a>组装教程</h3><p>请参考以下教程进行组装：<br><a target="_blank" rel="noopener" href="https://help.prusa3d.com/en/category/original-prusa-i3-mk3s-kit-assembly_1128">Prusa i3 MK3S+ 组装指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://guides.bear-lab.com/c/BearFrame_Assembly_Guide">Prusa i3 MK3S+ 升级版（prusa_i3_bear_upgrade）组装指南</a></p>
+<h3 id="接线示意图"><a href="#接线示意图" class="headerlink" title="接线示意图"></a>接线示意图</h3><p><a target="_blank" rel="noopener" href="https://reprap.org/wiki/RAMPS_1.4">RAMPS_1.4 官方Wiki</a></p>
+<h3 id="3D打印机固件"><a href="#3D打印机固件" class="headerlink" title="3D打印机固件"></a>3D打印机固件</h3><p><a target="_blank" rel="noopener" href="https://marlinfw.org/">Marlin固件</a>是一款开源3D打印机的固件，集合了众多支持3D打印机的主控芯片，可以很方便进行3D打印机的固件编译与配置。</p>
+<p><a href="https://dongxunz.github.io/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/">详细固件参数配置，请查看此文章</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/3D%E6%89%93%E5%8D%B0/">3D打印</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Prusa-i3/">Prusa i3</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/17/%E5%B5%8C%E5%85%A5%E5%BC%8F/C51/DIY%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DIY加热焊台</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/">
+                        <span class="hidden-mobile">Altium Designer快捷操作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

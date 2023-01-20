@@ -1,0 +1,638 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenMediaVault安装与配置">
+<meta property="og:url" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/flash_img.png">
+<meta property="og:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png">
+<meta property="article:published_time" content="2021-12-08T12:08:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T17:07:22.269Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="OpenMediaVault">
+<meta property="article:tag" content="NAS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/flash_img.png">
+  
+  
+  <title>OpenMediaVault安装与配置 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                分享
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/">
+                    <i class="iconfont icon-apple-fill"></i>
+                    电路
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    结构
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/">
+                    <i class="iconfont icon-music"></i>
+                    音乐
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/">
+                    <i class="iconfont icon-steam"></i>
+                    游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/">
+                    <i class="iconfont icon-book"></i>
+                    阅读角
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/clover.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="OpenMediaVault安装与配置">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-08 20:08" pubdate>
+        2021年12月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OpenMediaVault安装与配置</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年1月22日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB/CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。<br>OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无需深入了解。</p>
+</blockquote>
+<hr>
+<h2 id="安装OpenMediaVault"><a href="#安装OpenMediaVault" class="headerlink" title="安装OpenMediaVault"></a>安装OpenMediaVault</h2><h3 id="1-下载镜像文件"><a href="#1-下载镜像文件" class="headerlink" title="1. 下载镜像文件"></a>1. 下载镜像文件</h3><p><a target="_blank" rel="noopener" href="https://www.openmediavault.org/">Openmediavault官方网站</a></p>
+<h3 id="2-烧写镜像文件"><a href="#2-烧写镜像文件" class="headerlink" title="2. 烧写镜像文件"></a>2. 烧写镜像文件</h3><p><a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">烧录镜像文件工具</a></p>
+<p><img src="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/flash_img.png" srcset="/img/loading.gif" lazyload alt="烧写镜像文件操作"></p>
+<h3 id="3-开机启动"><a href="#3-开机启动" class="headerlink" title="3. 开机启动"></a>3. 开机启动</h3><hr>
+<h2 id="配置OpenMediaVault"><a href="#配置OpenMediaVault" class="headerlink" title="配置OpenMediaVault"></a>配置OpenMediaVault</h2><h3 id="开启WIFI"><a href="#开启WIFI" class="headerlink" title="开启WIFI"></a>开启WIFI</h3><h4 id="1-查看WIFI网卡名称："><a href="#1-查看WIFI网卡名称：" class="headerlink" title="1. 查看WIFI网卡名称："></a>1. 查看WIFI网卡名称：</h4><figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">sudo iwconfig</span><br></code></pre></div></td></tr></table></figure>
+<p>如下图，其中<code>wlp4s0</code>就是我的WIFI网卡名称：<br><img src="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png" srcset="/img/loading.gif" lazyload alt="查看WIFI网卡名称">.</p>
+<h4 id="2-配置相关文件："><a href="#2-配置相关文件：" class="headerlink" title="2. 配置相关文件："></a>2. 配置相关文件：</h4><ul>
+<li>由于在最新的系统中，interface文件被系统自动管理，所以我们首先需要操作一下相关服务：</li>
+</ul>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo rm <span class="hljs-regexp">/etc/</span>systemd<span class="hljs-regexp">/network/</span>*            <span class="hljs-comment">#删除所有默认网络配置</span><br>sudo netplan apply                        <span class="hljs-comment">#添加新的网络计划</span><br>sudo omv-salt deploy run systemd-networkd <span class="hljs-comment">#禁用系统systemd-networkd服务</span><br><br>sudo nano <span class="hljs-regexp">/etc/</span>network/interface          <span class="hljs-comment">#输入以下两种配置其一即可</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>配置一：自动获取IP：<figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts">auto lo<br>iface lo inet loopback            <span class="hljs-meta">#本地网络配置</span><br><br><span class="hljs-class">auto </span>&#123;wifi_card_name&#125;<br><span class="hljs-class">iface </span>&#123;wifi_card_name&#125; inet dhcp  <span class="hljs-meta">#dhcp为自动获取IP</span><br>wpa_conf <span class="hljs-meta-keyword">/etc/</span>wpa.conf            <span class="hljs-meta">#WIFI配置文件路径</span><br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>{wifi_card_name}：步骤1中查询到的WIFI网卡名称</p>
+</blockquote>
+<ul>
+<li>配置二：设置静态IP：<figure class="highlight puppet"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs puppet">auto lo<br>iface lo inet loopback  <span class="hljs-comment">#本地网络配置</span><br><br><span class="hljs-keyword">auto</span> &#123;wifi_card_name&#125;<br><span class="hljs-keyword">iface</span> &#123;wifi_card_name&#125; <span class="hljs-keyword">inet</span> <span class="hljs-keyword">static</span><br><span class="hljs-keyword">address</span> 192.168.xxx.xxx <span class="hljs-comment">#静态IP地址</span><br>netmask 255.255.255.0   <span class="hljs-comment">#子网掩码</span><br>gateway 192.168.xxx.xxx <span class="hljs-comment">#网关地址</span><br>wpa_conf /etc/wpa.conf  <span class="hljs-comment">#WIFI配置文件路径</span><br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<p>输入完成后，按Ctrl+X，输入Y，回车保存。</p>
+<h4 id="3-保存需要连接的WIFI信息"><a href="#3-保存需要连接的WIFI信息" class="headerlink" title="3. 保存需要连接的WIFI信息"></a>3. 保存需要连接的WIFI信息</h4><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo touch <span class="hljs-regexp">/etc/</span>wpa.conf                                    <span class="hljs-comment">#创建保存WIFI信息的文件</span><br><br>wpa_passphrase &#123;wifi_name&#125; &#123;wifi_password&#125; &gt;&gt; <span class="hljs-regexp">/etc/</span>wpa.conf <span class="hljs-comment">#使用密文来保存WIFI信息</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>{wifi_name}：要连接的WIFI名称<br>{wifi_password}：对应WIFI密码</p>
+</blockquote>
+<h4 id="4-启动网卡"><a href="#4-启动网卡" class="headerlink" title="4. 启动网卡"></a>4. 启动网卡</h4><figure class="highlight dts"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dts"><span class="hljs-class">ifup </span>&#123;wifi_card_name&#125;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>{wifi_card_name}：WIFI网卡名称</p>
+</blockquote>
+<hr>
+<h3 id="配置OpenMediaVault的DNS"><a href="#配置OpenMediaVault的DNS" class="headerlink" title="配置OpenMediaVault的DNS"></a>配置OpenMediaVault的DNS</h3><blockquote>
+<p>老办法是直接修改<code>/etc/resolv.conf</code>文件，在最后面添加</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">nameserver</span> <span class="hljs-number">8.8.8.8</span><br></code></pre></div></td></tr></table></figure>
+
+<p>但是新系统，resolv.conf被系统自动管理，所以需要使用以下方法：</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">nano <span class="hljs-regexp">/etc/</span>systemd/resolved.conf<br></code></pre></div></td></tr></table></figure>
+<p>将<code>#DNS=</code>改为<code>DNS=8.8.8.8</code>，Ctrl+X，输入Y，回车保存退出即可。</p>
+<p>输入以下命令，重启systemd-resolved服务：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">systemctl restart systemd-resolved</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="开启社区插件"><a href="#开启社区插件" class="headerlink" title="开启社区插件"></a>开启社区插件</h3><h3 id="更改OpenMediaVault为国内源"><a href="#更改OpenMediaVault为国内源" class="headerlink" title="更改OpenMediaVault为国内源"></a>更改OpenMediaVault为国内源</h3><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/openmediavault/">清华大学开源镜像网站</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/OpenMediaVault/">OpenMediaVault</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/OpenMediaVault/">OpenMediaVault</a>
+                    
+                      <a class="hover-with-bg" href="/tags/NAS/">NAS</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/10/Linux/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux基础命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">一加6刷机笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

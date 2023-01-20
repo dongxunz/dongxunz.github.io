@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="G-code命令Marlin包含丰富的G-code命令，可以很方便的使用电脑通过串口连接3D打印机时进行调试与配置，以下只列出常用G-code命令，详细的G-code命令介绍，请查看Marlin G-code官方帮助文档。 G0 &#x2F; G1 - 直线运动描述G0 : X、Y、Z轴（不包含E轴）的线性运动。G1 : X、Y、Z、E轴的线性运动。 笔记用法G0 [E&lt;pos&gt;] [F&lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Marlin固件常用G-code命令">
+<meta property="og:url" content="https://dongxunz.github.io/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%B8%B8%E7%94%A8G-code%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="G-code命令Marlin包含丰富的G-code命令，可以很方便的使用电脑通过串口连接3D打印机时进行调试与配置，以下只列出常用G-code命令，详细的G-code命令介绍，请查看Marlin G-code官方帮助文档。 G0 &#x2F; G1 - 直线运动描述G0 : X、Y、Z轴（不包含E轴）的线性运动。G1 : X、Y、Z、E轴的线性运动。 笔记用法G0 [E&lt;pos&gt;] [F&lt;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-14T11:22:54.000Z">
+<meta property="article:modified_time" content="2022-06-14T16:40:50.805Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="Marlin固件">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Marlin固件常用G-code命令 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                分享
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/">
+                    <i class="iconfont icon-apple-fill"></i>
+                    电路
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    结构
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/">
+                    <i class="iconfont icon-music"></i>
+                    音乐
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/">
+                    <i class="iconfont icon-steam"></i>
+                    游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/">
+                    <i class="iconfont icon-book"></i>
+                    阅读角
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/clover.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Marlin固件常用G-code命令">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-14 19:22" pubdate>
+        2022年6月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Marlin固件常用G-code命令</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年6月15日 凌晨
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="G-code命令"><a href="#G-code命令" class="headerlink" title="G-code命令"></a>G-code命令</h2><p>Marlin包含丰富的G-code命令，可以很方便的使用电脑通过串口连接3D打印机时进行调试与配置，以下只列出常用G-code命令，详细的G-code命令介绍，请查看<a target="_blank" rel="noopener" href="https://marlinfw.org/meta/gcode/">Marlin G-code官方帮助文档</a>。</p>
+<h3 id="G0-G1-直线运动"><a href="#G0-G1-直线运动" class="headerlink" title="G0 / G1 - 直线运动"></a>G0 / G1 - 直线运动</h3><h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p><code>G0</code> : X、Y、Z轴（不包含E轴）的线性运动。<br><code>G1</code> : X、Y、Z、E轴的线性运动。</p>
+<h4 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h4><h4 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h4><p><code>G0 [E&lt;pos&gt;] [F&lt;rate&gt;] [X&lt;pos&gt;] [Y&lt;pos&gt;] [Z&lt;pos&gt;]</code><br><code>G1 [E&lt;pos&gt;] [F&lt;rate&gt;] [X&lt;pos&gt;] [Y&lt;pos&gt;] [Z&lt;pos&gt;]</code></p>
+<p><code>[E&lt;pos&gt;]</code> : E（挤出机）轴上的绝对或相对位置（以当前单位表示），E轴描述了挤出机进料器输入耗材长度。<br><code>[F&lt;rate&gt;]</code> : 起点到终点之间移动的最大移动速度，单位mm/min；此处设置的速度适用于省略此参数的后续移动。<br><code>[X&lt;pos&gt;]</code> : X轴上的绝对或相对坐标（以当前单位表示）。<br><code>[Y&lt;pos&gt;]</code> : Y轴上的绝对或相对坐标（以当前单位表示）。<br><code>[Z&lt;pos&gt;]</code> : Z轴上的绝对或相对坐标（以当前单位表示）。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight tp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tp">默认情况下，坐标以毫米为单位，也可以通过 G<span class="hljs-number">20</span> 设置为英寸。<br><br>G<span class="hljs-number">0</span> <span class="hljs-keyword">X</span><span class="hljs-number">10</span>  # <span class="hljs-keyword">X</span>轴相对于原点移动<span class="hljs-number">10mm</span><br>G<span class="hljs-number">0</span> <span class="hljs-keyword">X</span><span class="hljs-number">50</span> <span class="hljs-keyword">Y</span><span class="hljs-number">50</span> <span class="hljs-keyword">Z</span><span class="hljs-number">50</span>  # <span class="hljs-keyword">X</span>、<span class="hljs-keyword">Y</span>、<span class="hljs-keyword">Z</span>轴相当于原点分别移动<span class="hljs-number">50mm</span><br><br>G<span class="hljs-number">0</span> F<span class="hljs-number">1500</span>  # 设置移动进给速度为<span class="hljs-number">1500mm</span>/min<br><br>G<span class="hljs-number">1</span> <span class="hljs-keyword">X</span><span class="hljs-number">50</span> <span class="hljs-keyword">Y</span><span class="hljs-number">25</span><span class="hljs-number">.3</span> E<span class="hljs-number">22</span><span class="hljs-number">.4</span>  # <span class="hljs-keyword">X</span>轴向正方向移动<span class="hljs-number">50mm</span>、<span class="hljs-keyword">Y</span>轴正方向移动<span class="hljs-number">25</span><span class="hljs-number">.3</span>mm，同时E轴挤出机挤出<span class="hljs-number">22</span><span class="hljs-number">.4</span>mm的耗材长度<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="G2-G3-圆弧或圆运动"><a href="#G2-G3-圆弧或圆运动" class="headerlink" title="G2 / G3 - 圆弧或圆运动"></a>G2 / G3 - 圆弧或圆运动</h3><h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>G2 : 顺时针圆弧<br>G3 : 逆时针圆弧</p>
+<h4 id="用法-1"><a href="#用法-1" class="headerlink" title="用法"></a>用法</h4><h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h4><figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs"><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="M114-获取当前位置"><a href="#M114-获取当前位置" class="headerlink" title="M114 - 获取当前位置"></a>M114 - 获取当前位置</h3><h4 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h4><p>获取当前X、Y、Z、E轴电机位置，包含步进值；步进值为打印空间大小，不允许超过设定值，也不允许为负数。</p>
+<h4 id="用法-2"><a href="#用法-2" class="headerlink" title="用法"></a>用法</h4><p><code>M114 [D] [E] [R]</code></p>
+<p><code>[D]</code> : 详细资料（必填M114_DETAIL）<br><code>[E]</code> : 报告 E 步进器位置（需要M114_DETAIL）<br><code>[R]</code> : 真实位置信息（需要M114_REALTIME）</p>
+<h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h4><figure class="highlight tp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs tp">&gt; M<span class="hljs-number">114</span><br><span class="hljs-keyword">X</span>:<span class="hljs-number">0</span><span class="hljs-number">.00</span> <span class="hljs-keyword">Y</span>:<span class="hljs-number">127</span><span class="hljs-number">.00</span> <span class="hljs-keyword">Z</span>:<span class="hljs-number">145</span><span class="hljs-number">.00</span> E:<span class="hljs-number">0</span><span class="hljs-number">.00</span> Count <span class="hljs-keyword">X</span>: <span class="hljs-number">0</span> <span class="hljs-keyword">Y</span>:<span class="hljs-number">10160</span> <span class="hljs-keyword">Z</span>:<span class="hljs-number">116000</span><br>ok<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="M105-查看各温度探头温度"><a href="#M105-查看各温度探头温度" class="headerlink" title="M105 - 查看各温度探头温度"></a>M105 - 查看各温度探头温度</h3><h4 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h4><p>将各探头温度返回给主机。</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p><code>M105 [R] [T&lt;index&gt;]</code></p>
+<p><code>[R]</code>    : 包括冗余温度传感器（如果有）<br><code>[T&lt;index&gt;]</code> : 热端指数</p>
+<h4 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h4><figure class="highlight node-repl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs node-repl"><span class="hljs-meta">&gt;</span> <span class="javascript">M105</span><br><span class="hljs-meta">&gt;</span> <span class="javascript">ok T:<span class="hljs-number">30.44</span> /<span class="hljs-number">0.00</span> B:<span class="hljs-number">30.08</span> /<span class="hljs-number">0.00</span> @:<span class="hljs-number">0</span> B@:<span class="hljs-number">0</span></span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="M428-原点偏移量"><a href="#M428-原点偏移量" class="headerlink" title="M428 - 原点偏移量"></a>M428 - 原点偏移量</h3><h4 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a>说明</h4><p>将当前位置设定为本地起始位置和坐标空间的持久偏移；<br>当前位置必须在原0点偏移2CM以内才能使用该指令，<br>当前位置设置为原始起始位置，<br>任何先前的位置偏移G92都会被清除，<br>原点偏移是持久的—添加当前位置直到改变。</p>
+<h4 id="参数-1"><a href="#参数-1" class="headerlink" title="参数"></a>参数</h4><h4 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h4><figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs"><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="M119-各限位开关状态"><a href="#M119-各限位开关状态" class="headerlink" title="M119 - 各限位开关状态"></a>M119 - 各限位开关状态</h3><h4 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a>说明</h4><p>使用此命令可以获得所有限位开关状态，包括Z探针和耗材传感器。</p>
+<h4 id="参数-2"><a href="#参数-2" class="headerlink" title="参数"></a>参数</h4><p>限位开关未触发时返回值应该为：open；触发时返回值为：TRIGGERED；如果限位开关未被触发时返回值为：TRIGGERED，表示限位开关判定逻辑设置有问题，需要在Configuration.h中反转限位开关逻辑。</p>
+<h4 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h4><figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm">&gt; M119<br>Reporting endstop status<br><span class="hljs-symbol">x_min:</span> open<br><span class="hljs-symbol">y_min:</span> open<br><span class="hljs-symbol">z_min:</span> TRIGGERED<br><span class="hljs-symbol">z_probe:</span> open<br><span class="hljs-symbol">filament:</span> open<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="M114-圆弧或圆运动"><a href="#M114-圆弧或圆运动" class="headerlink" title="M114 - 圆弧或圆运动"></a>M114 - 圆弧或圆运动</h3><h4 id="说明-5"><a href="#说明-5" class="headerlink" title="说明"></a>说明</h4><h4 id="参数-3"><a href="#参数-3" class="headerlink" title="参数"></a>参数</h4><h4 id="示例-6"><a href="#示例-6" class="headerlink" title="示例"></a>示例</h4><figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs"><br></code></pre></div></td></tr></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/3D%E6%89%93%E5%8D%B0/">3D打印</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Marlin%E5%9B%BA%E4%BB%B6/">Marlin固件</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DIY力回馈方向盘</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">Marlin固件参数配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

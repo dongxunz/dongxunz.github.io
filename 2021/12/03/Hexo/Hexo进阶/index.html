@@ -1,0 +1,704 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="Hexo生成的Blog主要目录结构使用hexo init &lt;folder&gt;创建博客根目录后，在该目录下安装默认插件npm install后，目录组成如下： 1234567891011121314.├── node_modules&#x3D;：Hexo第三方插件安装目录├── scaffolds：新建文章时使用的Markdown文件模板|   ├── draft.md：草稿模板，生成的文章位于so">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo进阶">
+<meta property="og:url" content="https://dongxunz.github.io/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="Hexo生成的Blog主要目录结构使用hexo init &lt;folder&gt;创建博客根目录后，在该目录下安装默认插件npm install后，目录组成如下： 1234567891011121314.├── node_modules&#x3D;：Hexo第三方插件安装目录├── scaffolds：新建文章时使用的Markdown文件模板|   ├── draft.md：草稿模板，生成的文章位于so">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-03T15:57:46.000Z">
+<meta property="article:modified_time" content="2022-05-18T13:53:44.649Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="主题">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Live2D">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Hexo进阶 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                分享
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/">
+                    <i class="iconfont icon-apple-fill"></i>
+                    电路
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    结构
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/">
+                    <i class="iconfont icon-music"></i>
+                    音乐
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/">
+                    <i class="iconfont icon-steam"></i>
+                    游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/">
+                    <i class="iconfont icon-book"></i>
+                    阅读角
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/clover.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Hexo进阶">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-03 23:57" pubdate>
+        2021年12月3日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hexo进阶</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年5月18日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="Hexo生成的Blog主要目录结构"><a href="#Hexo生成的Blog主要目录结构" class="headerlink" title="Hexo生成的Blog主要目录结构"></a>Hexo生成的Blog主要目录结构</h2><p>使用<code>hexo init &lt;folder&gt;</code>创建博客根目录后，在该目录下安装默认插件<code>npm install</code>后，目录组成如下：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sqf">.<br>├── node_modules=：Hexo第三方插件安装目录<br>├── scaffolds：新建文章时使用的Markdown文件模板<br>|   ├── draft.md：草稿模板，生成的文章位于source/<span class="hljs-variable">_drafts</span><br>|   ├── page.md：分页模板，生成的文章位于source<br>|   └── post.md：默认文章模板，生成的文章位于source/<span class="hljs-variable">_posts</span><br>├── source用于存放原始的Markdown文章和图片<br>|   ├── <span class="hljs-variable">_drafts</span>：存放草稿文章的目录<br>|   └── <span class="hljs-variable">_posts</span>：存放主要文章的目录<br>├── themes：主题存放目录<br>├── <span class="hljs-variable">_config</span>.landscape.yml：默认主题配置文件<br>├── <span class="hljs-variable">_config</span>.yml：博客网站配置文件<br>├── package.json：Hexo相关脚本与包管理信息<br>└── package-<span class="hljs-built_in">lock</span>.json：第三方插件信息<br></code></pre></div></td></tr></table></figure>
+
+<p>相关链接：  </p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/docs/configuration">_config.yml配置介绍</a>  </li>
+</ul>
+<hr>
+<h2 id="Hexo使用模板文件生成文章"><a href="#Hexo使用模板文件生成文章" class="headerlink" title="Hexo使用模板文件生成文章"></a>Hexo使用模板文件生成文章</h2><figure class="highlight gauss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss">生成文章命令：<br>hexo <span class="hljs-keyword">new</span> [layout] &lt;<span class="hljs-built_in">title</span>&gt;   <span class="hljs-meta">#该方法生成的文章文件全部存放于`_posts`下</span><br><br>[layout] : draft / page / post<br>&lt;<span class="hljs-built_in">title</span>&gt;  : 文章名称<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight dos"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dos">生成文章并新建相应的路径文件夹：<br>hexo new [layout] --<span class="hljs-built_in">path</span> &quot;<span class="hljs-built_in">path</span>/<span class="hljs-built_in">title</span>&quot; <span class="hljs-built_in">title</span><br><br>[layout] : draft / page / post<br><span class="hljs-built_in">path</span>/<span class="hljs-built_in">title</span>  : 文章存放路径，需包含文章名称<br><span class="hljs-built_in">title</span>  : 文章名称<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><p>draft（草稿）：<br>文件路径为： <strong>./source/_drafts</strong></p>
+<blockquote>
+<p>该目录下的文章，在使用<code>hexo g</code>编译时，会被忽略，所以也不会显示在网页上。<br>如果想要把草稿文章显示出来，可以使用<code>hexo publish [layout] &lt;title&gt;</code>，将草稿文章移动到 <strong>./source/_posts</strong>下，重新编译，就可以将文章显示出来。  </p>
+</blockquote>
+</li>
+<li><p>page（分页）：<br>文件路径为： <strong>./source</strong></p>
+<blockquote>
+<p>直接将文章放置在资源文件根目录。</p>
+</blockquote>
+</li>
+<li><p>post（文章）<br>生成文章路径为： <strong>./source/_posts</strong></p>
+<blockquote>
+<p>该目录为网页显示正文文章。</p>
+</blockquote>
+</li>
+</ul>
+<p>相关链接：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/docs/writing#Scaffolds">scaffolds使用方法</a></li>
+</ul>
+<hr>
+<h2 id="Hexo资源文件夹"><a href="#Hexo资源文件夹" class="headerlink" title="Hexo资源文件夹"></a>Hexo资源文件夹</h2><ul>
+<li><p>资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
+</li>
+<li><p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>_config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 true 来打开。</p>
+</li>
+</ul>
+<figure class="highlight node-repl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs node-repl"><span class="hljs-meta">...</span><br>post_asset_folder: true<br><span class="hljs-meta">...</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><ul>
+<li>当资源文件管理功能打开后，Hexo将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</li>
+</ul>
+</li>
+<li><ul>
+<li>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在Hexo 2时代，社区创建了很多插件来解决这个问题。但是，随着Hexo 3 的发布，许多新的标签插件被加入到了核心代码中。这使得你可以更简单地在文章中引用你的资源。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight django"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs django"><span class="hljs-template-tag">&#123;% <span class="hljs-name">asset_path</span> slug %&#125;</span><span class="xml"></span><br><span class="xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">asset_img</span> slug [title] %&#125;</span><span class="xml"></span><br><span class="xml"></span><span class="hljs-template-tag">&#123;% <span class="hljs-name">asset_link</span> slug [title] %&#125;</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>比如说：当你打开文章资源文件夹功能后，你把一个 example.jpg 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 markdown 语法 <code>![](example.jpg)</code> ，它将<strong>不会出现在首页上</strong>。（但是它会在文章中按你期待的方式工作）</li>
+</ul>
+<p>正确的引用图片方式是使用下列的标签插件而不是 markdown ：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs maxima">&#123;<span class="hljs-symbol">%</span> asset_img <span class="hljs-built_in">example</span>.jpg This <span class="hljs-built_in">is</span> an <span class="hljs-built_in">example</span> <span class="hljs-built_in">image</span> <span class="hljs-symbol">%</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>通过这种方式，图片将会同时出现在文章和主页以及归档页中。</p>
+<blockquote>
+<p>上述方法虽然可以显示出图片，但是不支持在Markdown编辑器中预览图片，只支持在网页中显示，所以使用第三方插件来达到Markdown和网页都能预览图片。</p>
+</blockquote>
+<p>安装第三方插件</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">npm install https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/CodeFalling/</span>hexo-asset-image --save<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><p>不要使用这条命令来安装：<code>npm install hexo-asset-image --save</code>，该插件被hexo”渲染”后，生成的HTML图片引用路径有问题。</p>
+</li>
+<li><p>以后使用<code>hexo new &#123;title&#125;</code>新建文章，会生成一个和<code>&#123;title&#125;</code>名称相同的文件夹，将图片放入该文件夹，然后使用Markdown语法：<code>![img](./&#123;title&#125;/img_name.png)</code>，图片路径为相对路径，即可在网页和Markdown编辑器中都显示图片。</p>
+</li>
+</ul>
+<hr>
+<h2 id="Hexo主题"><a href="#Hexo主题" class="headerlink" title="Hexo主题"></a>Hexo主题</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">Hexo-Theme-Fluid - 一款 Material Design 风格的主题</a></li>
+</ul>
+<hr>
+<h2 id="Hexo-Live2D"><a href="#Hexo-Live2D" class="headerlink" title="Hexo Live2D"></a>Hexo Live2D</h2><ol>
+<li>安装模块<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada">npm install <span class="hljs-comment">--save hexo-helper-live2d</span><br></code></pre></div></td></tr></table></figure></li>
+<li>配置模块<br>请向Hexo的 _config.yml 文件或主题的 _config.yml 文件中添加配置.<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">live2d:</span><br><span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">scriptFrom:</span> <span class="hljs-string">local</span><br><span class="hljs-attr">pluginRootPath:</span> <span class="hljs-string">live2dw/</span><br><span class="hljs-attr">pluginJsPath:</span> <span class="hljs-string">lib/</span><br><span class="hljs-attr">pluginModelPath:</span> <span class="hljs-string">assets/</span><br><span class="hljs-attr">tagMode:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">debug:</span> <span class="hljs-literal">false</span><br><span class="hljs-attr">model:</span><br> <span class="hljs-attr">use:</span> <span class="hljs-string">live2d-widget-model-wanko</span>  <span class="hljs-comment">#模型文件名称</span><br><span class="hljs-attr">display:</span><br> <span class="hljs-attr">position:</span> <span class="hljs-string">right</span> <span class="hljs-comment">#模型位于网页中的位置</span><br> <span class="hljs-attr">width:</span> <span class="hljs-number">150</span><br> <span class="hljs-attr">height:</span> <span class="hljs-number">300</span><br><span class="hljs-attr">mobile:</span><br> <span class="hljs-attr">show:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">react:</span><br> <span class="hljs-attr">opacity:</span> <span class="hljs-number">0.7</span><br></code></pre></div></td></tr></table></figure></li>
+<li>下载模型<blockquote>
+<p>使用<code>npm install &#123;packagename&#125;</code>安装以下模型:  </p>
+</blockquote>
+<ul>
+<li>live2d-widget-model-chitose</li>
+<li>live2d-widget-model-epsilon2_1</li>
+<li>live2d-widget-model-gf</li>
+<li>live2d-widget-model-haru/01 (use npm install –save live2d-widget-model-haru)</li>
+<li>live2d-widget-model-haru/02 (use npm install –save live2d-widget-model-haru)</li>
+<li>live2d-widget-model-haruto</li>
+<li>live2d-widget-model-hibiki</li>
+<li>live2d-widget-model-hijiki</li>
+<li>live2d-widget-model-izumi</li>
+<li>live2d-widget-model-koharu</li>
+<li>live2d-widget-model-miku</li>
+<li>live2d-widget-model-ni-j</li>
+<li>live2d-widget-model-nico</li>
+<li>live2d-widget-model-nietzsche</li>
+<li>live2d-widget-model-nipsilon</li>
+<li>live2d-widget-model-nito</li>
+<li>live2d-widget-model-shizuku</li>
+<li>live2d-widget-model-tororo</li>
+<li>live2d-widget-model-tsumiki</li>
+<li>live2d-widget-model-unitychan</li>
+<li>live2d-widget-model-wanko</li>
+<li>live2d-widget-model-z16</li>
+</ul>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Hexo/">Hexo</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%BB%E9%A2%98/">主题</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Live2D/">Live2D</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Adb命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/03/Hexo/%E9%80%9A%E8%BF%87Github%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8D%9A%E5%AE%A2/">
+                        <span class="hidden-mobile">通过Github搭建Hexo博客，实现远程访问博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

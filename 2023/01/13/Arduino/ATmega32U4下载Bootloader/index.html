@@ -1,0 +1,649 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言 由于购买的ATmega32U4散片均没有Bootloader，导致自己DIY的主板使用该芯片连接电脑时，电脑无法将芯片识别为COM设备，也就无法给芯片烧写程序；所以需要使用编程器先给芯片烧录Bootloader，才能被电脑识别为COM设备，进行后续程序的烧写。  所需工具 Arduino UNO开发板（A板） 杜邦线若干 自己DIY的主板（B板）  烧写步骤给A板烧写ISP程序 A板使用数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ATmega32U4下载Bootloader">
+<meta property="og:url" content="https://dongxunz.github.io/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言 由于购买的ATmega32U4散片均没有Bootloader，导致自己DIY的主板使用该芯片连接电脑时，电脑无法将芯片识别为COM设备，也就无法给芯片烧写程序；所以需要使用编程器先给芯片烧录Bootloader，才能被电脑识别为COM设备，进行后续程序的烧写。  所需工具 Arduino UNO开发板（A板） 杜邦线若干 自己DIY的主板（B板）  烧写步骤给A板烧写ISP程序 A板使用数据">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongxunz.github.io/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/view_com_id.png">
+<meta property="article:published_time" content="2023-01-13T15:00:43.000Z">
+<meta property="article:modified_time" content="2023-01-15T12:01:23.571Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="ATmega32U4">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/view_com_id.png">
+  
+  
+  <title>ATmega32U4下载Bootloader - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                分享
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/">
+                    <i class="iconfont icon-apple-fill"></i>
+                    电路
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    结构
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/">
+                    <i class="iconfont icon-music"></i>
+                    音乐
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/">
+                    <i class="iconfont icon-steam"></i>
+                    游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/">
+                    <i class="iconfont icon-book"></i>
+                    阅读角
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/clover.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ATmega32U4下载Bootloader">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-01-13 23:00" pubdate>
+        2023年1月13日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      4 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ATmega32U4下载Bootloader</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2023年1月15日 晚上
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>由于购买的<a target="_blank" rel="noopener" href="https://so.szlcsc.com/global.html?k=ATmega32U4&hot-key=">ATmega32U4散片</a>均没有Bootloader，导致自己DIY的主板使用该芯片连接电脑时，电脑无法将芯片识别为COM设备，也就无法给芯片烧写程序；所以需要使用编程器先给芯片烧录Bootloader，才能被电脑识别为COM设备，进行后续程序的烧写。</p>
+</blockquote>
+<h2 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h2><ul>
+<li>Arduino UNO开发板（A板）</li>
+<li>杜邦线若干</li>
+<li>自己DIY的主板（B板）</li>
+</ul>
+<h2 id="烧写步骤"><a href="#烧写步骤" class="headerlink" title="烧写步骤"></a>烧写步骤</h2><h3 id="给A板烧写ISP程序"><a href="#给A板烧写ISP程序" class="headerlink" title="给A板烧写ISP程序"></a>给A板烧写ISP程序</h3><ol>
+<li>A板使用数据线连接电脑。</li>
+<li>打开 Arduino 软件。</li>
+<li>文件 -&gt; 示例 -&gt; 11.ArduinoISP -&gt; ArduinoISP。</li>
+<li>工具 -&gt; 开发板:”Arduino UNO”，端口选择主板对应的COM号。</li>
+<li>编译上传，等待烧写成功，A板就会变成一个USBISP编程器。</li>
+</ol>
+<h3 id="使用杜邦线将A板和B板连接起来"><a href="#使用杜邦线将A板和B板连接起来" class="headerlink" title="使用杜邦线将A板和B板连接起来"></a>使用杜邦线将A板和B板连接起来</h3><table align="center">
+    <tr>
+        <th colspan="3">AB板接线方式</th>
+    </tr>
+    <tr>
+        <td>A板</td>
+        <td>B板</td>
+        <td>备注</td>  
+    </tr>
+    <tr>
+        <td>D10</td>
+        <td>RESET</td>
+        <td rowspan="6">ICSP接口</td>
+    </tr>
+    <tr>
+        <td>D11</td>
+      <td>MOSI</td>
+    </tr>
+    <tr>
+        <td>D12</td>
+      <td>MISO</td>
+    </tr>
+    <tr>
+        <td>D13</td>
+        <td>SCK</td>
+    </tr>
+    <tr>
+       <td>5V</td>
+        <td>5V</td>
+    </tr>
+    <tr>
+        <td>GND</td>
+        <td>GND</td>
+    </tr>
+</table>
+
+
+<h3 id="给B板烧写Bootloader"><a href="#给B板烧写Bootloader" class="headerlink" title="给B板烧写Bootloader"></a>给B板烧写Bootloader</h3><ol>
+<li>A板使用数据线连接电脑。</li>
+<li><strong>以管理员身份运行</strong> Arduino 软件。</li>
+<li>文件 -&gt; 首选项 -&gt; 显示详细输出 ✔编译 ✔上传，然后点击 好 保存。</li>
+<li>工具 -&gt; 开发板:”Arduino Leonardo”，端口选择<strong>A板</strong>对应的COM号。<div class="note note-info">
+            <p>开发板:”Arduino Leonardo”：<br>开发板型号根据B板设计进行选择，由于我设计的主板功能和Arduino Leonardo开发板类似，所以选择这个型号进行烧录；如果不是按照 Arduino Leonardo开发板 设计，请选择对应的开发板型号。</p>
+          </div></li>
+<li>工具 -&gt; 编程器:”Arduino as ISP”。</li>
+<li>工具 -&gt; 烧录引导程序。</li>
+<li>烧录过程可能需要几分钟，请耐心等待，当 Arduino 软件左下角显示 <strong>烧录引导程序完成</strong> 时，就代表B板已经成功烧录 Arduino Leonardo开发板 的Bootloader了。</li>
+</ol>
+<h3 id="测试B板Bootloader是否烧写成功"><a href="#测试B板Bootloader是否烧写成功" class="headerlink" title="测试B板Bootloader是否烧写成功"></a>测试B板Bootloader是否烧写成功</h3><p>将B板使用数据线连接电脑，进入 <em>设备管理器 -&gt; 端口(COM和LPT)</em> 查看是否显示出主板的COM号。</p>
+<p><img src="/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/view_com_id.png" srcset="/img/loading.gif" lazyload alt="查看主板COM号"></p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>B板成功刷写Bootloader后，使用数据线连接电脑时，通过 <em>设备管理器 -&gt; 端口(COM和LPT)</em> 会看到先显示为：<strong>Arduino Leonardo Bootloader(COM?)</strong> ，过了几秒钟之后，会显示为：<strong>Arduino Lenardo(COM?)</strong> ；如果要给芯片烧写程序，就需要在 Arduino Leonardo Bootloader(COM?) 阶段时进行烧录，否则当显示为 Arduino Leonardo(COM?) 时是无法烧写程序的。</p>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1154y1i7oF/?vd_source=86afd42930abc3b873490c6820b27f6c">用Arduino给atmega328(类Arduino)烧录bootloader</a></p>
+<p><a target="_blank" rel="noopener" href="https://docs.arduino.cc/built-in-examples/arduino-isp/ArduinoISP?_gl=1*diynw4*_ga*OTg3ODQwNzU1LjE2NzA0MjYwNzE.*_ga_NEXN8H46L5*MTY3MzcyMjE2My4xMi4xLjE2NzM3MjIxODkuMC4wLjA.">Arduino as ISP and Arduino Bootloaders</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Arduino/">Arduino</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ATmega32U4/">ATmega32U4</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/">
+                        <span class="hidden-mobile">DIY力回馈方向盘</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

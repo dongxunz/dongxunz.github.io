@@ -1,0 +1,874 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言以前用键盘玩欧卡2的时候，就一直想着能有个方向盘那该多美滋滋 :) 有一天在B站刷视频时，无意中看到了UP主：夏叶-XiaYe关于DIY力回馈方向盘的视频，顿时来了兴趣，才有了下文看到的力回馈方向盘 V2.1。 设计图纸结构设计              力回馈方向盘 V1.0                           设计思路       底板为5mm厚的环氧板；主轴使用轴承座固定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DIY力回馈方向盘">
+<meta property="og:url" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言以前用键盘玩欧卡2的时候，就一直想着能有个方向盘那该多美滋滋 :) 有一天在B站刷视频时，无意中看到了UP主：夏叶-XiaYe关于DIY力回馈方向盘的视频，顿时来了兴趣，才有了下文看到的力回馈方向盘 V2.1。 设计图纸结构设计              力回馈方向盘 V1.0                           设计思路       底板为5mm厚的环氧板；主轴使用轴承座固定">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Force_feedback_steering_wheel_v1.0.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Force_feedback_steering_wheel_v2.0.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Force_feedback_steering_wheel_v2.1.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/expansion_sleeve_adapter_plate_v1.1.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/motor_control_panel_v2.0.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/force_feedback_steering_wheel_control_board_v2.1.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Optical_axis_machining_drawings.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Pedal_fixed_mount.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/force_feedback_steering_wheel_machine_v2.1.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/main_control_panel_v2.1.jpg">
+<meta property="article:published_time" content="2022-12-25T06:04:46.000Z">
+<meta property="article:modified_time" content="2023-01-20T08:23:09.628Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="力回馈方向盘">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Force_feedback_steering_wheel_v1.0.png">
+  
+  
+  <title>DIY力回馈方向盘 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                分享
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/">
+                    <i class="iconfont icon-apple-fill"></i>
+                    电路
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    结构
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/">
+                    <i class="iconfont icon-music"></i>
+                    音乐
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/">
+                    <i class="iconfont icon-steam"></i>
+                    游戏
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/">
+                    <i class="iconfont icon-book"></i>
+                    阅读角
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/clover.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="DIY力回馈方向盘">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-25 14:04" pubdate>
+        2022年12月25日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">DIY力回馈方向盘</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2023年1月20日 下午
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以前用键盘玩<a target="_blank" rel="noopener" href="https://store.steampowered.com/app/227300/Euro_Truck_Simulator_2/">欧卡2</a>的时候，就一直想着能有个方向盘那该多美滋滋 :)</p>
+<p>有一天在B站刷视频时，无意中看到了UP主：<a target="_blank" rel="noopener" href="https://space.bilibili.com/359721186/video">夏叶-XiaYe</a>关于DIY力回馈方向盘的视频，顿时来了兴趣，才有了下文看到的<strong>力回馈方向盘 V2.1</strong>。</p>
+<h2 id="设计图纸"><a href="#设计图纸" class="headerlink" title="设计图纸"></a>设计图纸</h2><h3 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h3><table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 力回馈方向盘 V1.0 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Force_feedback_steering_wheel_v1.0.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>底板为5mm厚的环氧板；主轴使用轴承座固定于环氧板中间位置，左侧为开关电源（220V AC to 12V DC），右侧为旋转编码器、主控板、电机；旋转编码器和电机固定孔预留了左右移动空间，可用于拉紧同步带。</td>
+  </tr>
+  
+      <td> <div align="center"> 缺点 </div> </td>
+      <td>由于底板为环氧板，材料强度一般，导致拧上螺丝后，板子会发生弯曲变形，放置于桌面也会根据方向盘转向而左右晃动；尺寸也显得 “肥胖” ，占用太多桌面空间。</td>
+  
+</table>
+
+<table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 力回馈方向盘 V2.0 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Force_feedback_steering_wheel_v2.0.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>底板由环氧板更换为2040铝型材，强度可靠；电机固定于左侧，右侧为主轴与同步轮、旋转编码器；主控板固定于右侧型材靠上的表面，便于使用数据线与电脑进行连接；电源依然为开关电源，但固定方式选择外置，使用DC头连接到主控板上的电机控制板，缩小尺寸。</td>
+  </tr>
+  
+      <td> <div align="center"> 缺点 </div> </td>
+      <td>主轴为光轴，由于表面光滑，导致同步轮使用顶丝固定后会出现打滑情况；同步带宽度偏窄，方向盘转向手感较差；脚踏板与主控板使用XH2.54接口连接，多次拔插时容易松动。</td>
+  
+</table>
+
+<table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 力回馈方向盘 V2.1 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Force_feedback_steering_wheel_v2.1.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>由 V2.0 升级优化而来，对尺寸小幅优化；将主控板进行了重新设计，解决 V2.0 “叠汉堡” 式的固定方式；电源未使用开关电源，因为即使外置也略显不优雅，所以选择使用12V 5A笔记本电源，体积小了很多，还可以放在型材之间固定起来。</td>
+  </tr>
+  
+      <td> <div align="center"> 缺点 </div> </td>
+      <td>暂未发现。</td>
+  
+</table>
+
+<table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 胀紧套转接板 V1.1 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/expansion_sleeve_adapter_plate_v1.1.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>该转接板为铝基板，用于将方向盘与胀紧套紧固在一起。</td>
+  </tr>
+</table>
+
+<h3 id="硬件设计"><a href="#硬件设计" class="headerlink" title="硬件设计"></a>硬件设计</h3><table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 电机控制板 V2.0 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/motor_control_panel_v2.0.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>主控板为Arduino Leonardo开发板；电机控制板使用排针上下对插的方式与主控板连接。</td>
+  </tr>
+</table>
+
+<table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 力回馈方向盘主控板 V2.1 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/force_feedback_steering_wheel_control_board_v2.1.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>主芯片与电机控制电路全部在一块PCB上，集成度进一步提高；同时优化了主控板与电脑、脚踏板连接方式，解决因反复插拔导致接口松动，提升连接稳定性。</td>
+  </tr>
+</table>
+
+<table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 光轴加工图纸 V1.1 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Optical_axis_machining_drawings.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>加入凹槽设计，解决同步轮使用顶丝固定后出现的打滑问题。</td>
+  </tr>
+</table>
+
+<table style="width:100%">
+  <tr>
+      <td colspan="2"> <font size="5"> <div align="center"> <b> 脚踏固定板钻孔尺寸图 V1.1 </b> </div> </font></td>
+  </tr>
+  <tr>
+    <th colspan="2"><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/Pedal_fixed_mount.png" srcset="/img/loading.gif" lazyload></th>
+  </tr>
+  <tr>
+    <td nowrap="nowrap"> <div align="center"> 设计思路 </div> </td>
+    <td>该尺寸图为木板钻孔尺寸图，用于固定脚踏板，使用自攻螺丝进行固定。</td>
+  </tr>
+</table>
+
+<h2 id="材料清单"><a href="#材料清单" class="headerlink" title="材料清单"></a>材料清单</h2><h3 id="力回馈方向盘-V2-1-BOM"><a href="#力回馈方向盘-V2-1-BOM" class="headerlink" title="力回馈方向盘 V2.1-BOM"></a>力回馈方向盘 V2.1-BOM</h3><table>
+<thead>
+<tr>
+<th align="center">商品名称与链接</th>
+<th align="center">数量</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">力回馈方向盘主控板 V2.1</td>
+<td align="center">1</td>
+<td align="center">暂未开源，如需工程文件，请联系我👨🏻‍🔧</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=724e6vdj6354&id=582975294023&spm=a1z09.2.0.0.219e2e8dFLhxN5">2040V型材</a></td>
+<td align="center">4+2</td>
+<td align="center">264mm *4 211mm *2</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.520f2e8dIBtSJh&id=17619853393&_u=824e6vdjc21b">MY1016电机</a></td>
+<td align="center">1</td>
+<td align="center">24V 300W</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=620356673590&_u=p24e6vdj6425">旋转编码器</a></td>
+<td align="center">1</td>
+<td align="center">脉冲：1000 输出方式：NPN 供电：5V</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=623473045760&_u=p24e6vdj7e4b">旋转编码器支架</a></td>
+<td align="center">1</td>
+<td align="center">直板</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.20.54ea7484gwsFSv&id=578821901264">同步轮 3M120齿 BF型</a></td>
+<td align="center">1</td>
+<td align="center">光轴使用，槽宽16mm，内孔直径12mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=574671696720&_u=p24e6vdj728c">同步轮 3M20齿 K型</a></td>
+<td align="center">1</td>
+<td align="center">电机使用，槽宽16mm，内孔直径8mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=574671696720&_u=p24e6vdj728c">同步轮 3M20齿 K型</a></td>
+<td align="center">1</td>
+<td align="center">光轴使用，槽宽11mm，内孔直径12mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=574671696720&_u=p24e6vdj728c">同步轮 3M20齿 BF型</a></td>
+<td align="center">1</td>
+<td align="center">旋转编码器使用，槽宽11mm，内孔直径6mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=600361540850&_u=p24e6vdj54c7">3M白色聚氨酯PU带钢丝环形接驳同步带</a></td>
+<td align="center">1</td>
+<td align="center">电机 &lt;—&gt; 光轴使用，带宽15mm，长度462mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=22415655050&_u=p24e6vdjd141">橡胶同步带</a></td>
+<td align="center">1</td>
+<td align="center">旋转编码器 &lt;—&gt; 光轴使用，带宽10mm，长度180mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=568313029075&_u=p24e6vdj95d2">直线光轴</a></td>
+<td align="center">1</td>
+<td align="center">按照<strong>光轴加工图</strong>进行加工</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=592124362935&_u=p24e6vdjb65f">立式带座外球面轴承座</a></td>
+<td align="center">2</td>
+<td align="center">内径12mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=p24e6vdj6c5f&id=609906070631&spm=a1z09.2.0.0.9f722e8dWw8wIa">涨紧套</a></td>
+<td align="center">1</td>
+<td align="center">Z11-12X18，将光轴与方向盘连接固定起来</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=613506952367&_u=p24e6vdjb513">14寸方向盘</a></td>
+<td align="center">1</td>
+<td align="center">颜色自选</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.9f722e8dWw8wIa&id=575103704187&_u=p24e6vdj13ad">脚踏板</a></td>
+<td align="center">3</td>
+<td align="center">插头类型无要求；如果不需要 离合，可以只买2个</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z10.1-c.w4023-24442391615.2.40c33574lEVeCT&id=681303866126">电源适配器</a></td>
+<td align="center">1</td>
+<td align="center">12V 5A，输出接口：DC 5.5*2.5mm</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.2f2c2e8dbH8ZGT&id=656923245143&_u=f24e6vdjca32">脚踏固定木板</a></td>
+<td align="center">1</td>
+<td align="center">长：40CM，宽：25CM，厚度：2CM；用于固定脚踏板</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?id=690189342885&spm=a1z09.2.0.0.2f2c2e8dbH8ZGT&_u=f24e6vdj1165">防滑垫</a></td>
+<td align="center">1</td>
+<td align="center">长：40CM，宽：25CM，厚度：3MM，用于粘贴在脚踏固定板底部，增加摩擦力</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://detail.tmall.com/item.htm?_u=f24e6vdjb2ae&id=530300194946&spm=a1z09.2.0.0.2f2c2e8dbH8ZGT">自攻螺丝</a></td>
+<td align="center">10</td>
+<td align="center">M6*12</td>
+</tr>
+<tr>
+<td align="center"><a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?spm=a1z09.2.0.0.2f2c2e8dbH8ZGT&id=623227467524&_u=f24e6vdjb05c">C型夹</a></td>
+<td align="center">2</td>
+<td align="center">紫罗兰[梅花开口67(侧孔M10)]，将方向盘固定在桌面上</td>
+</tr>
+</tbody></table>
+<h2 id="成品示意图"><a href="#成品示意图" class="headerlink" title="成品示意图"></a>成品示意图</h2><h3 id="力回馈方向盘-V2-1"><a href="#力回馈方向盘-V2-1" class="headerlink" title="力回馈方向盘 V2.1"></a>力回馈方向盘 V2.1</h3><p><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/force_feedback_steering_wheel_machine_v2.1.jpg" srcset="/img/loading.gif" lazyload alt="方向盘"></p>
+<p><img src="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/main_control_panel_v2.1.jpg" srcset="/img/loading.gif" lazyload alt="主控板 V2.1"></p>
+<p><img src alt="脚踏板"></p>
+<h2 id="下载程序"><a href="#下载程序" class="headerlink" title="下载程序"></a>下载程序</h2><h2 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h2><h3 id="软件设置"><a href="#软件设置" class="headerlink" title="软件设置"></a>软件设置</h3><ol>
+<li>将主控板 V2.1 使用数据线连接电脑，等待主控板上的 TX 灯亮起。</li>
+<li>打开 EMC Utility Lite 软件。</li>
+<li>点击右上角 齿轮 图标。</li>
+<li>Encoder — Cpr ：<strong>旋转编码器脉冲 * 4</strong>。</li>
+<li>Hbridge — <strong>2PWM + 1DIR</strong>。</li>
+<li>点击 Save。</li>
+</ol>
+<h2 id="功能测试"><a href="#功能测试" class="headerlink" title="功能测试"></a>功能测试</h2><h3 id="转向测试"><a href="#转向测试" class="headerlink" title="转向测试"></a>转向测试</h3><ol>
+<li>将主控板 V2.1 使用数据线连接上电脑，等待主控板上的 TX 灯亮起。</li>
+<li>打开 EMC Utility Lite 软件。</li>
+<li>将 Angle 使用鼠标拖到 <strong>900°</strong>。</li>
+<li>将方向盘转到适当位置，鼠标点击 <strong>Center</strong>。</li>
+<li>左转方向盘时，为负度数，右转方向盘时，为正度数。<div class="note note-info">
+            <p>第5步如果往左转方向盘为正度数，往右为负度数，需要将旋转编码器的 A/B 信号线互换。</p>
+          </div></li>
+</ol>
+<h3 id="力回馈测试"><a href="#力回馈测试" class="headerlink" title="力回馈测试"></a>力回馈测试</h3><font color="#ff0000">
+<b>⚠此测试存在风险，请确保做好一切应急措施（保持安全距离，不要用手紧握方向盘，电机电源可立即关断，或者让其他人协助测试等等），此测试导致的任何后果本人概不负责，请小心谨慎！！！</b>
+</font>
+
+<ol>
+<li>将主控板 V2.1 使用数据线连接上电脑，等待主控板上的 TX 灯亮起。</li>
+<li>将 220V 转 12V 5A 电源适配器插入主板DC母座，波动钮子开关(SW_12V)，当主板上的 DC_12V 灯亮起即可。</li>
+<li>打开 EMC Utility Lite 软件。</li>
+<li>将 Angle 使用鼠标拖到 <strong>900°</strong>。</li>
+<li>将方向盘转到适当位置，鼠标点击 <strong>Center</strong>。</li>
+<li>一直往左打方向盘，直到度数为 <strong>-450°</strong> 时，此时电机会给一个反方向的力，阻止度数继续减小；然后一直往右打方向盘，直到度数为 <strong>450°</strong> 时，此时电机也会给一个反方向的力，阻止度数继续增大，即代表力回馈正常。<div class="note note-warning">
+            <ul><li>步骤1，3不能反着来，否则力回馈测试会没有反应（软件打开时会读取主控板参数，反着来会读不到参数，导致力回馈功能失效）。</li><li>当方向盘转到 <strong>-450°</strong> 或者 <strong>450°</strong> 时，电机突然转个不停或者转一下卡一下，需要立即断掉电源适配器的供电，并将数据线与电脑拔掉，将主板上 <strong>转向控制</strong> 的短接帽进行调换，然后重复上述步骤进行测试，直到力回馈正常。</li></ul>
+          </div></li>
+</ol>
+<h3 id="脚踏板测试"><a href="#脚踏板测试" class="headerlink" title="脚踏板测试"></a>脚踏板测试</h3><ol>
+<li>将 脚踏板 通过Type-C线插在主板 <strong>脚踏板接口</strong> 上。</li>
+<li>将主控板 V2.1 使用数据线连接上电脑，等待主控板上的 TX 灯亮起。</li>
+<li>打开 EMC Utility Lite 软件。</li>
+<li>点击 Pedal。</li>
+<li>取消勾选 HandBrake ；如果不需要离合功能，需取消勾选 Clutch。</li>
+<li>用脚踩踏 <strong>油门踏板</strong> ，当 <strong>Accel</strong> 进度条随着脚越用力踩，进度条越高时，说明 <strong>油门踏板</strong> 配置正确。</li>
+<li>用脚踩踏 <strong>刹车踏板</strong> ，当 <strong>Brake</strong> 进度条随着脚越用力踩，进度条越高时，说明 <strong>刹车踏板</strong> 配置正确。<div class="note note-info">
+            <p>如果步骤6，7测试情况与之结果相反，需要点击对应功能的 Min 或者 Max，然后重复测试，直到结果一致，代表脚踏板功能正常。</p>
+          </div></li>
+</ol>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><p><a target="_blank" rel="noopener" href="https://www.jlc.com/">嘉立创PCB</a><br><a target="_blank" rel="noopener" href="https://pro.lceda.cn/editor">嘉立创EDA</a><br><a target="_blank" rel="noopener" href="https://space.bilibili.com/359721186/video">夏叶-XiaYe</a><br><a target="_blank" rel="noopener" href="https://www.facebook.com/EMCDeveloper/posts/update-emclitedownload-httpsdrivegooglecomdrivefolders1ozyxyb4qvjnjuk3sml5wxakt4/838745573148286/">EMC Development</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DIY/">DIY</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/">力回馈方向盘</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ATmega32U4下载Bootloader</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%B8%B8%E7%94%A8G-code%E5%91%BD%E4%BB%A4/">
+                        <span class="hidden-mobile">Marlin固件常用G-code命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>
