@@ -18,22 +18,24 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="集成电路（Integrated Circuit）都是由这些基础电子元器件组合而成，所以对于这些器件的使用，需要了解其特性，才能更方便灵活的使用他们；由于本文章收集的内容大多来自网络，所以可能存在错误或者遗漏，还请大家纠正补充，非常感谢。 电阻在电磁学里，电阻（Resistor）是一个物体对于电流通过的阻碍能力，单位为：Ω（欧姆）。  电容在电路学里，给定电压，电容器储存电荷的能力，称为电容（Cap">
+    <meta name="description" content="集成电路（Integrated Circuit）都是由这些基础电子元器件组合而成，所以对于这些器件的使用，需要了解其特性，才能更方便灵活的使用他们；由于本文章收集的内容大多来自网络，所以可能存在错误或者遗漏，还请大家纠正补充，非常感谢。 电阻(Resistor)             在电磁学里，电阻是一个物体对于电流通过的阻碍能力，单位为：Ω（欧姆）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="认识相关电子元器件">
 <meta property="og:url" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="集成电路（Integrated Circuit）都是由这些基础电子元器件组合而成，所以对于这些器件的使用，需要了解其特性，才能更方便灵活的使用他们；由于本文章收集的内容大多来自网络，所以可能存在错误或者遗漏，还请大家纠正补充，非常感谢。 电阻在电磁学里，电阻（Resistor）是一个物体对于电流通过的阻碍能力，单位为：Ω（欧姆）。  电容在电路学里，给定电压，电容器储存电荷的能力，称为电容（Cap">
+<meta property="og:description" content="集成电路（Integrated Circuit）都是由这些基础电子元器件组合而成，所以对于这些器件的使用，需要了解其特性，才能更方便灵活的使用他们；由于本文章收集的内容大多来自网络，所以可能存在错误或者遗漏，还请大家纠正补充，非常感谢。 电阻(Resistor)             在电磁学里，电阻是一个物体对于电流通过的阻碍能力，单位为：Ω（欧姆）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Resistor.png">
 <meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Capacitance.png">
 <meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Inductance.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/NPN.png">
+<meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PNP.png">
 <meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/NMOS.png">
 <meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/NMOS-EG.png">
 <meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PMOS.png">
 <meta property="og:image" content="https://dongxunz.github.io/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PMOS-EG.png">
 <meta property="article:published_time" content="2022-05-22T05:25:16.000Z">
-<meta property="article:modified_time" content="2022-05-22T07:24:28.049Z">
+<meta property="article:modified_time" content="2023-02-05T16:04:13.396Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="电子元器件">
 <meta name="twitter:card" content="summary_large_image">
@@ -279,7 +281,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.8k 字
     </span>
   
 
@@ -288,7 +290,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分钟
+      6 分钟
     </span>
   
 
@@ -329,49 +331,223 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月22日 下午
+                  本文最后更新于：2023年2月6日 凌晨
                 
               </p>
             
             <div class="markdown-body">
               <p>集成电路（Integrated Circuit）都是由这些基础电子元器件组合而成，所以对于这些器件的使用，需要了解其特性，才能更方便灵活的使用他们；由于本文章收集的内容大多来自网络，所以可能存在错误或者遗漏，还请大家纠正补充，非常感谢。</p>
-<h2 id="电阻"><a href="#电阻" class="headerlink" title="电阻"></a>电阻</h2><p>在电磁学里，电阻（Resistor）是一个物体对于<strong>电流通过的阻碍能力</strong>，单位为：Ω（欧姆）。</p>
-<p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Resistor.png" srcset="/img/loading.gif" lazyload alt="电阻器件符号"></p>
-<h2 id="电容"><a href="#电容" class="headerlink" title="电容"></a>电容</h2><p>在电路学里，给定电压，<strong>电容器储存电荷的能力</strong>，称为电容（Capacitance），单位为：F（法拉）。</p>
-<p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Capacitance.png" srcset="/img/loading.gif" lazyload alt="电容器件符号"></p>
-<h2 id="电感"><a href="#电感" class="headerlink" title="电感"></a>电感</h2><p>电感（Inductance）是闭合回路的一种属性，即当通过闭合回路的电流改变时，会出现电动势来<strong>抵抗电流的改变</strong>，单位为：H（亨利）。</p>
-<p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Inductance.png" srcset="/img/loading.gif" lazyload alt="电感器件符号"></p>
-<h2 id="二极管"><a href="#二极管" class="headerlink" title="二极管"></a>二极管</h2><h2 id="光耦"><a href="#光耦" class="headerlink" title="光耦"></a>光耦</h2><h2 id="压敏电阻"><a href="#压敏电阻" class="headerlink" title="压敏电阻"></a>压敏电阻</h2><h2 id="瞬态抑制二极管"><a href="#瞬态抑制二极管" class="headerlink" title="瞬态抑制二极管"></a>瞬态抑制二极管</h2><h2 id="三极管"><a href="#三极管" class="headerlink" title="三极管"></a>三极管</h2><h2 id="场效应管"><a href="#场效应管" class="headerlink" title="场效应管"></a>场效应管</h2><h3 id="NMOS-N型金属氧化物半导体"><a href="#NMOS-N型金属氧化物半导体" class="headerlink" title="NMOS - N型金属氧化物半导体"></a>NMOS - N型金属氧化物半导体</h3><p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/NMOS.png" srcset="/img/loading.gif" lazyload alt="NMOS器件符号"></p>
-<figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm"><span class="hljs-symbol">G:</span>栅极G（Gate）<br><span class="hljs-symbol">S:</span>源极S（Source）<br><span class="hljs-symbol">D:</span>漏极D（Drain）<br></code></pre></div></td></tr></table></figure>
+<h2 id="电阻-Resistor"><a href="#电阻-Resistor" class="headerlink" title="电阻(Resistor)"></a>电阻(Resistor)</h2><div class="note note-info">
+            <p>在电磁学里，电阻是一个物体对于<strong>电流通过的阻碍能力</strong>，单位为：Ω（欧姆）。</p>
+          </div>
+
+<table style="width:100%">
+  <tr>
+    <td> <div align="center"> 器件符号 </div> </td>
+    <td> <div align="center"> 电路标识 </div> </td>
+    <td> <div align="center"> 关注参数 </div> </td>
+  </tr>
+  <tr>
+    <th width="15%"> <img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Resistor.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> R </div> </td>
+    <td> <div align="center"> 
+    阻值 <br>
+    功率 </div> </td>
+  </tr>
+</table>
+
+<h2 id="电容-Capacitance"><a href="#电容-Capacitance" class="headerlink" title="电容(Capacitance)"></a>电容(Capacitance)</h2><div class="note note-info">
+            <p>在电路学里，给定电压，<strong>电容器储存电荷的能力</strong>，单位为：F（法拉）。</p>
+          </div>
+
+<table style="width:100%">
+  <tr>
+    <td> <div align="center"> 器件符号 </div> </td>
+    <td> <div align="center"> 电路标识 </div> </td>
+    <td> <div align="center"> 关注参数 </div> </td>
+  </tr>
+  <tr>
+    <th width="15%"> <img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Capacitance.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> C </div> </td>
+    <td> <div align="center"> 
+    容值 <br>
+    耐压 </div> </td>
+  </tr>
+</table>
+
+<h2 id="电感-Inductance"><a href="#电感-Inductance" class="headerlink" title="电感(Inductance)"></a>电感(Inductance)</h2><div class="note note-info">
+            <p>电感是闭合回路的一种属性，即当通过闭合回路的电流改变时，会出现电动势来<strong>抵抗电流的改变</strong>，单位为：H（亨利）。</p>
+          </div>
+
+<table style="width:100%">
+  <tr>
+    <td> <div align="center"> 器件符号 </div> </td>
+    <td> <div align="center"> 电路标识 </div> </td>
+    <td> <div align="center"> 关注参数 </div> </td>
+  </tr>
+  <tr>
+    <th width="15%"> <img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/Inductance.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> L </div> </td>
+    <td> <div align="center"> ??? </div> </td>
+  </tr>
+</table>
+
+<h2 id="二极管"><a href="#二极管" class="headerlink" title="二极管()"></a>二极管()</h2><div class="note note-info">
+            <p>二极管。</p>
+          </div>
+
+<h2 id="光耦"><a href="#光耦" class="headerlink" title="光耦()"></a>光耦()</h2><div class="note note-info">
+            <p>光耦。</p>
+          </div>
+
+<h2 id="压敏电阻"><a href="#压敏电阻" class="headerlink" title="压敏电阻()"></a>压敏电阻()</h2><div class="note note-info">
+            <p>压敏电阻。</p>
+          </div>
+
+<h2 id="瞬态抑制二极管"><a href="#瞬态抑制二极管" class="headerlink" title="瞬态抑制二极管()"></a>瞬态抑制二极管()</h2><div class="note note-info">
+            <p>瞬态抑制二极管。</p>
+          </div>
+
+<h2 id="三极管-BJT"><a href="#三极管-BJT" class="headerlink" title="三极管(BJT)"></a>三极管(BJT)</h2><div class="note note-info">
+            <p>三极管是一种<strong>控制电流</strong>的半导体器件。<br>三极管的作用是把微弱信号放大成幅度值较大的电信号，也可以用作无触点开关。<br>三极管有截止、放大、饱和三种工作状态。<br>在模拟电路中，一般使用放大状态，用于将电流进行放大；而在数字电路中，主要用于三极管的开关特性，只用到了截止和饱和状态。<br>三极管有2种类型，分为NPN和PNP，区分口诀：箭头朝内PNP，箭头朝外PNP。<br>两种类型的三极管导通区分方法可以看箭头：箭头的始端比末端电压高0.7V就导通。</p>
+          </div>
+
+<h3 id="NPN型三极管"><a href="#NPN型三极管" class="headerlink" title="NPN型三极管"></a>NPN型三极管</h3><table style="width:100%">
+  <tr>
+    <td> <div align="center"> 器件符号 </div> </td>
+    <td> <div align="center"> 电路标识 </div> </td>
+    <td> <div align="center"> 引脚定义 </div> </td>
+    <td> <div align="center"> 导通条件 </div> </td>
+    <td> <div align="center"> 关注参数 </div> </td>
+    <td> <div align="center"> 控制逻辑 </div> </td>
+  </tr>
+  <tr>
+    <th width="15%"> <img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/NPN.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> N </div> </td>
+    <td nowrap="nowrap"> <div align="center"> 
+    B:基极(Base) <br>
+    E:发射极(Emitter) <br>
+    C:集电极(Collector) </div> </td>
+    <td nowrap="nowrap"> <div align="center"> V(B) - V(E) > 0.7V </div> </td>
+    <td> <div align="center"> ??? </div> </td>
+    <td> <div align="center"> B作为控制端时，高电平时导通，低电平关断 </div> </td>
+  </tr>
+</table>
+
+<h3 id="PNP型三极管"><a href="#PNP型三极管" class="headerlink" title="PNP型三极管"></a>PNP型三极管</h3><table style="width:100%">
+  <tr>
+    <td> <div align="center"> 器件符号 </div> </td>
+    <td> <div align="center"> 电路标识 </div> </td>
+    <td> <div align="center"> 引脚定义 </div> </td>
+    <td> <div align="center"> 导通条件 </div> </td>
+    <td> <div align="center"> 关注参数 </div> </td>
+    <td> <div align="center"> 控制逻辑 </div> </td>
+  </tr>
+  <tr>
+    <th width="15%"> <img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PNP.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> N </div> </td>
+    <td nowrap="nowrap"> <div align="center"> 
+    B:基极(Base) <br>
+    E:发射极(Emitter) <br>
+    C:集电极(Collector) </div> </td>
+    <td nowrap="nowrap"> <div align="center"> V(E) - V(B) > 0.7V </div> </td>
+    <td> <div align="center"> ??? </div> </td>
+    <td> <div align="center"> B作为控制端时，高电平时关断，低电平导通 </div> </td>
+  </tr>
+</table>
+
+<h2 id="场效应管"><a href="#场效应管" class="headerlink" title="场效应管"></a>场效应管</h2><div class="note note-info">
+            <p>场效应管是一种<strong>控制电压</strong>的半导体器件。</p>
+          </div>
+
+<h3 id="NMOS-N型金属氧化物半导体"><a href="#NMOS-N型金属氧化物半导体" class="headerlink" title="NMOS - N型金属氧化物半导体"></a>NMOS - N型金属氧化物半导体</h3><table style="width:100%">
+  <tr>
+    <td> <div align="center"> 器件符号 </div> </td>
+    <td> <div align="center"> 电路标识 </div> </td>
+    <td> <div align="center"> 引脚定义 </div> </td>
+    <td> <div align="center"> 导通条件 </div> </td>
+    <td> <div align="center"> 关注参数 </div> </td>
+    <td> <div align="center"> 使用场景 </div> </td>
+  </tr>
+  <tr>
+    <th width="15%"> <img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/NMOS.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> Q </div> </td>
+    <td> <div align="center"> 
+    G:栅极(Gate) <br>
+    S:源极(Source) <br>
+    D:漏极(Drain) </div> </td>
+    <td> <div align="center"> V(G) - V(S) > V GS(th) </div> </td>
+    <td> <div align="center"> 
+    V DS <br>
+    V GS <br>
+    I D <br>
+    R DS(on) <br>
+    V GS(th) </div> </td>
+    <td> <div align="center"> NMOS一般用在信号控制上 </div> </td>
+  </tr>
+</table>
 
 <p>选型时，我们需要关注以下参数：</p>
 <ol>
-<li>电流方向：<strong>漏极（Drain）—&gt; 源极（Source）</strong></li>
-<li><strong>V GS(th)</strong>: 控制MOS导通时所需的栅极（Gate）<strong>正电压</strong>。</li>
-<li><strong>R DS(on)</strong>: 漏极（Drain）与源极（Source）之间的电阻，电阻越小，MOS导通时压降越小，电流越大，反之亦然。</li>
-<li><strong>C GS</strong>:     栅极（Gate）与源极（Source）之间的电容，电容越小，充电时间越短，控制MOS管的时间也相应越短，反之亦然。</li>
+<li>电流方向：<strong>漏极(Drain) —&gt; 源极(Source)</strong></li>
+<li><strong>V GS(th)</strong>: 控制MOS导通时所需的栅极(Gate)，一般为<strong>正电压</strong>。</li>
+<li><strong>R DS(on)</strong>: 漏极(Drain)与源极(Source)之间的电阻，电阻越小，MOS导通时压降越小，电流越大，反之亦然。</li>
+<li><strong>C GS</strong>:     栅极(Gate)与源极(Source)之间的电容，电容越小，充电时间越短，控制MOS管的时间也相应越短，反之亦然。</li>
 </ol>
+<p>注意事项：</p>
+<blockquote>
+<p><strong>R DS(on)</strong> 与 <strong>C GS</strong> 成反比，这是由于制造工艺导致的，所以在选型时，需要权衡他们的参数。<br>NMOS在实际应用电路中，多作为<strong>下管</strong>使用，<strong>源极(Source)<strong>直接</strong>接地</strong>。<br>对于无源器件，一般使用NMOS作为<strong>下管</strong>使用。</p>
+</blockquote>
 <p>示例电路：</p>
 <p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/NMOS-EG.png" srcset="/img/loading.gif" lazyload alt="NMOS示例电路"></p>
-<blockquote>
-<p><strong>R DS(on)</strong> 与 <strong>C GS</strong> 成反比，这是由于制造工艺导致的，所以在选型时，需要权衡他们的参数。<br>NMOS在实际应用电路中，多作为<strong>下管</strong>使用，<strong>源极（Source）</strong>直接<strong>接地</strong>。<br>对于无源器件，一般使用NMOS作为<strong>下管</strong>使用。</p>
-</blockquote>
-<h3 id="PMOS-P型金属氧化物半导体"><a href="#PMOS-P型金属氧化物半导体" class="headerlink" title="PMOS - P型金属氧化物半导体"></a>PMOS - P型金属氧化物半导体</h3><p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PMOS.png" srcset="/img/loading.gif" lazyload alt="PMOS器件符号"></p>
-<figure class="highlight avrasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs avrasm"><span class="hljs-symbol">G:</span>栅极G（Gate）<br><span class="hljs-symbol">S:</span>源极S（Source）<br><span class="hljs-symbol">D:</span>漏极D（Drain）<br></code></pre></div></td></tr></table></figure>
+<h3 id="PMOS-P型金属氧化物半导体"><a href="#PMOS-P型金属氧化物半导体" class="headerlink" title="PMOS - P型金属氧化物半导体"></a>PMOS - P型金属氧化物半导体</h3><table style="width:100%">
+  <tr>
+    <td> <div align="center"> 器件符号 </div> </td>
+    <td> <div align="center"> 电路标识 </div> </td>
+    <td> <div align="center"> 引脚定义 </div> </td>
+    <td> <div align="center"> 导通条件 </div> </td>
+    <td> <div align="center"> 关注参数 </div> </td>
+    <td> <div align="center"> 使用场景 </div> </td>
+  </tr>
+  <tr>
+    <th width="15%"> <img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PMOS.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> Q </div> </td>
+    <td> <div align="center"> 
+    G:栅极(Gate) <br>
+    S:源极(Source) <br>
+    D:漏极(Drain) </div> </td>
+    <td> <div align="center"> V(G) - V(S) > V GS(th) </div> </td>
+    <td> <div align="center"> 
+    V DS <br>
+    V GS <br>
+    I D <br>
+    R DS(on) <br>
+    V GS(th) </div> </td>
+    <td> <div align="center"> PMOS一般使用在电源开关上 </div> </td>
+  </tr>
+</table>
 
 <p>选型时，我们需要关注以下参数：</p>
 <ol>
-<li>电流方向：<strong>源极（Source）—&gt; 漏极（Drain）</strong></li>
-<li><strong>V GS(th)</strong>: 控制MOS导通时所需的栅极（Gate）<strong>负电压</strong>。</li>
-<li><strong>R DS(on)</strong>: 漏极（Drain）与源极（Source）之间的电阻，电阻越小，MOS导通时压降越小，电流越大，反之亦然。</li>
-<li><strong>C GS</strong>:     栅极（Gate）与源极（Source）之间的电容，电容越小，充电时间越短，控制MOS管的时间也相应越短，反之亦然。</li>
+<li>电流方向：<strong>源极(Source) —&gt; 漏极(Drain)</strong></li>
+<li><strong>V GS(th)</strong>: 控制MOS导通时所需的栅极(Gate)，一般为<strong>负电压</strong>。</li>
+<li><strong>R DS(on)</strong>: 漏极(Drain)与源极(Source)之间的电阻，电阻越小，MOS导通时压降越小，电流越大，反之亦然。</li>
+<li><strong>C GS</strong>:     栅极(Gate)与源极(Source)之间的电容，电容越小，充电时间越短，控制MOS管的时间也相应越短，反之亦然。</li>
 </ol>
-<p>电路示例：</p>
-<p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PMOS-EG.png" srcset="/img/loading.gif" lazyload alt="PMOS示例电路"></p>
+<p>注意事项：</p>
 <blockquote>
-<p><strong>R DS(on)</strong> 与 <strong>C GS</strong> 成反比，这是由于制造工艺导致的，所以在选型时，需要权衡他们的参数。<br>PMOS在实际应用电路中，多作为<strong>上管</strong>使用，<strong>源极（Source）</strong>接<strong>电源（VCC）</strong>。<br>对于有源器件，一般使用PMOS作为<strong>上管</strong>使用。</p>
+<p><strong>R DS(on)</strong> 与 <strong>C GS</strong> 成反比，这是由于制造工艺导致的，所以在选型时，需要权衡他们的参数。<br>PMOS在实际应用电路中，多作为<strong>上管</strong>使用，<strong>源极(Source)<strong>接</strong>电源（VCC）</strong>。<br>对于有源器件，一般使用PMOS作为<strong>上管</strong>使用。</p>
 </blockquote>
-<h3 id="CMOS-NOMS-PMOS组合"><a href="#CMOS-NOMS-PMOS组合" class="headerlink" title="CMOS - NOMS+PMOS组合"></a>CMOS - NOMS+PMOS组合</h3><h2 id="运算放大器"><a href="#运算放大器" class="headerlink" title="运算放大器"></a>运算放大器</h2>
+<p>电路示例</p>
+<p><img src="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/PMOS-EG.png" srcset="/img/loading.gif" lazyload alt="PMOS示例电路"></p>
+<h3 id="CMOS-NOMS-PMOS组合"><a href="#CMOS-NOMS-PMOS组合" class="headerlink" title="CMOS - NOMS+PMOS组合()"></a>CMOS - NOMS+PMOS组合()</h3><div class="note note-info">
+            <p>NOMS+PMOS组合。</p>
+          </div>
+
+<h2 id="运算放大器"><a href="#运算放大器" class="headerlink" title="运算放大器()"></a>运算放大器()</h2><div class="note note-info">
+            <p>运算放大器。</p>
+          </div>
+
             </div>
             <hr>
             <div>
