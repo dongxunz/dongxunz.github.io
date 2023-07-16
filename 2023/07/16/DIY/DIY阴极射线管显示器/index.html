@@ -18,23 +18,25 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言 由于购买的ATmega32U4散片均没有Bootloader，导致自己DIY的主板使用该芯片连接电脑时，电脑无法将芯片识别为COM设备，也就无法给芯片烧写程序；所以需要使用编程器先给芯片烧录Bootloader，才能被电脑识别为COM设备，进行后续程序的烧写。  所需工具 Arduino UNO开发板（A板） 杜邦线若干 自己DIY的主板（B板）  烧写步骤给A板烧写ISP程序 A板使用数据">
+    <meta name="description" content="阴极射线管的简介阴极射线管（英语：Cathode ray tube，缩写 CRT）[1]，又称显像管、布劳恩管，是一种用于显示系统的物理仪器，曾广泛应用于示波器、电视机和显示器上。它是利用阴极电子枪发射电子，在阳极高压的作用下，射向荧光屏，使荧光粉发光，同时电子束在偏转磁场的作用下，作上下左右的移动来达到扫描的目的。早期的阴极射线管仅能显示光线的强弱，展现黑白画面。而彩色阴极射线管具有红色、绿色和">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ATmega32U4下载Bootloader">
-<meta property="og:url" content="https://dongxunz.github.io/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/index.html">
+<meta property="og:title" content="DIY阴极射线管显示器">
+<meta property="og:url" content="https://dongxunz.github.io/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言 由于购买的ATmega32U4散片均没有Bootloader，导致自己DIY的主板使用该芯片连接电脑时，电脑无法将芯片识别为COM设备，也就无法给芯片烧写程序；所以需要使用编程器先给芯片烧录Bootloader，才能被电脑识别为COM设备，进行后续程序的烧写。  所需工具 Arduino UNO开发板（A板） 杜邦线若干 自己DIY的主板（B板）  烧写步骤给A板烧写ISP程序 A板使用数据">
+<meta property="og:description" content="阴极射线管的简介阴极射线管（英语：Cathode ray tube，缩写 CRT）[1]，又称显像管、布劳恩管，是一种用于显示系统的物理仪器，曾广泛应用于示波器、电视机和显示器上。它是利用阴极电子枪发射电子，在阳极高压的作用下，射向荧光屏，使荧光粉发光，同时电子束在偏转磁场的作用下，作上下左右的移动来达到扫描的目的。早期的阴极射线管仅能显示光线的强弱，展现黑白画面。而彩色阴极射线管具有红色、绿色和">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dongxunz.github.io/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/view_com_id.png">
-<meta property="article:published_time" content="2023-01-13T15:00:43.000Z">
-<meta property="article:modified_time" content="2023-07-16T15:32:56.104Z">
+<meta property="og:image" content="https://dongxunz.github.io/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/cathode_ray_tube_diagram-en.png">
+<meta property="og:image" content="https://dongxunz.github.io/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/an_actual_triple_gun_assembly.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/7-pin_crt_pin_diagram.png">
+<meta property="article:published_time" content="2023-07-16T01:40:19.000Z">
+<meta property="article:modified_time" content="2023-07-16T15:30:41.067Z">
 <meta property="article:author" content="dongxunz">
-<meta property="article:tag" content="ATmega32U4">
+<meta property="article:tag" content="CRT">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://dongxunz.github.io/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/view_com_id.png">
+<meta name="twitter:image" content="https://dongxunz.github.io/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/cathode_ray_tube_diagram-en.png">
   
   
-  <title>ATmega32U4下载Bootloader - dongxunz&#39;s blogs</title>
+  <title>DIY阴极射线管显示器 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -252,7 +254,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ATmega32U4下载Bootloader">
+            <span class="h2" id="subtitle" title="DIY阴极射线管显示器">
               
             </span>
 
@@ -262,8 +264,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-01-13 23:00" pubdate>
-        2023年1月13日 晚上
+      <time datetime="2023-07-16 09:40" pubdate>
+        2023年7月16日 上午
       </time>
     </span>
   
@@ -273,7 +275,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1.3k 字
     </span>
   
 
@@ -282,7 +284,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4 分钟
+      5 分钟
     </span>
   
 
@@ -319,7 +321,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ATmega32U4下载Bootloader</h1>
+            <h1 style="display: none">DIY阴极射线管显示器</h1>
             
               <p class="note note-info">
                 
@@ -328,76 +330,59 @@
               </p>
             
             <div class="markdown-body">
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>由于购买的<a target="_blank" rel="noopener" href="https://so.szlcsc.com/global.html?k=ATmega32U4&hot-key=">ATmega32U4散片</a>均没有Bootloader，导致自己DIY的主板使用该芯片连接电脑时，电脑无法将芯片识别为COM设备，也就无法给芯片烧写程序；所以需要使用编程器先给芯片烧录Bootloader，才能被电脑识别为COM设备，进行后续程序的烧写。</p>
-</blockquote>
-<h2 id="所需工具"><a href="#所需工具" class="headerlink" title="所需工具"></a>所需工具</h2><ul>
-<li>Arduino UNO开发板（A板）</li>
-<li>杜邦线若干</li>
-<li>自己DIY的主板（B板）</li>
-</ul>
-<h2 id="烧写步骤"><a href="#烧写步骤" class="headerlink" title="烧写步骤"></a>烧写步骤</h2><h3 id="给A板烧写ISP程序"><a href="#给A板烧写ISP程序" class="headerlink" title="给A板烧写ISP程序"></a>给A板烧写ISP程序</h3><ol>
-<li>A板使用数据线连接电脑。</li>
-<li>打开 Arduino 软件。</li>
-<li>文件 -&gt; 示例 -&gt; 11.ArduinoISP -&gt; ArduinoISP。</li>
-<li>工具 -&gt; 开发板:”Arduino UNO”，端口选择主板对应的COM号。</li>
-<li>编译上传，等待烧写成功，A板就会变成一个USBISP编程器。</li>
+              <h2 id="阴极射线管的简介"><a href="#阴极射线管的简介" class="headerlink" title="阴极射线管的简介"></a>阴极射线管的简介</h2><p><strong>阴极射线管</strong>（英语：Cathode ray tube，缩写 CRT）<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="Cathode-ray tube - Wiki
+">[1]</span></a></sup>，又称显像管、布劳恩管，是一种用于显示系统的物理仪器，曾广泛应用于示波器、电视机和显示器上。它是利用阴极电子枪发射电子，在阳极高压的作用下，射向荧光屏，使荧光粉发光，同时电子束在偏转磁场的作用下，作上下左右的移动来达到扫描的目的。早期的阴极射线管仅能显示光线的强弱，展现黑白画面。而彩色阴极射线管具有红色、绿色和蓝色三支电子枪，三支电子枪同时发射电子打在荧幕玻璃上磷化物上来显示颜色。</p>
+<p>由于它笨重、耗电且较占空间，不适合用于便携设备，而且使用材料多，已很难压低生产成本，2000年代起几乎被轻巧、省电且省空间的液晶显示器(LCD)取代。阴极射线管的市场剩下极重视色彩表现、需要极高反应速度及低温环境下等特殊用途。</p>
+<h2 id="阴极射线管的种类"><a href="#阴极射线管的种类" class="headerlink" title="阴极射线管的种类"></a>阴极射线管的种类</h2><ol>
+<li>磁场偏向型：以磁场令电子束产生偏向，产生磁场的偏向线圈附加在阴极射线管颈部外侧。电视机和电脑显示器使用此种方式的显像管。</li>
+<li>电场偏向型：以电场令电子束产生偏向，产生电场的偏向极板内建在阴极射线管内部。示波器使用此种方式的显像管，以利应付不同的扫描频率，但此方式需要较长的管身，主要用于电子仪器。</li>
+<li>威廉士管：具有记忆保持功能的特殊阴极射线管。</li>
 </ol>
-<h3 id="使用杜邦线将A板和B板连接起来"><a href="#使用杜邦线将A板和B板连接起来" class="headerlink" title="使用杜邦线将A板和B板连接起来"></a>使用杜邦线将A板和B板连接起来</h3><table align="center">
-    <tr>
-        <th colspan="3">AB板接线方式</th>
-    </tr>
-    <tr>
-        <td>A板</td>
-        <td>B板</td>
-        <td>备注</td>  
-    </tr>
-    <tr>
-        <td>D10</td>
-        <td>RESET</td>
-        <td rowspan="6">ICSP接口</td>
-    </tr>
-    <tr>
-        <td>D11</td>
-      <td>MOSI</td>
-    </tr>
-    <tr>
-        <td>D12</td>
-      <td>MISO</td>
-    </tr>
-    <tr>
-        <td>D13</td>
-        <td>SCK</td>
-    </tr>
-    <tr>
-       <td>5V</td>
-        <td>5V</td>
-    </tr>
-    <tr>
-        <td>GND</td>
-        <td>GND</td>
-    </tr>
+<h2 id="阴极射线管结构示意图"><a href="#阴极射线管结构示意图" class="headerlink" title="阴极射线管结构示意图"></a>阴极射线管结构示意图</h2><table style="width:100%">
+  <tr>
+    <td> <div align="center"> 示意图 </div> </td>
+    <td> <div align="center"> 名称 </div> </td>
+  </tr>
+  <tr>
+    <th width="60%"> <img src="/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/cathode_ray_tube_diagram-en.png" srcset="/img/loading.gif" lazyload>  </th>
+    <td> <div align="center"> 
+    Control Grid(控制网络) <br>
+    Anode(阳极) <br>
+    Deflecting coils(偏转线圈) <br>
+    Heater(加热器) <br>
+    Cathode(阴极) <br>
+    Electron beam(电子束) <br>
+    Focusing coil(聚焦线圈) <br>
+    Fluorescent screen(荧光屏)
+    </div> </td>
+  </tr>
 </table>
 
-
-<h3 id="给B板烧写Bootloader"><a href="#给B板烧写Bootloader" class="headerlink" title="给B板烧写Bootloader"></a>给B板烧写Bootloader</h3><ol>
-<li>请再次确认AB板接线方式是否正确！</li>
-<li>A板使用数据线连接电脑。</li>
-<li><strong>以管理员身份运行</strong> Arduino 软件。</li>
-<li>文件 -&gt; 首选项 -&gt; 显示详细输出 ✔编译 ✔上传，然后点击 好 保存。</li>
-<li>工具 -&gt; 开发板:”Arduino Leonardo”，端口选择<strong>A板</strong>对应的COM号。<div class="note note-info">
-            <p>开发板:”Arduino Leonardo”：<br>开发板型号根据B板设计进行选择，由于我设计的主板功能和Arduino Leonardo开发板类似，所以选择这个型号进行烧录；如果不是按照 Arduino Leonardo开发板 设计，请选择对应的开发板型号。</p>
-          </div></li>
-<li>工具 -&gt; 编程器:”Arduino as ISP”。</li>
-<li>工具 -&gt; 烧录引导程序。</li>
-<li>烧录过程可能需要几分钟，请耐心等待，当 Arduino 软件左下角显示 <strong>烧录引导程序完成</strong> 时，就代表B板已经成功烧录 Arduino Leonardo开发板的Bootloader了。</li>
+<h2 id="阴极射线管核心部件"><a href="#阴极射线管核心部件" class="headerlink" title="阴极射线管核心部件"></a>阴极射线管核心部件</h2><h3 id="电子枪-Electron-gun"><a href="#电子枪-Electron-gun" class="headerlink" title="电子枪(Electron gun)"></a>电子枪(Electron gun)</h3><p>电子枪由：阴极、加热端、控制网络、第一阳极、聚焦电极、最终阳极组成。<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="Electrons in Shadow-mask Colour Tubes
+">[4]</span></a></sup></p>
+<p><img src="/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/an_actual_triple_gun_assembly.jpg" srcset="/img/loading.gif" lazyload alt="三色电子枪组件"></p>
+<h3 id="偏转线圈"><a href="#偏转线圈" class="headerlink" title="偏转线圈"></a>偏转线圈</h3><h3 id="高压阳极"><a href="#高压阳极" class="headerlink" title="高压阳极"></a>高压阳极</h3><h2 id="阴极射线管显示器的驱动部件"><a href="#阴极射线管显示器的驱动部件" class="headerlink" title="阴极射线管显示器的驱动部件"></a>阴极射线管显示器的驱动部件</h2><h3 id="行输出变压器-Flyback-transformer"><a href="#行输出变压器-Flyback-transformer" class="headerlink" title="行输出变压器(Flyback transformer)"></a>行输出变压器(Flyback transformer)</h3><h3 id="驱动电路"><a href="#驱动电路" class="headerlink" title="驱动电路"></a>驱动电路</h3><h2 id="阴极射线管的引脚定义"><a href="#阴极射线管的引脚定义" class="headerlink" title="阴极射线管的引脚定义"></a>阴极射线管的引脚定义</h2><blockquote>
+<p>阴极射线管根据不同的类型，引脚定义也有所区别；该文档<a target="_blank" rel="noopener" href="https://www.bustedgear.com/res_Tube_pinouts.pdf">res_Tube_pinouts</a>并不包含所有类型的引脚定义，只作为参考。</p>
+</blockquote>
+<p>本次DIY使用的HP-545系列 、安捷伦-546系列、力科-93系列示波器上使用的阴极射线管，均为7脚阴极射线管，引脚定义如下<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="Topic: CRT monitor going “full brightness”
+">[2]</span></a></sup>：</p>
+<p><img src="/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/7-pin_crt_pin_diagram.png" srcset="/img/loading.gif" lazyload alt="7脚阴极射线管引脚示意图"></p>
+<ol>
+<li>Grid (G1):“控制网格”；通常为 0 至约 –20V。</li>
+<li>Cathode (K):通常为+50V至+80V。</li>
+<li>Heater (H):0V</li>
+<li>Heater (H):+11V</li>
+<li>Grid (G1):内部连接到 CRT 的引脚 1。</li>
+<li>First Anode (G2):“屏幕网格”（也称为“截止”）；通常为 +90V。</li>
+<li>Focus Anode (G4):控制像散光束，散光是一种屈光误差，其产生的效果类似于散光失焦显示；通常为 0 V 至 + 90 V，根据“焦点”预设（如果安装）而变化！</li>
 </ol>
-<h3 id="测试B板Bootloader是否烧写成功"><a href="#测试B板Bootloader是否烧写成功" class="headerlink" title="测试B板Bootloader是否烧写成功"></a>测试B板Bootloader是否烧写成功</h3><p>将B板使用数据线连接电脑，进入 <em>设备管理器 -&gt; 端口(COM和LPT)</em> 查看是否显示出主板的COM号。</p>
-<p><img src="/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/view_com_id.png" srcset="/img/loading.gif" lazyload alt="查看主板COM号"></p>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>B板成功刷写Bootloader后，使用数据线连接电脑时，通过 <em>设备管理器 -&gt; 端口(COM和LPT)</em> 会看到先显示为：<strong>Arduino Leonardo Bootloader(COM?)</strong> ，过了几秒钟之后，会显示为：<strong>Arduino Lenardo(COM?)</strong> ；如果要给芯片烧写程序，就需要在 Arduino Leonardo Bootloader(COM?) 阶段时进行烧录，否则当显示为 Arduino Leonardo(COM?) 时是无法烧写程序的。</p>
-<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1154y1i7oF/?vd_source=86afd42930abc3b873490c6820b27f6c">用Arduino给atmega328(类Arduino)烧录bootloader</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://docs.arduino.cc/built-in-examples/arduino-isp/ArduinoISP?_gl=1*diynw4*_ga*OTg3ODQwNzU1LjE2NzA0MjYwNzE.*_ga_NEXN8H46L5*MTY3MzcyMjE2My4xMi4xLjE2NzM3MjIxODkuMC4wLjA.">Arduino as ISP and Arduino Bootloaders</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cathode-ray_tube">Cathode-ray tube - Wiki</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.eevblog.com/forum/repair/crt-monitor-going-full-brightness/">Topic: CRT monitor going “full brightness”</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://lateblt.tripod.com/bit71.txt">Principles Of A CRT (Cathode Ray Tube)</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="http://www.r-type.org/articles/art-004f.htm">Electrons in Shadow-mask Colour Tubes</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://digilent.com/reference/programmable-logic/basys-3/reference-manual">Basys 3 Reference Manual</a>
+<a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Flyback_transformer">Flyback transformer - Wiki</a>
+<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
             </div>
             <hr>
             <div>
@@ -406,7 +391,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Arduino/">Arduino</a>
+                      <a class="hover-with-bg" href="/categories/DIY/">DIY</a>
                     
                   </div>
                 
@@ -414,7 +399,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/ATmega32U4/">ATmega32U4</a>
+                      <a class="hover-with-bg" href="/tags/CRT/">CRT</a>
                     
                   </div>
                 
@@ -431,18 +416,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/20/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0%E5%A4%9A%E8%89%B2%E6%89%93%E5%8D%B0%E6%A8%A1%E5%9D%97-MMU2S/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">组装一台多色打印模块-MMU2S</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/">
-                        <span class="hidden-mobile">DIY力回馈方向盘</span>
+                      <a href="/2023/01/20/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0%E5%A4%9A%E8%89%B2%E6%89%93%E5%8D%B0%E6%A8%A1%E5%9D%97-MMU2S/">
+                        <span class="hidden-mobile">组装一台多色打印模块-MMU2S</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
