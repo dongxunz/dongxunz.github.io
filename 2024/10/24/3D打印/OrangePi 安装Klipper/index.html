@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -18,12 +21,12 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="刷入官方Debian系统优选Linux6.1内核版本的镜像，支持CAN网络，Linux5.4内核版本不支持CAN网络！ 使用balenaEtcher软件刷入Debian官方镜像。 连接WIFI扫描WIFI： 1nmcli dev wifi  连接WIFI： 1sudo nmcli dev wifi connect wifi_name password wifi_passwd  wifi_name:">
+    <meta name="description" content="刷入官方Debian系统优选Linux6.1内核版本的镜像，支持CAN网络，Linux5.4内核版本不支持CAN网络！ 可以使用以下命令检查系统内核是否支持CAN网络：[1] 1sudo modprobe can &amp;&amp; echo &quot;您的内核支持CAN&quot; || echo &quot;您的内核不支持CAN&quot;    使用balenaEtcher软件刷入Deb">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OrangePi Zero 3安装Klipper">
 <meta property="og:url" content="https://dongxunz.github.io/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="刷入官方Debian系统优选Linux6.1内核版本的镜像，支持CAN网络，Linux5.4内核版本不支持CAN网络！ 使用balenaEtcher软件刷入Debian官方镜像。 连接WIFI扫描WIFI： 1nmcli dev wifi  连接WIFI： 1sudo nmcli dev wifi connect wifi_name password wifi_passwd  wifi_name:">
+<meta property="og:description" content="刷入官方Debian系统优选Linux6.1内核版本的镜像，支持CAN网络，Linux5.4内核版本不支持CAN网络！ 可以使用以下命令检查系统内核是否支持CAN网络：[1] 1sudo modprobe can &amp;&amp; echo &quot;您的内核支持CAN&quot; || echo &quot;您的内核不支持CAN&quot;    使用balenaEtcher软件刷入Deb">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/kiauh_1.png">
 <meta property="og:image" content="https://dongxunz.github.io/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/kiauh_2.png">
@@ -35,11 +38,14 @@
 <meta property="og:image" content="https://dongxunz.github.io/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/klipper_local_host_mcu.png">
 <meta property="og:image" content="https://dongxunz.github.io/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/change_time_zone.png">
 <meta property="article:published_time" content="2024-10-24T13:35:25.000Z">
-<meta property="article:modified_time" content="2025-03-13T08:21:02.212Z">
+<meta property="article:modified_time" content="2025-03-21T13:30:47.596Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="Klipper固件">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dongxunz.github.io/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/kiauh_1.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
   
   
   <title>OrangePi Zero 3安装Klipper - dongxunz&#39;s blogs</title>
@@ -47,25 +53,19 @@
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
-    
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
-  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
@@ -74,7 +74,13 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
   
 <link rel="stylesheet" href="/css/macpanel.css">
@@ -83,16 +89,55 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.1"></head>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>dongxunz&#39;s blogs💬</strong>
@@ -113,9 +158,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -125,9 +170,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -137,9 +182,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -149,9 +194,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -164,48 +209,48 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-cliplist"></i>
-                分享
+                <span>分享</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/circuitry/">
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
                     <i class="iconfont icon-apple-fill"></i>
-                    电路
+                    <span>电路</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/construction/">
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
                     <i class="iconfont icon-codepen-fill"></i>
-                    结构
+                    <span>结构</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/music/">
+                  <a class="dropdown-item" href="/share/music/" target="_self">
                     <i class="iconfont icon-music"></i>
-                    音乐
+                    <span>音乐</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/game/">
+                  <a class="dropdown-item" href="/share/game/" target="_self">
                     <i class="iconfont icon-steam"></i>
-                    游戏
+                    <span>游戏</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/reading-corner/">
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
                     <i class="iconfont icon-book"></i>
-                    阅读角
+                    <span>阅读角</span>
                   </a>
                 
               </div>
@@ -217,9 +262,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -229,9 +274,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -239,14 +284,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -254,65 +301,80 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/clover.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="OrangePi Zero 3安装Klipper">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2024-10-24 21:35" pubdate>
-        2024年10月24日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      12k 字
-    </span>
   
 
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      39 分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OrangePi Zero 3安装Klipper"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-24 21:35" pubdate>
+          2024年10月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          5 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -321,62 +383,75 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">OrangePi Zero 3安装Klipper</h1>
+            <h1 id="seo-header">OrangePi Zero 3安装Klipper</h1>
             
-              <p class="note note-info">
+              <p id="updated-time" class="note note-info" style="">
                 
-                  本文最后更新于：2025年3月13日 下午
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2025年3月21日 晚上
+                  
                 
               </p>
             
-            <div class="markdown-body">
-              <h2 id="刷入官方Debian系统"><a href="#刷入官方Debian系统" class="headerlink" title="刷入官方Debian系统"></a>刷入官方Debian系统</h2><p>优选<font color="#11AA22">Linux6.1内核版本</font>的镜像，<strong>支持CAN网络</strong>，<font color="#AA1122">Linux5.4内核版本</font><strong>不支持CAN网络</strong>！</p>
+            
+              <div class="markdown-body">
+                
+                <h2 id="刷入官方Debian系统"><a href="#刷入官方Debian系统" class="headerlink" title="刷入官方Debian系统"></a>刷入官方Debian系统</h2><p>优选<font color="#11AA22">Linux6.1内核版本</font>的镜像，<strong>支持CAN网络</strong>，<font color="#AA1122">Linux5.4内核版本</font><strong>不支持CAN网络</strong>！</p>
+<p>可以使用以下命令检查系统内核是否支持CAN网络：<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[CAN问题合集](https://mellow.klipper.cn/docs/DebugDoc/faq/klipper_can/?persistLocale=true)">[1]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> modprobe can &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;您的内核支持CAN&quot;</span> || <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;您的内核不支持CAN&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+
 <p>使用<a target="_blank" rel="noopener" href="https://github.com/balena-io/etcher/releases">balenaEtcher</a>软件刷入<a target="_blank" rel="noopener" href="http://www.orangepi.cn/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-Pi-Zero-3.html">Debian官方镜像</a>。</p>
 <h2 id="连接WIFI"><a href="#连接WIFI" class="headerlink" title="连接WIFI"></a>连接WIFI</h2><p>扫描WIFI：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">nmcli dev wifi</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">nmcli dev wifi</span><br></code></pre></td></tr></table></figure>
 
 <p>连接WIFI：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">sudo nmcli dev wifi <span class="hljs-keyword">connect</span> wifi_name <span class="hljs-keyword">password</span> wifi_passwd<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">sudo nmcli dev wifi <span class="hljs-keyword">connect</span> wifi_name <span class="hljs-keyword">password</span> wifi_passwd<br></code></pre></td></tr></table></figure>
 
 <p><strong>wifi_name:</strong> WIFI名称<br><strong>wifi_passwd:</strong> WIFI密码</p>
 <p>连接成功后，查看WIFI的IP地址：</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">ip <span class="hljs-keyword">addr </span><span class="hljs-keyword">show </span>wlan0<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">ip <span class="hljs-keyword">addr </span><span class="hljs-keyword">show </span>wlan0<br></code></pre></td></tr></table></figure>
 
-<h2 id="安装所需软件"><a href="#安装所需软件" class="headerlink" title="安装所需软件"></a>安装所需软件</h2><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">sudo apt <span class="hljs-keyword">install</span> git<br></code></pre></div></td></tr></table></figure>
+<h2 id="安装所需软件"><a href="#安装所需软件" class="headerlink" title="安装所需软件"></a>安装所需软件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install git<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt install python<span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install python3<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt install python<span class="hljs-number">3</span>-pip<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install python3-pip<br></code></pre></td></tr></table></figure>
 
 <h2 id="更换软件源"><a href="#更换软件源" class="headerlink" title="更换软件源"></a>更换软件源</h2><p>系统源：<br>橘子🍊官方已将系统默认apt源换成华为的镜像源，所以无需再操作。</p>
 <p>查看pip源：</p>
-<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">pip3 config list<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">pip3 config list<br></code></pre></td></tr></table></figure>
 
 <p>以下是国内pip源地址，按需替换即可：<br>阿里云：<a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/pypi/simple/">http://mirrors.aliyun.com/pypi/simple/</a><br>清华大学：<a target="_blank" rel="noopener" href="https://pypi.tuna.tsinghua.edu.cn/simple/">https://pypi.tuna.tsinghua.edu.cn/simple/</a><br>中国科技大学：<a target="_blank" rel="noopener" href="https://pypi.mirrors.ustc.edu.cn/simple/">https://pypi.mirrors.ustc.edu.cn/simple/</a></p>
 <p>示例更换pip3为阿里云的源，依次执行以下命令：</p>
-<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim">pip3 config <span class="hljs-keyword">set</span> <span class="hljs-keyword">global</span>.<span class="hljs-built_in">index</span>-url http<span class="hljs-variable">s:</span>//mirrors.aliyun.<span class="hljs-keyword">com</span>/pypi/simple<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gams">pip3 config <span class="hljs-keyword">set</span> global.index-url <span class="hljs-comment">https:</span>//<span class="hljs-comment">mirrors.aliyun.com</span>/pypi/<span class="hljs-comment">simple</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight pgsql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs pgsql">pip3 config <span class="hljs-keyword">set</span> install.<span class="hljs-keyword">trusted</span>-host mirrors.aliyun.com<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">pip3 config <span class="hljs-keyword">set</span> install.<span class="hljs-keyword">trusted</span>-host mirrors.aliyun.com<br></code></pre></td></tr></table></figure>
 
 <h2 id="挂载临时代理"><a href="#挂载临时代理" class="headerlink" title="挂载临时代理"></a>挂载临时代理</h2><p>将电脑上运行的Clash软件在设置里开启局域网连接，查看电脑的IP和端口，然后替换下面命令中的x和y部分：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">http_proxy</span>=http://x:y<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">http_proxy</span>=http://x:y<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">https_proxy</span>=http://x:y<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">https_proxy</span>=http://x:y<br></code></pre></td></tr></table></figure>
 
 <h2 id="使用KIAUH脚本安装Klipper"><a href="#使用KIAUH脚本安装Klipper" class="headerlink" title="使用KIAUH脚本安装Klipper"></a>使用KIAUH脚本安装Klipper</h2><p>克隆KIAUH官方仓库：</p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/dw-0/</span>kiauh.git<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/dw-0/kiauh.git<br></code></pre></td></tr></table></figure>
 
 <p>运行KIAUH脚本：</p>
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">.<span class="hljs-regexp">/kiauh/</span>kiauh.sh<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">.<span class="hljs-regexp">/kiauh/</span>kiauh.sh<br></code></pre></td></tr></table></figure>
 
 <h3 id="安装组件：Klipper、Moonraker、Web"><a href="#安装组件：Klipper、Moonraker、Web" class="headerlink" title="安装组件：Klipper、Moonraker、Web"></a>安装组件：Klipper、Moonraker、Web</h3><div class="note note-info">
-            <p>第一次运行脚本首次可能出现以下界面，这是kiauh v6.0.0测试版，一般输入<font color="#FF0000"><strong>4</strong></font>回车，不更新且下次运行脚本不再提示：<br><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/kiauh_1.png" srcset="/img/loading.gif" lazyload></p>
+            <p>运行脚本可能会出现以下界面，询问是否体验KIAUH v6测试版，测试版包含了一些新功能；我们使用稳定版操作，输入<font color="#FF0000"><strong>2</strong></font>回车。<br><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/kiauh_1.png" srcset="/img/loading.gif" lazyload></p>
           </div>
 
 <div class="note note-info">
@@ -384,93 +459,147 @@
           </div>
 
 <div class="note note-info">
-            <p>安装核心必备组件：Klipper、Moonraker，而网页界面：Mainsail / Fluidd，任选其一安装即可：<br><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/kiauh_3.png" srcset="/img/loading.gif" lazyload></p>
+            <p>安装核心必备组件：Klipper、Moonraker，而网页界面：Mainsail &#x2F; Fluidd，任选其一安装即可：<br><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/kiauh_3.png" srcset="/img/loading.gif" lazyload></p>
           </div>
 
-<h2 id="给OrangePi刷入Klipper固件"><a href="#给OrangePi刷入Klipper固件" class="headerlink" title="给OrangePi刷入Klipper固件"></a>给OrangePi刷入Klipper固件</h2><p>依次执行以下命令<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="RPi microcontroller
-">[1]</span></a></sup>：</p>
-<figure class="highlight arcade"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arcade">cd ~<span class="hljs-regexp">/klipper/</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="给OrangePi刷入Klipper固件"><a href="#给OrangePi刷入Klipper固件" class="headerlink" title="给OrangePi刷入Klipper固件"></a>给OrangePi刷入Klipper固件</h2><p>依次执行以下命令：<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[RPi microcontroller](https://www.klipper3d.org/RPi_microcontroller.html)">[2]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/klipper/<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">sudo cp .<span class="hljs-regexp">/scripts/</span>klipper-mcu.service <span class="hljs-regexp">/etc/</span>systemd<span class="hljs-regexp">/system/</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ./scripts/klipper-mcu.service /etc/systemd/system/<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">sudo systemctl <span class="hljs-builtin-name">enable</span> klipper-mcu.service<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> klipper-mcu.service<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">make menuconfig</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make menuconfig</span><br></code></pre></td></tr></table></figure>
 
 <p><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/klipper_linux_config.png" srcset="/img/loading.gif" lazyload alt="按照图片中进行配置"></p>
-<figure class="highlight arduino"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs arduino">sudo service klipper stop<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">sudo service klipper stop<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">make flash</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">make flash</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight crmsh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs crmsh">sudo service klipper <span class="hljs-literal">start</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> service klipper start<br></code></pre></td></tr></table></figure>
 
 <p>执行完以上操作后，重启上位机，登录SSH，查看是否有本地串口：</p>
-<figure class="highlight jboss-cli"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">cd</span> <span class="hljs-string">/tmp</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /tmp<br></code></pre></td></tr></table></figure>
 
-<figure class="highlight ebnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ebnf"><span class="hljs-attribute">ls</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span><br></code></pre></td></tr></table></figure>
 
 <p>此时可能会没有显示本地串口，如下图：</p>
 <p><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/no_linxu_mcu_local_serial_port.png" srcset="/img/loading.gif" lazyload alt="查看是否有本地串口"></p>
 <p>接下来查看klipper-mcu的运行状态：</p>
-<figure class="highlight fortran"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fortran">systemctl <span class="hljs-keyword">status</span> klipper-mcu.service<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fortran">systemctl <span class="hljs-keyword">status</span> klipper-mcu.service<br></code></pre></td></tr></table></figure>
 
 <p><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/check_klipper_mcu_status.png" srcset="/img/loading.gif" lazyload alt="查看Klipper MCU状态，显示有报错！"></p>
-<p>我遇到的情况是使用以下命令进行修复的，仅供参考<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="Can’t start a Linux host mcu on Orangepi zero 3
-">[2]</span></a></sup> <sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="Armbian kernel &amp; Klipper host mcu: “Got error -1 in sched_setschedule”
-">[3]</span></a></sup>：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">sudo sysctl -w kernel.sched_rt_runtime_us=-<span class="hljs-number">1</span><br>echo <span class="hljs-string">&quot;kernel.sched_rt_runtime_us = -1&quot;</span> | sudo tee <span class="hljs-regexp">/etc/</span>sysctl.d/<span class="hljs-number">10</span>-disable-rt-<span class="hljs-keyword">group</span>-limit.conf<br></code></pre></div></td></tr></table></figure>
+<p>我遇到的情况是使用以下命令进行修复的，仅供参考：<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Can’t start a Linux host mcu on Orangepi zero 3](https://klipper.discourse.group/t/cant-start-a-linux-host-mcu-on-orangepi-zero-3/9822/11)">[3]</span></a></sup> <sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Armbian kernel & Klipper host mcu: “Got error -1 in sched_setschedule”](https://klipper.discourse.group/t/armbian-kernel-klipper-host-mcu-got-error-1-in-sched-setschedule/1193)">[4]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> sysctl -w kernel.sched_rt_runtime_us=-1<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;kernel.sched_rt_runtime_us = -1&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/sysctl.d/10-disable-rt-group-limit.conf<br></code></pre></td></tr></table></figure>
 
 <p><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/resolving_linux_kernel_erro.png" srcset="/img/loading.gif" lazyload alt="执行上述命令后，控制台输出如下信息，然后重启上位机"></p>
 <p><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/klipper_local_host_mcu.png" srcset="/img/loading.gif" lazyload alt="再次查看已成功启动Linux MCU本地串口，可以到网页端进行配置引脚进行使用"></p>
 <h2 id="编写OrangePi配置文件"><a href="#编写OrangePi配置文件" class="headerlink" title="编写OrangePi配置文件"></a>编写OrangePi配置文件</h2><p>此配置文件配合我给OrangePi Zero3画的Hub板进行使用，仅供参考：</p>
-<figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean"># This file contains an example configuration <span class="hljs-keyword">with</span> RPi <span class="hljs-keyword">as</span> secondary mcu<br><br># See docs/Config_Reference.md for a description <span class="hljs-keyword">of</span> parameters.<br><br># The rpi microcontroller is used <span class="hljs-keyword">as</span> secondary.<br># Typically, both the X and Y axes<br># are connected to the main micro-controller. The rpi microcontroller is used<br># on non time-critical functions such <span class="hljs-keyword">as</span> enclosure sensors, additional fan or<br># light sources<br><br># See More :<br># https:<span class="hljs-comment">//www.klipper3d.org/RPi_microcontroller.html</span><br># http:<span class="hljs-comment">//www.orangepi.cn/orangepiwiki/index.php/Orange_Pi_Zero_3</span><br><br>[mcu host]<br>serial: /tmp/klipper_host_mcu<br><br>#[temperature_sensor SOC_Temp]<br>#sensor_type: temperature_host<br>#min_temp: <span class="hljs-number">0</span><br>#max_temp: <span class="hljs-number">80</span><br><br>[virtual_sdcard]<br>path: /home/orangepi/printer_data/gcodes<br>on_error_gcode: CANCEL_PRINT<br><br>#####################################################################<br>#   Orange Pi Cooling Fan<br>#####################################################################<br><br>[temperature_fan orange_pi_soc_fan]<br>pin: host:gpiochip1/gpio75<br>#max_power:<br>#shutdown_speed: <span class="hljs-number">1.0</span><br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>sensor_type: temperature_host<br>#sensor_pin:<br>control: watermark<br>#max_delta:<br>min_temp: <span class="hljs-number">0</span><br>max_temp: <span class="hljs-number">80</span><br>#   See the <span class="hljs-string">&quot;extruder&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#pid_Kp:<br>#pid_Ki:<br>#pid_Kd:<br>#   The proportional (pid_Kp), integral (pid_Ki), and derivative<br>#   (pid_Kd) settings for the PID feedback control <span class="hljs-keyword">system</span>. Klipper<br>#   evaluates the PID settings <span class="hljs-keyword">with</span> the following general formula:<br>#     fan_pwm = max_power - (Kp*e + Ki*integral(e) - Kd*derivative(e)) / <span class="hljs-number">255</span><br>#   Where <span class="hljs-string">&quot;e&quot;</span> is <span class="hljs-string">&quot;target_temperature - measured_temperature&quot;</span> and<br>#   <span class="hljs-string">&quot;fan_pwm&quot;</span> is the requested fan rate <span class="hljs-keyword">with</span> <span class="hljs-number">0.0</span> being full off and<br>#   <span class="hljs-number">1.0</span> being full on. The pid_Kp, pid_Ki, and pid_Kd parameters must<br>#   be provided when the PID control algorithm is enabled.<br>#pid_deriv_time: <span class="hljs-number">2.0</span><br>#   A time value (<span class="hljs-keyword">in</span> seconds) over which temperature measurements will<br>#   be smoothed when using the PID control algorithm. This may reduce<br>#   the impact <span class="hljs-keyword">of</span> measurement noise. The default is <span class="hljs-number">2</span> seconds.<br>target_temp: <span class="hljs-number">40</span><br>#   A temperature (<span class="hljs-keyword">in</span> Celsius) that will be the target temperature.<br>#   The default is <span class="hljs-number">40</span> degrees.<br>#max_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when the sensor temperature exceeds the set value.<br>#   The default is <span class="hljs-number">1.0</span>.<br>#min_speed: <span class="hljs-number">0.3</span><br>#   The minimum fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that<br>#   the fan will be set to for PID temperature fans.<br>#   The default is <span class="hljs-number">0.3</span>.<br>#gcode_id:<br>#   If set, the temperature will be reported <span class="hljs-keyword">in</span> M105 queries using the<br>#   given id. The default is to not report the temperature via M105.<br><br>#####################################################################<br># Electrical Warehouse Cooling Fan<br>#####################################################################<br><br>[temperature_fan left_cooling_fan]<br>pin: host:gpiochip1/gpio70<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>sensor_type: temperature_host<br>#sensor_pin:<br>control: watermark<br>#max_delta:<br>min_temp: <span class="hljs-number">0</span><br>max_temp: <span class="hljs-number">80</span><br>#   See the <span class="hljs-string">&quot;extruder&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#pid_Kp:<br>#pid_Ki:<br>#pid_Kd:<br>#   The proportional (pid_Kp), integral (pid_Ki), and derivative<br>#   (pid_Kd) settings for the PID feedback control <span class="hljs-keyword">system</span>. Klipper<br>#   evaluates the PID settings <span class="hljs-keyword">with</span> the following general formula:<br>#     fan_pwm = max_power - (Kp*e + Ki*integral(e) - Kd*derivative(e)) / <span class="hljs-number">255</span><br>#   Where <span class="hljs-string">&quot;e&quot;</span> is <span class="hljs-string">&quot;target_temperature - measured_temperature&quot;</span> and<br>#   <span class="hljs-string">&quot;fan_pwm&quot;</span> is the requested fan rate <span class="hljs-keyword">with</span> <span class="hljs-number">0.0</span> being full off and<br>#   <span class="hljs-number">1.0</span> being full on. The pid_Kp, pid_Ki, and pid_Kd parameters must<br>#   be provided when the PID control algorithm is enabled.<br>#pid_deriv_time: <span class="hljs-number">2.0</span><br>#   A time value (<span class="hljs-keyword">in</span> seconds) over which temperature measurements will<br>#   be smoothed when using the PID control algorithm. This may reduce<br>#   the impact <span class="hljs-keyword">of</span> measurement noise. The default is <span class="hljs-number">2</span> seconds.<br>target_temp: <span class="hljs-number">40</span><br>#   A temperature (<span class="hljs-keyword">in</span> Celsius) that will be the target temperature.<br>#   The default is <span class="hljs-number">40</span> degrees.<br>#max_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when the sensor temperature exceeds the set value.<br>#   The default is <span class="hljs-number">1.0</span>.<br>#min_speed: <span class="hljs-number">0.3</span><br>#   The minimum fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that<br>#   the fan will be set to for PID temperature fans.<br>#   The default is <span class="hljs-number">0.3</span>.<br>#gcode_id:<br>#   If set, the temperature will be reported <span class="hljs-keyword">in</span> M105 queries using the<br>#   given id. The default is to not report the temperature via M105.<br><br>#[controller_fan cooling_fan_left]<br>#pin: host:gpiochip1/gpio70<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#fan_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver is active.<br>#   The default is <span class="hljs-number">1.0</span><br>#idle_timeout:<br>#   The amount <span class="hljs-keyword">of</span> time (<span class="hljs-keyword">in</span> seconds) after a stepper driver or heater<br>#   was active and the fan should be kept running. The default<br>#   is <span class="hljs-number">30</span> seconds.<br>#idle_speed:<br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver was active and<br>#   before the idle_timeout is reached. The default is fan_speed.<br>#heater: heater_bed<br>#stepper:<br>#   Name <span class="hljs-keyword">of</span> the config section defining the heater/stepper that this fan<br>#   is associated <span class="hljs-keyword">with</span>. If a comma separated list <span class="hljs-keyword">of</span> heater/stepper names<br>#   is provided here, then the fan will be enabled when any <span class="hljs-keyword">of</span> the given<br>#   heaters/steppers are enabled. The default heater is <span class="hljs-string">&quot;extruder&quot;</span>, the<br>#   default stepper is all <span class="hljs-keyword">of</span> them.<br><br>[temperature_fan right_cooling_fan]<br>pin: host:gpiochip1/gpio73<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>sensor_type: temperature_host<br>#sensor_pin:<br>control: watermark<br>#max_delta:<br>min_temp: <span class="hljs-number">0</span><br>max_temp: <span class="hljs-number">80</span><br>#   See the <span class="hljs-string">&quot;extruder&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#pid_Kp:<br>#pid_Ki:<br>#pid_Kd:<br>#   The proportional (pid_Kp), integral (pid_Ki), and derivative<br>#   (pid_Kd) settings for the PID feedback control <span class="hljs-keyword">system</span>. Klipper<br>#   evaluates the PID settings <span class="hljs-keyword">with</span> the following general formula:<br>#     fan_pwm = max_power - (Kp*e + Ki*integral(e) - Kd*derivative(e)) / <span class="hljs-number">255</span><br>#   Where <span class="hljs-string">&quot;e&quot;</span> is <span class="hljs-string">&quot;target_temperature - measured_temperature&quot;</span> and<br>#   <span class="hljs-string">&quot;fan_pwm&quot;</span> is the requested fan rate <span class="hljs-keyword">with</span> <span class="hljs-number">0.0</span> being full off and<br>#   <span class="hljs-number">1.0</span> being full on. The pid_Kp, pid_Ki, and pid_Kd parameters must<br>#   be provided when the PID control algorithm is enabled.<br>#pid_deriv_time: <span class="hljs-number">2.0</span><br>#   A time value (<span class="hljs-keyword">in</span> seconds) over which temperature measurements will<br>#   be smoothed when using the PID control algorithm. This may reduce<br>#   the impact <span class="hljs-keyword">of</span> measurement noise. The default is <span class="hljs-number">2</span> seconds.<br>target_temp: <span class="hljs-number">40</span><br>#   A temperature (<span class="hljs-keyword">in</span> Celsius) that will be the target temperature.<br>#   The default is <span class="hljs-number">40</span> degrees.<br>#max_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when the sensor temperature exceeds the set value.<br>#   The default is <span class="hljs-number">1.0</span>.<br>#min_speed: <span class="hljs-number">0.3</span><br>#   The minimum fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that<br>#   the fan will be set to for PID temperature fans.<br>#   The default is <span class="hljs-number">0.3</span>.<br>#gcode_id:<br>#   If set, the temperature will be reported <span class="hljs-keyword">in</span> M105 queries using the<br>#   given id. The default is to not report the temperature via M105.<br><br>#[controller_fan cooling_fan_right]<br>#pin: host:gpiochip1/gpio73<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#fan_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver is active.<br>#   The default is <span class="hljs-number">1.0</span><br>#idle_timeout:<br>#   The amount <span class="hljs-keyword">of</span> time (<span class="hljs-keyword">in</span> seconds) after a stepper driver or heater<br>#   was active and the fan should be kept running. The default<br>#   is <span class="hljs-number">30</span> seconds.<br>#idle_speed:<br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver was active and<br>#   before the idle_timeout is reached. The default is fan_speed.<br>#heater: heater_bed<br>#stepper:<br>#   Name <span class="hljs-keyword">of</span> the config section defining the heater/stepper that this fan<br>#   is associated <span class="hljs-keyword">with</span>. If a comma separated list <span class="hljs-keyword">of</span> heater/stepper names<br>#   is provided here, then the fan will be enabled when any <span class="hljs-keyword">of</span> the given<br>#   heaters/steppers are enabled. The default heater is <span class="hljs-string">&quot;extruder&quot;</span>, the<br>#   default stepper is all <span class="hljs-keyword">of</span> them.<br><br>#####################################################################<br>#   HTU21D sensor<br>#####################################################################<br><br># See more :<br># http:<span class="hljs-comment">//www.orangepi.cn/orangepiwiki/index.php/Orange_Pi_Zero_3#26pin_I2C.E6.B5.8B.E8.AF.95</span><br># https:<span class="hljs-comment">//www.klipper3d.org/Config_Reference.html?h=htu#htu21d-sensor</span><br># https:<span class="hljs-comment">//github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg</span><br>[temperature_sensor electrical_warehouse]<br>sensor_type: HTU21D<br>#   Must be <span class="hljs-string">&quot;HTU21D&quot;</span> , <span class="hljs-string">&quot;SI7013&quot;</span>, <span class="hljs-string">&quot;SI7020&quot;</span>, <span class="hljs-string">&quot;SI7021&quot;</span> or <span class="hljs-string">&quot;SHT21&quot;</span><br>#i2c_address:<br>#   Default is <span class="hljs-number">64</span> (<span class="hljs-number">0x40</span>).<br>i2c_mcu: host<br>i2c_bus: i2c<span class="hljs-number">.3</span><br>#i2c_software_scl_pin: host:i2c1/gpio228<br>#i2c_software_sda_pin: host:i2c1/gpio229<br>#i2c_speed:<br>#   See the <span class="hljs-string">&quot;common I2C settings&quot;</span> section for a description <span class="hljs-keyword">of</span> the<br>#   above parameters.<br>#htu21d_hold_master: <span class="hljs-literal">True</span><br>#   If the sensor can hold the I2C buf while reading. If <span class="hljs-literal">True</span> no other<br>#   bus communication can be performed while reading is <span class="hljs-keyword">in</span> progress.<br>#   Default is <span class="hljs-literal">False</span>.<br>#htu21d_resolution:<br>#   The resolution <span class="hljs-keyword">of</span> temperature and humidity reading.<br>#   Valid values are:<br>#    <span class="hljs-string">&#x27;TEMP14_HUM12&#x27;</span> -&gt; <span class="hljs-number">14</span>bit for Temp and <span class="hljs-number">12</span>bit for humidity<br>#    <span class="hljs-string">&#x27;TEMP13_HUM10&#x27;</span> -&gt; <span class="hljs-number">13</span>bit for Temp and <span class="hljs-number">10</span>bit for humidity<br>#    <span class="hljs-string">&#x27;TEMP12_HUM08&#x27;</span> -&gt; <span class="hljs-number">12</span>bit for Temp and <span class="hljs-number">08</span>bit for humidity<br>#    <span class="hljs-string">&#x27;TEMP11_HUM11&#x27;</span> -&gt; <span class="hljs-number">11</span>bit for Temp and <span class="hljs-number">11</span>bit for humidity<br>#   Default is: <span class="hljs-string">&quot;TEMP11_HUM11&quot;</span><br>htu21d_report_time: <span class="hljs-number">60</span><br>#   Interval <span class="hljs-keyword">in</span> seconds between readings. Default is <span class="hljs-number">30</span><br><br>[gcode_macro Electrical_Warehouse_State]<br>gcode:<br>    &#123;% set sensor = printer[<span class="hljs-string">&quot;htu21d electrical_warehouse&quot;</span>] %&#125;<br>    &#123;action_respond_info(<br>        <span class="hljs-string">&quot;Temperature: %.2f°C\n&quot;</span><br>        <span class="hljs-string">&quot;Humidity: %.2f%%&quot;</span> % (<br>            sensor.temperature,<br>            sensor.humidity))&#125;<br><br>#####################################################################<br>#   Case Lights<br>#####################################################################<br>#[output_pin Case_Lights]<br>#pin: host:gpiochip1/gpio73<br>#value: <span class="hljs-number">0</span><br>#shutdown_value: <span class="hljs-number">0</span><br><br>#[gcode_macro lights_on]<br>#gcode:<br>#    SET_PIN PIN=Case_Lights VALUE=<span class="hljs-number">1.0</span><br><br>#[gcode_macro lights_off]<br>#gcode:<br>#    SET_PIN PIN=Case_Lights VALUE=<span class="hljs-number">0.0</span><br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br></pre></td><td class="code"><pre><code class="hljs clean"># This file contains an example configuration <span class="hljs-keyword">with</span> RPi <span class="hljs-keyword">as</span> secondary mcu<br><br># See docs/Config_Reference.md for a description <span class="hljs-keyword">of</span> parameters.<br><br># The rpi microcontroller is used <span class="hljs-keyword">as</span> secondary.<br># Typically, both the X and Y axes<br># are connected to the main micro-controller. The rpi microcontroller is used<br># on non time-critical functions such <span class="hljs-keyword">as</span> enclosure sensors, additional fan or<br># light sources<br><br># See More :<br># https:<span class="hljs-comment">//www.klipper3d.org/RPi_microcontroller.html</span><br># http:<span class="hljs-comment">//www.orangepi.cn/orangepiwiki/index.php/Orange_Pi_Zero_3</span><br><br>[mcu host]<br>serial: /tmp/klipper_host_mcu<br><br>#[temperature_sensor SOC_Temp]<br>#sensor_type: temperature_host<br>#min_temp: <span class="hljs-number">0</span><br>#max_temp: <span class="hljs-number">80</span><br><br>[virtual_sdcard]<br>path: /home/orangepi/printer_data/gcodes<br>on_error_gcode: CANCEL_PRINT<br><br>#####################################################################<br>#   Orange Pi Cooling Fan<br>#####################################################################<br><br>[temperature_fan orange_pi_soc_fan]<br>pin: host:gpiochip1/gpio75<br>#max_power:<br>#shutdown_speed: <span class="hljs-number">1.0</span><br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>sensor_type: temperature_host<br>#sensor_pin:<br>control: watermark<br>#max_delta:<br>min_temp: <span class="hljs-number">0</span><br>max_temp: <span class="hljs-number">80</span><br>#   See the <span class="hljs-string">&quot;extruder&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#pid_Kp:<br>#pid_Ki:<br>#pid_Kd:<br>#   The proportional (pid_Kp), integral (pid_Ki), and derivative<br>#   (pid_Kd) settings for the PID feedback control <span class="hljs-keyword">system</span>. Klipper<br>#   evaluates the PID settings <span class="hljs-keyword">with</span> the following general formula:<br>#     fan_pwm = max_power - (Kp*e + Ki*integral(e) - Kd*derivative(e)) / <span class="hljs-number">255</span><br>#   Where <span class="hljs-string">&quot;e&quot;</span> is <span class="hljs-string">&quot;target_temperature - measured_temperature&quot;</span> and<br>#   <span class="hljs-string">&quot;fan_pwm&quot;</span> is the requested fan rate <span class="hljs-keyword">with</span> <span class="hljs-number">0.0</span> being full off and<br>#   <span class="hljs-number">1.0</span> being full on. The pid_Kp, pid_Ki, and pid_Kd parameters must<br>#   be provided when the PID control algorithm is enabled.<br>#pid_deriv_time: <span class="hljs-number">2.0</span><br>#   A time value (<span class="hljs-keyword">in</span> seconds) over which temperature measurements will<br>#   be smoothed when using the PID control algorithm. This may reduce<br>#   the impact <span class="hljs-keyword">of</span> measurement noise. The default is <span class="hljs-number">2</span> seconds.<br>target_temp: <span class="hljs-number">40</span><br>#   A temperature (<span class="hljs-keyword">in</span> Celsius) that will be the target temperature.<br>#   The default is <span class="hljs-number">40</span> degrees.<br>#max_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when the sensor temperature exceeds the set value.<br>#   The default is <span class="hljs-number">1.0</span>.<br>#min_speed: <span class="hljs-number">0.3</span><br>#   The minimum fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that<br>#   the fan will be set to for PID temperature fans.<br>#   The default is <span class="hljs-number">0.3</span>.<br>#gcode_id:<br>#   If set, the temperature will be reported <span class="hljs-keyword">in</span> M105 queries using the<br>#   given id. The default is to not report the temperature via M105.<br><br>#####################################################################<br># Electrical Warehouse Cooling Fan<br>#####################################################################<br><br>[temperature_fan left_cooling_fan]<br>pin: host:gpiochip1/gpio70<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>sensor_type: temperature_host<br>#sensor_pin:<br>control: watermark<br>#max_delta:<br>min_temp: <span class="hljs-number">0</span><br>max_temp: <span class="hljs-number">80</span><br>#   See the <span class="hljs-string">&quot;extruder&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#pid_Kp:<br>#pid_Ki:<br>#pid_Kd:<br>#   The proportional (pid_Kp), integral (pid_Ki), and derivative<br>#   (pid_Kd) settings for the PID feedback control <span class="hljs-keyword">system</span>. Klipper<br>#   evaluates the PID settings <span class="hljs-keyword">with</span> the following general formula:<br>#     fan_pwm = max_power - (Kp*e + Ki*integral(e) - Kd*derivative(e)) / <span class="hljs-number">255</span><br>#   Where <span class="hljs-string">&quot;e&quot;</span> is <span class="hljs-string">&quot;target_temperature - measured_temperature&quot;</span> and<br>#   <span class="hljs-string">&quot;fan_pwm&quot;</span> is the requested fan rate <span class="hljs-keyword">with</span> <span class="hljs-number">0.0</span> being full off and<br>#   <span class="hljs-number">1.0</span> being full on. The pid_Kp, pid_Ki, and pid_Kd parameters must<br>#   be provided when the PID control algorithm is enabled.<br>#pid_deriv_time: <span class="hljs-number">2.0</span><br>#   A time value (<span class="hljs-keyword">in</span> seconds) over which temperature measurements will<br>#   be smoothed when using the PID control algorithm. This may reduce<br>#   the impact <span class="hljs-keyword">of</span> measurement noise. The default is <span class="hljs-number">2</span> seconds.<br>target_temp: <span class="hljs-number">40</span><br>#   A temperature (<span class="hljs-keyword">in</span> Celsius) that will be the target temperature.<br>#   The default is <span class="hljs-number">40</span> degrees.<br>#max_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when the sensor temperature exceeds the set value.<br>#   The default is <span class="hljs-number">1.0</span>.<br>#min_speed: <span class="hljs-number">0.3</span><br>#   The minimum fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that<br>#   the fan will be set to for PID temperature fans.<br>#   The default is <span class="hljs-number">0.3</span>.<br>#gcode_id:<br>#   If set, the temperature will be reported <span class="hljs-keyword">in</span> M105 queries using the<br>#   given id. The default is to not report the temperature via M105.<br><br>#[controller_fan cooling_fan_left]<br>#pin: host:gpiochip1/gpio70<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#fan_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver is active.<br>#   The default is <span class="hljs-number">1.0</span><br>#idle_timeout:<br>#   The amount <span class="hljs-keyword">of</span> time (<span class="hljs-keyword">in</span> seconds) after a stepper driver or heater<br>#   was active and the fan should be kept running. The default<br>#   is <span class="hljs-number">30</span> seconds.<br>#idle_speed:<br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver was active and<br>#   before the idle_timeout is reached. The default is fan_speed.<br>#heater: heater_bed<br>#stepper:<br>#   Name <span class="hljs-keyword">of</span> the config section defining the heater/stepper that this fan<br>#   is associated <span class="hljs-keyword">with</span>. If a comma separated list <span class="hljs-keyword">of</span> heater/stepper names<br>#   is provided here, then the fan will be enabled when any <span class="hljs-keyword">of</span> the given<br>#   heaters/steppers are enabled. The default heater is <span class="hljs-string">&quot;extruder&quot;</span>, the<br>#   default stepper is all <span class="hljs-keyword">of</span> them.<br><br>[temperature_fan right_cooling_fan]<br>pin: host:gpiochip1/gpio73<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>sensor_type: temperature_host<br>#sensor_pin:<br>control: watermark<br>#max_delta:<br>min_temp: <span class="hljs-number">0</span><br>max_temp: <span class="hljs-number">80</span><br>#   See the <span class="hljs-string">&quot;extruder&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#pid_Kp:<br>#pid_Ki:<br>#pid_Kd:<br>#   The proportional (pid_Kp), integral (pid_Ki), and derivative<br>#   (pid_Kd) settings for the PID feedback control <span class="hljs-keyword">system</span>. Klipper<br>#   evaluates the PID settings <span class="hljs-keyword">with</span> the following general formula:<br>#     fan_pwm = max_power - (Kp*e + Ki*integral(e) - Kd*derivative(e)) / <span class="hljs-number">255</span><br>#   Where <span class="hljs-string">&quot;e&quot;</span> is <span class="hljs-string">&quot;target_temperature - measured_temperature&quot;</span> and<br>#   <span class="hljs-string">&quot;fan_pwm&quot;</span> is the requested fan rate <span class="hljs-keyword">with</span> <span class="hljs-number">0.0</span> being full off and<br>#   <span class="hljs-number">1.0</span> being full on. The pid_Kp, pid_Ki, and pid_Kd parameters must<br>#   be provided when the PID control algorithm is enabled.<br>#pid_deriv_time: <span class="hljs-number">2.0</span><br>#   A time value (<span class="hljs-keyword">in</span> seconds) over which temperature measurements will<br>#   be smoothed when using the PID control algorithm. This may reduce<br>#   the impact <span class="hljs-keyword">of</span> measurement noise. The default is <span class="hljs-number">2</span> seconds.<br>target_temp: <span class="hljs-number">40</span><br>#   A temperature (<span class="hljs-keyword">in</span> Celsius) that will be the target temperature.<br>#   The default is <span class="hljs-number">40</span> degrees.<br>#max_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when the sensor temperature exceeds the set value.<br>#   The default is <span class="hljs-number">1.0</span>.<br>#min_speed: <span class="hljs-number">0.3</span><br>#   The minimum fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that<br>#   the fan will be set to for PID temperature fans.<br>#   The default is <span class="hljs-number">0.3</span>.<br>#gcode_id:<br>#   If set, the temperature will be reported <span class="hljs-keyword">in</span> M105 queries using the<br>#   given id. The default is to not report the temperature via M105.<br><br>#[controller_fan cooling_fan_right]<br>#pin: host:gpiochip1/gpio73<br>#max_power:<br>#shutdown_speed:<br>#cycle_time:<br>#hardware_pwm:<br>#kick_start_time:<br>#off_below:<br>#tachometer_pin:<br>#tachometer_ppr:<br>#tachometer_poll_interval:<br>#enable_pin:<br>#   See the <span class="hljs-string">&quot;fan&quot;</span> section for a description <span class="hljs-keyword">of</span> the above parameters.<br>#fan_speed: <span class="hljs-number">1.0</span><br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver is active.<br>#   The default is <span class="hljs-number">1.0</span><br>#idle_timeout:<br>#   The amount <span class="hljs-keyword">of</span> time (<span class="hljs-keyword">in</span> seconds) after a stepper driver or heater<br>#   was active and the fan should be kept running. The default<br>#   is <span class="hljs-number">30</span> seconds.<br>#idle_speed:<br>#   The fan speed (expressed <span class="hljs-keyword">as</span> a value <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span> to <span class="hljs-number">1.0</span>) that the fan<br>#   will be set to when a heater or stepper driver was active and<br>#   before the idle_timeout is reached. The default is fan_speed.<br>#heater: heater_bed<br>#stepper:<br>#   Name <span class="hljs-keyword">of</span> the config section defining the heater/stepper that this fan<br>#   is associated <span class="hljs-keyword">with</span>. If a comma separated list <span class="hljs-keyword">of</span> heater/stepper names<br>#   is provided here, then the fan will be enabled when any <span class="hljs-keyword">of</span> the given<br>#   heaters/steppers are enabled. The default heater is <span class="hljs-string">&quot;extruder&quot;</span>, the<br>#   default stepper is all <span class="hljs-keyword">of</span> them.<br><br>#####################################################################<br>#   HTU21D sensor<br>#####################################################################<br><br># See more :<br># http:<span class="hljs-comment">//www.orangepi.cn/orangepiwiki/index.php/Orange_Pi_Zero_3#26pin_I2C.E6.B5.8B.E8.AF.95</span><br># https:<span class="hljs-comment">//www.klipper3d.org/Config_Reference.html?h=htu#htu21d-sensor</span><br># https:<span class="hljs-comment">//github.com/Klipper3d/klipper/blob/master/config/sample-macros.cfg</span><br>[temperature_sensor electrical_warehouse]<br>sensor_type: HTU21D<br>#   Must be <span class="hljs-string">&quot;HTU21D&quot;</span> , <span class="hljs-string">&quot;SI7013&quot;</span>, <span class="hljs-string">&quot;SI7020&quot;</span>, <span class="hljs-string">&quot;SI7021&quot;</span> or <span class="hljs-string">&quot;SHT21&quot;</span><br>#i2c_address:<br>#   Default is <span class="hljs-number">64</span> (<span class="hljs-number">0x40</span>).<br>i2c_mcu: host<br>i2c_bus: i2c<span class="hljs-number">.3</span><br>#i2c_software_scl_pin: host:i2c1/gpio228<br>#i2c_software_sda_pin: host:i2c1/gpio229<br>#i2c_speed:<br>#   See the <span class="hljs-string">&quot;common I2C settings&quot;</span> section for a description <span class="hljs-keyword">of</span> the<br>#   above parameters.<br>#htu21d_hold_master: <span class="hljs-literal">True</span><br>#   If the sensor can hold the I2C buf while reading. If <span class="hljs-literal">True</span> no other<br>#   bus communication can be performed while reading is <span class="hljs-keyword">in</span> progress.<br>#   Default is <span class="hljs-literal">False</span>.<br>#htu21d_resolution:<br>#   The resolution <span class="hljs-keyword">of</span> temperature and humidity reading.<br>#   Valid values are:<br>#    <span class="hljs-string">&#x27;TEMP14_HUM12&#x27;</span> -&gt; <span class="hljs-number">14</span>bit for Temp and <span class="hljs-number">12</span>bit for humidity<br>#    <span class="hljs-string">&#x27;TEMP13_HUM10&#x27;</span> -&gt; <span class="hljs-number">13</span>bit for Temp and <span class="hljs-number">10</span>bit for humidity<br>#    <span class="hljs-string">&#x27;TEMP12_HUM08&#x27;</span> -&gt; <span class="hljs-number">12</span>bit for Temp and <span class="hljs-number">08</span>bit for humidity<br>#    <span class="hljs-string">&#x27;TEMP11_HUM11&#x27;</span> -&gt; <span class="hljs-number">11</span>bit for Temp and <span class="hljs-number">11</span>bit for humidity<br>#   Default is: <span class="hljs-string">&quot;TEMP11_HUM11&quot;</span><br>htu21d_report_time: <span class="hljs-number">60</span><br>#   Interval <span class="hljs-keyword">in</span> seconds between readings. Default is <span class="hljs-number">30</span><br><br>[gcode_macro Electrical_Warehouse_State]<br>gcode:<br>    &#123;% set sensor = printer[<span class="hljs-string">&quot;htu21d electrical_warehouse&quot;</span>] %&#125;<br>    &#123;action_respond_info(<br>        <span class="hljs-string">&quot;Temperature: %.2f°C\n&quot;</span><br>        <span class="hljs-string">&quot;Humidity: %.2f%%&quot;</span> % (<br>            sensor.temperature,<br>            sensor.humidity))&#125;<br><br>#####################################################################<br>#   Case Lights<br>#####################################################################<br>#[output_pin Case_Lights]<br>#pin: host:gpiochip1/gpio73<br>#value: <span class="hljs-number">0</span><br>#shutdown_value: <span class="hljs-number">0</span><br><br>#[gcode_macro lights_on]<br>#gcode:<br>#    SET_PIN PIN=Case_Lights VALUE=<span class="hljs-number">1.0</span><br><br>#[gcode_macro lights_off]<br>#gcode:<br>#    SET_PIN PIN=Case_Lights VALUE=<span class="hljs-number">0.0</span><br><br></code></pre></td></tr></table></figure>
 
 <h3 id="修改系统时区"><a href="#修改系统时区" class="headerlink" title="修改系统时区"></a>修改系统时区</h3><p>默认时区是UTC，可以修改时区为亚洲：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript"><span class="hljs-built_in">date</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight dsconfig"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dsconfig"><span class="hljs-string">sudo</span> <span class="hljs-string">timedatectl</span> <span class="hljs-built_in">set-timezone</span> <span class="hljs-string">Asia</span>/<span class="hljs-string">Shanghai</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dsconfig"><span class="hljs-string">sudo</span> <span class="hljs-string">timedatectl</span> <span class="hljs-built_in">set-timezone</span> <span class="hljs-string">Asia</span>/<span class="hljs-string">Shanghai</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript"><span class="hljs-built_in">date</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-built_in">date</span><br></code></pre></td></tr></table></figure>
 
 <p><img src="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/change_time_zone.png" srcset="/img/loading.gif" lazyload alt="执行上述命令后，时区已经改为亚洲时区"></p>
-<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.klipper3d.org/RPi_microcontroller.html">RPi microcontroller</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://klipper.discourse.group/t/cant-start-a-linux-host-mcu-on-orangepi-zero-3/9822/11">Can’t start a Linux host mcu on Orangepi zero 3</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://klipper.discourse.group/t/armbian-kernel-klipper-host-mcu-got-error-1-in-sched-setschedule/1193">Armbian kernel &amp; Klipper host mcu: “Got error -1 in sched_setschedule”</a>
-<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/3D%E6%89%93%E5%8D%B0/">3D打印</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/Klipper%E5%9B%BA%E4%BB%B6/">Klipper固件</a>
-                    
-                  </div>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://mellow.klipper.cn/docs/DebugDoc/faq/klipper_can/?persistLocale=true">CAN问题合集</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.klipper3d.org/RPi_microcontroller.html">RPi microcontroller</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://klipper.discourse.group/t/cant-start-a-linux-host-mcu-on-orangepi-zero-3/9822/11">Can’t start a Linux host mcu on Orangepi zero 3</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://klipper.discourse.group/t/armbian-kernel-klipper-host-mcu-got-error-1-in-sched-setschedule/1193">Armbian kernel &amp; Klipper host mcu: “Got error -1 in sched_setschedule”</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-chain-item">3D打印</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Klipper%E5%9B%BA%E4%BB%B6/" class="print-no-link">#Klipper固件</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OrangePi Zero 3安装Klipper</div>
+      <div>https://dongxunz.github.io/2024/10/24/3D打印/OrangePi 安装Klipper/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
               
               
-                <div class="post-prevnext">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/">
+                      <a href="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" title="BTT SKR V1.4主板烧录Klipper固件">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">BTT SKR V1.4主板烧录Klipper固件</span>
                         <span class="visible-mobile">上一篇</span>
@@ -480,7 +609,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/08/20/3D%E6%89%93%E5%8D%B0/%E6%A0%A1%E5%87%863D%E6%89%93%E5%8D%B0%E6%9C%BA/">
+                      <a href="/2023/08/20/3D%E6%89%93%E5%8D%B0/%E6%A0%A1%E5%87%863D%E6%89%93%E5%8D%B0%E6%9C%BA/" title="校准3D打印机">
                         <span class="hidden-mobile">校准3D打印机</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -496,19 +625,53 @@
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
 
 
     
@@ -533,56 +696,59 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
 
+  
 
-  <!-- SCRIPTS -->
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
@@ -601,10 +767,22 @@
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -614,82 +792,117 @@
 
 
 
-  
-
-
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
-  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
 
 
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
 </html>

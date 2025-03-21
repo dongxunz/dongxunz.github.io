@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -18,12 +21,12 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="参考链接 乐鑫ESP-AT  AT指令AT指令可以通过串口下发相应的指令来控制模块。 模块与串口连接方式12345串口    模块3.3V -&gt; 3.3VRX   -&gt; TXTX   -&gt; RXGND  -&gt; GND  常用AT指令进入AT指令模式 - ATAT 1OK #返回值为“**OK**”即表示可以进行AT指令操作。  查询&#x2F;设置 Wi-Fi 模式 - AT+CW">
+    <meta name="description" content="参考链接 乐鑫ESP-AT  AT指令AT指令可以通过串口下发相应的指令来控制模块。 模块与串口连接方式12345串口    模块3.3V -&gt; 3.3VRX   -&gt; TXTX   -&gt; RXGND  -&gt; GND  常用AT指令进入AT指令模式 - ATAT 1OK #返回值为“**OK**”即表示可以进行AT指令操作。  查询&#x2F;设置 Wi-Fi 模式 -">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AT指令">
 <meta property="og:url" content="https://dongxunz.github.io/2022/02/21/%E5%B5%8C%E5%85%A5%E5%BC%8F/AT%E6%8C%87%E4%BB%A4/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="参考链接 乐鑫ESP-AT  AT指令AT指令可以通过串口下发相应的指令来控制模块。 模块与串口连接方式12345串口    模块3.3V -&gt; 3.3VRX   -&gt; TXTX   -&gt; RXGND  -&gt; GND  常用AT指令进入AT指令模式 - ATAT 1OK #返回值为“**OK**”即表示可以进行AT指令操作。  查询&#x2F;设置 Wi-Fi 模式 - AT+CW">
+<meta property="og:description" content="参考链接 乐鑫ESP-AT  AT指令AT指令可以通过串口下发相应的指令来控制模块。 模块与串口连接方式12345串口    模块3.3V -&gt; 3.3VRX   -&gt; TXTX   -&gt; RXGND  -&gt; GND  常用AT指令进入AT指令模式 - ATAT 1OK #返回值为“**OK**”即表示可以进行AT指令操作。  查询&#x2F;设置 Wi-Fi 模式 -">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-02-21T12:42:17.000Z">
 <meta property="article:modified_time" content="2022-02-24T16:48:02.448Z">
@@ -32,30 +35,27 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>AT指令 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
-    
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
-  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
@@ -64,7 +64,13 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
   
 <link rel="stylesheet" href="/css/macpanel.css">
@@ -73,16 +79,55 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.1"></head>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>dongxunz&#39;s blogs💬</strong>
@@ -103,9 +148,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -115,9 +160,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -127,9 +172,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -139,9 +184,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -154,48 +199,48 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-cliplist"></i>
-                分享
+                <span>分享</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/circuitry/">
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
                     <i class="iconfont icon-apple-fill"></i>
-                    电路
+                    <span>电路</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/construction/">
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
                     <i class="iconfont icon-codepen-fill"></i>
-                    结构
+                    <span>结构</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/music/">
+                  <a class="dropdown-item" href="/share/music/" target="_self">
                     <i class="iconfont icon-music"></i>
-                    音乐
+                    <span>音乐</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/game/">
+                  <a class="dropdown-item" href="/share/game/" target="_self">
                     <i class="iconfont icon-steam"></i>
-                    游戏
+                    <span>游戏</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/reading-corner/">
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
                     <i class="iconfont icon-book"></i>
-                    阅读角
+                    <span>阅读角</span>
                   </a>
                 
               </div>
@@ -207,9 +252,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -219,9 +264,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -229,14 +274,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -244,65 +291,80 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/clover.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="AT指令">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-21 20:42" pubdate>
-        2022年2月21日 晚上
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      7.7k 字
-    </span>
   
 
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      25 分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="AT指令"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-21 20:42" pubdate>
+          2022年2月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          9 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -311,147 +373,221 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">AT指令</h1>
+            <h1 id="seo-header">AT指令</h1>
             
-              <p class="note note-info">
+              <p id="updated-time" class="note note-info" style="">
                 
-                  本文最后更新于：2022年2月25日 凌晨
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2022年2月25日 凌晨
+                  
                 
               </p>
             
-            <div class="markdown-body">
-              <blockquote>
+            
+              <div class="markdown-body">
+                
+                <blockquote>
 <p>参考链接</p>
 <p><a target="_blank" rel="noopener" href="https://docs.espressif.com/projects/esp-at/zh_CN/latest/Get_Started/index.html">乐鑫ESP-AT</a></p>
 </blockquote>
 <h2 id="AT指令"><a href="#AT指令" class="headerlink" title="AT指令"></a>AT指令</h2><p>AT指令可以通过串口下发相应的指令来控制模块。</p>
-<h2 id="模块与串口连接方式"><a href="#模块与串口连接方式" class="headerlink" title="模块与串口连接方式"></a>模块与串口连接方式</h2><figure class="highlight clean"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs clean">串口    模块<br><span class="hljs-number">3.3</span>V -&gt; <span class="hljs-number">3.3</span>V<br>RX   -&gt; TX<br>TX   -&gt; RX<br>GND  -&gt; GND<br></code></pre></div></td></tr></table></figure>
+<h2 id="模块与串口连接方式"><a href="#模块与串口连接方式" class="headerlink" title="模块与串口连接方式"></a>模块与串口连接方式</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean">串口    模块<br><span class="hljs-number">3.3</span>V -&gt; <span class="hljs-number">3.3</span>V<br>RX   -&gt; TX<br>TX   -&gt; RX<br>GND  -&gt; GND<br></code></pre></td></tr></table></figure>
 
 <h2 id="常用AT指令"><a href="#常用AT指令" class="headerlink" title="常用AT指令"></a>常用AT指令</h2><h3 id="进入AT指令模式-AT"><a href="#进入AT指令模式-AT" class="headerlink" title="进入AT指令模式 - AT"></a>进入AT指令模式 - AT</h3><p><code>AT</code></p>
-<figure class="highlight nginx"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs nginx"><span class="hljs-attribute">OK</span> <span class="hljs-comment">#返回值为“**OK**”即表示可以进行AT指令操作。</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">OK</span> <span class="hljs-comment">#返回值为“**OK**”即表示可以进行AT指令操作。</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="查询-设置-Wi-Fi-模式-AT-CWMODE"><a href="#查询-设置-Wi-Fi-模式-AT-CWMODE" class="headerlink" title="查询/设置 Wi-Fi 模式 - AT+CWMODE"></a>查询/设置 Wi-Fi 模式 - AT+CWMODE</h3><p><code>AT+CWMODE=&lt;mode&gt;[,&lt;auto_connect&gt;]</code></p>
-<figure class="highlight properties"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-attr">&lt;mode&gt;：模式</span><br>        <span class="hljs-attr">0</span>: <span class="hljs-string">无 Wi-Fi 模式，并且关闭 Wi-Fi RF</span><br>        <span class="hljs-attr">1</span>: <span class="hljs-string">Station 模式</span><br>        <span class="hljs-attr">2</span>: <span class="hljs-string">SoftAP 模式</span><br>        <span class="hljs-attr">3</span>: <span class="hljs-string">SoftAP+Station 模式</span><br><br><span class="hljs-meta">&lt;auto_connect&gt;：切换</span> <span class="hljs-string">ESP 设备的 Wi-Fi 模式时（例如，从 SoftAP 或无 Wi-Fi 模式切换为 Station 模式或 SoftAP+Station 模式），是否启用自动连接 AP 的功能，默认值：1。参数缺省时，使用默认值，也就是能自动连接。</span><br>        <span class="hljs-attr">0</span>: <span class="hljs-string">禁用自动连接 AP 的功能</span><br>        <span class="hljs-attr">1</span>: <span class="hljs-string">启用自动连接 AP 的功能，若之前已经将自动连接 AP 的配置保存到 flash 中，则 ESP 设备将自动连接 AP</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="查询-设置-Wi-Fi-模式-AT-CWMODE"><a href="#查询-设置-Wi-Fi-模式-AT-CWMODE" class="headerlink" title="查询&#x2F;设置 Wi-Fi 模式 - AT+CWMODE"></a>查询&#x2F;设置 Wi-Fi 模式 - AT+CWMODE</h3><p><code>AT+CWMODE=&lt;mode&gt;[,&lt;auto_connect&gt;]</code></p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">&lt;mode&gt;：模式</span><br><span class="hljs-attribute">        0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">无 Wi-Fi 模式，并且关闭 Wi-Fi RF</span><br>        <span class="hljs-attribute">1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Station 模式</span><br>        <span class="hljs-attribute">2</span><span class="hljs-punctuation">:</span> <span class="hljs-string">SoftAP 模式</span><br>        <span class="hljs-attribute">3</span><span class="hljs-punctuation">:</span> <span class="hljs-string">SoftAP+Station 模式</span><br><br><span class="hljs-attribute">&lt;auto_connect&gt;：切换 ESP 设备的 Wi-Fi 模式时（例如，从 SoftAP 或无 Wi-Fi 模式切换为 Station 模式或 SoftAP+Station 模式），是否启用自动连接 AP 的功能，默认值：1。参数缺省时，使用默认值，也就是能自动连接。</span><br><span class="hljs-attribute">        0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">禁用自动连接 AP 的功能</span><br>        <span class="hljs-attribute">1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">启用自动连接 AP 的功能，若之前已经将自动连接 AP 的配置保存到 flash 中，则 ESP 设备将自动连接 AP</span><br></code></pre></td></tr></table></figure>
 <blockquote>
-<p>示例：AT+CWMODE=1</p>
+<p>示例：AT+CWMODE&#x3D;1</p>
 </blockquote>
 <h3 id="配置-SoftAP-参数-AT-CWSAP"><a href="#配置-SoftAP-参数-AT-CWSAP" class="headerlink" title="配置 SoftAP 参数 - AT+CWSAP"></a>配置 SoftAP 参数 - AT+CWSAP</h3><p><code>AT+CWSAP=&lt;ssid&gt;,&lt;pwd&gt;,&lt;chl&gt;,&lt;ecn&gt;[,&lt;max conn&gt;][,&lt;ssid hidden&gt;]</code></p>
-<figure class="highlight fsharp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs fsharp">&lt;ssid&gt;：字符串参数，接入点名称<br>&lt;pwd&gt;：字符串参数，密码，范围：<span class="hljs-number">8</span> ~ <span class="hljs-number">63</span> 字节 ASCII<br>&lt;channel&gt;：信道号<br>&lt;ecn&gt;：加密方式，不支持 WEP<br>        <span class="hljs-number">0</span>: OPEN<br>        <span class="hljs-number">2</span>: WPA_PSK<br>        <span class="hljs-number">3</span>: WPA2_PSK<br>        <span class="hljs-number">4</span>: WPA_WPA2_PSK<br><span class="hljs-meta">[&lt;max conn&gt;]</span>：允许连入 ESP SoftAP 的最多 station 数目，取值范围：[<span class="hljs-number">1</span>,<span class="hljs-number">10</span>]<br><span class="hljs-meta">[&lt;ssid hidden&gt;]</span>：<br>        <span class="hljs-number">0</span>: 广播 SSID（默认）<br>        <span class="hljs-number">1</span>: 不广播 SSID<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">ssid</span>&gt;</span>：字符串参数，接入点名称<br><span class="hljs-tag">&lt;<span class="hljs-name">pwd</span>&gt;</span>：字符串参数，密码，范围：8 ~ 63 字节 ASCII<br><span class="hljs-tag">&lt;<span class="hljs-name">channel</span>&gt;</span>：信道号<br><span class="hljs-tag">&lt;<span class="hljs-name">ecn</span>&gt;</span>：加密方式，不支持 WEP<br>        0: OPEN<br>        2: WPA_PSK<br>        3: WPA2_PSK<br>        4: WPA_WPA2_PSK<br>[<span class="hljs-tag">&lt;<span class="hljs-name">max</span> <span class="hljs-attr">conn</span>&gt;</span>]：允许连入 ESP SoftAP 的最多 station 数目，取值范围：[1,10]<br>[<span class="hljs-tag">&lt;<span class="hljs-name">ssid</span> <span class="hljs-attr">hidden</span>&gt;</span>]：<br>        0: 广播 SSID（默认）<br>        1: 不广播 SSID<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>示例：AT+CWSAP=”ESP”,”1234567890”,5,3</p>
+<p>示例：AT+CWSAP&#x3D;”ESP”,”1234567890”,5,3</p>
 </blockquote>
 <h3 id="扫描当前可用的AP-AT-CWLAP"><a href="#扫描当前可用的AP-AT-CWLAP" class="headerlink" title="扫描当前可用的AP - AT+CWLAP"></a>扫描当前可用的AP - AT+CWLAP</h3><p><code>AT+CWLAP=[&lt;ssid&gt;,&lt;mac&gt;,&lt;channel&gt;,&lt;scan_type&gt;,&lt;scan_time_min&gt;,&lt;scan_time_max&gt;]</code></p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">&lt;ecn&gt;：加密方式</span><br>        <span class="hljs-attr">0:</span> <span class="hljs-string">OPEN</span><br>        <span class="hljs-attr">1:</span> <span class="hljs-string">WEP</span><br>        <span class="hljs-attr">2:</span> <span class="hljs-string">WPA_PSK</span><br>        <span class="hljs-attr">3:</span> <span class="hljs-string">WPA2_PSK</span><br>        <span class="hljs-attr">4:</span> <span class="hljs-string">WPA_WPA2_PSK</span><br>        <span class="hljs-attr">5:</span> <span class="hljs-string">WPA2_ENTERPRISE</span><br>        <span class="hljs-attr">6:</span> <span class="hljs-string">WPA3_PSK</span><br>        <span class="hljs-attr">7:</span> <span class="hljs-string">WPA2_WPA3_PSK</span><br>        [<span class="hljs-string">ESP32-C3</span> <span class="hljs-string">Only</span>] <span class="hljs-attr">8:</span> <span class="hljs-string">WAPI_PSK</span><br><span class="hljs-string">&lt;ssid&gt;：字符串参数，AP</span> <span class="hljs-string">的</span> <span class="hljs-string">SSID</span><br><span class="hljs-string">&lt;rssi&gt;：信号强度</span><br><span class="hljs-string">&lt;mac&gt;：字符串参数，AP</span> <span class="hljs-string">的</span> <span class="hljs-string">MAC</span> <span class="hljs-string">地址</span><br><span class="hljs-string">&lt;channel&gt;：信道号</span><br><span class="hljs-string">&lt;scan_type&gt;：Wi-Fi</span> <span class="hljs-string">扫描类型，默认值为：0</span><br>        <span class="hljs-attr">0:</span> <span class="hljs-string">主动扫描</span><br>        <span class="hljs-attr">1:</span> <span class="hljs-string">被动扫描</span><br><span class="hljs-string">&lt;scan_time_min&gt;：每个信道最短扫描时间，单位：毫秒，范围：[0,1500]，如果扫描类型为被动扫描，本参数无效</span><br><span class="hljs-string">&lt;scan_time_max&gt;：每个信道最长扫描时间，单位：毫秒，范围：[0,1500]，如果设为</span> <span class="hljs-number">0</span><span class="hljs-string">，固件采用参数默认值，主动扫描为</span> <span class="hljs-number">120</span> <span class="hljs-string">ms，被动扫描为</span> <span class="hljs-number">360</span> <span class="hljs-string">ms</span><br><span class="hljs-string">&lt;freq_offset&gt;：频偏（保留项目）</span><br><span class="hljs-string">&lt;freqcal_val&gt;：频率校准值（保留项目）</span><br><span class="hljs-string">&lt;pairwise_cipher&gt;：成对加密类型</span><br>        <span class="hljs-attr">0:</span> <span class="hljs-string">None</span><br>        <span class="hljs-attr">1:</span> <span class="hljs-string">WEP40</span><br>        <span class="hljs-attr">2:</span> <span class="hljs-string">WEP104</span><br>        <span class="hljs-attr">3:</span> <span class="hljs-string">TKIP</span><br>        <span class="hljs-attr">4:</span> <span class="hljs-string">CCMP</span><br>        <span class="hljs-attr">5:</span> <span class="hljs-string">TKIP</span> <span class="hljs-string">and</span> <span class="hljs-string">CCMP</span><br>        <span class="hljs-attr">6:</span> <span class="hljs-string">AES-CMAC-128</span><br>        <span class="hljs-attr">7:</span> <span class="hljs-string">未知</span><br><span class="hljs-string">&lt;group_cipher&gt;：组加密类型，与</span> <span class="hljs-string">&lt;pairwise_cipher&gt;</span> <span class="hljs-string">参数的枚举值相同</span><br><span class="hljs-string">&lt;bgn&gt;：802.11</span> <span class="hljs-string">b/g/n，若</span> <span class="hljs-string">bit</span> <span class="hljs-string">设为</span> <span class="hljs-number">1</span><span class="hljs-string">，则表示使能对应模式，若设为</span> <span class="hljs-number">0</span><span class="hljs-string">，则表示禁用对应模式</span><br>        <span class="hljs-attr">bit 0:</span> <span class="hljs-string">是否使能</span> <span class="hljs-number">802.</span><span class="hljs-string">11b</span> <span class="hljs-string">模式</span><br>        <span class="hljs-attr">bit 1:</span> <span class="hljs-string">是否使能</span> <span class="hljs-number">802.</span><span class="hljs-string">11g</span> <span class="hljs-string">模式</span><br>        <span class="hljs-attr">bit 2:</span> <span class="hljs-string">是否使能</span> <span class="hljs-number">802.</span><span class="hljs-string">11n</span> <span class="hljs-string">模式</span><br><span class="hljs-string">&lt;wps&gt;：wps</span> <span class="hljs-string">flag</span><br>        <span class="hljs-attr">0:</span> <span class="hljs-string">不支持</span> <span class="hljs-string">WPS</span><br>        <span class="hljs-attr">1:</span> <span class="hljs-string">支持</span> <span class="hljs-string">WPS</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">&lt;ecn&gt;：加密方式</span><br><span class="hljs-attribute">        0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">OPEN</span><br>        <span class="hljs-attribute">1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WEP</span><br>        <span class="hljs-attribute">2</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WPA_PSK</span><br>        <span class="hljs-attribute">3</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WPA2_PSK</span><br>        <span class="hljs-attribute">4</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WPA_WPA2_PSK</span><br>        <span class="hljs-attribute">5</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WPA2_ENTERPRISE</span><br>        <span class="hljs-attribute">6</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WPA3_PSK</span><br>        <span class="hljs-attribute">7</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WPA2_WPA3_PSK</span><br>        <span class="hljs-attribute">[ESP32-C3 Only] 8</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WAPI_PSK</span><br><span class="hljs-attribute">&lt;ssid&gt;：字符串参数，AP 的 SSID</span><br><span class="hljs-attribute">&lt;rssi&gt;：信号强度</span><br><span class="hljs-attribute">&lt;mac&gt;：字符串参数，AP 的 MAC 地址</span><br><span class="hljs-attribute">&lt;channel&gt;：信道号</span><br><span class="hljs-attribute">&lt;scan_type&gt;：Wi-Fi 扫描类型，默认值为：0</span><br><span class="hljs-attribute">        0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">主动扫描</span><br>        <span class="hljs-attribute">1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">被动扫描</span><br><span class="hljs-attribute">&lt;scan_time_min&gt;：每个信道最短扫描时间，单位：毫秒，范围：[0,1500]，如果扫描类型为被动扫描，本参数无效</span><br><span class="hljs-attribute">&lt;scan_time_max&gt;：每个信道最长扫描时间，单位：毫秒，范围：[0,1500]，如果设为 0，固件采用参数默认值，主动扫描为 120 ms，被动扫描为 360 ms</span><br><span class="hljs-attribute">&lt;freq_offset&gt;：频偏（保留项目）</span><br><span class="hljs-attribute">&lt;freqcal_val&gt;：频率校准值（保留项目）</span><br><span class="hljs-attribute">&lt;pairwise_cipher&gt;：成对加密类型</span><br><span class="hljs-attribute">        0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">None</span><br>        <span class="hljs-attribute">1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WEP40</span><br>        <span class="hljs-attribute">2</span><span class="hljs-punctuation">:</span> <span class="hljs-string">WEP104</span><br>        <span class="hljs-attribute">3</span><span class="hljs-punctuation">:</span> <span class="hljs-string">TKIP</span><br>        <span class="hljs-attribute">4</span><span class="hljs-punctuation">:</span> <span class="hljs-string">CCMP</span><br>        <span class="hljs-attribute">5</span><span class="hljs-punctuation">:</span> <span class="hljs-string">TKIP and CCMP</span><br>        <span class="hljs-attribute">6</span><span class="hljs-punctuation">:</span> <span class="hljs-string">AES-CMAC-128</span><br>        <span class="hljs-attribute">7</span><span class="hljs-punctuation">:</span> <span class="hljs-string">未知</span><br><span class="hljs-attribute">&lt;group_cipher&gt;：组加密类型，与 &lt;pairwise_cipher&gt; 参数的枚举值相同</span><br><span class="hljs-attribute">&lt;bgn&gt;：802.11 b/g/n，若 bit 设为 1，则表示使能对应模式，若设为 0，则表示禁用对应模式</span><br><span class="hljs-attribute">        bit 0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">是否使能 802.11b 模式</span><br>        <span class="hljs-attribute">bit 1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">是否使能 802.11g 模式</span><br>        <span class="hljs-attribute">bit 2</span><span class="hljs-punctuation">:</span> <span class="hljs-string">是否使能 802.11n 模式</span><br><span class="hljs-attribute">&lt;wps&gt;：wps flag</span><br><span class="hljs-attribute">        0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">不支持 WPS</span><br>        <span class="hljs-attribute">1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">支持 WPS</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>示例：<br>AT+CWLAP=”Wi-Fi”,”ca:d7:19:d8:a6:44”,6,0,400,1000</p>
-<p>AT+CWLAP=”Wi-Fi” #寻找指定 SSID 的 AP</p>
+<p>示例：<br>AT+CWLAP&#x3D;”Wi-Fi”,”ca:d7:19:d8:a6:44”,6,0,400,1000</p>
+<p>AT+CWLAP&#x3D;”Wi-Fi” #寻找指定 SSID 的 AP</p>
 </blockquote>
 <h3 id="连接AP-AT-CWJAP"><a href="#连接AP-AT-CWJAP" class="headerlink" title="连接AP - AT+CWJAP"></a>连接AP - AT+CWJAP</h3><p><code>AT+CWJAP:&lt;ssid&gt;,&lt;bssid&gt;,&lt;channel&gt;,&lt;rssi&gt;,&lt;pci_en&gt;,&lt;reconn_interval&gt;,&lt;listen_interval&gt;,&lt;scan_mode&gt;,&lt;pmf&gt;</code></p>
-<figure class="highlight stata"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stata">&lt;ssid&gt;：目标 <span class="hljs-keyword">AP</span> 的 SSID #如果 SSID 和密码中有 ,、&quot;、\\ 等特殊字符，需转义<br>&lt;<span class="hljs-keyword">pwd</span>&gt;：密码最长 63 字节 ASCII<br>&lt;bssid&gt;：目标 <span class="hljs-keyword">AP</span> 的 <span class="hljs-keyword">MAC</span> 地址，当多个 <span class="hljs-keyword">AP</span> 有相同的 SSID 时，该参数不可省略<br>&lt;channel&gt;：信道号<br>&lt;rssi&gt;：信号强度<br>&lt;pci_en&gt;：PCI 认证<br>        0: ESP station 可与任何一种加密方式的 <span class="hljs-keyword">AP</span> 连接，包括 <span class="hljs-keyword">OPEN</span> 和 WEP<br>        1: ESP station 可与除 <span class="hljs-keyword">OPEN</span> 和 WEP 之外的任何一种加密方式的 <span class="hljs-keyword">AP</span> 连接<br>&lt;reconn_interval&gt;：Wi-Fi 重连间隔，单位：秒，默认值：1，最大值：7200<br>        0: 断开连接后，ESP station 不重连 <span class="hljs-keyword">AP</span><br>        [1,7200]: 断开连接后，ESP station 每隔指定的时间与 <span class="hljs-keyword">AP</span> 重连<br>&lt;listen_interval&gt;：监听 <span class="hljs-keyword">AP</span> beacon 的间隔，单位为 <span class="hljs-keyword">AP</span> beacon 间隔，默认值：3，范围：[1,100]<br>&lt;scan_mode&gt;：扫描模式<br>       0: 快速扫描，找到目标 <span class="hljs-keyword">AP</span> 后终止扫描，ESP station 与第一个扫描到的 <span class="hljs-keyword">AP</span> 连接<br>       1: 全信道扫描，所有信道都扫描后才终止扫描，ESP station 与扫描到的信号最强的 <span class="hljs-keyword">AP</span> 连接<br>&lt;jap_timeout&gt;：AT+CWJAP 命令超时的最大值，单位：秒，默认值：15，范围：[3,600]<br>&lt;pmf&gt;：PMF（Protected Management Frames，受保护的管理帧），默认值 0<br>        0 表示禁用 PMF<br>        bit 0: 具有 PMF 功能，提示支持 PMF，如果其他设备具有 PMF 功能，则 ESP 设备将优先选择以 PMF 模式连接<br>        bit 1: 需要 PMF，提示需要 PMF，设备将不会关联不支持 PMF 功能的设备<br>&lt;<span class="hljs-keyword">error</span> code&gt;：错误码，仅供参考<br>        1: 连接超时<br>        2: 密码错误<br>        3: 无法找到目标 <span class="hljs-keyword">AP</span><br>        4: 连接失败<br>        其它值: 发生未知错误<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs gherkin"><span class="hljs-variable">&lt;ssid&gt;</span>：目标 AP 的 SSID <span class="hljs-comment">#如果 SSID 和密码中有 ,、&quot;、\\ 等特殊字符，需转义</span><br><span class="hljs-variable">&lt;pwd&gt;</span>：密码最长 63 字节 ASCII<br><span class="hljs-variable">&lt;bssid&gt;</span>：目标 AP 的 MAC 地址，当多个 AP 有相同的 SSID 时，该参数不可省略<br><span class="hljs-variable">&lt;channel&gt;</span>：信道号<br><span class="hljs-variable">&lt;rssi&gt;</span>：信号强度<br><span class="hljs-variable">&lt;pci_en&gt;</span>：PCI 认证<br>        0: ESP station 可与任何一种加密方式的 AP 连接，包括 OPEN 和 WEP<br>        1: ESP station 可与除 OPEN 和 WEP 之外的任何一种加密方式的 AP 连接<br><span class="hljs-variable">&lt;reconn_interval&gt;</span>：Wi-Fi 重连间隔，单位：秒，默认值：1，最大值：7200<br>        0: 断开连接后，ESP station 不重连 AP<br>        [1,7200]: 断开连接后，ESP station 每隔指定的时间与 AP 重连<br><span class="hljs-variable">&lt;listen_interval&gt;</span>：监听 AP beacon 的间隔，单位为 AP beacon 间隔，默认值：3，范围：[1,100]<br><span class="hljs-variable">&lt;scan_mode&gt;</span>：扫描模式<br>       0: 快速扫描，找到目标 AP 后终止扫描，ESP station 与第一个扫描到的 AP 连接<br>       1: 全信道扫描，所有信道都扫描后才终止扫描，ESP station 与扫描到的信号最强的 AP 连接<br><span class="hljs-variable">&lt;jap_timeout&gt;</span>：AT+CWJAP 命令超时的最大值，单位：秒，默认值：15，范围：[3,600]<br><span class="hljs-variable">&lt;pmf&gt;</span>：PMF（Protected Management Frames，受保护的管理帧），默认值 0<br>        0 表示禁用 PMF<br>        bit 0: 具有 PMF 功能，提示支持 PMF，如果其他设备具有 PMF 功能，则 ESP 设备将优先选择以 PMF 模式连接<br>        bit 1: 需要 PMF，提示需要 PMF，设备将不会关联不支持 PMF 功能的设备<br><span class="hljs-variable">&lt;error code&gt;</span>：错误码，仅供参考<br>        1: 连接超时<br>        2: 密码错误<br>        3: 无法找到目标 AP<br>        4: 连接失败<br>        其它值: 发生未知错误<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>示例：AT+CWJAP=”abc”,”0123456789”</p>
+<p>示例：AT+CWJAP&#x3D;”abc”,”0123456789”</p>
 </blockquote>
 <h3 id="断开与当前AP的连接-AT-CWQAP"><a href="#断开与当前AP的连接-AT-CWQAP" class="headerlink" title="断开与当前AP的连接 -AT+CWQAP"></a>断开与当前AP的连接 -AT+CWQAP</h3><p><code>AT+CWQAP</code></p>
 <h3 id="查询本地-IP-地址和-MAC-地址-AT-CIFSR"><a href="#查询本地-IP-地址和-MAC-地址-AT-CIFSR" class="headerlink" title="查询本地 IP 地址和 MAC 地址 - AT+CIFSR"></a>查询本地 IP 地址和 MAC 地址 - AT+CIFSR</h3><p><code>AT+CIFSR:APIP,&lt;&quot;APIP&quot;&gt;</code><br><code>AT+CIFSR:APIP6LL,&lt;&quot;APIP6LL&quot;&gt;</code><br><code>AT+CIFSR:APIP6GL,&lt;&quot;APIP6GL&quot;&gt;</code><br><code>AT+CIFSR:APMAC,&lt;&quot;APMAC&quot;&gt;</code><br><code>AT+CIFSR:STAIP,&lt;&quot;STAIP&quot;&gt;</code><br><code>AT+CIFSR:STAIP6LL,&lt;&quot;STAIP6LL&quot;&gt;</code><br><code>AT+CIFSR:STAIP6GL,&lt;&quot;STAIP6GL&quot;&gt;</code><br><code>AT+CIFSR:STAMAC,&lt;&quot;STAMAC&quot;&gt;</code><br><code>AT+CIFSR:ETHIP,&lt;&quot;ETHIP&quot;&gt;</code><br><code>AT+CIFSR:ETHIP6LL,&lt;&quot;ETHIP6LL&quot;&gt;</code><br><code>AT+CIFSR:ETHIP6GL,&lt;&quot;ETHIP6GL&quot;&gt;</code><br><code>AT+CIFSR:ETHMAC,&lt;&quot;ETHMAC&quot;&gt;</code></p>
-<figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;”APIP”&gt;</span>: ESP SoftAP 的 IPv4 地址<br><span class="hljs-attribute">&lt;”APIP6LL”&gt;</span>: ESP SoftAP 的 IPv6 本地链路地址<br><span class="hljs-attribute">&lt;”APIP6GL”&gt;</span>: ESP SoftAP 的 IPv6 全局地址<br><span class="hljs-attribute">&lt;”APMAC”&gt;</span>: ESP SoftAP 的 MAC 地址<br><span class="hljs-attribute">&lt;”STAIP”&gt;</span>: ESP station 的 IPv4 地址<br><span class="hljs-attribute">&lt;”STAIP6LL”&gt;</span>: ESP station 的 IPv6 本地链路地址<br><span class="hljs-attribute">&lt;”STAIP6GL”&gt;</span>: ESP station 的 IPv6 全局地址<br><span class="hljs-attribute">&lt;”STAMAC”&gt;</span>: ESP station 的 MAC 地址<br><span class="hljs-attribute">&lt;”ETHIP”&gt;</span>: ESP ethernet 的 IPv4 地址<br><span class="hljs-attribute">&lt;”ETHIP6LL”&gt;</span>: ESP ethernet 的 IPv6 本地链路地址<br><span class="hljs-attribute">&lt;”ETHIP6GL”&gt;</span>: ESP ethernet 的 IPv6 全局地址<br><span class="hljs-attribute">&lt;”ETHMAC”&gt;</span>: ESP ethernet 的 MAC 地址<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;”APIP”&gt;</span>: ESP SoftAP 的 IPv4 地址<br><span class="hljs-attribute">&lt;”APIP6LL”&gt;</span>: ESP SoftAP 的 IPv6 本地链路地址<br><span class="hljs-attribute">&lt;”APIP6GL”&gt;</span>: ESP SoftAP 的 IPv6 全局地址<br><span class="hljs-attribute">&lt;”APMAC”&gt;</span>: ESP SoftAP 的 MAC 地址<br><span class="hljs-attribute">&lt;”STAIP”&gt;</span>: ESP station 的 IPv4 地址<br><span class="hljs-attribute">&lt;”STAIP6LL”&gt;</span>: ESP station 的 IPv6 本地链路地址<br><span class="hljs-attribute">&lt;”STAIP6GL”&gt;</span>: ESP station 的 IPv6 全局地址<br><span class="hljs-attribute">&lt;”STAMAC”&gt;</span>: ESP station 的 MAC 地址<br><span class="hljs-attribute">&lt;”ETHIP”&gt;</span>: ESP ethernet 的 IPv4 地址<br><span class="hljs-attribute">&lt;”ETHIP6LL”&gt;</span>: ESP ethernet 的 IPv6 本地链路地址<br><span class="hljs-attribute">&lt;”ETHIP6GL”&gt;</span>: ESP ethernet 的 IPv6 全局地址<br><span class="hljs-attribute">&lt;”ETHMAC”&gt;</span>: ESP ethernet 的 MAC 地址<br></code></pre></td></tr></table></figure>
 
 <h3 id="断开与-AP-的连接-AT-CWQAP"><a href="#断开与-AP-的连接-AT-CWQAP" class="headerlink" title="断开与 AP 的连接 - AT+CWQAP"></a>断开与 AP 的连接 - AT+CWQAP</h3><p><code>AT+CWQAP</code></p>
 <h3 id="建立-TCP-连接、UDP-传输或-SSL-连接-AT-CIPSTART"><a href="#建立-TCP-连接、UDP-传输或-SSL-连接-AT-CIPSTART" class="headerlink" title="建立 TCP 连接、UDP 传输或 SSL 连接 - AT+CIPSTART"></a>建立 TCP 连接、UDP 传输或 SSL 连接 - AT+CIPSTART</h3><blockquote>
 <p>该功能适用于PC与模块之间进行TCP、UDP、SSL通讯。</p>
 </blockquote>
-<h4 id="1-建立-TCP-连接"><a href="#1-建立-TCP-连接" class="headerlink" title="1. 建立 TCP 连接"></a>1. 建立 TCP 连接</h4><p>// 单连接 (AT+CIPMUX=0):</p>
+<h4 id="1-建立-TCP-连接"><a href="#1-建立-TCP-连接" class="headerlink" title="1. 建立 TCP 连接"></a>1. 建立 TCP 连接</h4><p>&#x2F;&#x2F; 单连接 (AT+CIPMUX&#x3D;0):</p>
 <p><code>AT+CIPSTART=&lt;&quot;type&quot;&gt;,&lt;&quot;remote host&quot;&gt;,&lt;remote port&gt;[,&lt;keep alive&gt;][,&lt;&quot;local IP&quot;&gt;]</code></p>
-<p>// 多连接 (AT+CIPMUX=1):</p>
+<p>&#x2F;&#x2F; 多连接 (AT+CIPMUX&#x3D;1):</p>
 <p><code>AT+CIPSTART=&lt;link ID&gt;,&lt;&quot;type&quot;&gt;,&lt;&quot;remote host&quot;&gt;,&lt;remote port&gt;[,&lt;keep alive&gt;][,&lt;&quot;local IP&quot;&gt;]</code></p>
-<figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;link ID&gt;</span>：网络连接 ID (0 ~ 4)，用于多连接的情况。该参数范围取决于 menuconfig 中的两个配置项。一个是 AT 组件中的配置项 AT_SOCKET_MAX_CONN_NUM ，默认值为 5。另一个是 LWIP 组件中的配置项 LWIP_MAX_SOCKETS ，默认值为 10。要修改该参数的范围，您需要修改配置项 AT_SOCKET_MAX_CONN_NUM 的值并确保该值不大于 LWIP_MAX_SOCKETS 的值。（请参考 编译 ESP-AT 工程 获取更多信息。）<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示网络连接类型，”TCP” 或 “TCPv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;keep alive&gt;</span>：TCP keep-alive 间隔，默认值：0<br>        0: 禁用 TCP keep-alive 功能<br>        1 ~ 7200: 检测间隔，单位：秒<br><span class="hljs-attribute">&lt;”local IP”&gt;</span>：连接绑定的本机 IPv4 地址或 IPv6 地址，该参数在本地多网络接口时和本地多 IP 地址时非常有用。默认为禁用，如果您想使用，需自行设置，空值也为有效值<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;link ID&gt;</span>：网络连接 ID (0 ~ 4)，用于多连接的情况。该参数范围取决于 menuconfig 中的两个配置项。一个是 AT 组件中的配置项 AT_SOCKET_MAX_CONN_NUM ，默认值为 5。另一个是 LWIP 组件中的配置项 LWIP_MAX_SOCKETS ，默认值为 10。要修改该参数的范围，您需要修改配置项 AT_SOCKET_MAX_CONN_NUM 的值并确保该值不大于 LWIP_MAX_SOCKETS 的值。（请参考 编译 ESP-AT 工程 获取更多信息。）<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示网络连接类型，”TCP” 或 “TCPv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;keep alive&gt;</span>：TCP keep-alive 间隔，默认值：0<br>        0: 禁用 TCP keep-alive 功能<br>        1 ~ 7200: 检测间隔，单位：秒<br><span class="hljs-attribute">&lt;”local IP”&gt;</span>：连接绑定的本机 IPv4 地址或 IPv6 地址，该参数在本地多网络接口时和本地多 IP 地址时非常有用。默认为禁用，如果您想使用，需自行设置，空值也为有效值<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>示例：AT+CIPSTART=”TCP”,”192.168.101.110”,1000</p>
+<p>示例：AT+CIPSTART&#x3D;”TCP”,”192.168.101.110”,1000</p>
 </blockquote>
-<h4 id="2-建立-UDP-传输"><a href="#2-建立-UDP-传输" class="headerlink" title="2. 建立 UDP 传输"></a>2. 建立 UDP 传输</h4><p>// 单连接：(AT+CIPMUX=0)</p>
+<h4 id="2-建立-UDP-传输"><a href="#2-建立-UDP-传输" class="headerlink" title="2. 建立 UDP 传输"></a>2. 建立 UDP 传输</h4><p>&#x2F;&#x2F; 单连接：(AT+CIPMUX&#x3D;0)</p>
 <p><code>AT+CIPSTART=&lt;&quot;type&quot;&gt;,&lt;&quot;remote host&quot;&gt;,&lt;remote port&gt;[,&lt;local port&gt;,&lt;mode&gt;,&lt;&quot;local IP&quot;&gt;]</code></p>
-<p>// 多连接：(AT+CIPMUX=1)</p>
+<p>&#x2F;&#x2F; 多连接：(AT+CIPMUX&#x3D;1)</p>
 <p><code>AT+CIPSTART=&lt;link ID&gt;,&lt;&quot;type&quot;&gt;,&lt;&quot;remote host&quot;&gt;,&lt;remote port&gt;[,&lt;local port&gt;,&lt;mode&gt;,&lt;&quot;local IP&quot;&gt;]</code></p>
-<figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;link ID&gt;</span>：网络连接 ID (0 ~ 4)，用于多连接的情况<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示网络连接类型，”UDP” 或 “UDPv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;local port&gt;</span>：ESP 设备的 UDP 端口值<br><span class="hljs-attribute">&lt;mode&gt;</span>：在 UDP Wi-Fi 透传下，本参数的值必须设为 0<br>        0: 接收到 UDP 数据后，不改变对端 UDP 地址信息（默认）<br>        1: 仅第一次接收到与初始设置不同的对端 UDP 数据时，改变对端 UDP 地址信息为发送数据设备的 IP 地址和端口<br>        2: 每次接收到 UDP 数据时，都改变对端 UDP 地址信息为发送数据的设备的 IP 地址和端口<br><span class="hljs-attribute">&lt;”local IP”&gt;</span>：连接绑定的本机 IPv4 地址或 IPv6 地址，该参数在本地多网络接口时和本地多 IP 地址时非常有用。默认为禁用，如果您想使用，需自行设置，空值也为有效值<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;link ID&gt;</span>：网络连接 ID (0 ~ 4)，用于多连接的情况<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示网络连接类型，”UDP” 或 “UDPv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;local port&gt;</span>：ESP 设备的 UDP 端口值<br><span class="hljs-attribute">&lt;mode&gt;</span>：在 UDP Wi-Fi 透传下，本参数的值必须设为 0<br>        0: 接收到 UDP 数据后，不改变对端 UDP 地址信息（默认）<br>        1: 仅第一次接收到与初始设置不同的对端 UDP 数据时，改变对端 UDP 地址信息为发送数据设备的 IP 地址和端口<br>        2: 每次接收到 UDP 数据时，都改变对端 UDP 地址信息为发送数据的设备的 IP 地址和端口<br><span class="hljs-attribute">&lt;”local IP”&gt;</span>：连接绑定的本机 IPv4 地址或 IPv6 地址，该参数在本地多网络接口时和本地多 IP 地址时非常有用。默认为禁用，如果您想使用，需自行设置，空值也为有效值<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>示例：AT+CIPSTART=”UDP”,”192.168.101.110”,1000,1002,2</p>
+<p>示例：AT+CIPSTART&#x3D;”UDP”,”192.168.101.110”,1000,1002,2</p>
 </blockquote>
-<h4 id="3-建立-SSL-连接"><a href="#3-建立-SSL-连接" class="headerlink" title="3. 建立 SSL 连接"></a>3. 建立 SSL 连接</h4><p>/ 单连接：(AT+CIPMUX=0)</p>
+<h4 id="3-建立-SSL-连接"><a href="#3-建立-SSL-连接" class="headerlink" title="3. 建立 SSL 连接"></a>3. 建立 SSL 连接</h4><p>&#x2F; 单连接：(AT+CIPMUX&#x3D;0)</p>
 <p><code>AT+CIPSTART=&lt;&quot;type&quot;&gt;,&lt;&quot;remote host&quot;&gt;,&lt;remote port&gt;[,&lt;keep alive&gt;,&lt;&quot;local IP&quot;&gt;]</code></p>
-<p>// 多连接：(AT+CIPMUX=1)</p>
+<p>&#x2F;&#x2F; 多连接：(AT+CIPMUX&#x3D;1)</p>
 <p><code>AT+CIPSTART=&lt;link ID&gt;,&lt;&quot;type&quot;&gt;,&lt;&quot;remote host&quot;&gt;,&lt;remote port&gt;[,&lt;keep alive&gt;,&lt;&quot;local IP&quot;&gt;]</code></p>
-<figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;link ID&gt;</span>：网络连接 ID (0 ~ 4)，用于多连接的情况<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示网络连接类型，”SSL” 或 “SSLv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;keep alive&gt;</span>：SSL 保留配置，默认值：0<br><span class="hljs-attribute">&lt;”local IP”&gt;</span>：连接绑定的本机 IPv4 地址或 IPv6 地址，该参数在本地多网络接口时和本地多 IP 地址时非常有用。默认为禁用，如果您想使用，需自行设置，空值也为有效值<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;link ID&gt;</span>：网络连接 ID (0 ~ 4)，用于多连接的情况<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示网络连接类型，”SSL” 或 “SSLv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;keep alive&gt;</span>：SSL 保留配置，默认值：0<br><span class="hljs-attribute">&lt;”local IP”&gt;</span>：连接绑定的本机 IPv4 地址或 IPv6 地址，该参数在本地多网络接口时和本地多 IP 地址时非常有用。默认为禁用，如果您想使用，需自行设置，空值也为有效值<br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>示例：AT+CIPSTART=”SSL”,”iot.espressif.cn”,8443</p>
+<p>示例：AT+CIPSTART&#x3D;”SSL”,”iot.espressif.cn”,8443</p>
 </blockquote>
-<h3 id="查询-设置传输模式-AT-CIPMODE"><a href="#查询-设置传输模式-AT-CIPMODE" class="headerlink" title="查询/设置传输模式 - AT+CIPMODE"></a>查询/设置传输模式 - AT+CIPMODE</h3><p><code>AT+CIPMODE=&lt;mode&gt;</code></p>
-<figure class="highlight properties"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs properties"><span class="hljs-meta">&lt;mode&gt;</span>:<span class="hljs-string"></span><br>        <span class="hljs-attr">0</span>: <span class="hljs-string">普通传输模式</span><br>        <span class="hljs-attr">1</span>: <span class="hljs-string">Wi-Fi 透传接收模式，仅支持 TCP 单连接、UDP 固定通信对端、SSL 单连接的情况</span><br><span class="hljs-comment">        #配置更改不保存到 flash。</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="查询-设置传输模式-AT-CIPMODE"><a href="#查询-设置传输模式-AT-CIPMODE" class="headerlink" title="查询&#x2F;设置传输模式 - AT+CIPMODE"></a>查询&#x2F;设置传输模式 - AT+CIPMODE</h3><p><code>AT+CIPMODE=&lt;mode&gt;</code></p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">&lt;mode&gt;</span><span class="hljs-punctuation">:</span><br>        <span class="hljs-attribute">0</span><span class="hljs-punctuation">:</span> <span class="hljs-string">普通传输模式</span><br>        <span class="hljs-attribute">1</span><span class="hljs-punctuation">:</span> <span class="hljs-string">Wi-Fi 透传接收模式，仅支持 TCP 单连接、UDP 固定通信对端、SSL 单连接的情况</span><br>        <span class="hljs-comment">#配置更改不保存到 flash。</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>示例：AT+CIPMODE=1</p>
+<p>示例：AT+CIPMODE&#x3D;1</p>
 </blockquote>
 <h3 id="开始透传-AT-CIPSEND"><a href="#开始透传-AT-CIPSEND" class="headerlink" title="开始透传 - AT+CIPSEND"></a>开始透传 - AT+CIPSEND</h3><p><code>AT+CIPSEND</code></p>
 <ul>
 <li>退出透传：<code>+++</code> <strong>（不发送换行）</strong></li>
 </ul>
 <h3 id="设置开机-透传模式-信息-AT-SAVETRANSLINK"><a href="#设置开机-透传模式-信息-AT-SAVETRANSLINK" class="headerlink" title="设置开机 透传模式 信息 - AT+SAVETRANSLINK"></a>设置开机 透传模式 信息 - AT+SAVETRANSLINK</h3><p><code>AT+SAVETRANSLINK=&lt;mode&gt;,&lt;&quot;remote host&quot;&gt;,&lt;remote port&gt;[,&lt;&quot;type&quot;&gt;,&lt;keep alive&gt;]</code></p>
-<figure class="highlight bnf"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;mode&gt;</span>:<br>        0: 关闭 ESP 上电进入 Wi-Fi 透传模式<br>        1: 开启 ESP 上电进入 Wi-Fi 透传模式<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示传输类型：”TCP”，”TCPv6”，”SSL”，或 “SSLv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;keep alive&gt;</span>：TCP keep-alive 间隔，默认值：0<br>        0: 禁用 keep-alive 功能<br>        1 ~ 7200: 检测间隔，单位：秒<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;mode&gt;</span>:<br>        0: 关闭 ESP 上电进入 Wi-Fi 透传模式<br>        1: 开启 ESP 上电进入 Wi-Fi 透传模式<br><span class="hljs-attribute">&lt;”remote host”&gt;</span>：字符串参数，表示远端 IPv4 地址、IPv6 地址，或域名<br><span class="hljs-attribute">&lt;remote port&gt;</span>：远端端口值<br><span class="hljs-attribute">&lt;”type”&gt;</span>：字符串参数，表示传输类型：”TCP”，”TCPv6”，”SSL”，或 “SSLv6”。默认值：”TCP”<br><span class="hljs-attribute">&lt;keep alive&gt;</span>：TCP keep-alive 间隔，默认值：0<br>        0: 禁用 keep-alive 功能<br>        1 ~ 7200: 检测间隔，单位：秒<br></code></pre></td></tr></table></figure>
 
 <h2 id="TCP-IP-AT示例"><a href="#TCP-IP-AT示例" class="headerlink" title="TCP-IP AT示例"></a>TCP-IP AT示例</h2><h3 id="ESP-设备作为-TCP-客户端，建立单连接，实现-UART-Wi-Fi-透传"><a href="#ESP-设备作为-TCP-客户端，建立单连接，实现-UART-Wi-Fi-透传" class="headerlink" title="ESP 设备作为 TCP 客户端，建立单连接，实现 UART Wi-Fi 透传"></a>ESP 设备作为 TCP 客户端，建立单连接，实现 UART Wi-Fi 透传</h3><blockquote>
 <p>该功能可用于2个WIFI模块之间进行通讯测试。</p>
 </blockquote>
-<h4 id="模块1设置步骤："><a href="#模块1设置步骤：" class="headerlink" title="模块1设置步骤："></a>模块1设置步骤：</h4><figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-built_in">AT</span>+CWMODE=<span class="hljs-number">2</span>     <span class="hljs-comment">#设置 Wi-Fi 模式为 softAP</span><br><br><span class="hljs-built_in">AT</span>+CIPMUX=<span class="hljs-number">1</span>     <span class="hljs-comment">#使能多连接</span><br><br><span class="hljs-built_in">AT</span>+CWSAP=<span class="hljs-string">&quot;ESP32_softAP&quot;</span>,<span class="hljs-string">&quot;1234567890&quot;</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>        <span class="hljs-comment">#设置 softAP</span><br><br><span class="hljs-built_in">AT</span>+CIPAP?       <span class="hljs-comment">#查询 softAP 信息</span><br><br><span class="hljs-built_in">AT</span>+CIPSERVER=<span class="hljs-number">1</span>  <span class="hljs-comment">#建立 TCP 服务器，默认端口为 333</span><br><br><span class="hljs-built_in">AT</span>+CIPCLOSE=<span class="hljs-number">0</span>   <span class="hljs-comment">#关闭 TCP 连接</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="模块1设置步骤："><a href="#模块1设置步骤：" class="headerlink" title="模块1设置步骤："></a>模块1设置步骤：</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-built_in">AT</span>+CWMODE=<span class="hljs-number">2</span>     <span class="hljs-comment">#设置 Wi-Fi 模式为 softAP</span><br><br><span class="hljs-built_in">AT</span>+CIPMUX=<span class="hljs-number">1</span>     <span class="hljs-comment">#使能多连接</span><br><br><span class="hljs-built_in">AT</span>+CWSAP=<span class="hljs-string">&quot;ESP32_softAP&quot;</span>,<span class="hljs-string">&quot;1234567890&quot;</span>,<span class="hljs-number">5</span>,<span class="hljs-number">3</span>        <span class="hljs-comment">#设置 softAP</span><br><br><span class="hljs-built_in">AT</span>+CIPAP?       <span class="hljs-comment">#查询 softAP 信息</span><br><br><span class="hljs-built_in">AT</span>+CIPSERVER=<span class="hljs-number">1</span>  <span class="hljs-comment">#建立 TCP 服务器，默认端口为 333</span><br><br><span class="hljs-built_in">AT</span>+CIPCLOSE=<span class="hljs-number">0</span>   <span class="hljs-comment">#关闭 TCP 连接</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="模块2设置步骤："><a href="#模块2设置步骤：" class="headerlink" title="模块2设置步骤："></a>模块2设置步骤：</h4><figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-built_in">AT</span>+CWMODE=<span class="hljs-number">1</span>     <span class="hljs-comment">#设置 Wi-Fi 模式为 station</span><br><br><span class="hljs-built_in">AT</span>+CWJAP=<span class="hljs-string">&quot;ESP32_softAP&quot;</span>,<span class="hljs-string">&quot;1234567890&quot;</span>       <span class="hljs-comment">#连接模块1的AP</span><br><br><span class="hljs-built_in">AT</span>+CIPSTA?      <span class="hljs-comment">#查询 ESP 设备 IP 地址</span><br><br><span class="hljs-built_in">AT</span>+CIPMUX=<span class="hljs-number">1</span>     <span class="hljs-comment">#使能多连接</span><br><br><span class="hljs-built_in">AT</span>+CIPSTART=<span class="hljs-string">&quot;TCP&quot;</span>,<span class="hljs-string">&quot;192.168.x.xxx&quot;</span>,<span class="hljs-number">333</span>  <span class="hljs-comment">#模块1的TCP服务器IP与端口</span><br><br><span class="hljs-built_in">AT</span>+CIPMODE=<span class="hljs-number">1</span>    <span class="hljs-comment">#进入透传模式</span><br><br><span class="hljs-built_in">AT</span>+CIPSEND      <span class="hljs-comment">#开始透传</span><br><br>+++     <span class="hljs-comment">#退出透传</span><br></code></pre></div></td></tr></table></figure>
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/ESP32/">ESP32</a>
-                    
-                      <a class="hover-with-bg" href="/categories/ESP32/ESP8266/">ESP8266</a>
-                    
-                      <a class="hover-with-bg" href="/categories/ESP32/ESP8266/WIFI%E6%A8%A1%E5%9D%97/">WIFI模块</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/AT%E6%8C%87%E4%BB%A4/">AT指令</a>
-                    
-                  </div>
+<h4 id="模块2设置步骤："><a href="#模块2设置步骤：" class="headerlink" title="模块2设置步骤："></a>模块2设置步骤：</h4><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-built_in">AT</span>+CWMODE=<span class="hljs-number">1</span>     <span class="hljs-comment">#设置 Wi-Fi 模式为 station</span><br><br><span class="hljs-built_in">AT</span>+CWJAP=<span class="hljs-string">&quot;ESP32_softAP&quot;</span>,<span class="hljs-string">&quot;1234567890&quot;</span>       <span class="hljs-comment">#连接模块1的AP</span><br><br><span class="hljs-built_in">AT</span>+CIPSTA?      <span class="hljs-comment">#查询 ESP 设备 IP 地址</span><br><br><span class="hljs-built_in">AT</span>+CIPMUX=<span class="hljs-number">1</span>     <span class="hljs-comment">#使能多连接</span><br><br><span class="hljs-built_in">AT</span>+CIPSTART=<span class="hljs-string">&quot;TCP&quot;</span>,<span class="hljs-string">&quot;192.168.x.xxx&quot;</span>,<span class="hljs-number">333</span>  <span class="hljs-comment">#模块1的TCP服务器IP与端口</span><br><br><span class="hljs-built_in">AT</span>+CIPMODE=<span class="hljs-number">1</span>    <span class="hljs-comment">#进入透传模式</span><br><br><span class="hljs-built_in">AT</span>+CIPSEND      <span class="hljs-comment">#开始透传</span><br><br>+++     <span class="hljs-comment">#退出透传</span><br></code></pre></td></tr></table></figure>
                 
               </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ESP32/" class="category-chain-item">ESP32</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/ESP32/ESP8266/" class="category-chain-item">ESP8266</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/ESP32/ESP8266/WIFI%E6%A8%A1%E5%9D%97/" class="category-chain-item">WIFI模块</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AT%E6%8C%87%E4%BB%A4/" class="print-no-link">#AT指令</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>AT指令</div>
+      <div>https://dongxunz.github.io/2022/02/21/嵌入式/AT指令/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
               
               
-                <div class="post-prevnext">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20PCB%E8%A7%84%E5%88%99%E8%AF%A6%E8%A7%A3/">
+                      <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20PCB%E8%A7%84%E5%88%99%E8%AF%A6%E8%A7%A3/" title="Altium Designer PCB规则详解">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Altium Designer PCB规则详解</span>
                         <span class="visible-mobile">上一篇</span>
@@ -461,7 +597,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/23/Windows%E5%B7%A5%E5%85%B7/Win10%E5%AE%89%E8%A3%85Windows%20Subsystem%20for%20Linux/">
+                      <a href="/2022/01/23/Windows%E5%B7%A5%E5%85%B7/Win10%E5%AE%89%E8%A3%85Windows%20Subsystem%20for%20Linux/" title="Win10安装Windows Subsystem for Linux">
                         <span class="hidden-mobile">Win10安装Windows Subsystem for Linux</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -477,19 +613,53 @@
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
 
 
     
@@ -514,56 +684,59 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
 
+  
 
-  <!-- SCRIPTS -->
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
@@ -582,10 +755,22 @@
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -595,82 +780,117 @@
 
 
 
-  
-
-
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
-  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
 
 
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
 </html>

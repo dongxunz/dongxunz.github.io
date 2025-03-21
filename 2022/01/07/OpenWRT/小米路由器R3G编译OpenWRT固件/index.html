@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -44,30 +47,27 @@
 <meta name="twitter:image" content="https://dongxunz.github.io/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/xiaomi_router_r3g.png">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>小米路由器R3G编译OpenWRT固件 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
+
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/atom-one-dark.min.css" />
-    
-  
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
 
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
-  
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
@@ -76,7 +76,13 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
   
 <link rel="stylesheet" href="/css/macpanel.css">
@@ -85,16 +91,55 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.1"></head>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>dongxunz&#39;s blogs💬</strong>
@@ -115,9 +160,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -127,9 +172,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -139,9 +184,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -151,9 +196,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -166,48 +211,48 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-cliplist"></i>
-                分享
+                <span>分享</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/circuitry/">
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
                     <i class="iconfont icon-apple-fill"></i>
-                    电路
+                    <span>电路</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/construction/">
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
                     <i class="iconfont icon-codepen-fill"></i>
-                    结构
+                    <span>结构</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/music/">
+                  <a class="dropdown-item" href="/share/music/" target="_self">
                     <i class="iconfont icon-music"></i>
-                    音乐
+                    <span>音乐</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/game/">
+                  <a class="dropdown-item" href="/share/game/" target="_self">
                     <i class="iconfont icon-steam"></i>
-                    游戏
+                    <span>游戏</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/reading-corner/">
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
                     <i class="iconfont icon-book"></i>
-                    阅读角
+                    <span>阅读角</span>
                   </a>
                 
               </div>
@@ -219,9 +264,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -231,9 +276,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -241,14 +286,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -256,65 +303,80 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/clover.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="小米路由器R3G编译OpenWRT固件">
-              
-            </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-07 01:25" pubdate>
-        2022年1月7日 凌晨
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      14k 字
-    </span>
   
 
-  
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      45 分钟
-    </span>
-  
-
-  
-  
-    
-      <!-- 不蒜子统计文章PV -->
-      <span id="busuanzi_container_page_pv" style="display: none">
-        <i class="iconfont icon-eye" aria-hidden="true"></i>
-        <span id="busuanzi_value_page_pv"></span> 次
-      </span>
-    
-  
-</div>
-
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="小米路由器R3G编译OpenWRT固件"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-01-07 01:25" pubdate>
+          2022年1月7日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
@@ -323,22 +385,30 @@
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
     <div class="col-lg-8 nopadding-x-md">
       <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
+        <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">小米路由器R3G编译OpenWRT固件</h1>
+            <h1 id="seo-header">小米路由器R3G编译OpenWRT固件</h1>
             
-              <p class="note note-info">
+              <p id="updated-time" class="note note-info" style="">
                 
-                  本文最后更新于：2022年6月21日 凌晨
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2022年6月21日 凌晨
+                  
                 
               </p>
             
-            <div class="markdown-body">
-              <p>OpenWrt是适合于嵌入式设备的一个Linux发行版。</p>
+            
+              <div class="markdown-body">
+                
+                <p>OpenWrt是适合于嵌入式设备的一个Linux发行版。</p>
 <p>相对原厂固件而言，OpenWrt不是一个单一、静态的固件，而是提供了一个可添加软件包的可写的文件系统。这使用户可以自由的选择应用程序和配置，而不必受设备提供商的限制，并且可以使用一些适合某方面应用的软件包来定制你的设备。对于开发者来说，OpenWrt是一个框架，开发者不必麻烦地构建整个固件就能得到想要的应用程序；对于用户来说，这意味着完全定制的能力，与以往不同的方式使用设备，OPKG包含超过3500个软件。 默认使用LuCI作为web交互界面。</p>
 <p>OpenWrt另有一个复刻分支项目，名为LEDE，两者于2018年1月合并，合并后的项目使用OpenWrt的名字、LEDE的源代码</p>
 <h2 id="本地编译"><a href="#本地编译" class="headerlink" title="本地编译"></a>本地编译</h2><h3 id="编译前须知"><a href="#编译前须知" class="headerlink" title="编译前须知"></a>编译前须知</h3><ol>
@@ -349,47 +419,47 @@
 <h3 id="编译环境配置"><a href="#编译环境配置" class="headerlink" title="编译环境配置"></a>编译环境配置</h3><blockquote>
 <p>编译环境：<strong>Ubuntu 20.04 LTS</strong>，请在终端分别执行以下命令：</p>
 </blockquote>
-<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt update -y<br><br><span class="hljs-attribute">sudo</span> apt full-upgrade -y<br><br><span class="hljs-attribute">sudo</span> apt install -y ack antlr<span class="hljs-number">3</span> asciidoc autoconf automake autopoint binutils bison build-essential \<br><span class="hljs-attribute">bzip2</span> ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib \<br><span class="hljs-attribute">git</span> gperf haveged help<span class="hljs-number">2</span>man intltool libc<span class="hljs-number">6</span>-dev-i<span class="hljs-number">386</span> libelf-dev libglib<span class="hljs-number">2</span>.<span class="hljs-number">0</span>-dev libgmp<span class="hljs-number">3</span>-dev libltdl-dev \<br><span class="hljs-attribute">libmpc</span>-dev libmpfr-dev libncurses<span class="hljs-number">5</span>-dev libncursesw<span class="hljs-number">5</span>-dev libreadline-dev libssl-dev libtool lrzsz \<br><span class="hljs-attribute">mkisofs</span> msmtp nano ninja-build p<span class="hljs-number">7</span>zip p<span class="hljs-number">7</span>zip-full patch pkgconf python<span class="hljs-number">2</span>.<span class="hljs-number">7</span> python<span class="hljs-number">3</span> python<span class="hljs-number">3</span>-pip qemu-utils \<br><span class="hljs-attribute">rsync</span> scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib<span class="hljs-number">1</span>g-dev<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">sudo apt update -y<br><br>sudo apt full-upgrade -y<br><br>sudo apt <span class="hljs-keyword">install </span>-y ack antlr3 asciidoc autoconf automake autopoint <span class="hljs-keyword">binutils </span><span class="hljs-keyword">bison </span><span class="hljs-keyword">build-essential </span>\<br><span class="hljs-keyword">bzip2 </span>ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-<span class="hljs-keyword">multilib </span>g++-<span class="hljs-keyword">multilib </span>\<br>git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.<span class="hljs-number">0</span>-dev libgmp3-dev libltdl-dev \<br>libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz \<br>mkisofs msmtp nano ninja-<span class="hljs-keyword">build </span>p7zip p7zip-full patch pkgconf python2.<span class="hljs-number">7</span> python3 python3-pip qemu-utils \<br>rsync <span class="hljs-keyword">scons </span>squashfs-tools <span class="hljs-keyword">subversion </span><span class="hljs-keyword">swig </span>texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev<br></code></pre></td></tr></table></figure>
 
-<h3 id="下载Lean的OpenWRT源码"><a href="#下载Lean的OpenWRT源码" class="headerlink" title="下载Lean的OpenWRT源码"></a>下载Lean的OpenWRT源码</h3><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">git clone https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/coolsnowwolf/</span>lede<br></code></pre></div></td></tr></table></figure>
+<h3 id="下载Lean的OpenWRT源码"><a href="#下载Lean的OpenWRT源码" class="headerlink" title="下载Lean的OpenWRT源码"></a>下载Lean的OpenWRT源码</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">git <span class="hljs-keyword">clone</span> <span class="hljs-title">https</span>://github.com/coolsnowwolf/lede<br></code></pre></td></tr></table></figure>
 
 <h3 id="添加OpenWRT插件源"><a href="#添加OpenWRT插件源" class="headerlink" title="添加OpenWRT插件源"></a>添加OpenWRT插件源</h3><p>Git Clone 完成后，进入<strong>lede</strong>目录，根据实际需求添加以下插件库。</p>
 <blockquote>
 <p>科学上网插件仓库</p>
 </blockquote>
-<figure class="highlight vala"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vala"><span class="hljs-meta">#常用</span><br>sed -i <span class="hljs-string">&#x27;$a src-git helloworld https://github.com/fw876/helloworld&#x27;</span> feeds.conf.<span class="hljs-keyword">default</span><br><br><span class="hljs-meta">#次要</span><br>sed -i <span class="hljs-string">&#x27;$a src-git passwall https://github.com/xiaorouji/openwrt-passwall&#x27;</span> feeds.conf.<span class="hljs-keyword">default</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-comment">#常用</span><br><span class="hljs-attribute">sed</span> -i <span class="hljs-string">&#x27;<span class="hljs-variable">$a</span> src-git helloworld https://github.com/fw876/helloworld&#x27;</span> feeds.conf.default<br><br><span class="hljs-comment">#次要</span><br>sed -i <span class="hljs-string">&#x27;<span class="hljs-variable">$a</span> src-git passwall https://github.com/xiaorouji/openwrt-passwall&#x27;</span> feeds.conf.default<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>openwrt插件合集仓库</p>
 </blockquote>
-<figure class="highlight stylus"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs stylus">sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git kenzo https://github.com/kenzok8/openwrt-packages&#x27;</span> feeds<span class="hljs-selector-class">.conf</span><span class="hljs-selector-class">.default</span><br>sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git small https://github.com/kenzok8/small&#x27;</span> feeds<span class="hljs-selector-class">.conf</span>.default<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git kenzo https://github.com/kenzok8/openwrt-packages&#x27;</span> feeds<span class="hljs-selector-class">.conf</span><span class="hljs-selector-class">.default</span><br>sed -<span class="hljs-selector-tag">i</span> <span class="hljs-string">&#x27;$a src-git small https://github.com/kenzok8/small&#x27;</span> feeds<span class="hljs-selector-class">.conf</span>.default<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>openwrt插件合集仓库（每天更新）</p>
 </blockquote>
-<figure class="highlight dart"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs dart">sed -i <span class="hljs-string">&#x27;<span class="hljs-subst">$a</span> src-git small8 https://github.com/kenzok8/small-package&#x27;</span> feeds.conf.<span class="hljs-keyword">default</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dart">sed -i <span class="hljs-string">&#x27;<span class="hljs-subst">$a</span> src-git small8 https://github.com/kenzok8/small-package&#x27;</span> feeds.conf.<span class="hljs-keyword">default</span><br></code></pre></td></tr></table></figure>
 
-<h3 id="更新feeds并安装插件，开启配置菜单"><a href="#更新feeds并安装插件，开启配置菜单" class="headerlink" title="更新feeds并安装插件，开启配置菜单"></a>更新feeds并安装插件，开启配置菜单</h3><figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">git pull<br><br>.<span class="hljs-regexp">/scripts/</span>feeds update -a<br><br>.<span class="hljs-regexp">/scripts/</span>feeds install -a<br><br>make menuconfig<br></code></pre></div></td></tr></table></figure>
+<h3 id="更新feeds并安装插件，开启配置菜单"><a href="#更新feeds并安装插件，开启配置菜单" class="headerlink" title="更新feeds并安装插件，开启配置菜单"></a>更新feeds并安装插件，开启配置菜单</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk">git pull<br><br>.<span class="hljs-regexp">/scripts/</span>feeds update -a<br><br>.<span class="hljs-regexp">/scripts/</span>feeds install -a<br><br>make menuconfig<br></code></pre></td></tr></table></figure>
 
 <h3 id="选择编译目标"><a href="#选择编译目标" class="headerlink" title="选择编译目标"></a>选择编译目标</h3><p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/xiaomi_router_r3g.png" srcset="/img/loading.gif" lazyload alt="小米路由器R3G对应的编译设置"></p>
-<h3 id="下载dl库，编译固件"><a href="#下载dl库，编译固件" class="headerlink" title="下载dl库，编译固件"></a>下载dl库，编译固件</h3><figure class="highlight gauss"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gauss"><span class="hljs-built_in">make</span> download -j8<br><br><span class="hljs-built_in">make</span> V=s -j1  <span class="hljs-meta">#-j 后面是线程数，第一次编译推荐用单线程</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="下载dl库，编译固件"><a href="#下载dl库，编译固件" class="headerlink" title="下载dl库，编译固件"></a>下载dl库，编译固件</h3><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs gauss"><span class="hljs-built_in">make</span> download -j8<br><br><span class="hljs-built_in">make</span> V=s -j1  <span class="hljs-meta">#-j 后面是线程数，第一次编译推荐用单线程</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
-<p>编译完成后输出路径：<strong>lede/bin/targets/.</strong></p>
+<p>编译完成后输出路径：<strong>lede&#x2F;bin&#x2F;targets&#x2F;.</strong></p>
 </blockquote>
 <h3 id="二次编译"><a href="#二次编译" class="headerlink" title="二次编译"></a>二次编译</h3><p>请分别执行以下命令：</p>
-<figure class="highlight vim"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> lede<br><br>git pull<br><br>./scripts/feeds <span class="hljs-keyword">update</span> -<span class="hljs-keyword">a</span><br><br>./scripts/feeds install -<span class="hljs-keyword">a</span><br><br><span class="hljs-keyword">make</span> defconfig<br><br><span class="hljs-keyword">make</span> download -j8<br><br><span class="hljs-keyword">make</span> V=s -<span class="hljs-keyword">j</span>$(nproc)<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">cd</span> lede<br><br>git pull<br><br>./scripts/feeds <span class="hljs-keyword">update</span> -<span class="hljs-keyword">a</span><br><br>./scripts/feeds install -<span class="hljs-keyword">a</span><br><br><span class="hljs-keyword">make</span> defconfig<br><br><span class="hljs-keyword">make</span> download -j8<br><br><span class="hljs-keyword">make</span> V=s -<span class="hljs-keyword">j</span>$(nproc)<br></code></pre></td></tr></table></figure>
 
 <h3 id="重新配置"><a href="#重新配置" class="headerlink" title="重新配置"></a>重新配置</h3><p>请分别执行以下命令：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs powershell"><span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> ./tmp &amp;&amp; <span class="hljs-built_in">rm</span> <span class="hljs-literal">-rf</span> .config<br><br>make menuconfig<br><br>make V=s <span class="hljs-literal">-j</span><span class="hljs-variable">$</span>(nproc)<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> -rf ./tmp &amp;&amp; <span class="hljs-built_in">rm</span> -rf .config<br><br>make menuconfig<br><br>make V=s -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
 
 <hr>
 <h2 id="使用Github-Actions编译OpenWRT固件"><a href="#使用Github-Actions编译OpenWRT固件" class="headerlink" title="使用Github Actions编译OpenWRT固件"></a>使用Github Actions编译OpenWRT固件</h2><h3 id="编译前须知-1"><a href="#编译前须知-1" class="headerlink" title="编译前须知"></a>编译前须知</h3><ol>
 <li>访问Github可能不顺畅，请使用魔法👁‍🗨</li>
 <li>需要一个注册一个Github账号</li>
 </ol>
-<h3 id="创建自动编译脚本仓库"><a href="#创建自动编译脚本仓库" class="headerlink" title="创建自动编译脚本仓库"></a>创建自动编译脚本仓库</h3><p><a target="_blank" rel="noopener" href="https://github.com/P3TERX/Actions-OpenWrt">P3TERX / Actions-OpenWrt仓库</a></p>
-<p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/actions_openwrt_by_P3TERX.png" srcset="/img/loading.gif" lazyload alt="P3TERX / Actions-OpenWrt"></p>
+<h3 id="创建自动编译脚本仓库"><a href="#创建自动编译脚本仓库" class="headerlink" title="创建自动编译脚本仓库"></a>创建自动编译脚本仓库</h3><p><a target="_blank" rel="noopener" href="https://github.com/P3TERX/Actions-OpenWrt">P3TERX &#x2F; Actions-OpenWrt仓库</a></p>
+<p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/actions_openwrt_by_P3TERX.png" srcset="/img/loading.gif" lazyload alt="P3TERX &#x2F; Actions-OpenWrt"></p>
 <h3 id="配置编译脚本"><a href="#配置编译脚本" class="headerlink" title="配置编译脚本"></a>配置编译脚本</h3><h4 id="diy-part1-sh"><a href="#diy-part1-sh" class="headerlink" title="diy-part1.sh"></a>diy-part1.sh</h4><p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/actions_openwrt_diy_part1.png" srcset="/img/loading.gif" lazyload alt="配置diy-part1.sh"></p>
 <h4 id="diy-part2-sh"><a href="#diy-part2-sh" class="headerlink" title="diy-part2.sh"></a>diy-part2.sh</h4><p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/actions_openwrt_diy_part2.png" srcset="/img/loading.gif" lazyload alt="配置diy-part2.sh"></p>
 <h4 id="创建-config"><a href="#创建-config" class="headerlink" title="创建.config"></a>创建.config</h4><p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/actions_openwrt_create_config_file.png" srcset="/img/loading.gif" lazyload alt="配置.config"></p>
@@ -397,7 +467,7 @@
 <blockquote>
 <p>该配置文件仅针对Xiaomi r3g v1，请根据自己的编译目标配置该文件！</p>
 </blockquote>
-<figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">CONFIG_TARGET_ramips</span>=y<br><span class="hljs-attr">CONFIG_TARGET_ramips_mt7621</span>=y<br><span class="hljs-attr">CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_mi-router-3g</span>=y<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">CONFIG_TARGET_ramips</span>=y<br><span class="hljs-attr">CONFIG_TARGET_ramips_mt7621</span>=y<br><span class="hljs-attr">CONFIG_TARGET_ramips_mt7621_DEVICE_xiaomi_mi-router-3g</span>=y<br></code></pre></td></tr></table></figure>
 
 <h3 id="开始编译"><a href="#开始编译" class="headerlink" title="开始编译"></a>开始编译</h3><blockquote>
 <p>Xiaomi r3g v1不能将SSH connection to Actions设置为 <code>true</code> ，否则会编译失败。</p>
@@ -410,13 +480,13 @@
 <p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/actions_openwrt_ssh.png" srcset="/img/loading.gif" lazyload alt="SSH链接"></p>
 <h3 id="等待编译完成"><a href="#等待编译完成" class="headerlink" title="等待编译完成"></a>等待编译完成</h3><p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/actions_openwrt_compile_successful.png" srcset="/img/loading.gif" lazyload alt="编译成功，下载固件包"></p>
 <p>编译成功后，脚本会自动将生成的固件打包，可下载刷入。</p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="OpenWRT-更新软件包-和-安装软件包-命令"><a href="#OpenWRT-更新软件包-和-安装软件包-命令" class="headerlink" title="OpenWRT 更新软件包 和 安装软件包 命令"></a>OpenWRT 更新软件包 和 安装软件包 命令</h3><figure class="highlight cmake"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs cmake">opkg update <span class="hljs-comment">#更新软件包</span><br><br>opkg <span class="hljs-keyword">install</span> software_name.ipk  <span class="hljs-comment">#安装软件包</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="OpenWRT-更新软件包-和-安装软件包-命令"><a href="#OpenWRT-更新软件包-和-安装软件包-命令" class="headerlink" title="OpenWRT 更新软件包 和 安装软件包 命令"></a>OpenWRT 更新软件包 和 安装软件包 命令</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cmake">opkg update <span class="hljs-comment">#更新软件包</span><br><br>opkg <span class="hljs-keyword">install</span> software_name.ipk  <span class="hljs-comment">#安装软件包</span><br></code></pre></td></tr></table></figure>
 
 <h3 id="如果使用的本地编译环境是WSL-Windows-Subsystem-for-Linux-，请使用以下命令进行编译："><a href="#如果使用的本地编译环境是WSL-Windows-Subsystem-for-Linux-，请使用以下命令进行编译：" class="headerlink" title="如果使用的本地编译环境是WSL(Windows Subsystem for Linux)，请使用以下命令进行编译："></a>如果使用的本地编译环境是WSL(Windows Subsystem for Linux)，请使用以下命令进行编译：</h3><p>首次编译：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">PATH=<span class="hljs-regexp">/usr/local</span><span class="hljs-regexp">/sbin:/usr</span><span class="hljs-regexp">/local/bin</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/bin</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/bin</span> make V=s -j1<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable constant_">PATH</span>=<span class="hljs-regexp">/usr/local</span><span class="hljs-regexp">/sbin:/usr</span><span class="hljs-regexp">/local/bin</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/bin</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/bin</span> make V=s -j1<br></code></pre></td></tr></table></figure>
 
 <p>二次编译：</p>
-<figure class="highlight elixir"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs elixir">PATH=<span class="hljs-regexp">/usr/local</span><span class="hljs-regexp">/sbin:/usr</span><span class="hljs-regexp">/local/bin</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/bin</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/bin</span> make -j<span class="hljs-variable">$(</span>(<span class="hljs-variable">$(</span>nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable constant_">PATH</span>=<span class="hljs-regexp">/usr/local</span><span class="hljs-regexp">/sbin:/usr</span><span class="hljs-regexp">/local/bin</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/bin</span><span class="hljs-symbol">:/sbin</span><span class="hljs-symbol">:/bin</span> make -j<span class="hljs-variable">$(</span>(<span class="hljs-variable">$(</span>nproc) + <span class="hljs-number">1</span>)) V=s<br></code></pre></td></tr></table></figure>
 
 <h2 id="添加插件"><a href="#添加插件" class="headerlink" title="添加插件"></a>添加插件</h2><p>OpenWRT通过LuCI来管理插件：</p>
 <ul>
@@ -428,49 +498,105 @@
 </li>
 </ul>
 <p><img src="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/luci_applications_config.png" srcset="/img/loading.gif" lazyload alt="LuCI插件管理界面"></p>
-<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-accesscontrol  #访问时间控制<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adblock  #AdBlock广告过滤<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adbyby-plus  #广告屏蔽大师Plus<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-advancedsetting  #系统高级设置（Le库以外的插件<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-aria2  #Aria2下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-arpbind  #IP/MAC绑定<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-attendedsysupgrade  #固件更新升级相关<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-autoreboot  #支持计划重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-baidupcs-web  #百度网盘管理<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifs-mount  #CIFS/SMB挂载设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifsd  #CIFS/SMB网络共享<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-commands  #Shell命令模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ddns  #动态域名 DNS（集成阿里DDNS客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnscrypt-proxy  #DNSCrypt解决DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnsfilter  #DNSFilter基于DNS的广告过滤<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnsforwarder  #DNSForwarder防DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-filetransfer  #文件传输（可web安装ipk包）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-firewall  #添加防火墙<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frpc  #内网穿透Frp客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frps  #内网穿透Frp服务端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-guest-wifi  #WiFi访客网络<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-hd-idle  #硬盘休眠<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nlbwmon  #网络带宽监视器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-noddos  #NodDOS Clients 阻止DDoS攻击<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-passwall  #科学上网（Li大佬插件）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-qbittorrent  #BT下载工具(qBittorrent)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ramfree  #释放内存<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-samba  #网络共享（Samba）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ssr-plus  #SSR科学上网Plus+（Le大佬插件）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-statistics  #流量监控工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-transmission  #BT下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-turboacc  #Turbo ACC 网络加速(支持 Fast Path 或者 硬件 NAT)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-unblockmusic  #解锁网易云灰色歌曲<span class="hljs-number">3</span>合<span class="hljs-number">1</span>新版本<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-upnp  #通用即插即用UPnP（端口自动转发<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vlmcsd  #KMS服务器设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vsftpd  #FTP服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-watchcat  #断网检测功能与定时重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-webadmin  #Web管理页面设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wifischedule  #WiFi 计划<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wol  #WOL网络唤醒<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wrtbwmon  #实时流量监测<br></code></pre></div></td></tr></table></figure>
+<h3 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h3><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs xl">L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-accesscontrol  #访问时间控制<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adblock  #AdBlock广告过滤<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adbyby-plus  #广告屏蔽大师Plus<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-advancedsetting  #系统高级设置（Le库以外的插件<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-aria2  #Aria2下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-arpbind  #IP/MAC绑定<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-attendedsysupgrade  #固件更新升级相关<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-autoreboot  #支持计划重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-baidupcs-web  #百度网盘管理<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifs-mount  #CIFS/SMB挂载设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifsd  #CIFS/SMB网络共享<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-commands  #Shell命令模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ddns  #动态域名 DNS（集成阿里DDNS客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnscrypt-proxy  #DNSCrypt解决DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnsfilter  #DNSFilter基于DNS的广告过滤<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnsforwarder  #DNSForwarder防DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-filetransfer  #文件传输（可web安装ipk包）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-firewall  #添加防火墙<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frpc  #内网穿透Frp客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frps  #内网穿透Frp服务端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-guest-wifi  #WiFi访客网络<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-hd-idle  #硬盘休眠<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nlbwmon  #网络带宽监视器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-noddos  #NodDOS Clients 阻止DDoS攻击<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-passwall  #科学上网（Li大佬插件）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-qbittorrent  #BT下载工具(qBittorrent)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ramfree  #释放内存<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-samba  #网络共享（Samba）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ssr-plus  #SSR科学上网Plus+（Le大佬插件）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-statistics  #流量监控工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-transmission  #BT下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-turboacc  #Turbo ACC 网络加速(支持 Fast Path 或者 硬件 NAT)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-unblockmusic  #解锁网易云灰色歌曲<span class="hljs-number">3</span>合<span class="hljs-number">1</span>新版本<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-upnp  #通用即插即用UPnP（端口自动转发<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vlmcsd  #KMS服务器设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vsftpd  #FTP服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-watchcat  #断网检测功能与定时重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-webadmin  #Web管理页面设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wifischedule  #WiFi 计划<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wol  #WOL网络唤醒<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wrtbwmon  #实时流量监测<br></code></pre></td></tr></table></figure>
 
 <h3 id="所有插件"><a href="#所有插件" class="headerlink" title="所有插件"></a>所有插件</h3><blockquote>
-<p>最后更新时间：2022/6/19</p>
+<p>最后更新时间：2022&#x2F;6&#x2F;19</p>
 </blockquote>
-<figure class="highlight xl"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xl">L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-accesscontrol  #访问时间控制<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adblock   #ADB广告过滤<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adbyby-plus  #广告屏蔽大师Plus +<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-advanced-reboot  #Linksys高级重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ahcp  #Ad-Hoc配置协议(AHCP) ipv6 <span class="hljs-built_in">and</span> 双栈 自动配置协议 !<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-airplay2   #Apple AirPlay2 无损音频接收服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-amule  #aMule下载工具 !<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-aria2 # Aria2下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-arpbind  #IP/MAC绑定<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-asterisk  #支持Asterisk电话服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-attendedsysupgrade  #固件更新升级相关<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-autoreboot  #支持计划重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-baidupcs-web  #百度网盘管理<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bcp38  #BCP38网络入口过滤（不确定）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bird1-ipv4  #对Bird1-ipv4的支持<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bird1-ipv6  #对Bird1-ipv6的支持<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bmx6  #BMX6路由协议<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifs-mount   #CIFS/SMB挂载设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifsd  #CIFS/SMB网络共享<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cjdns  #加密IPV6网络相关<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-clamav  #ClamAV杀毒软件<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-commands   #Shell命令模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cshark   #CloudShark捕获工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ddns   #动态域名 DNS（集成阿里DDNS客户端）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-diag-core   #core诊断工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-diskman   #磁盘管理工具<br>    <span class="hljs-function"><span class="hljs-title">luci</span>-app-diskman ---&gt;</span> Include btrfs-progs   #新型的写时复制 (COW)<br>    <span class="hljs-function"><span class="hljs-title">luci</span>-app-diskman ---&gt;</span> Include lsblk   #lsblk命令 用于列出所有可用块设备的信息<br>    <span class="hljs-function"><span class="hljs-title">luci</span>-app-diskman ---&gt;</span> Include mdadm   #mdadm命令 用于创建、管理、监控RAID设备的工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnscrypt-proxy  #DNSCrypt解决DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnsforwarder  #DNSForwarder防DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-docker  #Docker容器(dockerman更名为docker)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dump1090  #民航无线频率（不确定）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dynapoint  #DynaPoint（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-e2guardian   #Web内容过滤器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-familycloud   #家庭云盘<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-filetransfer  #文件传输（可web安装ipk包）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-firewall   #添加防火墙<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-flowoffload  #Turbo ACC网络加速（集成FLOW,BBR,NAT,DNS...<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-freifunk-diagnostics   #freifunk组件 诊断（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-freifunk-policyrouting  #freifunk组件 策略路由（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-freifunk-widgets  #freifunk组件 索引（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frpc   #内网穿透Frp客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frps   #内网穿透Frp服务端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-fwknopd  #Firewall Knock Operator服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-guest-wifi   #WiFi访客网络<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-gost  #隐蔽的https代理（Li大内插件）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-haproxy-tcp   #HAProxy负载均衡-TCP<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-hd-idle  #硬盘休眠<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-hnet  #Homenet Status家庭网络控制协议<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-https-dns-proxy  #通过HTTPS代理为DNS提供Web UI<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ipsec-vpnd  #VPN服务器 IPSec<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-kodexplorer  #KOD可道云私人网盘（与vnStat冲突 ! ）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-kooldns  #virtual**服务器 ddns替代方案（丢弃）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-koolproxy  #KP去广告（丢弃）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-lxc   #LXC容器管理<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-meshwizard #网络设置向导<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-minidlna   #完全兼容DLNA / UPnP-AV客户端的服务器软件<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-mjpg-streamer   #兼容Linux-UVC的摄像头程序<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-music-remote-center   #PCHiFi 数字转盘遥控<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-mwan3   #MWAN3负载均衡<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-mwan3helper   #MWAN3分流助手<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-n2n_v2   #N2N内网穿透 N2N v2 virtual**服务<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-netdata  #Netdata实时监控（图形化）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nfs   #NFS网络共享<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nft-qos  #QOS流控 Nftables版<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nlbwmon   #网络带宽监视器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-noddos  #NodDOS Clients 阻止DDoS攻击<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nps   #内网穿透nps<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ntpc   #NTP时间同步服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ocserv  #OpenConnect virtual**服务<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-olsr  #OLSR配置和状态模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-olsr-services  #OLSR服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-olsr-viz   #OLSR可视化<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-openvpn  #OpenVPN客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-openvpn-server  #易于使用的OpenVPN服务器 Web-UI<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-oscam   #OSCAM服务器（丢弃）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-p910nd   #打印服务器模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-pagekitec   #Pagekitec内网穿透客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-polipo  #Polipo代理(是一个小型且快速的网页缓存代理)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-pppoe-relay  #PPPoE NAT穿透 点对点协议（PPP）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-privoxy  #Privoxy网络代理(带过滤无缓存)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ps3netsrv  #PS3 NET服务器（用于加载蓝光/游戏ISO/PKG）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-qbittorrent  #BT下载工具（qBittorrent）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-qos   #流量服务质量(QoS)流控<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-radicale   #CalDAV/CardDAV同步工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ramfree  #释放内存<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-rclone  #命令行云端同步工具<br>    Include rclone-webui  #Rclone界面<br>    Include rclone-ng (another webui)  #Rclone另一个界面<br>    Include fuse-utils (mount cloud storage)  #fuse-utils（挂载云存储）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-rp-pppoe-server  #Roaring Penguin PPPoE Server 服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-samba   #网络共享（Samba）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-samba4   #网络共享（Samba4）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-sfe  #Turbo ACC网络加速（flowoffload二选一）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-shadowsocks-libev  #SS-libev服务端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-shairplay  #支持AirPlay功能<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-siitwizard  #SIIT配置向导  SIIT-Wizzard<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-simple-adblock  #简单的广告拦截<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-softethervpn  #SoftEther VPN服务器  NAT穿透<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-splash  #Client-Splash是无线MESH网络的一个热点认证系统<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-sqm  #流量智能队列管理（QOS）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-squid   #Squid代理服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ssr-plus   #SSR Plus+<br>    Include Shadowsocks  #新SS代理<br>    Include Shadowsocks V2ray Plugin  #新V2ray代理<br>    Include Xray  #Xray代理   *<br>    Include Trojan  #Trojan代理<br>    Include Redsocks2  #socks-red2代理<br>    Include NaiveProxy  #NaiveProxy代理<br>    Include Kcptun  #Kcptun加速<br>    Include ShadowsocksR Server  #ShadowsocksR服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ssrserver-python  #SSR Python服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-statistics  #流量监控工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-syncdial  #多拨虚拟网卡（原macvlan）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-tinyproxy  #Tinyproxy是 HTTP(S)代理服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-transmission   #BT下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-travelmate  #旅行路由器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ttyd   #网页终端命令行<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-udpxy  #udpxy做组播服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-uhttpd  #uHTTPd Web服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-unblockmusic  #解锁网易云灰色歌曲<span class="hljs-number">3</span>合<span class="hljs-number">1</span>新版本<br>    UnblockNeteaseMusic Golang Version  #Golang版本<br>    UnblockNeteaseMusic <span class="hljs-built_in">NodeJS</span> Version  #<span class="hljs-built_in">NodeJS</span>版本<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-unbound  #Unbound DNS解析器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-upnp   #通用即插即用UPnP（端口自动转发）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-usb-printer  #USB 打印服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-uugamebooster  #UU网游加速器   *<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-v2ray-server   #V2ray 服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-verysync  #微力同步<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vlmcsd  #KMS服务器设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vnstat   #vnStat网络监控（图表）（与kodexplorer冲突 ! ）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vpnbypass  #VPN BypassWebUI  绕过VPN设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vsftpd  #FTP服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-watchcat  #断网检测功能与定时重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-webadmin  #Web管理页面设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wifischedule  #WiFi 计划<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wireguard  #WireGuard状态<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wol   #WOL网络唤醒<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wrtbwmon  #实时流量监测<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-xlnetacc  #迅雷快鸟<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-zerotier  #ZeroTier内网穿透<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br></pre></td><td class="code"><pre><code class="hljs xl">L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-accesscontrol  #访问时间控制<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adblock   #ADB广告过滤<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-adbyby-plus  #广告屏蔽大师Plus +<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-advanced-reboot  #Linksys高级重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ahcp  #Ad-Hoc配置协议(AHCP) ipv6 <span class="hljs-built_in">and</span> 双栈 自动配置协议 !<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-airplay2   #Apple AirPlay2 无损音频接收服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-amule  #aMule下载工具 !<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-aria2 # Aria2下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-arpbind  #IP/MAC绑定<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-asterisk  #支持Asterisk电话服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-attendedsysupgrade  #固件更新升级相关<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-autoreboot  #支持计划重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-baidupcs-web  #百度网盘管理<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bcp38  #BCP38网络入口过滤（不确定）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bird1-ipv4  #对Bird1-ipv4的支持<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bird1-ipv6  #对Bird1-ipv6的支持<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-bmx6  #BMX6路由协议<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifs-mount   #CIFS/SMB挂载设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cifsd  #CIFS/SMB网络共享<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cjdns  #加密IPV6网络相关<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-clamav  #ClamAV杀毒软件<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-commands   #Shell命令模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-cshark   #CloudShark捕获工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ddns   #动态域名 DNS（集成阿里DDNS客户端）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-diag-core   #core诊断工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-diskman   #磁盘管理工具<br>    <span class="hljs-function"><span class="hljs-title">luci</span>-app-diskman ---&gt;</span> Include btrfs-progs   #新型的写时复制 (COW)<br>    <span class="hljs-function"><span class="hljs-title">luci</span>-app-diskman ---&gt;</span> Include lsblk   #lsblk命令 用于列出所有可用块设备的信息<br>    <span class="hljs-function"><span class="hljs-title">luci</span>-app-diskman ---&gt;</span> Include mdadm   #mdadm命令 用于创建、管理、监控RAID设备的工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnscrypt-proxy  #DNSCrypt解决DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dnsforwarder  #DNSForwarder防DNS污染<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-docker  #Docker容器(dockerman更名为docker)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dump1090  #民航无线频率（不确定）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-dynapoint  #DynaPoint（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-e2guardian   #Web内容过滤器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-familycloud   #家庭云盘<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-filetransfer  #文件传输（可web安装ipk包）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-firewall   #添加防火墙<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-flowoffload  #Turbo ACC网络加速（集成FLOW,BBR,NAT,DNS...<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-freifunk-diagnostics   #freifunk组件 诊断（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-freifunk-policyrouting  #freifunk组件 策略路由（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-freifunk-widgets  #freifunk组件 索引（未知）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frpc   #内网穿透Frp客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-frps   #内网穿透Frp服务端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-fwknopd  #Firewall Knock Operator服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-guest-wifi   #WiFi访客网络<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-gost  #隐蔽的https代理（Li大内插件）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-haproxy-tcp   #HAProxy负载均衡-TCP<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-hd-idle  #硬盘休眠<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-hnet  #Homenet Status家庭网络控制协议<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-https-dns-proxy  #通过HTTPS代理为DNS提供Web UI<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ipsec-vpnd  #VPN服务器 IPSec<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-kodexplorer  #KOD可道云私人网盘（与vnStat冲突 ! ）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-kooldns  #virtual**服务器 ddns替代方案（丢弃）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-koolproxy  #KP去广告（丢弃）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-lxc   #LXC容器管理<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-meshwizard #网络设置向导<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-minidlna   #完全兼容DLNA / UPnP-AV客户端的服务器软件<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-mjpg-streamer   #兼容Linux-UVC的摄像头程序<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-music-remote-center   #PCHiFi 数字转盘遥控<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-mwan3   #MWAN3负载均衡<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-mwan3helper   #MWAN3分流助手<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-n2n_v2   #N2N内网穿透 N2N v2 virtual**服务<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-netdata  #Netdata实时监控（图形化）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nfs   #NFS网络共享<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nft-qos  #QOS流控 Nftables版<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nlbwmon   #网络带宽监视器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-noddos  #NodDOS Clients 阻止DDoS攻击<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-nps   #内网穿透nps<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ntpc   #NTP时间同步服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ocserv  #OpenConnect virtual**服务<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-olsr  #OLSR配置和状态模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-olsr-services  #OLSR服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-olsr-viz   #OLSR可视化<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-openvpn  #OpenVPN客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-openvpn-server  #易于使用的OpenVPN服务器 Web-UI<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-oscam   #OSCAM服务器（丢弃）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-p910nd   #打印服务器模块<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-pagekitec   #Pagekitec内网穿透客户端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-polipo  #Polipo代理(是一个小型且快速的网页缓存代理)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-pppoe-relay  #PPPoE NAT穿透 点对点协议（PPP）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-privoxy  #Privoxy网络代理(带过滤无缓存)<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ps3netsrv  #PS3 NET服务器（用于加载蓝光/游戏ISO/PKG）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-qbittorrent  #BT下载工具（qBittorrent）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-qos   #流量服务质量(QoS)流控<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-radicale   #CalDAV/CardDAV同步工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ramfree  #释放内存<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-rclone  #命令行云端同步工具<br>    Include rclone-webui  #Rclone界面<br>    Include rclone-ng (another webui)  #Rclone另一个界面<br>    Include fuse-utils (mount cloud storage)  #fuse-utils（挂载云存储）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-rp-pppoe-server  #Roaring Penguin PPPoE Server 服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-samba   #网络共享（Samba）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-samba4   #网络共享（Samba4）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-sfe  #Turbo ACC网络加速（flowoffload二选一）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-shadowsocks-libev  #SS-libev服务端<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-shairplay  #支持AirPlay功能<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-siitwizard  #SIIT配置向导  SIIT-Wizzard<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-simple-adblock  #简单的广告拦截<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-softethervpn  #SoftEther VPN服务器  NAT穿透<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-splash  #Client-Splash是无线MESH网络的一个热点认证系统<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-sqm  #流量智能队列管理（QOS）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-squid   #Squid代理服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ssr-plus   #SSR Plus+<br>    Include Shadowsocks  #新SS代理<br>    Include Shadowsocks V2ray Plugin  #新V2ray代理<br>    Include Xray  #Xray代理   *<br>    Include Trojan  #Trojan代理<br>    Include Redsocks2  #socks-red2代理<br>    Include NaiveProxy  #NaiveProxy代理<br>    Include Kcptun  #Kcptun加速<br>    Include ShadowsocksR Server  #ShadowsocksR服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ssrserver-python  #SSR Python服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-statistics  #流量监控工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-syncdial  #多拨虚拟网卡（原macvlan）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-tinyproxy  #Tinyproxy是 HTTP(S)代理服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-transmission   #BT下载工具<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-travelmate  #旅行路由器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-ttyd   #网页终端命令行<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-udpxy  #udpxy做组播服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-uhttpd  #uHTTPd Web服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-unblockmusic  #解锁网易云灰色歌曲<span class="hljs-number">3</span>合<span class="hljs-number">1</span>新版本<br>    UnblockNeteaseMusic Golang Version  #Golang版本<br>    UnblockNeteaseMusic <span class="hljs-built_in">NodeJS</span> Version  #<span class="hljs-built_in">NodeJS</span>版本<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-unbound  #Unbound DNS解析器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-upnp   #通用即插即用UPnP（端口自动转发）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-usb-printer  #USB 打印服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-uugamebooster  #UU网游加速器   *<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-v2ray-server   #V2ray 服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-verysync  #微力同步<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vlmcsd  #KMS服务器设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vnstat   #vnStat网络监控（图表）（与kodexplorer冲突 ! ）<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vpnbypass  #VPN BypassWebUI  绕过VPN设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-vsftpd  #FTP服务器<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-watchcat  #断网检测功能与定时重启<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-webadmin  #Web管理页面设置<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wifischedule  #WiFi 计划<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wireguard  #WireGuard状态<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wol   #WOL网络唤醒<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-wrtbwmon  #实时流量监测<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-xlnetacc  #迅雷快鸟<br>L<span class="hljs-function"><span class="hljs-title">uCI</span> ---&gt;</span> A<span class="hljs-function"><span class="hljs-title">pplications</span> ---&gt;</span> luci-app-zerotier  #ZeroTier内网穿透<br></code></pre></td></tr></table></figure>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/OpenWRT/">OpenWRT</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6/">编译固件</a>
-                    
-                  </div>
                 
               </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OpenWRT/" class="category-chain-item">OpenWRT</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" class="print-no-link">#路由器</a>
+      
+        <a href="/tags/%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6/" class="print-no-link">#编译固件</a>
+      
+    </div>
+  
+</div>
+
+
               
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-NC-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>小米路由器R3G编译OpenWRT固件</div>
+      <div>https://dongxunz.github.io/2022/01/07/OpenWRT/小米路由器R3G编译OpenWRT固件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年1月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
               
               
-                <div class="post-prevnext">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/23/Hexo/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/">
+                      <a href="/2022/01/23/Hexo/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="Hexo主题配置">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Hexo主题配置</span>
                         <span class="visible-mobile">上一篇</span>
@@ -480,7 +606,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/">
+                      <a href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/" title="Linux工具进阶">
                         <span class="hidden-mobile">Linux工具进阶</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -496,19 +622,53 @@
         </div>
       </div>
     </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
-      </div>
-    
+
+
+  </aside>
+
+
+    </div>
   </div>
 </div>
 
-<!-- Custom -->
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
 
 
     
@@ -533,56 +693,59 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
 
+  
 
-  <!-- SCRIPTS -->
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
@@ -601,10 +764,22 @@
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -614,82 +789,117 @@
 
 
 
-  
-
-
 
   
-    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
-  
-  
-    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
-  
-  
-    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
-  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
 
 
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
 </html>

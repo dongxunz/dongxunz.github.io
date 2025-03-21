@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -30,15 +33,21 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
@@ -47,7 +56,13 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
   
 <link rel="stylesheet" href="/css/macpanel.css">
@@ -56,16 +71,55 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.1"></head>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
-  <header style="height: 100vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>dongxunz&#39;s blogs💬</strong>
@@ -86,9 +140,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -98,9 +152,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -110,9 +164,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -122,9 +176,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -137,48 +191,48 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-cliplist"></i>
-                分享
+                <span>分享</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/circuitry/">
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
                     <i class="iconfont icon-apple-fill"></i>
-                    电路
+                    <span>电路</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/construction/">
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
                     <i class="iconfont icon-codepen-fill"></i>
-                    结构
+                    <span>结构</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/music/">
+                  <a class="dropdown-item" href="/share/music/" target="_self">
                     <i class="iconfont icon-music"></i>
-                    音乐
+                    <span>音乐</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/game/">
+                  <a class="dropdown-item" href="/share/game/" target="_self">
                     <i class="iconfont icon-steam"></i>
-                    游戏
+                    <span>游戏</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/reading-corner/">
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
                     <i class="iconfont icon-book"></i>
-                    阅读角
+                    <span>阅读角</span>
                   </a>
                 
               </div>
@@ -190,9 +244,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -202,9 +256,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -212,14 +266,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -227,34 +283,40 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/clover.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="dongxunz&#39;s blogs">
-              
-            </span>
+  
 
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
           
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
+            <span id="subtitle" data-typed-text="dongxunz&#39;s blogs"></span>
           
         </div>
+
+        
       </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
     
       <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
+        <div id="board"
+          style="margin-top: 0">
           
           <div class="container">
             <div class="row">
@@ -266,19 +328,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/" target="_self">
           Linux工具进阶
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/" target="_self">
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/" target="_self">
+        <div>
           
-          
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -290,18 +352,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Linux/">Linux</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Linux%E5%B7%A5%E5%85%B7/">Linux工具</a>
+              <a href="/tags/Linux%E5%B7%A5%E5%85%B7/">#Linux工具</a>
             
           </div>
         
@@ -313,19 +389,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/10/Linux/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" target="_self">
           Linux基础命令
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/10/Linux/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/10/Linux/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" target="_self">
+        <div>
           前言学会使用命令帮助在linux终端，面对命令不知道怎么用，或不记得命令的拼写及参数时，我们需要求助于系统的帮助文档； linux系统内置的帮助文档很详细，通常能解决我们的问题，我们需要掌握如何正确的去使用它们；  在只记得部分命令关键字的场合，我们可通过man -k来搜索； 需要知道某个命令的简要说明，可以使用whatis；而更详细的介绍，则可用info命令； 查看命令在哪个位置，我们需要使用w
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -337,18 +413,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Linux/">Linux</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Linux%E5%91%BD%E4%BB%A4/">Linux命令</a>
+              <a href="/tags/Linux%E5%91%BD%E4%BB%A4/">#Linux命令</a>
             
           </div>
         
@@ -360,19 +450,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
           OpenMediaVault安装与配置
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
-          
-          OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个
-        </a>
-      </p>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" target="_self">
+        <div>
+          OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -384,20 +474,34 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/OpenMediaVault/">OpenMediaVault</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OpenMediaVault/" class="category-chain-item">OpenMediaVault</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/OpenMediaVault/">OpenMediaVault</a>
+              <a href="/tags/OpenMediaVault/">#OpenMediaVault</a>
             
-              <a href="/tags/NAS/">NAS</a>
+              <a href="/tags/NAS/">#NAS</a>
             
           </div>
         
@@ -409,19 +513,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/" target="_self">
           一加6刷机笔记
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/" target="_self">
+        <div>
           刷机步骤1. 开启USB调试模式进入 设置 &gt; 关于手机，连续点击 版本号 5次，开启 开发者选项 2. 进入Bootloder模式手机关机，按住 开机键+音量下键 进入Bootloder模式 3. 解OEM锁使用数据线，将手机与电脑连接起来，打开电脑上的CMD，输入adb start-server连接手机，然后输入fastboot oem unlock解锁，此时手机上会有解锁风险提示，使用
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -433,20 +537,34 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%88%B7%E6%9C%BA/">刷机</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E6%9C%BA/" class="category-chain-item">刷机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Android/">Android</a>
+              <a href="/tags/Android/">#Android</a>
             
-              <a href="/tags/%E4%B8%80%E5%8A%A06/">一加6</a>
+              <a href="/tags/%E4%B8%80%E5%8A%A06/">#一加6</a>
             
           </div>
         
@@ -458,19 +576,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/" target="_self">
           Fastboot命令
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/" target="_self">
-          
-          Fastboot：英文翻译为快速启动的意思；在Android手机中Fastboot是一种比Recovery更底层的刷机模式；是使用USB数据线连接手机进行刷机的工具（俗称线刷）。  基础命令1. 重启进入系统1fastboot reboot  2. 解锁OEM锁 对于新款设备（2015 年及之后发布的设备）：1fastboot flashing unlock 对于老款设备（2014 年及之前发布
-        </a>
-      </p>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/" target="_self">
+        <div>
+          Fastboot：英文翻译为快速启动的意思；在Android手机中Fastboot是一种比Recovery更底层的刷机模式；是使用USB数据线连接手机进行刷机的工具（俗称线刷）。  基础命令1. 重启进入系统1fastboot reboot  2. 解锁OEM锁 对于新款设备（2015 年及之后发布的设备）：  1fastboot flashing unlock  对于老款设备（2014 年及之
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -482,20 +600,34 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%88%B7%E6%9C%BA/">刷机</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E6%9C%BA/" class="category-chain-item">刷机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Android/">Android</a>
+              <a href="/tags/Android/">#Android</a>
             
-              <a href="/tags/Fastboot/">Fastboot</a>
+              <a href="/tags/Fastboot/">#Fastboot</a>
             
           </div>
         
@@ -507,19 +639,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/" target="_self">
           Adb命令
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/" target="_self">
+        <div>
           ADB官方介绍  ADB全称为：Android Debug Bridge，可翻译为Android 调试桥(adb)，是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。   基础命令1. 查看使用帮助1adb help  2. 启动adb服务：1adb start-se
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -531,20 +663,34 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%88%B7%E6%9C%BA/">刷机</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%88%B7%E6%9C%BA/" class="category-chain-item">刷机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Android/">Android</a>
+              <a href="/tags/Android/">#Android</a>
             
-              <a href="/tags/adb/">adb</a>
+              <a href="/tags/adb/">#adb</a>
             
           </div>
         
@@ -556,19 +702,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/" target="_self">
           Hexo进阶
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/" target="_self">
-          
-          Hexo生成的Blog主要目录结构使用hexo init &lt;folder&gt;创建博客根目录后，在该目录下安装默认插件npm install后，目录组成如下： 1234567891011121314.├── node_modules&#x3D;：Hexo第三方插件安装目录├── scaffolds：新建文章时使用的Markdown文件模板|   ├── draft.md：草稿模板，生成的文章位于so
-        </a>
-      </p>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/" target="_self">
+        <div>
+          Hexo生成的Blog主要目录结构使用hexo init &lt;folder&gt;创建博客根目录后，在该目录下安装默认插件npm install后，目录组成如下： 1234567891011121314.├── node_modules=：Hexo第三方插件安装目录├── scaffolds：新建文章时使用的Markdown文件模板|   ├── draft.md：草稿模板，生成的文章位于so
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -580,24 +726,38 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Hexo/">Hexo</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E4%B8%BB%E9%A2%98/">主题</a>
+              <a href="/tags/%E4%B8%BB%E9%A2%98/">#主题</a>
             
-              <a href="/tags/Hexo/">Hexo</a>
+              <a href="/tags/Hexo/">#Hexo</a>
             
-              <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/">#博客</a>
             
-              <a href="/tags/Live2D/">Live2D</a>
+              <a href="/tags/Live2D/">#Live2D</a>
             
           </div>
         
@@ -609,19 +769,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/03/Hexo/%E9%80%9A%E8%BF%87Github%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8D%9A%E5%AE%A2/" target="_self">
           通过Github搭建在线Hexo博客网站
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/03/Hexo/%E9%80%9A%E8%BF%87Github%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8D%9A%E5%AE%A2/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/03/Hexo/%E9%80%9A%E8%BF%87Github%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8D%9A%E5%AE%A2/" target="_self">
+        <div>
           所需工具 Node.js Git   安装Hexo1. 安装完所需工具后，打开CMD，依次查询工具的版本号：12345node -v #查看node版本npm -v #查看npm版本git -v #查看git版本   2. 安装hexo，在CMD窗口中输入：1npm install -g hexo-cli  3. 等待安装完成后，输入以下命令查看hexo的版本：1hexo -v #查看hexo版本
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -633,22 +793,36 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Hexo/">Hexo</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Hexo/">Hexo</a>
+              <a href="/tags/Hexo/">#Hexo</a>
             
-              <a href="/tags/%E5%8D%9A%E5%AE%A2/">博客</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/">#博客</a>
             
-              <a href="/tags/Github/">Github</a>
+              <a href="/tags/Github/">#Github</a>
             
           </div>
         
@@ -660,19 +834,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/12/02/Markdown/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" target="_self">
           Markdown基本语法
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/12/02/Markdown/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" target="_self">
-          
-          标题 要创建标题，请在单词或短语前面添加井号 (# ) 。#号的数量代表了标题的级别。  1234567891011# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题   可选语法：还可以在文本下方添加任意数量的 &#x3D;&#x3D; 号来标识一级标题，或者 – 号来标识二级标题。  12345一级标题&#x3D;&#x3D;&#x3D;二级标题---   段落 要创建段落，请使用空白行将一
-        </a>
-      </p>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/12/02/Markdown/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" target="_self">
+        <div>
+          标题 要创建标题，请在单词或短语前面添加井号 (# ) 。#号的数量代表了标题的级别。  1234567891011# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标题###### 六级标题   可选语法：还可以在文本下方添加任意数量的 &#x3D;&#x3D; 号来标识一级标题，或者 – 号来标识二级标题。  12345一级标题===二级标题---   段落 要创建段
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -684,18 +858,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Markdown/">Markdown</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Markdown/" class="category-chain-item">Markdown</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Markdown%E8%AF%AD%E6%B3%95/">Markdown语法</a>
+              <a href="/tags/Markdown%E8%AF%AD%E6%B3%95/">#Markdown语法</a>
             
           </div>
         
@@ -707,19 +895,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2021/11/30/Hello%20World/hello-world/" target="_self">
           Hello World
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2021/11/30/Hello%20World/hello-world/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/11/30/Hello%20World/hello-world/" target="_self">
+        <div>
           Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -731,18 +919,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Hello-World/">Hello World</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hello-World/" class="category-chain-item">Hello World</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Hello-World/">Hello World</a>
+              <a href="/tags/Hello-World/">#Hello World</a>
             
           </div>
         
@@ -787,56 +989,59 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
 
+  
 
-  <!-- SCRIPTS -->
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
@@ -855,10 +1060,52 @@
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        jQuery.ajax({
+          type: 'GET',
+          url: 'https://v1.hitokoto.cn/',
+          headers: {},
+          dataType: 'json',
+          success: function(result) {
+            var apiText;
+            if (result) {
+              var keys = 'hitokoto'.split(',');
+              if (result instanceof Array) {
+                result = result[0];
+              }
+              for (const k of keys) {
+                var value = result[k];
+                if (typeof value === 'string') {
+                  apiText = value;
+                  break;
+                } else if (value instanceof Object) {
+                  result = value;
+                }
+              }
+            }
+            apiText ? typing(apiText) : typing(text);
+          },
+          error: function(xhr, status, error) {
+            if (error) {
+              console.error('Failed to request https://v1.hitokoto.cn/:', error);
+            }
+            typing(text);
+          }
+        })
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -868,96 +1115,24 @@
 
 
 
-  
 
-
-
-
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      jQuery.ajax({
-        type: 'GET',
-        url: 'https://v1.hitokoto.cn/',
-        headers: {},
-        dataType: 'json',
-        success: function(result) {
-          var text;
-          if (result) {
-            var keys = 'hitokoto'.split(',');
-            if (result instanceof Array) {
-              result = result[0];
-            }
-            for (const k of keys) {
-              var value = result[k];
-              if (typeof value === 'string') {
-                text = value;
-                break;
-              } else if (value instanceof Object) {
-                result = value;
-              }
-            }
-          }
-          text ? typing(text) : typing(title);
-        },
-        error: function() {
-          typing(title);
-        }
-      })
-      
-    })(window, document);
-  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
 </html>

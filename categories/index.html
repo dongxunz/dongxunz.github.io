@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -30,15 +33,21 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>分类 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
@@ -47,7 +56,13 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
   
 <link rel="stylesheet" href="/css/macpanel.css">
@@ -56,16 +71,55 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.1"></head>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
-  <header style="height: 60vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>dongxunz&#39;s blogs💬</strong>
@@ -86,9 +140,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -98,9 +152,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -110,9 +164,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -122,9 +176,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -137,48 +191,48 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-cliplist"></i>
-                分享
+                <span>分享</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/circuitry/">
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
                     <i class="iconfont icon-apple-fill"></i>
-                    电路
+                    <span>电路</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/construction/">
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
                     <i class="iconfont icon-codepen-fill"></i>
-                    结构
+                    <span>结构</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/music/">
+                  <a class="dropdown-item" href="/share/music/" target="_self">
                     <i class="iconfont icon-music"></i>
-                    音乐
+                    <span>音乐</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/game/">
+                  <a class="dropdown-item" href="/share/game/" target="_self">
                     <i class="iconfont icon-steam"></i>
-                    游戏
+                    <span>游戏</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/reading-corner/">
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
                     <i class="iconfont icon-book"></i>
-                    阅读角
+                    <span>阅读角</span>
                   </a>
                 
               </div>
@@ -190,9 +244,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -202,9 +256,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -212,14 +266,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -227,29 +283,35 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/clover.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="分类">
-              
-            </span>
+  
 
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="分类"></span>
           
         </div>
+
+        
       </div>
+
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
     
       <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
+        <div id="board"
           >
           
           <div class="container">
@@ -264,24 +326,27 @@
 <div class="category-list">
   
   
-  
-  
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="3D打印"
         id="heading-0e09994456681fa2a869af4b9509b020" role="tab" data-toggle="collapse" href="#collapse-0e09994456681fa2a869af4b9509b020"
         aria-expanded="false"
       >
         3D打印
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>8</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-0e09994456681fa2a869af4b9509b020" role="tabpanel" aria-labelledby="heading-0e09994456681fa2a869af4b9509b020">
+      
+        <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>8</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-0e09994456681fa2a869af4b9509b020"
+           role="tabpanel" aria-labelledby="heading-0e09994456681fa2a869af4b9509b020">
         
         
           
@@ -290,56 +355,72 @@
     
       
       
-        <a href="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" class="list-group-item list-group-item-action">
+        <a href="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" title="BTT Manta M8P V2.0主板烧录Klipper固件"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">BTT Manta M8P V2.0主板烧录Klipper固件</span>
         </a>
       
     
       
       
-        <a href="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" class="list-group-item list-group-item-action">
+        <a href="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" title="BTT SKR V1.4主板烧录Klipper固件"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">BTT SKR V1.4主板烧录Klipper固件</span>
         </a>
       
     
       
       
-        <a href="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/" class="list-group-item list-group-item-action">
+        <a href="/2024/10/24/3D%E6%89%93%E5%8D%B0/OrangePi%20%E5%AE%89%E8%A3%85Klipper/" title="OrangePi Zero 3安装Klipper"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">OrangePi Zero 3安装Klipper</span>
         </a>
       
     
       
       
-        <a href="/2023/08/20/3D%E6%89%93%E5%8D%B0/%E6%A0%A1%E5%87%863D%E6%89%93%E5%8D%B0%E6%9C%BA/" class="list-group-item list-group-item-action">
+        <a href="/2023/08/20/3D%E6%89%93%E5%8D%B0/%E6%A0%A1%E5%87%863D%E6%89%93%E5%8D%B0%E6%9C%BA/" title="校准3D打印机"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">校准3D打印机</span>
         </a>
       
     
       
       
-        <a href="/2023/01/20/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0%E5%A4%9A%E8%89%B2%E6%89%93%E5%8D%B0%E6%A8%A1%E5%9D%97-MMU2S/" class="list-group-item list-group-item-action">
+        <a href="/2023/01/20/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0%E5%A4%9A%E8%89%B2%E6%89%93%E5%8D%B0%E6%A8%A1%E5%9D%97-MMU2S/" title="组装一台多色打印模块-MMU2S"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">组装一台多色打印模块-MMU2S</span>
         </a>
       
     
       
       
-        <a href="/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%B8%B8%E7%94%A8G-code%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
+        <a href="/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%B8%B8%E7%94%A8G-code%E5%91%BD%E4%BB%A4/" title="Marlin固件常用G-code命令"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Marlin固件常用G-code命令</span>
         </a>
       
     
       
       
-        <a href="/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/" class="list-group-item list-group-item-action">
+        <a href="/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/" title="Marlin固件参数配置"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Marlin固件参数配置</span>
         </a>
       
     
       
       
-        <a href="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/" class="list-group-item list-group-item-action">
+        <a href="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/" title="组装一台Prusa i3 MK3S+ &amp; Bear Frame Upgrade 2.1"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">组装一台Prusa i3 MK3S+ &amp; Bear Frame Upgrade 2.1</span>
         </a>
       
@@ -352,20 +433,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Hexo"
         id="heading-c00d1eb68b529768ba98c975c76a9b66" role="tab" data-toggle="collapse" href="#collapse-c00d1eb68b529768ba98c975c76a9b66"
         aria-expanded="false"
       >
         Hexo
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Hexo/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>3</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-c00d1eb68b529768ba98c975c76a9b66" role="tabpanel" aria-labelledby="heading-c00d1eb68b529768ba98c975c76a9b66">
+      
+        <a href="/categories/Hexo/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>3</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-c00d1eb68b529768ba98c975c76a9b66"
+           role="tabpanel" aria-labelledby="heading-c00d1eb68b529768ba98c975c76a9b66">
         
         
           
@@ -374,21 +460,27 @@
     
       
       
-        <a href="/2022/01/23/Hexo/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" class="list-group-item list-group-item-action">
+        <a href="/2022/01/23/Hexo/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="Hexo主题配置"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Hexo主题配置</span>
         </a>
       
     
       
       
-        <a href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/" title="Hexo进阶"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Hexo进阶</span>
         </a>
       
     
       
       
-        <a href="/2021/12/03/Hexo/%E9%80%9A%E8%BF%87Github%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8D%9A%E5%AE%A2/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/03/Hexo/%E9%80%9A%E8%BF%87Github%E6%90%AD%E5%BB%BAHexo%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE%E5%8D%9A%E5%AE%A2/" title="通过Github搭建在线Hexo博客网站"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">通过Github搭建在线Hexo博客网站</span>
         </a>
       
@@ -401,20 +493,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="刷机"
         id="heading-e6fa256e7b3b98464a968bde643cd707" role="tab" data-toggle="collapse" href="#collapse-e6fa256e7b3b98464a968bde643cd707"
         aria-expanded="false"
       >
         刷机
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E5%88%B7%E6%9C%BA/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>3</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-e6fa256e7b3b98464a968bde643cd707" role="tabpanel" aria-labelledby="heading-e6fa256e7b3b98464a968bde643cd707">
+      
+        <a href="/categories/%E5%88%B7%E6%9C%BA/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>3</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-e6fa256e7b3b98464a968bde643cd707"
+           role="tabpanel" aria-labelledby="heading-e6fa256e7b3b98464a968bde643cd707">
         
         
           
@@ -423,21 +520,27 @@
     
       
       
-        <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/" title="一加6刷机笔记"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">一加6刷机笔记</span>
         </a>
       
     
       
       
-        <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/" title="Fastboot命令"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Fastboot命令</span>
         </a>
       
     
       
       
-        <a href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/" title="Adb命令"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Adb命令</span>
         </a>
       
@@ -450,20 +553,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Altium Designer"
         id="heading-a03de51e5aebb7dac96ffc5a9d43b648" role="tab" data-toggle="collapse" href="#collapse-a03de51e5aebb7dac96ffc5a9d43b648"
         aria-expanded="false"
       >
         Altium Designer
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Altium-Designer/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-a03de51e5aebb7dac96ffc5a9d43b648" role="tabpanel" aria-labelledby="heading-a03de51e5aebb7dac96ffc5a9d43b648">
+      
+        <a href="/categories/Altium-Designer/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>2</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-a03de51e5aebb7dac96ffc5a9d43b648"
+           role="tabpanel" aria-labelledby="heading-a03de51e5aebb7dac96ffc5a9d43b648">
         
         
           
@@ -472,14 +580,18 @@
     
       
       
-        <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/" class="list-group-item list-group-item-action">
+        <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/" title="Altium Designer快捷操作"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Altium Designer快捷操作</span>
         </a>
       
     
       
       
-        <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20PCB%E8%A7%84%E5%88%99%E8%AF%A6%E8%A7%A3/" class="list-group-item list-group-item-action">
+        <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20PCB%E8%A7%84%E5%88%99%E8%AF%A6%E8%A7%A3/" title="Altium Designer PCB规则详解"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Altium Designer PCB规则详解</span>
         </a>
       
@@ -492,20 +604,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="DIY"
         id="heading-03f933764cfb504f7e8b74f5c1d1000a" role="tab" data-toggle="collapse" href="#collapse-03f933764cfb504f7e8b74f5c1d1000a"
         aria-expanded="false"
       >
         DIY
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/DIY/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-03f933764cfb504f7e8b74f5c1d1000a" role="tabpanel" aria-labelledby="heading-03f933764cfb504f7e8b74f5c1d1000a">
+      
+        <a href="/categories/DIY/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>2</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-03f933764cfb504f7e8b74f5c1d1000a"
+           role="tabpanel" aria-labelledby="heading-03f933764cfb504f7e8b74f5c1d1000a">
         
         
           
@@ -514,14 +631,18 @@
     
       
       
-        <a href="/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/" class="list-group-item list-group-item-action">
+        <a href="/2023/07/16/DIY/DIY%E9%98%B4%E6%9E%81%E5%B0%84%E7%BA%BF%E7%AE%A1%E6%98%BE%E7%A4%BA%E5%99%A8/" title="DIY阴极射线管显示器"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">DIY阴极射线管显示器</span>
         </a>
       
     
       
       
-        <a href="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/" class="list-group-item list-group-item-action">
+        <a href="/2022/12/25/DIY/DIY%E5%8A%9B%E5%9B%9E%E9%A6%88%E6%96%B9%E5%90%91%E7%9B%98/" title="DIY力回馈方向盘"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">DIY力回馈方向盘</span>
         </a>
       
@@ -534,20 +655,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Linux"
         id="heading-edc9f0a5a5d57797bf68e37364743831" role="tab" data-toggle="collapse" href="#collapse-edc9f0a5a5d57797bf68e37364743831"
         aria-expanded="false"
       >
         Linux
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Linux/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-edc9f0a5a5d57797bf68e37364743831" role="tabpanel" aria-labelledby="heading-edc9f0a5a5d57797bf68e37364743831">
+      
+        <a href="/categories/Linux/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>2</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-edc9f0a5a5d57797bf68e37364743831"
+           role="tabpanel" aria-labelledby="heading-edc9f0a5a5d57797bf68e37364743831">
         
         
           
@@ -556,14 +682,18 @@
     
       
       
-        <a href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/11/Linux/Linux%E5%B7%A5%E5%85%B7%E8%BF%9B%E9%98%B6/" title="Linux工具进阶"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Linux工具进阶</span>
         </a>
       
     
       
       
-        <a href="/2021/12/10/Linux/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/10/Linux/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" title="Linux基础命令"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Linux基础命令</span>
         </a>
       
@@ -576,20 +706,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="电路"
         id="heading-66f08e8fcaf555af23e0ccc6b34e7081" role="tab" data-toggle="collapse" href="#collapse-66f08e8fcaf555af23e0ccc6b34e7081"
         aria-expanded="false"
       >
         电路
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E7%94%B5%E8%B7%AF/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-66f08e8fcaf555af23e0ccc6b34e7081" role="tabpanel" aria-labelledby="heading-66f08e8fcaf555af23e0ccc6b34e7081">
+      
+        <a href="/categories/%E7%94%B5%E8%B7%AF/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>2</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-66f08e8fcaf555af23e0ccc6b34e7081"
+           role="tabpanel" aria-labelledby="heading-66f08e8fcaf555af23e0ccc6b34e7081">
         
         
           
@@ -598,14 +733,18 @@
     
       
       
-        <a href="/2022/06/03/%E7%94%B5%E8%B7%AF/%E5%B8%B8%E8%A7%81%E9%80%9A%E8%AE%AF%E7%94%B5%E8%B7%AF/" class="list-group-item list-group-item-action">
+        <a href="/2022/06/03/%E7%94%B5%E8%B7%AF/%E5%B8%B8%E8%A7%81%E9%80%9A%E8%AE%AF%E7%94%B5%E8%B7%AF/" title="常见通讯电路"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">常见通讯电路</span>
         </a>
       
     
       
       
-        <a href="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/" class="list-group-item list-group-item-action">
+        <a href="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/" title="认识相关电子元器件"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">认识相关电子元器件</span>
         </a>
       
@@ -618,55 +757,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-6a2355f793bd1b0e3ed8249be744d712" role="tab" data-toggle="collapse" href="#collapse-6a2355f793bd1b0e3ed8249be744d712"
-        aria-expanded="false"
-      >
-        OpenMediaVault
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/OpenMediaVault/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-6a2355f793bd1b0e3ed8249be744d712" role="tabpanel" aria-labelledby="heading-6a2355f793bd1b0e3ed8249be744d712">
-        
-        
-          
-  <div class="category-post-list">
     
-    
-      
-      
-        <a href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" class="list-group-item list-group-item-action">
-          <span class="category-post">OpenMediaVault安装与配置</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Arduino"
         id="heading-ee5bced252ab77ec8d633c1afda7c5da" role="tab" data-toggle="collapse" href="#collapse-ee5bced252ab77ec8d633c1afda7c5da"
         aria-expanded="false"
       >
         Arduino
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Arduino/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-ee5bced252ab77ec8d633c1afda7c5da" role="tabpanel" aria-labelledby="heading-ee5bced252ab77ec8d633c1afda7c5da">
+      
+        <a href="/categories/Arduino/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-ee5bced252ab77ec8d633c1afda7c5da"
+           role="tabpanel" aria-labelledby="heading-ee5bced252ab77ec8d633c1afda7c5da">
         
         
           
@@ -675,7 +784,9 @@
     
       
       
-        <a href="/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/" class="list-group-item list-group-item-action">
+        <a href="/2023/01/13/Arduino/ATmega32U4%E4%B8%8B%E8%BD%BDBootloader/" title="ATmega32U4下载Bootloader"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">ATmega32U4下载Bootloader</span>
         </a>
       
@@ -688,20 +799,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Hello World"
         id="heading-b10a8db164e0754105b7a99be72e3fe5" role="tab" data-toggle="collapse" href="#collapse-b10a8db164e0754105b7a99be72e3fe5"
         aria-expanded="false"
       >
         Hello World
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Hello-World/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-b10a8db164e0754105b7a99be72e3fe5" role="tabpanel" aria-labelledby="heading-b10a8db164e0754105b7a99be72e3fe5">
+      
+        <a href="/categories/Hello-World/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-b10a8db164e0754105b7a99be72e3fe5"
+           role="tabpanel" aria-labelledby="heading-b10a8db164e0754105b7a99be72e3fe5">
         
         
           
@@ -710,7 +826,9 @@
     
       
       
-        <a href="/2021/11/30/Hello%20World/hello-world/" class="list-group-item list-group-item-action">
+        <a href="/2021/11/30/Hello%20World/hello-world/" title="Hello World"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Hello World</span>
         </a>
       
@@ -723,20 +841,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Markdown"
         id="heading-2182a74bab7188d959e795d9301e87ff" role="tab" data-toggle="collapse" href="#collapse-2182a74bab7188d959e795d9301e87ff"
         aria-expanded="false"
       >
         Markdown
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Markdown/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-2182a74bab7188d959e795d9301e87ff" role="tabpanel" aria-labelledby="heading-2182a74bab7188d959e795d9301e87ff">
+      
+        <a href="/categories/Markdown/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-2182a74bab7188d959e795d9301e87ff"
+           role="tabpanel" aria-labelledby="heading-2182a74bab7188d959e795d9301e87ff">
         
         
           
@@ -745,7 +868,9 @@
     
       
       
-        <a href="/2021/12/02/Markdown/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/02/Markdown/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="Markdown基本语法"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">Markdown基本语法</span>
         </a>
       
@@ -758,20 +883,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-d14867a9f678d45ba279b432096dbfc1" role="tab" data-toggle="collapse" href="#collapse-d14867a9f678d45ba279b432096dbfc1"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="OpenMediaVault"
+        id="heading-6a2355f793bd1b0e3ed8249be744d712" role="tab" data-toggle="collapse" href="#collapse-6a2355f793bd1b0e3ed8249be744d712"
         aria-expanded="false"
       >
-        OpenWRT
+        OpenMediaVault
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/OpenWRT/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-d14867a9f678d45ba279b432096dbfc1" role="tabpanel" aria-labelledby="heading-d14867a9f678d45ba279b432096dbfc1">
+      
+        <a href="/categories/OpenMediaVault/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-6a2355f793bd1b0e3ed8249be744d712"
+           role="tabpanel" aria-labelledby="heading-6a2355f793bd1b0e3ed8249be744d712">
         
         
           
@@ -780,7 +910,93 @@
     
       
       
-        <a href="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/" class="list-group-item list-group-item-action">
+        <a href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" title="OpenMediaVault安装与配置"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">OpenMediaVault安装与配置</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="Windows"
+        id="heading-aea23489ce3aa9b6406ebb28e0cda430" role="tab" data-toggle="collapse" href="#collapse-aea23489ce3aa9b6406ebb28e0cda430"
+        aria-expanded="false"
+      >
+        Windows
+        <span class="list-group-count"></span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+        <a href="/categories/Windows/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-aea23489ce3aa9b6406ebb28e0cda430"
+           role="tabpanel" aria-labelledby="heading-aea23489ce3aa9b6406ebb28e0cda430">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/23/Windows%E5%B7%A5%E5%85%B7/Win10%E5%AE%89%E8%A3%85Windows%20Subsystem%20for%20Linux/" title="Win10安装Windows Subsystem for Linux"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Win10安装Windows Subsystem for Linux</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="OpenWRT"
+        id="heading-d14867a9f678d45ba279b432096dbfc1" role="tab" data-toggle="collapse" href="#collapse-d14867a9f678d45ba279b432096dbfc1"
+        aria-expanded="false"
+      >
+        OpenWRT
+        <span class="list-group-count"></span>
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      
+        <a href="/categories/OpenWRT/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-d14867a9f678d45ba279b432096dbfc1"
+           role="tabpanel" aria-labelledby="heading-d14867a9f678d45ba279b432096dbfc1">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/" title="小米路由器R3G编译OpenWRT固件"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">小米路由器R3G编译OpenWRT固件</span>
         </a>
       
@@ -793,20 +1009,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="ESP32"
         id="heading-789c376b43dbba68180fd04da73286da" role="tab" data-toggle="collapse" href="#collapse-789c376b43dbba68180fd04da73286da"
         aria-expanded="false"
       >
         ESP32
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/ESP32/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-789c376b43dbba68180fd04da73286da" role="tabpanel" aria-labelledby="heading-789c376b43dbba68180fd04da73286da">
+      
+        <a href="/categories/ESP32/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-789c376b43dbba68180fd04da73286da"
+           role="tabpanel" aria-labelledby="heading-789c376b43dbba68180fd04da73286da">
         
         
           
@@ -818,23 +1039,27 @@
 
           
   
-  
     
     
-    <div class="category-sub row">
-      <a
-        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="ESP8266"
         id="heading-7d3a5de0adc1398939601cd6c686612a" role="tab" data-toggle="collapse" href="#collapse-7d3a5de0adc1398939601cd6c686612a"
         aria-expanded="false"
       >
         ESP8266
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/ESP32/ESP8266/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-7d3a5de0adc1398939601cd6c686612a" role="tabpanel" aria-labelledby="heading-7d3a5de0adc1398939601cd6c686612a">
+      
+        <a href="/categories/ESP32/ESP8266/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-7d3a5de0adc1398939601cd6c686612a"
+           role="tabpanel" aria-labelledby="heading-7d3a5de0adc1398939601cd6c686612a">
         
         
           
@@ -846,23 +1071,27 @@
 
           
   
-  
     
     
-    <div class="category-sub row">
-      <a
-        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+    
+    <div class="category-sub row nomargin-x">
+      <a class="category-subitem collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="WIFI模块"
         id="heading-8f61e7550887650facc5be5ea2a27143" role="tab" data-toggle="collapse" href="#collapse-8f61e7550887650facc5be5ea2a27143"
         aria-expanded="false"
       >
         WIFI模块
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/ESP32/ESP8266/WIFI%E6%A8%A1%E5%9D%97/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-8f61e7550887650facc5be5ea2a27143" role="tabpanel" aria-labelledby="heading-8f61e7550887650facc5be5ea2a27143">
+      
+        <a href="/categories/ESP32/ESP8266/WIFI%E6%A8%A1%E5%9D%97/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-8f61e7550887650facc5be5ea2a27143"
+           role="tabpanel" aria-labelledby="heading-8f61e7550887650facc5be5ea2a27143">
         
         
           
@@ -871,7 +1100,9 @@
     
       
       
-        <a href="/2022/02/21/%E5%B5%8C%E5%85%A5%E5%BC%8F/AT%E6%8C%87%E4%BB%A4/" class="list-group-item list-group-item-action">
+        <a href="/2022/02/21/%E5%B5%8C%E5%85%A5%E5%BC%8F/AT%E6%8C%87%E4%BB%A4/" title="AT指令"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">AT指令</span>
         </a>
       
@@ -892,55 +1123,25 @@
   
     
     
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-aea23489ce3aa9b6406ebb28e0cda430" role="tab" data-toggle="collapse" href="#collapse-aea23489ce3aa9b6406ebb28e0cda430"
-        aria-expanded="false"
-      >
-        Windows
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/Windows/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-aea23489ce3aa9b6406ebb28e0cda430" role="tabpanel" aria-labelledby="heading-aea23489ce3aa9b6406ebb28e0cda430">
-        
-        
-          
-  <div class="category-post-list">
     
-    
-      
-      
-        <a href="/2022/01/23/Windows%E5%B7%A5%E5%85%B7/Win10%E5%AE%89%E8%A3%85Windows%20Subsystem%20for%20Linux/" class="list-group-item list-group-item-action">
-          <span class="category-post">Win10安装Windows Subsystem for Linux</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+    <div class="category row nomargin-x">
+      <a class="category-item collapsed
+          list-group-item category-item-action col-10 col-md-11 col-xm-11" title="C51"
         id="heading-27acaaa5d35436b77a732af051eed3e5" role="tab" data-toggle="collapse" href="#collapse-27acaaa5d35436b77a732af051eed3e5"
         aria-expanded="false"
       >
         C51
+        <span class="list-group-count"></span>
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/C51/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse collapse" id="collapse-27acaaa5d35436b77a732af051eed3e5" role="tabpanel" aria-labelledby="heading-27acaaa5d35436b77a732af051eed3e5">
+      
+        <a href="/categories/C51/" class="category-count col-2 col-md-1 col-xm-1">
+          <i class="iconfont icon-articles"></i>
+          <span>1</span>
+        </a>
+      
+      <div class="category-collapse collapse " id="collapse-27acaaa5d35436b77a732af051eed3e5"
+           role="tabpanel" aria-labelledby="heading-27acaaa5d35436b77a732af051eed3e5">
         
         
           
@@ -949,7 +1150,9 @@
     
       
       
-        <a href="/2022/04/17/%E5%B5%8C%E5%85%A5%E5%BC%8F/C51/DIY%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/" class="list-group-item list-group-item-action">
+        <a href="/2022/04/17/%E5%B5%8C%E5%85%A5%E5%BC%8F/C51/DIY%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/" title="DIY加热焊台"
+           class="list-group-item list-group-item-action
+           ">
           <span class="category-post">DIY加热焊台</span>
         </a>
       
@@ -961,6 +1164,7 @@
     </div>
   
 </div>
+
 
               </div>
             </div>
@@ -989,56 +1193,59 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
 
+  
 
-  <!-- SCRIPTS -->
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
@@ -1057,10 +1264,22 @@
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -1070,69 +1289,24 @@
 
 
 
-  
 
-
-
-
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-        typing(title);
-      
-    })(window, document);
-  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
 </html>

@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" href="/img/favicon.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -30,15 +33,21 @@
 <meta name="twitter:card" content="summary_large_image">
   
   
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
   <title>dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
@@ -47,7 +56,13 @@
 
 <link  rel="stylesheet" href="/css/main.css" />
 
-<!-- 自定义样式保持在最底部 -->
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
 
   
 <link rel="stylesheet" href="/css/macpanel.css">
@@ -56,16 +71,55 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.1"></head>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
-  <header style="height: 100vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
       <strong>dongxunz&#39;s blogs💬</strong>
@@ -86,9 +140,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -98,9 +152,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -110,9 +164,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -122,9 +176,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -137,48 +191,48 @@
               <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="iconfont icon-cliplist"></i>
-                分享
+                <span>分享</span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/circuitry/">
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
                     <i class="iconfont icon-apple-fill"></i>
-                    电路
+                    <span>电路</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/construction/">
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
                     <i class="iconfont icon-codepen-fill"></i>
-                    结构
+                    <span>结构</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/music/">
+                  <a class="dropdown-item" href="/share/music/" target="_self">
                     <i class="iconfont icon-music"></i>
-                    音乐
+                    <span>音乐</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/game/">
+                  <a class="dropdown-item" href="/share/game/" target="_self">
                     <i class="iconfont icon-steam"></i>
-                    游戏
+                    <span>游戏</span>
                   </a>
                 
                   
                   
                   
-                  <a class="dropdown-item" href="/share/reading-corner/">
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
                     <i class="iconfont icon-book"></i>
-                    阅读角
+                    <span>阅读角</span>
                   </a>
                 
               </div>
@@ -190,9 +244,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -202,9 +256,9 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                友链
+                <span>友链</span>
               </a>
             </li>
           
@@ -212,14 +266,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
+          
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -227,34 +283,40 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/clover.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="dongxunz&#39;s blogs">
-              
-            </span>
+  
 
-            
-          </div>
-
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
           
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
+            <span id="subtitle" data-typed-text="dongxunz&#39;s blogs"></span>
           
         </div>
+
+        
       </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
     </div>
+  </div>
+</div>
+
+</div>
+
   </header>
 
   <main>
     
       <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
+        <div id="board"
+          style="margin-top: 0">
           
           <div class="container">
             <div class="row">
@@ -266,19 +328,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/06/03/%E7%94%B5%E8%B7%AF/%E5%B8%B8%E8%A7%81%E9%80%9A%E8%AE%AF%E7%94%B5%E8%B7%AF/" target="_self">
           常见通讯电路
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/06/03/%E7%94%B5%E8%B7%AF/%E5%B8%B8%E8%A7%81%E9%80%9A%E8%AE%AF%E7%94%B5%E8%B7%AF/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/06/03/%E7%94%B5%E8%B7%AF/%E5%B8%B8%E8%A7%81%E9%80%9A%E8%AE%AF%E7%94%B5%E8%B7%AF/" target="_self">
+        <div>
           网口通讯串口通讯SPI通讯232通讯485通讯CAN总线通讯
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -290,18 +352,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E7%94%B5%E8%B7%AF/">电路</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%94%B5%E8%B7%AF/" class="category-chain-item">电路</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%80%9A%E8%AE%AF%E7%94%B5%E8%B7%AF/">通讯电路</a>
+              <a href="/tags/%E9%80%9A%E8%AE%AF%E7%94%B5%E8%B7%AF/">#通讯电路</a>
             
           </div>
         
@@ -313,19 +389,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/" target="_self">
           认识相关电子元器件
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/22/%E7%94%B5%E8%B7%AF/%E8%AE%A4%E8%AF%86%E7%9B%B8%E5%85%B3%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/" target="_self">
+        <div>
           集成电路（Integrated Circuit）都是由这些基础电子元器件组合而成，所以对于这些器件的使用，需要了解其特性，才能更方便灵活的使用他们；由于本文章收集的内容大多来自网络，所以可能存在错误或者遗漏，还请大家纠正补充，非常感谢。 电阻(Resistor)             在电磁学里，电阻是一个物体对于电流通过的阻碍能力，单位为：Ω（欧姆）。
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -337,18 +413,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E7%94%B5%E8%B7%AF/">电路</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%94%B5%E8%B7%AF/" class="category-chain-item">电路</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/">电子元器件</a>
+              <a href="/tags/%E7%94%B5%E5%AD%90%E5%85%83%E5%99%A8%E4%BB%B6/">#电子元器件</a>
             
           </div>
         
@@ -360,19 +450,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/04/17/%E5%B5%8C%E5%85%A5%E5%BC%8F/C51/DIY%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/" target="_self">
           DIY加热焊台
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/04/17/%E5%B5%8C%E5%85%A5%E5%BC%8F/C51/DIY%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/04/17/%E5%B5%8C%E5%85%A5%E5%BC%8F/C51/DIY%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/" target="_self">
+        <div>
           硬件主控1：STC12C5A60S2工作电压：4.0~5.5VFlash：60KEEPROM：1K封装：LQFP44价格：￥5.5 主控2：STC89C52 由于STC89C52 Flash只有8K，所以程序需要进行修改和精简后才能使用。  工作电压：3.8~5.5VFlash：8KEEPROM：5K封装：LQFP44价格：￥4.2 TIPS:主控1和主控2任选其一即可。  热电偶转换器：K型热点
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -384,20 +474,34 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/C51/">C51</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/C51/" class="category-chain-item">C51</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/DIY/">DIY</a>
+              <a href="/tags/DIY/">#DIY</a>
             
-              <a href="/tags/%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/">加热焊台</a>
+              <a href="/tags/%E5%8A%A0%E7%83%AD%E7%84%8A%E5%8F%B0/">#加热焊台</a>
             
           </div>
         
@@ -409,19 +513,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/" target="_self">
           组装一台Prusa i3 MK3S+ &amp; Bear Frame Upgrade 2.1
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/03/08/3D%E6%89%93%E5%8D%B0/%E7%BB%84%E8%A3%85%E4%B8%80%E5%8F%B0Prusa%20i3%20MK3S+/" target="_self">
+        <div>
           框架部分框架没有使用原版 Prusa i3 MK3S+ 的固定支架，而是使用 Bear Frame Upgrade 型材支架，后者比前者更稳定，而且后续还支持多种扩展，但组装难度会有所提升。 型材                            欧标2040V型材                                 尺寸信息
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -433,18 +537,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/3D%E6%89%93%E5%8D%B0/">3D打印</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-chain-item">3D打印</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Prusa-i3/">Prusa i3</a>
+              <a href="/tags/Prusa-i3/">#Prusa i3</a>
             
           </div>
         
@@ -456,19 +574,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/" target="_self">
           Altium Designer快捷操作
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/" target="_self">
-          
-          原理图快速复制原理图中的元件 - Ctrl+R在原理图中，选中需要复制的元件，按 Ctrl+R 可以进入快速复制选中元件。 切换网络捕捉栅格 - G &#x2F; Shift+G在原理图中，切换当前原理图的捕捉栅格大小。   PCB2D &#x2F; 3D显示视图切换按键盘上的 “2&#x2F;@键” 显示2D视图。按键盘上的 “3&#x2F;#键” 显示3D视图，在3D视图中，还可以按 “0&#x2F;)键” 或 “9&#x2F;(键” 在3D视图 下旋
-        </a>
-      </p>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/02/24/Altium%20Designer/Altium%20Designer%20%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/" target="_self">
+        <div>
+          原理图快速复制原理图中的元件 - Ctrl+R在原理图中，选中需要复制的元件，按 Ctrl+R 可以进入快速复制选中元件。 切换网络捕捉栅格 - G &#x2F; Shift+G在原理图中，切换当前原理图的捕捉栅格大小。   PCB2D &#x2F; 3D显示视图切换按键盘上的 “2&#x2F;@键” 显示2D视图。按键盘上的 “3&#x2F;#键” 显示3D视图，在3D视图中，还可以按 “0&#
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -480,18 +598,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Altium-Designer/">Altium Designer</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Altium-Designer/" class="category-chain-item">Altium Designer</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/">快捷操作</a>
+              <a href="/tags/%E5%BF%AB%E6%8D%B7%E6%93%8D%E4%BD%9C/">#快捷操作</a>
             
           </div>
         
@@ -503,19 +635,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20PCB%E8%A7%84%E5%88%99%E8%AF%A6%E8%A7%A3/" target="_self">
           Altium Designer PCB规则详解
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/02/24/Altium%20Designer/Altium%20Designer%20PCB%E8%A7%84%E5%88%99%E8%AF%A6%E8%A7%A3/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/02/24/Altium%20Designer/Altium%20Designer%20PCB%E8%A7%84%E5%88%99%E8%AF%A6%E8%A7%A3/" target="_self">
+        <div>
           铺铜到板框之间的距离（铺铜内缩） 当板框为Keep-Out Layer时，有2种方法控制铺铜到板框的距离：   方法1：  打开AD，点击 设计 -&gt; 规则，在 Design Rules -&gt; Electrical -&gt; Clearance下，点击默认的 Clearance 右键 -&gt; 新规则(Clearance_1)，按如下图进行编辑，即可控制铺铜到板框之间的距离。
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -527,18 +659,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Altium-Designer/">Altium Designer</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Altium-Designer/" class="category-chain-item">Altium Designer</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/PCB%E8%A7%84%E5%88%99/">PCB规则</a>
+              <a href="/tags/PCB%E8%A7%84%E5%88%99/">#PCB规则</a>
             
           </div>
         
@@ -550,19 +696,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/02/21/%E5%B5%8C%E5%85%A5%E5%BC%8F/AT%E6%8C%87%E4%BB%A4/" target="_self">
           AT指令
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/02/21/%E5%B5%8C%E5%85%A5%E5%BC%8F/AT%E6%8C%87%E4%BB%A4/" target="_self">
-          
-          参考链接 乐鑫ESP-AT  AT指令AT指令可以通过串口下发相应的指令来控制模块。 模块与串口连接方式12345串口    模块3.3V -&gt; 3.3VRX   -&gt; TXTX   -&gt; RXGND  -&gt; GND  常用AT指令进入AT指令模式 - ATAT 1OK #返回值为“**OK**”即表示可以进行AT指令操作。  查询&#x2F;设置 Wi-Fi 模式 - AT+CW
-        </a>
-      </p>
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/02/21/%E5%B5%8C%E5%85%A5%E5%BC%8F/AT%E6%8C%87%E4%BB%A4/" target="_self">
+        <div>
+          参考链接 乐鑫ESP-AT  AT指令AT指令可以通过串口下发相应的指令来控制模块。 模块与串口连接方式12345串口    模块3.3V -&gt; 3.3VRX   -&gt; TXTX   -&gt; RXGND  -&gt; GND  常用AT指令进入AT指令模式 - ATAT 1OK #返回值为“**OK**”即表示可以进行AT指令操作。  查询&#x2F;设置 Wi-Fi 模式 -
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -574,22 +720,46 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/ESP32/">ESP32</a>
-            
-              <a href="/categories/ESP32/ESP8266/">ESP8266</a>
-            
-              <a href="/categories/ESP32/ESP8266/WIFI%E6%A8%A1%E5%9D%97/">WIFI模块</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/ESP32/" class="category-chain-item">ESP32</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/ESP32/ESP8266/" class="category-chain-item">ESP8266</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/ESP32/ESP8266/WIFI%E6%A8%A1%E5%9D%97/" class="category-chain-item">WIFI模块</a>
+  
+  
+
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/AT%E6%8C%87%E4%BB%A4/">AT指令</a>
+              <a href="/tags/AT%E6%8C%87%E4%BB%A4/">#AT指令</a>
             
           </div>
         
@@ -601,19 +771,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/01/23/Windows%E5%B7%A5%E5%85%B7/Win10%E5%AE%89%E8%A3%85Windows%20Subsystem%20for%20Linux/" target="_self">
           Win10安装Windows Subsystem for Linux
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/01/23/Windows%E5%B7%A5%E5%85%B7/Win10%E5%AE%89%E8%A3%85Windows%20Subsystem%20for%20Linux/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/01/23/Windows%E5%B7%A5%E5%85%B7/Win10%E5%AE%89%E8%A3%85Windows%20Subsystem%20for%20Linux/" target="_self">
+        <div>
           参考链接： What is the Windows Subsystem for Linux? 安装 WSL 设置 WSL 开发环境  安装WSL 1启用相应功能按Win+Q，输入启用或关闭WIndows功能，勾选下面的选项，点击确定，等待安装完成之后重启电脑  重启电脑后，打开CMD，输入bash即可开始安装WSL 1。 安装WSL 2使用管理员运行PowerShell或者Windows命令提示
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -625,20 +795,34 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Windows/">Windows</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Windows/" class="category-chain-item">Windows</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/WSL/">WSL</a>
+              <a href="/tags/WSL/">#WSL</a>
             
-              <a href="/tags/Linux/">Linux</a>
+              <a href="/tags/Linux/">#Linux</a>
             
           </div>
         
@@ -650,19 +834,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/01/23/Hexo/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" target="_self">
           Hexo主题配置
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/01/23/Hexo/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/01/23/Hexo/Hexo%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" target="_self">
+        <div>
           Hexo-Theme-Fluid主题配置代码块添加MAC风格 借鉴来源：建议添加mac风格的代码块显示 #538    在博客目录...\Blog\node_modules\hexo-theme-fluid\source\css\下新建一个文件：macpanel.styl，输入以下内容：  12345678910111213141516.highlight    background: #2125
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -674,18 +858,32 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Hexo/">Hexo</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E4%B8%BB%E9%A2%98/">主题</a>
+              <a href="/tags/%E4%B8%BB%E9%A2%98/">#主题</a>
             
           </div>
         
@@ -697,19 +895,19 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/" target="_self">
           小米路由器R3G编译OpenWRT固件
         </a>
-      </h1>
+      </h2>
 
-      <p class="index-excerpt">
-        <a href="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/" target="_self">
-          
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/01/07/OpenWRT/%E5%B0%8F%E7%B1%B3%E8%B7%AF%E7%94%B1%E5%99%A8R3G%E7%BC%96%E8%AF%91OpenWRT%E5%9B%BA%E4%BB%B6/" target="_self">
+        <div>
           OpenWrt是适合于嵌入式设备的一个Linux发行版。 相对原厂固件而言，OpenWrt不是一个单一、静态的固件，而是提供了一个可添加软件包的可写的文件系统。这使用户可以自由的选择应用程序和配置，而不必受设备提供商的限制，并且可以使用一些适合某方面应用的软件包来定制你的设备。对于开发者来说，OpenWrt是一个框架，开发者不必麻烦地构建整个固件就能得到想要的应用程序；对于用户来说，这意味着完全定
-        </a>
-      </p>
+        </div>
+      </a>
 
       <div class="index-btm post-metas">
         
@@ -721,20 +919,34 @@
           </div>
         
         
-          <div class="post-meta mr-3">
+          <div class="post-meta mr-3 d-flex align-items-center">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/OpenWRT/">OpenWRT</a>
-            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OpenWRT/" class="category-chain-item">OpenWRT</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
           </div>
         
         
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">路由器</a>
+              <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/">#路由器</a>
             
-              <a href="/tags/%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6/">编译固件</a>
+              <a href="/tags/%E7%BC%96%E8%AF%91%E5%9B%BA%E4%BB%B6/">#编译固件</a>
             
           </div>
         
@@ -779,56 +991,59 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
 </div>
+
     
 
     
   </main>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
-  </div>
+  <footer>
+    <div class="footer-inner">
   
-  <div class="statistics">
-    
-    
-
-    
-      
-        <!-- 不蒜子统计PV -->
-        <span id="busuanzi_container_site_pv" style="display: none">
-            总访问量 
-            <span id="busuanzi_value_site_pv"></span>
-             次
-          </span>
-      
-      
-        <!-- 不蒜子统计UV -->
-        <span id="busuanzi_container_site_uv" style="display: none">
-            总访客数 
-            <span id="busuanzi_value_site_uv"></span>
-             人
-          </span>
-      
-    
-  </div>
-
-
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
   
 
   
-</footer>
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
 
+  
 
-  <!-- SCRIPTS -->
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
   
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
@@ -847,10 +1062,52 @@
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
-<!-- Plugins -->
 
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        jQuery.ajax({
+          type: 'GET',
+          url: 'https://v1.hitokoto.cn/',
+          headers: {},
+          dataType: 'json',
+          success: function(result) {
+            var apiText;
+            if (result) {
+              var keys = 'hitokoto'.split(',');
+              if (result instanceof Array) {
+                result = result[0];
+              }
+              for (const k of keys) {
+                var value = result[k];
+                if (typeof value === 'string') {
+                  apiText = value;
+                  break;
+                } else if (value instanceof Object) {
+                  result = value;
+                }
+              }
+            }
+            apiText ? typing(apiText) : typing(text);
+          },
+          error: function(xhr, status, error) {
+            if (error) {
+              console.error('Failed to request https://v1.hitokoto.cn/:', error);
+            }
+            typing(text);
+          }
+        })
+      
+    })(window, document);
+  </script>
 
-  <script  src="/js/local-search.js" ></script>
 
 
 
@@ -860,96 +1117,24 @@
 
 
 
-  
 
-
-
-
+  <script  src="/js/local-search.js" ></script>
 
   <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
 
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      jQuery.ajax({
-        type: 'GET',
-        url: 'https://v1.hitokoto.cn/',
-        headers: {},
-        dataType: 'json',
-        success: function(result) {
-          var text;
-          if (result) {
-            var keys = 'hitokoto'.split(',');
-            if (result instanceof Array) {
-              result = result[0];
-            }
-            for (const k of keys) {
-              var value = result[k];
-              if (typeof value === 'string') {
-                text = value;
-                break;
-              } else if (value instanceof Object) {
-                result = value;
-              }
-            }
-          }
-          text ? typing(text) : typing(title);
-        },
-        error: function() {
-          typing(title);
-        }
-      })
-      
-    })(window, document);
-  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-  
-    <!-- Baidu Analytics -->
-    <script defer>
-      var _hmt = _hmt || [];
-      (function () {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
 <script  src="/js/boot.js" ></script>
 
 
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
 </html>
