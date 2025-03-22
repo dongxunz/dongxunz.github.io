@@ -21,17 +21,17 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言本文章将指导给BigTreeTech出品的Manta-M8P V2.0进行烧录Klipper固件。[1]  现在基本上不需要先烧录Katapult(CanBoot)，所以本文省略了此步骤。  USB通讯 配置Klipper 编译并烧录固件 DFU模式（首推）  先按住BOOT按钮，接着再按一下RESET按钮后同时松开，上位机执行以下命令：  1lsusb   其中会有一条类似的信息，记住ID后">
+    <meta name="description" content="前言本文章将指导给BigTreeTech出品的Manta-M8P V2.0进行烧录Klipper固件。[1] USB通讯 配置Klipper  编译并烧录固件  DFU模式（首推）  先按住BOOT按钮，接着再按一下RESET按钮后同时松开，上位机执行以下命令：  1lsusb   其中会有一条类似的信息，记住ID后面的值：0483:df11（请根据实际情况来）：  Bus 001 Device">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BTT Manta M8P V2.0主板烧录Klipper固件">
 <meta property="og:url" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言本文章将指导给BigTreeTech出品的Manta-M8P V2.0进行烧录Klipper固件。[1]  现在基本上不需要先烧录Katapult(CanBoot)，所以本文省略了此步骤。  USB通讯 配置Klipper 编译并烧录固件 DFU模式（首推）  先按住BOOT按钮，接着再按一下RESET按钮后同时松开，上位机执行以下命令：  1lsusb   其中会有一条类似的信息，记住ID后">
+<meta property="og:description" content="前言本文章将指导给BigTreeTech出品的Manta-M8P V2.0进行烧录Klipper固件。[1] USB通讯 配置Klipper  编译并烧录固件  DFU模式（首推）  先按住BOOT按钮，接着再按一下RESET按钮后同时松开，上位机执行以下命令：  1lsusb   其中会有一条类似的信息，记住ID后面的值：0483:df11（请根据实际情况来）：  Bus 001 Device">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/manta_m8p_v2.0_klipper_usb_config.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/manta_m8p_v2.0_klipper_can_config.png">
 <meta property="article:published_time" content="2025-03-13T07:02:31.000Z">
-<meta property="article:modified_time" content="2025-03-21T13:28:44.937Z">
+<meta property="article:modified_time" content="2025-03-22T02:35:31.450Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="Klipper固件">
 <meta name="twitter:card" content="summary_large_image">
@@ -327,7 +327,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          378 字
+          392 字
         
       </span>
     
@@ -391,7 +391,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年3月21日 晚上
+                    本文最后更新于：2025年3月22日 上午
                   
                 
               </p>
@@ -400,30 +400,30 @@
               <div class="markdown-body">
                 
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文章将指导给BigTreeTech出品的Manta-M8P V2.0进行烧录Klipper固件。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Manta M8P & BTT EBB SB22XX setup](https://forum.vorondesign.com/threads/manta-m8p-btt-ebb-sb22xx-setup.1697/)">[1]</span></a></sup></p>
-<blockquote>
-<p>现在基本上不需要先烧录Katapult(CanBoot)，所以本文省略了此步骤。</p>
-</blockquote>
 <h2 id="USB通讯"><a href="#USB通讯" class="headerlink" title="USB通讯"></a>USB通讯</h2><ol>
-<li>配置Klipper<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/manta_m8p_v2.0_klipper_usb_config.png" srcset="/img/loading.gif" lazyload alt="Manta-M8P V2.0 使用USB通讯如图进行配置"></li>
-<li>编译并烧录固件<ul>
-<li>DFU模式（首推）<br>  先按住BOOT按钮，接着再按一下RESET按钮后同时松开，上位机执行以下命令：  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">lsusb</span><br></code></pre></td></tr></table></figure>
-  其中会有一条类似的信息，记住ID后面的值：<font color="#FF0000">0483:df11（请根据实际情况来）</font>：<br>  <code>Bus 001 Device 011: ID 0483:df11 STMicroelectronics STM Device in DFU Mode</code><br>  输入以下命令进行烧录：  <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> dfu-util -a <span class="hljs-number">0</span> -d <span class="hljs-number">0483</span>:df11 --dfuse-address <span class="hljs-number">0</span>x08002000 -D ~/klipper/out/klipper.bin<br></code></pre></td></tr></table></figure>
+<li><p>配置Klipper<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/manta_m8p_v2.0_klipper_usb_config.png" srcset="/img/loading.gif" lazyload alt="Manta-M8P V2.0 使用USB通讯如图进行配置"></p>
+</li>
+<li><p>编译并烧录固件</p>
+<ul>
+<li>DFU模式（首推）<br>  先按住BOOT按钮，接着再按一下RESET按钮后同时松开，上位机执行以下命令：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">lsusb<br></code></pre></td></tr></table></figure>
+  其中会有一条类似的信息，记住ID后面的值：<font color="#FF0000">0483:df11（请根据实际情况来）</font>：<br>  <code>Bus 001 Device 011: ID 0483:df11 STMicroelectronics STM Device in DFU Mode</code><br>  输入以下命令进行烧录：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> dfu-util -a 0 -d 0483:df11 --dfuse-address 0x08002000 -D ~/klipper/out/klipper.bin<br></code></pre></td></tr></table></figure>
   <font color="#FF0000">-d 后面填入刚刚ID后面的值</font></li>
 <li>SD卡<br>  将编译好的<code>klipper.bin</code>文件复制到TF中，并重命名为<code>firmware.bin</code>，插入主板 MCU-CARD卡槽中，上电后等待烧录完成。</li>
 </ul>
 </li>
 </ol>
-<h2 id="CAN桥接通讯"><a href="#CAN桥接通讯" class="headerlink" title="CAN桥接通讯"></a>CAN桥接通讯</h2><ol>
-<li>配置Klipper</li>
-</ol>
-<p><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/manta_m8p_v2.0_klipper_can_config.png" srcset="/img/loading.gif" lazyload alt="Manta-M8P V2.0 使用CAN桥接如图进行配置"></p>
-<ol start="2">
+<h2 id="CAN桥接通讯"><a href="#CAN桥接通讯" class="headerlink" title="CAN桥接通讯"></a>CAN桥接通讯</h2><blockquote>
+<p>现在基本上不需要先烧录Katapult(CanBoot)，所以本文省略了此步骤。</p>
+</blockquote>
+<ol>
+<li><p>配置Klipper<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20Manta%20M8P%20V2.0%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/manta_m8p_v2.0_klipper_can_config.png" srcset="/img/loading.gif" lazyload alt="Manta-M8P V2.0 使用CAN桥接如图进行配置"></p>
+</li>
 <li><p>编译并烧录固件<br>参照<strong>USB通讯</strong>里的烧录方法即可。</p>
 </li>
 <li><p>创建can0网络<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[CANBUS](https://www.klipper3d.org/CANBUS.html)">[2]</span></a></sup><br> 输入以下命令：</p>
- <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">sudo nano <span class="hljs-regexp">/etc/</span>network<span class="hljs-regexp">/interfaces.d/</span>can0<br></code></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/network/interfaces.d/can0<br></code></pre></td></tr></table></figure>
 <p> 复制以下信息粘贴：</p>
- <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">allow</span>-hotplug can0<br><span class="hljs-attribute">iface</span> can0 can static<br>    <span class="hljs-attribute">bitrate</span> <span class="hljs-number">1000000</span><br>    <span class="hljs-attribute">up</span> ifconfig $IFACE txqueuelen <span class="hljs-number">128</span><br></code></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">allow-hotplug can0<br>iface can0 can static<br>    bitrate 1000000<br>    up ifconfig <span class="hljs-variable">$IFACE</span> txqueuelen 128<br></code></pre></td></tr></table></figure>
 <p> 按<code>Ctrl+O</code>保存，按<code>Ctrl+X</code>退出</p>
 <ul>
 <li><strong>bitrate</strong>：CAN bus通讯速率；请和Klipper固件编译时保持一致。</li>
@@ -436,11 +436,11 @@
 <li><p>查看can0网络</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> ifconfig<br></code></pre></td></tr></table></figure>
 <ul>
-<li><font color="#FF0000">注意：建立CAN0网络需要上位机至少连接一个已经成功刷入CAN固件的下位机才会有显示，否则是无法建立网络的。</font></li>
+<li><font color="#FF0000">注意：建立can0网络需要上位机至少连接一个已经成功刷入CAN固件的下位机，并且没有连接其他的USB固件下位机时才会有显示，否则无法建立网络。</font></li>
 </ul>
 </li>
 <li><p>查询canbus_uuid</p>
- <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">~<span class="hljs-regexp">/klippy-env/</span>bin<span class="hljs-regexp">/python ~/</span>klipper<span class="hljs-regexp">/scripts/</span>canbus_query.py can0<br></code></pre></td></tr></table></figure></li>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">~/klippy-env/bin/python ~/klipper/scripts/canbus_query.py can0<br></code></pre></td></tr></table></figure></li>
 </ol>
 <h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://forum.vorondesign.com/threads/manta-m8p-btt-ebb-sb22xx-setup.1697/">Manta M8P &amp; BTT EBB SB22XX setup</a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.klipper3d.org/CANBUS.html">CANBUS</a>
