@@ -1,0 +1,916 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言本文章主要针对Smoothieware for OpenPnP固件的配置进行记录，不包含所有参数说明，详细说明请查看官方网站：Smoothieware-Website-V1 Configuration Options。   .center {   width: auto;   display: table;   margin-left: auto;   margin-right: auto;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Smoothieboard固件配置文件详解">
+<meta property="og:url" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/Smoothieboard%E5%9B%BA%E4%BB%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言本文章主要针对Smoothieware for OpenPnP固件的配置进行记录，不包含所有参数说明，详细说明请查看官方网站：Smoothieware-Website-V1 Configuration Options。   .center {   width: auto;   display: table;   margin-left: auto;   margin-right: auto;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-09T07:21:04.000Z">
+<meta property="article:modified_time" content="2025-04-12T14:08:56.318Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="Smoothieboard固件">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Smoothieboard固件配置文件详解 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                <span>分享</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
+                    <i class="iconfont icon-apple-fill"></i>
+                    <span>电路</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    <span>结构</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/" target="_self">
+                    <i class="iconfont icon-music"></i>
+                    <span>音乐</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>游戏</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
+                    <i class="iconfont icon-book"></i>
+                    <span>阅读角</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Smoothieboard固件配置文件详解"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-09 15:21" pubdate>
+          2025年4月9日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          6 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Smoothieboard固件配置文件详解</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2025年4月12日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文章主要针对Smoothieware for OpenPnP固件的配置进行记录，不包含所有参数说明，详细说明请查看官方网站：<a target="_blank" rel="noopener" href="https://smoothieware.github.io/smoothieware-website-v1/configuration-options.html">Smoothieware-Website-V1 Configuration Options</a>。</p>
+<!-- 让表格居中显示的风格 -->
+<style>
+.center
+{
+  width: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<p align="center"><font face="黑体" size="2.">Smoothieboard固件引脚配置</font></p>
+
+<div class="center">
+
+<table>
+<thead>
+<tr>
+<th align="center">修饰符</th>
+<th align="center">符号</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">反转引脚</td>
+<td align="center">!</td>
+<td align="center">英文感叹号</td>
+</tr>
+<tr>
+<td align="center">开漏输出</td>
+<td align="center">o</td>
+<td align="center">小写字母o</td>
+</tr>
+<tr>
+<td align="center">上拉</td>
+<td align="center">^</td>
+<td align="center">Shift+6</td>
+</tr>
+<tr>
+<td align="center">下拉</td>
+<td align="center">v</td>
+<td align="center">小写字母v</td>
+</tr>
+<tr>
+<td align="center">无上拉</td>
+<td align="center">-</td>
+<td align="center">减号</td>
+</tr>
+<tr>
+<td align="center">中断器模式</td>
+<td align="center">@</td>
+<td align="center">Shift+2</td>
+</tr>
+<tr>
+<td align="center">无修饰符</td>
+<td align="center"></td>
+<td align="center">默认上拉</td>
+</tr>
+</tbody></table>
+</div>
+
+<h2 id="运动控制"><a href="#运动控制" class="headerlink" title="运动控制"></a>运动控制</h2><h3 id="机器运动学"><a href="#机器运动学" class="headerlink" title="机器运动学"></a>机器运动学</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">arm_solution</span>                                <span class="hljs-string">corexy</span>            <span class="hljs-comment"># 默认配置参数：cartesian</span><br></code></pre></td></tr></table></figure>
+
+<p>机器运动学，可选参数：cartesian, corexy, linear_delta, rotatable_cartesian, morgan。</p>
+<h2 id="步进电机"><a href="#步进电机" class="headerlink" title="步进电机"></a>步进电机</h2><h3 id="每毫米脉冲数"><a href="#每毫米脉冲数" class="headerlink" title="每毫米脉冲数"></a>每毫米脉冲数</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">alpha_steps_per_mm</span>                           <span class="hljs-number">80</span>               <span class="hljs-comment"># alpha/X轴移动1mm所需脉冲数</span><br><span class="hljs-string">beta_steps_per_mm</span>                            <span class="hljs-number">333.3333</span>         <span class="hljs-comment"># beta/Y轴移动1mm所需脉冲数</span><br><span class="hljs-string">gamma_steps_per_mm</span>                           <span class="hljs-number">1600</span>             <span class="hljs-comment"># gamma/Z轴移动1mm所需脉冲数</span><br></code></pre></td></tr></table></figure>
+
+<p>步进电机移动1mm所需的脉冲数。</p>
+<h3 id="电机引脚配置"><a href="#电机引脚配置" class="headerlink" title="电机引脚配置"></a>电机引脚配置</h3><h4 id="常用轴电机引脚配置"><a href="#常用轴电机引脚配置" class="headerlink" title="常用轴电机引脚配置"></a>常用轴电机引脚配置</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">alpha_step_pin</span>                               <span class="hljs-number">2.2</span>              <span class="hljs-comment"># STEP引脚</span><br><span class="hljs-string">alpha_dir_pin</span>                                <span class="hljs-number">2.6</span>              <span class="hljs-comment"># DIR引脚，可以在引脚号后面加 ! 来改变旋转方向</span><br><span class="hljs-string">alpha_en_pin</span>                                 <span class="hljs-number">2.1</span>              <span class="hljs-comment"># EN引脚</span><br><span class="hljs-string">alpha_current</span>                                <span class="hljs-number">0.8</span>              <span class="hljs-comment"># 电机运行电流，单位：A</span><br><span class="hljs-string">alpha_max_rate</span>                               <span class="hljs-number">12000.0</span>          <span class="hljs-comment"># 最大速率，单位：mm/min</span><br></code></pre></td></tr></table></figure>
+
+<p>只列出alpha&#x2F;X轴电机引脚配置，其他轴可参考。</p>
+<h4 id="A-B旋转轴电机引脚配置"><a href="#A-B旋转轴电机引脚配置" class="headerlink" title="A&#x2F;B旋转轴电机引脚配置"></a>A&#x2F;B旋转轴电机引脚配置</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">delta_steps_per_mm</span>                           <span class="hljs-number">160</span>              <span class="hljs-comment"># Steps per mm for delta ( A ) stepper</span><br><span class="hljs-string">epsilon_steps_per_mm</span>                         <span class="hljs-number">160</span>              <span class="hljs-comment"># Steps per mm for epsilon ( B ) stepper</span><br><br><span class="hljs-comment"># A axis</span><br><span class="hljs-string">delta_step_pin</span>                               <span class="hljs-number">2.13</span>             <span class="hljs-comment"># Pin for delta stepper step signal</span><br><span class="hljs-string">delta_dir_pin</span>                                <span class="hljs-number">0.11</span>             <span class="hljs-comment"># Pin for delta stepper direction, add &#x27;!&#x27; to reverse direction</span><br><span class="hljs-string">delta_en_pin</span>                                 <span class="hljs-number">2.12</span>             <span class="hljs-comment"># Pin for delta enable</span><br><span class="hljs-comment">#delta_current                               0.8              # A stepper motor current</span><br><span class="hljs-string">delta_max_rate</span>                               <span class="hljs-number">12000.0</span>          <span class="hljs-comment"># Maximum rate in mm/min</span><br><br><span class="hljs-comment"># B axis</span><br><span class="hljs-string">epsilon_step_pin</span>                             <span class="hljs-number">1.15</span>             <span class="hljs-comment"># Pin for epsilon stepper step signal</span><br><span class="hljs-string">epsilon_dir_pin</span>                              <span class="hljs-number">1.14</span>             <span class="hljs-comment"># Pin for epsilon stepper direction, add &#x27;!&#x27; to reverse direction</span><br><span class="hljs-string">epsilon_en_pin</span>                               <span class="hljs-number">1.16</span>             <span class="hljs-comment"># Pin for epsilon enable</span><br><span class="hljs-comment">#epsilon_current                             0.8              # B stepper motor current</span><br><span class="hljs-string">epsilon_max_rate</span>                             <span class="hljs-number">12000.0</span>          <span class="hljs-comment"># Maximum rate in mm/min</span><br></code></pre></td></tr></table></figure>
+
+<p>拥有2个吸嘴单元的贴片机就会有2个旋转轴，分别为C1、C2轴，但在Smoothieware固件中，当轴定义超过普通的3轴（X、Y、Z）时，开发者对额外的轴分别定义为A（delta）、B（epsilon）、C（zeta）轴，所以在配置文件中需要手动添加一下A、B轴的电机引脚配置。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[smoothieware-website-v1 6 axis](http://smoothieware.org/6axis#compiling-6-axis)">[1]</span></a></sup></p>
+<h3 id="配置步进电机电流"><a href="#配置步进电机电流" class="headerlink" title="配置步进电机电流"></a>配置步进电机电流</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">currentcontrol_module_enable</span>                 <span class="hljs-literal">true</span>             <span class="hljs-comment"># 通过配置文件控制步进电机电流</span><br></code></pre></td></tr></table></figure>
+
+<p>该配置只针对原版smoothieboard主板上的电机驱动（mcp4451、ad5206）才有效，各种变种版本如果使用的不是该型号的电机驱动，可以更改为<code>false</code>。</p>
+<h2 id="LED"><a href="#LED" class="headerlink" title="LED"></a>LED</h2><h3 id="板载LED"><a href="#板载LED" class="headerlink" title="板载LED"></a>板载LED</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">leds_disable</span>                                 <span class="hljs-literal">true</span>             <span class="hljs-comment"># 加载配置后禁用板载LED</span><br></code></pre></td></tr></table></figure>
+
+<p>原版smoothieboard主板板载了4个LED指示灯，占用的引脚分别为：P1.18（LED1）、P1.19（LED2）、P1.20（LED3）、P1.21（LED4），如果使用原版可以启用，各种变种版本视情况可更改为<code>false</code>。</p>
+<h3 id="播放LED"><a href="#播放LED" class="headerlink" title="播放LED"></a>播放LED</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">play_led_disable</span>                             <span class="hljs-literal">true</span>             <span class="hljs-comment"># 禁用播放LED状态</span><br></code></pre></td></tr></table></figure>
+
+<p>原版smoothieboard主板才有的功能，其他变种版本可更改为<code>false</code>。</p>
+<h2 id="挤出机"><a href="#挤出机" class="headerlink" title="挤出机"></a>挤出机</h2><p>贴片机不需要使用挤出机，所以请注释掉所有和挤出机（extruder）相关的参数。</p>
+<h2 id="激光"><a href="#激光" class="headerlink" title="激光"></a>激光</h2><p>贴片机不需要使用激光，所以请注释掉所有和激光（laser）相关的参数。</p>
+<h2 id="热端"><a href="#热端" class="headerlink" title="热端"></a>热端</h2><p>贴片机不需要使用热端，所以请注释掉所有和热端（hotend）相关的参数。</p>
+<h2 id="热床"><a href="#热床" class="headerlink" title="热床"></a>热床</h2><p>贴片机不需要使用热床，所以请注释掉所有和热端（bed）相关的参数。</p>
+<h2 id="风扇"><a href="#风扇" class="headerlink" title="风扇"></a>风扇</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">switch.fan.enable</span>                            <span class="hljs-literal">true</span>             <span class="hljs-comment"># 是否启用风扇控制功能</span><br><span class="hljs-string">switch.fan.input_on_command</span>                  <span class="hljs-string">M106</span>             <span class="hljs-comment"># 打开输出执行的M代码</span><br><span class="hljs-string">switch.fan.input_off_command</span>                 <span class="hljs-string">M107</span>             <span class="hljs-comment"># 关闭输出执行的M代码</span><br><span class="hljs-string">switch.fan.output_pin</span>                        <span class="hljs-number">2.3</span>              <span class="hljs-comment"># 风扇控制引脚</span><br><span class="hljs-string">switch.fan.output_type</span>                       <span class="hljs-string">pwm</span>              <span class="hljs-comment"># PWM控制</span><br><span class="hljs-comment">#switch.fan.max_pwm                          255              # 最大PWM值，默认：255</span><br></code></pre></td></tr></table></figure>
+
+<p>担心部件过热可以视情况添加散热风扇；如果不使用风扇，可以注释掉所有和风扇（fan）相关的参数。</p>
+<h2 id="限位"><a href="#限位" class="headerlink" title="限位"></a>限位</h2><h3 id="硬限位"><a href="#硬限位" class="headerlink" title="硬限位"></a>硬限位</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">endstops_enable</span>                              <span class="hljs-literal">true</span>             <span class="hljs-comment"># 是否启用限位功能</span><br><span class="hljs-comment">#corexy_homing                               false            # 如果机器运动学为 hbot 或者 corexy，请设置为 true</span><br><span class="hljs-string">alpha_min_endstop</span>                            <span class="hljs-number">1.24</span><span class="hljs-string">^</span>            <span class="hljs-comment"># alpha/X轴最小限位开关引脚，可以在引脚号后面加 ! 来反转逻辑</span><br><span class="hljs-comment">#alpha_max_endstop                           1.25^            # alpha/X轴最大限位开关引脚，可以在引脚号后面加 ! 来反转逻辑</span><br><span class="hljs-string">alpha_homing_direction</span>                       <span class="hljs-string">home_to_min</span>      <span class="hljs-comment"># 归位时alpha/X轴往最小限位（home_to_min）或最大限位（home_to_max）方向移动。</span><br><span class="hljs-string">alpha_min</span>                                    <span class="hljs-number">0</span>                <span class="hljs-comment"># 如果归位时alpha/X轴往最小限位方向移动，那么触发最小限位后，当前位置为0</span><br><span class="hljs-string">alpha_max</span>                                    <span class="hljs-number">200</span>              <span class="hljs-comment"># 如果归位时alpha/X轴往最大限位方向移动，那么触发最大限位后，当前位置为200</span><br></code></pre></td></tr></table></figure>
+
+<p>硬限位的相关配置，只列出alpha&#x2F;X轴的配置详解，其他轴可参考。</p>
+<h3 id="软限位"><a href="#软限位" class="headerlink" title="软限位"></a>软限位</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">alpha_max_travel</span>                             <span class="hljs-number">500</span>              <span class="hljs-comment"># 归位时alpha/X轴最大行程，单位：mm</span><br><span class="hljs-string">beta_max_travel</span>                              <span class="hljs-number">500</span>              <span class="hljs-comment"># 归位时beta/Y轴最大行程，单位：mm</span><br><span class="hljs-string">gamma_max_travel</span>                             <span class="hljs-number">500</span>              <span class="hljs-comment"># 归位时gamma/Z轴最大行程，单位：mm</span><br></code></pre></td></tr></table></figure>
+
+<p>软限位最大移动距离限制，防止限位发生异常情况时，复位时一直没有限位触发信号而造成机器发生撞机，请按实际机器大小配置。</p>
+<h3 id="归位速度"><a href="#归位速度" class="headerlink" title="归位速度"></a>归位速度</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">alpha_fast_homing_rate_mm_s</span>                  <span class="hljs-number">50</span>               <span class="hljs-comment"># alpha/X轴归位时最快速度</span><br><span class="hljs-string">alpha_slow_homing_rate_mm_s</span>                  <span class="hljs-number">25</span>               <span class="hljs-comment"># alpha/X轴归位时最慢速度</span><br></code></pre></td></tr></table></figure>
+
+<p>alpha&#x2F;X轴归位先以最快速度进行移动，触发限位后再以最慢速度二次触发限位，以保证归位时的精度，其他轴可参考。</p>
+<h3 id="触发限位后移动距离"><a href="#触发限位后移动距离" class="headerlink" title="触发限位后移动距离"></a>触发限位后移动距离</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">alpha_homing_retract_mm</span>                      <span class="hljs-number">5</span>                <span class="hljs-comment"># alpha/X轴限位触发后，轴向前移动的距离</span><br><span class="hljs-string">beta_homing_retract_mm</span>                       <span class="hljs-number">5</span>                <span class="hljs-comment"># beta/Y轴限位触发后，轴向前移动的距离</span><br><span class="hljs-string">gamma_homing_retract_mm</span>                      <span class="hljs-number">1</span>                <span class="hljs-comment"># gamma/Z轴限位触发后，轴向上移动的距离</span><br></code></pre></td></tr></table></figure>
+
+<p>尽量不要设置为0，防止归位时一直挤压限位开关，影响寿命。</p>
+<h2 id="Z-Probe探针"><a href="#Z-Probe探针" class="headerlink" title="Z-Probe探针"></a>Z-Probe探针</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">zprobe.enable</span>                                <span class="hljs-literal">false</span>           <span class="hljs-comment"># 是否启用Z-Probe功能</span><br><span class="hljs-string">zprobe.probe_pin</span>                             <span class="hljs-number">0.10</span><span class="hljs-string">!^</span>          <span class="hljs-comment"># Z-Probe连接的引脚，如果为NC（常闭），请移除 !</span><br><span class="hljs-string">zprobe.slow_feedrate</span>                         <span class="hljs-number">5</span>               <span class="hljs-comment"># 探针进给率，单位：mm/s</span><br><span class="hljs-comment">#zprobe.debounce_ms                          1               # 如果触发不灵敏，可适当设置</span><br><span class="hljs-string">zprobe.fast_feedrate</span>                         <span class="hljs-number">100</span>             <span class="hljs-comment"># 移动进给率，单位：mm/s</span><br><span class="hljs-string">zprobe.probe_height</span>                          <span class="hljs-number">5</span>               <span class="hljs-comment"># Z-Probe在距离Bed多高的位置开始探测</span><br><span class="hljs-comment">#gamma_min_endstop                           nc              # Z轴最小限位距离？</span><br></code></pre></td></tr></table></figure>
+
+<p>贴片机不需要使用探针，所以可以关闭该功能。</p>
+<h2 id="屏幕"><a href="#屏幕" class="headerlink" title="屏幕"></a>屏幕</h2><h3 id="屏幕控制"><a href="#屏幕控制" class="headerlink" title="屏幕控制"></a>屏幕控制</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">panel.enable</span>                                 <span class="hljs-literal">false</span>             <span class="hljs-comment"># 是否启用屏幕控制功能</span><br><br><span class="hljs-comment"># Example for reprap discount GLCD</span><br><span class="hljs-comment"># on glcd EXP1 is to left and EXP2 is to right, pin 1 is bottom left, pin 2 is top left etc.</span><br><span class="hljs-comment"># +5v is EXP1 pin 10, Gnd is EXP1 pin 9</span><br><span class="hljs-comment">#panel.lcd                                   reprap_discount_glcd     #</span><br><span class="hljs-comment">#panel.spi_channel                           0                 # SPI channel to use  ; GLCD EXP1 Pins 3,5 (MOSI, SCLK)</span><br><span class="hljs-comment">#panel.spi_cs_pin                            0.16              # SPI chip select     ; GLCD EXP1 Pin 4</span><br><span class="hljs-comment">#panel.encoder_a_pin                         3.25!^            # Encoder pin         ; GLCD EXP2 Pin 3</span><br><span class="hljs-comment">#panel.encoder_b_pin                         3.26!^            # Encoder pin         ; GLCD EXP2 Pin 5</span><br><span class="hljs-comment">#panel.click_button_pin                      1.30!^            # Click button        ; GLCD EXP1 Pin 2</span><br><span class="hljs-comment">#panel.buzz_pin                              1.31              # Pin for buzzer      ; GLCD EXP1 Pin 1</span><br><span class="hljs-comment">#panel.back_button_pin                       2.11!^            # Back button         ; GLCD EXP2 Pin 8</span><br><br><span class="hljs-string">panel.menu_offset</span>                            <span class="hljs-number">0</span>                 <span class="hljs-comment"># Some panels will need 1 here</span><br><br><span class="hljs-string">panel.alpha_jog_feedrate</span>                     <span class="hljs-number">6000</span>              <span class="hljs-comment"># X jogging feedrate in mm/min</span><br><span class="hljs-string">panel.beta_jog_feedrate</span>                      <span class="hljs-number">6000</span>              <span class="hljs-comment"># Y jogging feedrate in mm/min</span><br><span class="hljs-string">panel.gamma_jog_feedrate</span>                     <span class="hljs-number">200</span>               <span class="hljs-comment"># Z jogging feedrate in mm/min</span><br><br><span class="hljs-string">panel.hotend_temperature</span>                     <span class="hljs-number">185</span>               <span class="hljs-comment"># Temp to set hotend when preheat is selected</span><br><span class="hljs-string">panel.bed_temperature</span>                        <span class="hljs-number">60</span>                <span class="hljs-comment"># Temp to set bed when preheat is selected</span><br></code></pre></td></tr></table></figure>
+
+<p>贴片机基本上使用电脑进行控制，无需额外的屏幕进行控制，所以可以关闭该功能。</p>
+<h3 id="屏幕菜单"><a href="#屏幕菜单" class="headerlink" title="屏幕菜单"></a>屏幕菜单</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">custom_menu.power_on.enable</span>                <span class="hljs-literal">true</span>              <span class="hljs-comment">#</span><br><span class="hljs-string">custom_menu.power_on.name</span>                  <span class="hljs-string">Power_on</span>          <span class="hljs-comment">#</span><br><span class="hljs-string">custom_menu.power_on.command</span>               <span class="hljs-string">M80</span>               <span class="hljs-comment">#</span><br><br><span class="hljs-string">custom_menu.power_off.enable</span>               <span class="hljs-literal">true</span>              <span class="hljs-comment">#</span><br><span class="hljs-string">custom_menu.power_off.name</span>                 <span class="hljs-string">Power_off</span>         <span class="hljs-comment">#</span><br><span class="hljs-string">custom_menu.power_off.command</span>              <span class="hljs-string">M81</span>               <span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
+
+<p>菜单功能只在需要屏幕控制的时候才有用，所以基本上可以不用配置，保持默认即可。</p>
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">network.enable</span>                               <span class="hljs-literal">false</span>            <span class="hljs-comment"># Enable the ethernet network services</span><br><span class="hljs-string">network.webserver.enable</span>                     <span class="hljs-literal">true</span>             <span class="hljs-comment"># Enable the webserver</span><br><span class="hljs-string">network.telnet.enable</span>                        <span class="hljs-literal">true</span>             <span class="hljs-comment"># Enable the telnet server</span><br><span class="hljs-string">network.ip_address</span>                           <span class="hljs-string">auto</span>             <span class="hljs-comment"># Use dhcp to get ip address</span><br></code></pre></td></tr></table></figure>
+
+<p>贴片机基本上使用USB线和电脑进行连接，无需网络，所以可以关闭该功能。</p>
+<h2 id="系统"><a href="#系统" class="headerlink" title="系统"></a>系统</h2><h3 id="波特率"><a href="#波特率" class="headerlink" title="波特率"></a>波特率</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">uart0.baud_rate</span>                              <span class="hljs-number">115200</span>           <span class="hljs-comment"># 默认硬件UART串行端口的波特率</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="第二个USB"><a href="#第二个USB" class="headerlink" title="第二个USB"></a>第二个USB</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">second_usb_serial_enable</span>                     <span class="hljs-literal">false</span>            <span class="hljs-comment"># 是否启用第二个USB串行端口</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="急停按钮"><a href="#急停按钮" class="headerlink" title="急停按钮"></a>急停按钮</h3><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">kill_button_enable</span>                           <span class="hljs-literal">true</span>             <span class="hljs-comment"># 是否启用急停按钮功能</span><br><span class="hljs-string">kill_button_pin</span>                              <span class="hljs-number">2.12</span>             <span class="hljs-comment"># 急停按钮的引脚</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="http://smoothieware.org/6axis#compiling-6-axis">smoothieware-website-v1 6 axis</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%B4%B4%E7%89%87%E6%9C%BA/" class="category-chain-item">贴片机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Smoothieboard%E5%9B%BA%E4%BB%B6/" class="print-no-link">#Smoothieboard固件</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Smoothieboard固件配置文件详解</div>
+      <div>https://dongxunz.github.io/2025/04/09/贴片机/Smoothieboard固件配置文件详解/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/" title="OpenPNP里程碑配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OpenPNP里程碑配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/BTT%20SKR%20V1.4T%E4%B8%BB%E6%9D%BF%E7%83%A7%E5%BD%95Smoothieware%E5%9B%BA%E4%BB%B6/" title="BTT SKR V1.4T主板烧录Smoothieware固件">
+                        <span class="hidden-mobile">BTT SKR V1.4T主板烧录Smoothieware固件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

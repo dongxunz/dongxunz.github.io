@@ -1,0 +1,1003 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言由于OpenPNP软件功能较为复杂，所以开发人员想到了一个好方法来解决上手困难的问题，那就是问题与解决方案（Issues and Solutions），俗称里程碑，软件会一步步指导你完成操作，走完里程碑，贴片机基本上就可以开始工作了。 里程碑界面（Milestone） 转到问题与解决方案选项卡中，此页面就是软件的里程碑界面。 吸嘴单元（ReferenceHead H1）本次DIY的贴片机使用2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenPNP里程碑配置">
+<meta property="og:url" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言由于OpenPNP软件功能较为复杂，所以开发人员想到了一个好方法来解决上手困难的问题，那就是问题与解决方案（Issues and Solutions），俗称里程碑，软件会一步步指导你完成操作，走完里程碑，贴片机基本上就可以开始工作了。 里程碑界面（Milestone） 转到问题与解决方案选项卡中，此页面就是软件的里程碑界面。 吸嘴单元（ReferenceHead H1）本次DIY的贴片机使用2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_milestones_wellcome.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_reference_head_config.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_completion_welcome_milestone.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_create_gcode_driver.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_gcode_driver_config.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_firmware_not_detected.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_firmware_not_support_ab_axis.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_set_serial_flow_control.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_x_axis_latter_missing.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_x_axis_latter.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_c_axis_latter.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_duplicate_axis_latter.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_avoid_axis_latter.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_command_confirm_regex.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_position_report_regex.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_connect_command.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_home_command.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_set_global_offsets_command_accept.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_get_position_command.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_move_to_command.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_move_to_complete_command.png">
+<meta property="article:published_time" content="2025-04-09T11:44:01.000Z">
+<meta property="article:modified_time" content="2025-04-12T16:00:02.491Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="OpenPNP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_milestones_wellcome.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>OpenPNP里程碑配置 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                <span>分享</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
+                    <i class="iconfont icon-apple-fill"></i>
+                    <span>电路</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    <span>结构</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/" target="_self">
+                    <i class="iconfont icon-music"></i>
+                    <span>音乐</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>游戏</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
+                    <i class="iconfont icon-book"></i>
+                    <span>阅读角</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OpenPNP里程碑配置"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-09 19:44" pubdate>
+          2025年4月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          4 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">OpenPNP里程碑配置</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2025年4月13日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于OpenPNP软件功能较为复杂，所以开发人员想到了一个好方法来解决上手困难的问题，那就是问题与解决方案（Issues and Solutions），俗称里程碑，软件会一步步指导你完成操作，走完里程碑，贴片机基本上就可以开始工作了。</p>
+<h3 id="里程碑界面（Milestone）"><a href="#里程碑界面（Milestone）" class="headerlink" title="里程碑界面（Milestone）"></a>里程碑界面（Milestone）</h3><p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_milestones_wellcome.png" srcset="/img/loading.gif" lazyload alt="里程碑欢迎界面"></p>
+<p>转到<strong>问题与解决方案</strong>选项卡中，此页面就是软件的里程碑界面。</p>
+<h3 id="吸嘴单元（ReferenceHead-H1）"><a href="#吸嘴单元（ReferenceHead-H1）" class="headerlink" title="吸嘴单元（ReferenceHead H1）"></a>吸嘴单元（ReferenceHead H1）</h3><p>本次DIY的贴片机使用2个吸嘴单元，由Z电机使用皮带传动控制2个吸嘴进行上下往复运动，所以按照如下图进行配置：</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_reference_head_config.png" srcset="/img/loading.gif" lazyload alt="吸嘴单元配置"></p>
+<p>点击接受（Accept）后会有一个警告（Warming）弹窗，这是OpenPNP会根据你选择的吸嘴单元数量及传动方式在<strong>贴片机配置</strong>选项卡中生成相应的配置，一般情况选择“是（Y）”即可，可以看到ReferenceHead H1主题内容的当前状态由“Open”变为“Solved”，接下来按照下图步骤完成当前里程碑。</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_completion_welcome_milestone.png" srcset="/img/loading.gif" lazyload alt="完成当前里程碑"></p>
+<h3 id="顶部相机（ImageCamera-Top）"><a href="#顶部相机（ImageCamera-Top）" class="headerlink" title="顶部相机（ImageCamera Top）"></a>顶部相机（ImageCamera Top）</h3><h3 id="底部相机（SimulateUpCamera-Bottom）"><a href="#底部相机（SimulateUpCamera-Bottom）" class="headerlink" title="底部相机（SimulateUpCamera Bottom）"></a>底部相机（SimulateUpCamera Bottom）</h3><h3 id="驱动器定义（NullDriver-NullDriver）"><a href="#驱动器定义（NullDriver-NullDriver）" class="headerlink" title="驱动器定义（NullDriver NullDriver）"></a>驱动器定义（NullDriver NullDriver）</h3><h4 id="新建驱动器"><a href="#新建驱动器" class="headerlink" title="新建驱动器"></a>新建驱动器</h4><p>对于Marlin固件，使用GcodeDriver即可。</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_create_gcode_driver.png" srcset="/img/loading.gif" lazyload alt="新建GcodeDriver"></p>
+<p>点击接受（Accept）后，OpenPNP会自动在<strong>贴片机配置</strong>选项卡的<strong>驱动定义</strong>下生成一个GcodeDriver驱动器；以下简单说明一下OpenPNP中各驱动器类型的功能：</p>
+<p>NullDriver<br>系统模拟的虚拟驱动器。</p>
+<p>GcodeDriver<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[GcodeDriver Github Wiki](https://github.com/openpnp/openpnp/wiki/GcodeDriver)">[1]</span></a></sup><br>同步驱动器，每次发送命令后会等待硬件返回<code>ok</code>才会发送下一条命令。</p>
+<p>GcodeAsyncDriver<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[GcodeAsyncDriver Github Wiki](https://github.com/openpnp/openpnp/wiki/GcodeAsyncDriver)">[2]</span></a></sup><br>异步驱动器，通过队列机制管理命令，无需等待硬件确认，可提高执行效率。</p>
+<p>NeoDen4Driver</p>
+<h4 id="配置GcodeDriver驱动器"><a href="#配置GcodeDriver驱动器" class="headerlink" title="配置GcodeDriver驱动器"></a>配置GcodeDriver驱动器</h4><p>主板接通电源，并用USB数据线连接上电脑，将GcodeDriver驱动器中的串口号设置成电脑识别出的主板COM口，波特率和Marlin固件里的<code>BAUDRATE</code>参数保持一致。</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_gcode_driver_config.png" srcset="/img/loading.gif" lazyload alt="配置GcodeDriver"></p>
+<p>再转到<strong>驱动配置</strong>选项卡，点击<strong>检测固件</strong>查看是否能成功显示固件信息，否则在进入下一里程碑时，OpenPNP会提示未检测到固件的警告：</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_firmware_not_detected.png" srcset="/img/loading.gif" lazyload alt="未检测到固件"></p>
+<p>再回到<strong>查找问题和解决方案</strong>选项卡，按照如下图操作，会出来一个错误事件，提示当前固件不支持ABC轴（旋转轴），这是由于我的Marlin固件除了基础的XYZ轴，另外2个轴分别为E0，E1，所以会提示不支持，在后续配置中会将E0、E1定义为相应的旋转轴，此处我们选择拒绝（Dismissed）即可。</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_firmware_not_support_ab_axis.png" srcset="/img/loading.gif" lazyload alt="固件不支持ABC轴"></p>
+<h4 id="设置串口流控制"><a href="#设置串口流控制" class="headerlink" title="设置串口流控制"></a>设置串口流控制</h4><p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_set_serial_flow_control.png" srcset="/img/loading.gif" lazyload alt="设置串口流控制"></p>
+<p>点接受（Accept）击后，OpenPNP会将串口的流控制由<code>Off</code>改为<code>RtsCts</code>；接着完成当前里程碑即可。</p>
+<h4 id="分配各轴字母"><a href="#分配各轴字母" class="headerlink" title="分配各轴字母"></a>分配各轴字母</h4><p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_x_axis_latter_missing.png" srcset="/img/loading.gif" lazyload alt="X轴字母缺失"></p>
+<p>OpenPNP软件自动为x轴分配了轴字母：<code>X</code>，所以直接点击接受（Accept），将会为<strong>贴片机配置</strong>选项卡中的<strong>轴</strong> -&gt; x轴字母分配为<code>X</code>，其他的y、Z1轴也以此类推即可。</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_x_axis_latter.png" srcset="/img/loading.gif" lazyload alt="为X轴分配轴字母"></p>
+<p>对于C1、C2、C3、C4旋转轴，软件无法自动分配轴字母，所以我们手动改为<code>E</code>，然后点接受（Accept）即可：</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_c_axis_latter.png" srcset="/img/loading.gif" lazyload alt="C轴手动分配轴字母"></p>
+<p>执行上述操作后再次点击 查找问题与解决方案 按钮，会看出来一些新的主题内容，其中有2条错误事件，显示C1、C2轴使用了相同的轴字母，我们都选择拒绝（Dismissed）即可。</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_duplicate_axis_latter.png" srcset="/img/loading.gif" lazyload alt="重复轴字母"></p>
+<p>再次点击 查找问题与解决方案 按钮，还是存在2条关于C1、C2轴的警告主题，显示尽量避免使用<code>E</code>作为轴字母，我们都选择拒绝（Dismissed）即可。</p>
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_avoid_axis_latter.png" srcset="/img/loading.gif" lazyload alt="避免E轴字母"></p>
+<h3 id="配置驱动器的Gcode"><a href="#配置驱动器的Gcode" class="headerlink" title="配置驱动器的Gcode"></a>配置驱动器的Gcode</h3><p>点击 查找问题与解决方案 按钮，往下翻可以看到OpenPNP建议配置驱动器对应的Gcode，我们都选择接受（Accept）即可，OpenPNP会自动填写对应的Gcode。</p>
+<h4 id="命令确认"><a href="#命令确认" class="headerlink" title="命令确认"></a>命令确认</h4><!-- 让表格居中显示的风格 -->
+
+<div class="center">
+
+<table>
+<thead>
+<tr>
+<th align="center">Gcode</th>
+<th align="center">正则表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">COMMAND_CONFIRM_REGEX</td>
+<td align="center"><code>^ok.*</code></td>
+</tr>
+</tbody></table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_command_confirm_regex.png" srcset="/img/loading.gif" lazyload alt="命令确认"></p>
+<h4 id="报告位置"><a href="#报告位置" class="headerlink" title="报告位置"></a>报告位置</h4><!-- 让表格居中显示的风格 -->
+
+<div class="center">
+
+<table>
+<thead>
+<tr>
+<th align="center">Gcode</th>
+<th align="center">正则表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">POSITION_REPORT_REGEX</td>
+<td align="center"><code>^.*X:(?&lt;X&gt;-?\d+\.\d+)\s*Y:(?&lt;Y&gt;-?\d+\.\d+)\s*Z:(?&lt;Z&gt;-?\d+\.\d+)\s*E:(?&lt;E&gt;-?\d+\.\d+)\s*E:(?&lt;E&gt;-?\d+\.\d+).*</code></td>
+</tr>
+</tbody></table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_position_report_regex.png" srcset="/img/loading.gif" lazyload alt="报告位置"></p>
+<h4 id="连接命令"><a href="#连接命令" class="headerlink" title="连接命令"></a>连接命令</h4><div class="center">
+    <table>
+        <tbody align="center" valign="center">
+            <tr>
+                <td>Gcode</td>
+                <td>正则表达式</td>
+            </tr>
+            <tr>
+                <td rowspan="2">CONNECT_COMMAND</td>
+                <td>G21 ; Set millimeters mode</td>
+            </tr>
+            <tr>
+                <td>G90 ; Set absolute positioning mode</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_connect_command.png" srcset="/img/loading.gif" lazyload alt="连接命令"></p>
+<h4 id="归位命令"><a href="#归位命令" class="headerlink" title="归位命令"></a>归位命令</h4><div class="center">
+    <table>
+        <tbody align="center" valign="center">
+            <tr>
+                <td>Gcode</td>
+                <td>正则表达式</td>
+            </tr>
+            <tr>
+                <td rowspan="2">HOME_COMMAND</td>
+                <td>{Acceleration:M204 S%.2f ; Initialize acceleration}</td>
+            </tr>
+            <tr>
+                <td>G28 ; Home all axes</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_home_command.png" srcset="/img/loading.gif" lazyload alt="归位命令"></p>
+<h4 id="全局偏移量命令"><a href="#全局偏移量命令" class="headerlink" title="全局偏移量命令"></a>全局偏移量命令</h4><!-- 让表格居中显示的风格 -->
+
+<div class="center">
+
+<table>
+<thead>
+<tr>
+<th align="center">Gcode</th>
+<th align="center">正则表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">SET_GLOBAL_OFFSETS_COMMAND</td>
+<td align="center"><code>G92 &#123;X:X%.4f&#125; &#123;Y:Y%.4f&#125; &#123;Z:Z%.4f&#125; &#123;E:E%.4f&#125; &#123;E:E%.4f&#125; ; reset coordinates</code></td>
+</tr>
+</tbody></table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_set_global_offsets_command_accept.png" srcset="/img/loading.gif" lazyload alt="全局偏移量命令"></p>
+<h4 id="获取位置命令"><a href="#获取位置命令" class="headerlink" title="获取位置命令"></a>获取位置命令</h4><!-- 让表格居中显示的风格 -->
+
+<div class="center">
+
+<table>
+<thead>
+<tr>
+<th align="center">Gcode</th>
+<th align="center">正则表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GET_POSITION_COMMAND</td>
+<td align="center"><code>M114 ; get position</code></td>
+</tr>
+</tbody></table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_get_position_command.png" srcset="/img/loading.gif" lazyload alt="获取位置命令"></p>
+<h4 id="移动命令"><a href="#移动命令" class="headerlink" title="移动命令"></a>移动命令</h4><div class="center">
+    <table>
+        <tbody align="center" valign="center">
+            <tr>
+                <td>Gcode</td>
+                <td>正则表达式</td>
+            </tr>
+            <tr>
+                <td rowspan="2">MOVE_TO_COMMAND</td>
+                <td>{Acceleration:M204 S%.0f }</td>
+            </tr>
+            <tr>
+                <td>G1 {X:X%.4f} {Y:Y%.4f} {Z:Z%.4f} {E:E%.4f} {E:E%.4f} {FeedRate:F%.0f} ; move to target</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_move_to_command.png" srcset="/img/loading.gif" lazyload alt="移动命令"></p>
+<h4 id="移动完成命令"><a href="#移动完成命令" class="headerlink" title="移动完成命令"></a>移动完成命令</h4><!-- 让表格居中显示的风格 -->
+
+<div class="center">
+
+<table>
+<thead>
+<tr>
+<th align="center">Gcode</th>
+<th align="center">正则表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">MOVE_TO_COMPLETE_COMMAND</td>
+<td align="center"><code>M400 ; Wait for moves to complete before returning</code></td>
+</tr>
+</tbody></table>
+</div>
+
+<p><img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/openpnp_move_to_complete_command.png" srcset="/img/loading.gif" lazyload alt="移动完成命令"></p>
+<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/openpnp/openpnp/wiki/GcodeDriver">GcodeDriver Github Wiki</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/openpnp/openpnp/wiki/GcodeAsyncDriver">GcodeAsyncDriver Github Wiki</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%B4%B4%E7%89%87%E6%9C%BA/" class="category-chain-item">贴片机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OpenPNP/" class="print-no-link">#OpenPNP</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OpenPNP里程碑配置</div>
+      <div>https://dongxunz.github.io/2025/04/09/贴片机/OpenPNP里程碑配置/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/11/%E8%B4%B4%E7%89%87%E6%9C%BA/Marlin%20For%20OpenPNP%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/" title="Marlin For OpenPNP固件参数配置">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Marlin For OpenPNP固件参数配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/Smoothieboard%E5%9B%BA%E4%BB%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" title="Smoothieboard固件配置文件详解">
+                        <span class="hidden-mobile">Smoothieboard固件配置文件详解</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

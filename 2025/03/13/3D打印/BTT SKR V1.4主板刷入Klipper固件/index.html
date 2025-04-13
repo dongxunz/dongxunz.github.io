@@ -21,12 +21,12 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言本文章将指导如何给BigTreeTech出品的3D打印机主板：SKR V1.4(LPC1768 100MHZ) &amp; SKR V1.4 turbo(LPC1769 120MHZ)烧录Klipper固件。 使用板载Bootloader烧录Klipper固件这2款主板出厂均自带冰沙板的Bootloader，可以使用TF卡烧录固件。[1]  在上位机中配置Klipper并编译  准备一张TF卡">
+    <meta name="description" content="前言本文章将指导如何给BigTreeTech出品的3D打印机主板：SKR V1.4(LPC1768 100MHZ) &amp; SKR V1.4 Turbo(LPC1769 120MHZ)烧录Klipper固件。 使用板载Bootloader烧录Klipper固件这2款主板出厂均自带Smoothieware板的DFU-Bootloader[1]，可以使用TF卡烧录固件。[2]  在上位机中配置Kl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BTT SKR V1.4主板烧录Klipper固件">
 <meta property="og:url" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言本文章将指导如何给BigTreeTech出品的3D打印机主板：SKR V1.4(LPC1768 100MHZ) &amp; SKR V1.4 turbo(LPC1769 120MHZ)烧录Klipper固件。 使用板载Bootloader烧录Klipper固件这2款主板出厂均自带冰沙板的Bootloader，可以使用TF卡烧录固件。[1]  在上位机中配置Klipper并编译  准备一张TF卡">
+<meta property="og:description" content="前言本文章将指导如何给BigTreeTech出品的3D打印机主板：SKR V1.4(LPC1768 100MHZ) &amp; SKR V1.4 Turbo(LPC1769 120MHZ)烧录Klipper固件。 使用板载Bootloader烧录Klipper固件这2款主板出厂均自带Smoothieware板的DFU-Bootloader[1]，可以使用TF卡烧录固件。[2]  在上位机中配置Kl">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/btt_skr_v1.4_klipper_config.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/btt_skr_v1.4_turbo_klipper_config.png">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_flash_bootloader_hex.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_flash_klipper_bin.png">
 <meta property="article:published_time" content="2025-03-13T06:58:54.000Z">
-<meta property="article:modified_time" content="2025-03-22T02:35:52.774Z">
+<meta property="article:modified_time" content="2025-04-11T04:14:55.983Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="Klipper固件">
 <meta name="twitter:card" content="summary_large_image">
@@ -331,7 +331,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          268 字
+          276 字
         
       </span>
     
@@ -395,7 +395,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年3月22日 上午
+                    本文最后更新于：2025年4月11日 中午
                   
                 
               </p>
@@ -403,17 +403,17 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文章将指导如何给BigTreeTech出品的3D打印机主板：SKR V1.4<code>(LPC1768 100MHZ)</code> &amp; SKR V1.4 turbo<code>(LPC1769 120MHZ)</code>烧录Klipper固件。</p>
-<h3 id="使用板载Bootloader烧录Klipper固件"><a href="#使用板载Bootloader烧录Klipper固件" class="headerlink" title="使用板载Bootloader烧录Klipper固件"></a>使用板载Bootloader烧录Klipper固件</h3><p>这2款主板出厂均自带冰沙板的Bootloader，可以使用TF卡烧录固件。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[SKR 1.3/1.4 Klipper Firmware](https://docs.vorondesign.com/build/software/skr13_klipper.html)">[1]</span></a></sup></p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文章将指导如何给BigTreeTech出品的3D打印机主板：SKR V1.4<code>(LPC1768 100MHZ)</code> &amp; SKR V1.4 Turbo<code>(LPC1769 120MHZ)</code>烧录Klipper固件。</p>
+<h3 id="使用板载Bootloader烧录Klipper固件"><a href="#使用板载Bootloader烧录Klipper固件" class="headerlink" title="使用板载Bootloader烧录Klipper固件"></a>使用板载Bootloader烧录Klipper固件</h3><p>这2款主板出厂均自带Smoothieware板的<a href="./DFU-Bootloader.hex">DFU-Bootloader</a><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Smoothieware bootloader Github](https://github.com/Smoothieware/Smoothieware/tree/edge/bootloader)">[1]</span></a></sup>，可以使用TF卡烧录固件。<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[SKR 1.3/1.4 Klipper Firmware](https://docs.vorondesign.com/build/software/skr13_klipper.html)">[2]</span></a></sup></p>
 <ol>
 <li><p>在上位机中配置Klipper并编译<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/btt_skr_v1.4_klipper_config.png" srcset="/img/loading.gif" lazyload alt="BTT SKR V1.4"><br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/btt_skr_v1.4_turbo_klipper_config.png" srcset="/img/loading.gif" lazyload alt="BTT SKR V1.4 turbo"></p>
 </li>
-<li><p>准备一张TF卡，使用读卡器连接电脑，打开<a target="_blank" rel="noopener" href="https://winscp.net/eng/download.php">WinScp软件</a>连接到上位机，将<code>klipper/out/klipper.bin</code>文件复制到TF卡中，并重命名为<code>firmware.bin</code>。</p>
+<li><p>准备一张TF卡，插入读卡器并连接电脑，打开<a target="_blank" rel="noopener" href="https://winscp.net/eng/download.php">WinScp软件</a>连接到上位机，将<code>klipper/out/klipper.bin</code>文件复制到TF卡中，并重命名为<code>firmware.bin</code>。</p>
 </li>
-<li><p>将TF卡插入主板，接入电源，等待大约1分钟，关掉电源后取出TF卡，插入电脑可以看到文件名变为<code>firmware.cur</code>，代表烧录成功。</p>
+<li><p>将TF卡插入主板，接入电源，等待大约1分钟，关掉电源后并取出TF卡，再次插入电脑可以看到文件名变为<code>FIRMWARE.CUR</code>，代表烧录成功。</p>
 </li>
 </ol>
-<h3 id="使用J-Link工具烧录Klipper固件"><a href="#使用J-Link工具烧录Klipper固件" class="headerlink" title="使用J-Link工具烧录Klipper固件"></a>使用J-Link工具烧录Klipper固件</h3><p>此方法适用于不小心刷掉自带Bootloader而导致TF卡无法刷入Klipper固件的情况。</p>
+<h3 id="使用J-Link工具烧录Klipper固件"><a href="#使用J-Link工具烧录Klipper固件" class="headerlink" title="使用J-Link工具烧录Klipper固件"></a>使用J-Link工具烧录Klipper固件</h3><p>此方法适用于不小心刷掉自带DFU-Bootloader而导致TF卡无法刷入Klipper固件的情况。</p>
 <ol>
 <li><p>下载<a target="_blank" rel="noopener" href="https://www.segger.com/downloads/jlink/">SEGGER J-Links软件</a></p>
 </li>
@@ -422,7 +422,7 @@
 </ol>
 <!-- 让表格居中显示的风格 -->
 <style>
-.center 
+.center
 {
   width: auto;
   display: table;
@@ -462,13 +462,14 @@
 </div>
 
 <ol start="3">
-<li><p>使用J-Flash Lite软件烧录Bootloader<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_device_interface.png" srcset="/img/loading.gif" lazyload alt="根据主板芯片型号选择"><br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_erase_chip.png" srcset="/img/loading.gif" lazyload alt="先擦除芯片"><br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_flash_bootloader_hex.png" srcset="/img/loading.gif" lazyload alt="选择Bootloader hex文件，点击烧录"></p>
+<li><p>使用J-Flash Lite软件烧录DFU-Bootloader<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_device_interface.png" srcset="/img/loading.gif" lazyload alt="根据主板芯片型号选择"><br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_erase_chip.png" srcset="/img/loading.gif" lazyload alt="先擦除芯片"><br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_flash_bootloader_hex.png" srcset="/img/loading.gif" lazyload alt="选择DFU-Bootloader.hex文件，点击烧录"></p>
 </li>
-<li><p>烧录klipper固件，地址改为：<strong>0x00004000</strong>：<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_flash_klipper_bin.png" srcset="/img/loading.gif" lazyload alt="烧录Klipper.bin"></p>
+<li><p>烧录klipper.bin固件，地址改为：<strong>0x00004000</strong>：<br><img src="/2025/03/13/3D%E6%89%93%E5%8D%B0/BTT%20SKR%20V1.4%E4%B8%BB%E6%9D%BF%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/j-flash_lite_flash_klipper_bin.png" srcset="/img/loading.gif" lazyload alt="烧录Klipper.bin"></p>
 </li>
 </ol>
-<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://docs.vorondesign.com/build/software/skr13_klipper.html">SKR 1.3&#x2F;1.4 Klipper Firmware</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/Smoothieware/Smoothieware/tree/edge/bootloader">Smoothieware bootloader Github</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://docs.vorondesign.com/build/software/skr13_klipper.html">SKR 1.3&#x2F;1.4 Klipper Firmware</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             

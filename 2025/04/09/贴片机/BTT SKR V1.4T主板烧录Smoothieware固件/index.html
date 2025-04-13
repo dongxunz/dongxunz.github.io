@@ -21,17 +21,17 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言由于某鱼Smoothieware主板版本众多，价格参差不齐，资料也是各种各样的，不推荐刚入门时就购买尝试；所以本文章使用BigTreeTech公司出品的SKR V1.4 Turbo主板，这款主板资料开源，且有完整的售后，使用的MCU芯片和Smoothieware主板一致，本人将试图给这款板子烧录Smoothieware固件，尝试是否可以正常使用OpenPNP进行贴片。 烧录固件 下载Smoot">
+    <meta name="description" content="前言由于某鱼原版Smoothieware主板价格离谱，不推荐刚入门时就购买尝试；所以本文章使用BigTreeTech公司出品的SKR V1.4 Turbo主板，这款主板资料开源，且有完整的售后，使用的MCU芯片和原版Smoothieware主板一致，将尝试给该主板烧录Smoothieware for OpenPnP固件。 烧录固件 下载Smoothieware固件及示例 Smoothieware">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BTT SKR V1.4T主板烧录Smoothieware固件">
 <meta property="og:url" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/BTT%20SKR%20V1.4T%E4%B8%BB%E6%9D%BF%E7%83%A7%E5%BD%95Smoothieware%E5%9B%BA%E4%BB%B6/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言由于某鱼Smoothieware主板版本众多，价格参差不齐，资料也是各种各样的，不推荐刚入门时就购买尝试；所以本文章使用BigTreeTech公司出品的SKR V1.4 Turbo主板，这款主板资料开源，且有完整的售后，使用的MCU芯片和Smoothieware主板一致，本人将试图给这款板子烧录Smoothieware固件，尝试是否可以正常使用OpenPNP进行贴片。 烧录固件 下载Smoot">
+<meta property="og:description" content="前言由于某鱼原版Smoothieware主板价格离谱，不推荐刚入门时就购买尝试；所以本文章使用BigTreeTech公司出品的SKR V1.4 Turbo主板，这款主板资料开源，且有完整的售后，使用的MCU芯片和原版Smoothieware主板一致，将尝试给该主板烧录Smoothieware for OpenPnP固件。 烧录固件 下载Smoothieware固件及示例 Smoothieware">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/BTT%20SKR%20V1.4T%E4%B8%BB%E6%9D%BF%E7%83%A7%E5%BD%95Smoothieware%E5%9B%BA%E4%BB%B6/openpnp_new_gcodedriver.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/BTT%20SKR%20V1.4T%E4%B8%BB%E6%9D%BF%E7%83%A7%E5%BD%95Smoothieware%E5%9B%BA%E4%BB%B6/check_smoothieware_firmware_version.png">
 <meta property="article:published_time" content="2025-04-09T03:26:12.000Z">
-<meta property="article:modified_time" content="2025-04-09T06:46:40.143Z">
+<meta property="article:modified_time" content="2025-04-12T07:37:47.637Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="Smoothieware">
 <meta name="twitter:card" content="summary_large_image">
@@ -327,7 +327,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          297 字
+          289 字
         
       </span>
     
@@ -391,7 +391,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年4月9日 下午
+                    本文最后更新于：2025年4月12日 下午
                   
                 
               </p>
@@ -399,19 +399,19 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于某鱼Smoothieware主板版本众多，价格参差不齐，资料也是各种各样的，不推荐刚入门时就购买尝试；所以本文章使用BigTreeTech公司出品的<a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?id=625671241167&pisk=gkLik20jOhSswXHdve_sqGD8nImLCN_fwKUAHZBqY9WIGCLOHizDeQ-9WEdVgZveHf69gA9Do9Jj1rh6WKj269faurWaL251Gl5wgEC2oNTpXrBtCZA2eZD-e43J1C_CuYH-WWAXNN10_s5aH2yFiZfwlhoboC_fuxVLu03k1LPJojqNg6lhMsCV3KWNLyWCiryw3OSUL_f5uZJVbyzFa1q4QZrN8XflMlr47GSFTsC00RJVuXAFds7V_K7qZghN3E-w8v_VUKWfK_ThsGXyt0a4o_zRbTS5Lrky-1D5UCW3urW1BWfetCHgPBQ6PLfJB2zMEQTBK6JrovbXdnJVipu7HNtJCUsHB0zeTw6C498zQl5lSOjy7MN0SBs2xeb97xZW9BXNqwKKAAIASdx5FGoIdKAhBK8GYRDdH3dp7Mvrpyvfm3OAid0g7LSP0krzXqzfTjLUcosNO6XRwoA_7Thnx6lntRjfb61ceXc3cosNO6X-tX2M1G5CiTC..&spm=a21xtw.29978516.product_shelf.9.28853a14RdbwRf&skuId=4853954461859">SKR V1.4 Turbo主板</a>，这款主板资料开源，且有完整的售后，使用的MCU芯片和Smoothieware主板一致，本人将试图给这款板子烧录Smoothieware固件，尝试是否可以正常使用OpenPNP进行贴片。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于某鱼原版Smoothieware主板价格离谱，不推荐刚入门时就购买尝试；所以本文章使用BigTreeTech公司出品的<a target="_blank" rel="noopener" href="https://item.taobao.com/item.htm?id=625671241167&pisk=gkLik20jOhSswXHdve_sqGD8nImLCN_fwKUAHZBqY9WIGCLOHizDeQ-9WEdVgZveHf69gA9Do9Jj1rh6WKj269faurWaL251Gl5wgEC2oNTpXrBtCZA2eZD-e43J1C_CuYH-WWAXNN10_s5aH2yFiZfwlhoboC_fuxVLu03k1LPJojqNg6lhMsCV3KWNLyWCiryw3OSUL_f5uZJVbyzFa1q4QZrN8XflMlr47GSFTsC00RJVuXAFds7V_K7qZghN3E-w8v_VUKWfK_ThsGXyt0a4o_zRbTS5Lrky-1D5UCW3urW1BWfetCHgPBQ6PLfJB2zMEQTBK6JrovbXdnJVipu7HNtJCUsHB0zeTw6C498zQl5lSOjy7MN0SBs2xeb97xZW9BXNqwKKAAIASdx5FGoIdKAhBK8GYRDdH3dp7Mvrpyvfm3OAid0g7LSP0krzXqzfTjLUcosNO6XRwoA_7Thnx6lntRjfb61ceXc3cosNO6X-tX2M1G5CiTC..&spm=a21xtw.29978516.product_shelf.9.28853a14RdbwRf&skuId=4853954461859">SKR V1.4 Turbo主板</a>，这款主板资料开源，且有完整的售后，使用的MCU芯片和原版Smoothieware主板一致，将尝试给该主板烧录Smoothieware for OpenPnP固件。</p>
 <h2 id="烧录固件"><a href="#烧录固件" class="headerlink" title="烧录固件"></a>烧录固件</h2><ol>
-<li><p>下载Smoothieware固件及示例</p>
-<p> <a href="./firmware.bin">Smoothieware固件</a><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Smoothieware Github FirmwareBin](https://github.com/Smoothieware/Smoothieware/tree/edge/FirmwareBin)">[1]</span></a></sup><br> <a href="./config.txt">Smoothieware示例配置文件</a><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Smoothieware Github ConfigSamples](https://github.com/Smoothieware/Smoothieware/tree/edge/ConfigSamples)">[2]</span></a></sup></p>
+<li><p>下载Smoothieware固件及示例<br> <a href="./firmware-2022-12-30.bin">Smoothieware for 3D Printer固件</a><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Smoothieware Github FirmwareBin](https://github.com/Smoothieware/Smoothieware/tree/edge/FirmwareBin)">[1]</span></a></sup><br> <a href="./firmware-2021-02-15-PAXIS-5.bin">Smoothieware for OpenPnP 5轴固件</a><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Smoothieware: New Firmware for PnP](https://makr.zone/smoothieware-new-firmware-for-pnp/500/)">[2]</span></a></sup><br> <a href="./firmware-2021-02-15-PAXIS-6.bin">Smoothieware for OpenPnP 6轴固件</a><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Smoothieware: New Firmware for PnP](https://makr.zone/smoothieware-new-firmware-for-pnp/500/)">[2]</span></a></sup><br> <a href="./config.txt">Smoothieware示例配置文件</a><sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Smoothieware Github ConfigSamples](https://github.com/Smoothieware/Smoothieware/tree/edge/ConfigSamples)">[3]</span></a></sup></p>
 </li>
-<li><p>检查固件是否烧录成功<br> 将固件和示例配置文件都复制到TF卡中（<strong>固件名称为：firmware.bin，不可更改</strong>），插入主板对应卡槽，连接好电源及USB数据线，通电后等待片刻，电脑设备管理器中会出现一个串行设备，且文件管理器中出现一个U盘，里面有2个文件：<code>config.txt</code>, <code>FIRMWARE.CUR</code>；有该文件<code>FIRMWARE.CUR</code>代表固件烧录成功，否则请检查之前的操作，并多次尝试（更换TF卡…）。</p>
+<li><p>检查固件是否烧录成功<br> 将<code>Smoothieware for OpenPnP 5轴固件</code>和<code>Smoothieware示例配置文件</code>都复制到TF卡中（<strong>固件名称必需更改为：firmware.bin</strong>），插入主板对应TF卡槽中，连接好电源及USB数据线，通电后等待片刻，电脑设备管理器中会出现一个USB串行设备，且文件管理器中也出现一个U盘，里面有2个文件：<code>config.txt</code>, <code>FIRMWARE.CUR</code>；有该文件<code>FIRMWARE.CUR</code>代表固件烧录成功，否则请检查之前的操作，并多次尝试（烧录DFU-Bootloader、更换TF卡…）。</p>
 </li>
 <li><p>查看Smoothieware固件版本<br> 打开OpenPNP软件，按照如下步骤操作：<br> <img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/BTT%20SKR%20V1.4T%E4%B8%BB%E6%9D%BF%E7%83%A7%E5%BD%95Smoothieware%E5%9B%BA%E4%BB%B6/openpnp_new_gcodedriver.png" srcset="/img/loading.gif" lazyload alt="新建一个GcodeDriver"><br> <img src="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/BTT%20SKR%20V1.4T%E4%B8%BB%E6%9D%BF%E7%83%A7%E5%BD%95Smoothieware%E5%9B%BA%E4%BB%B6/check_smoothieware_firmware_version.png" srcset="/img/loading.gif" lazyload alt="查看Smoothieware版本"></p>
 </li>
 </ol>
 <h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/Smoothieware/Smoothieware/tree/edge/FirmwareBin">Smoothieware Github FirmwareBin</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/Smoothieware/Smoothieware/tree/edge/ConfigSamples">Smoothieware Github ConfigSamples</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://makr.zone/smoothieware-new-firmware-for-pnp/500/">Smoothieware: New Firmware for PnP</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/Smoothieware/Smoothieware/tree/edge/ConfigSamples">Smoothieware Github ConfigSamples</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -500,6 +500,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/Smoothieboard%E5%9B%BA%E4%BB%B6%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%A6%E8%A7%A3/" title="Smoothieboard固件配置文件详解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Smoothieboard固件配置文件详解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

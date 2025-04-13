@@ -21,15 +21,15 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言在Marlin固件中，主要使用以下2个配置文件 (Configuration.h、Configuration_adv.h) 进行参数配置，其中Configuration.h包含了常用的基础参数，而Configuration_adv.h中包含了更多高级参数，请谨慎设置参数！由于参数众多，以下只是列出部分参数，更多详细参数配置请查看 Marlin官方参数配置文档。 Configuration.h参">
+    <meta name="description" content="前言在Marlin固件中，主要使用以下2个配置文件 (Configuration.h、Configuration_adv.h) 进行参数配置，其中Configuration.h包含了常用的基础参数，而Configuration_adv.h中包含了更多高级参数，请谨慎设置参数！由于参数众多，以下只是列出部分参数，更多详细参数配置请查看 Marlin官方参数配置文档。 Configuration.h主">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Marlin固件参数配置">
 <meta property="og:url" content="https://dongxunz.github.io/2022/06/14/3D%E6%89%93%E5%8D%B0/Marlin%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言在Marlin固件中，主要使用以下2个配置文件 (Configuration.h、Configuration_adv.h) 进行参数配置，其中Configuration.h包含了常用的基础参数，而Configuration_adv.h中包含了更多高级参数，请谨慎设置参数！由于参数众多，以下只是列出部分参数，更多详细参数配置请查看 Marlin官方参数配置文档。 Configuration.h参">
+<meta property="og:description" content="前言在Marlin固件中，主要使用以下2个配置文件 (Configuration.h、Configuration_adv.h) 进行参数配置，其中Configuration.h包含了常用的基础参数，而Configuration_adv.h中包含了更多高级参数，请谨慎设置参数！由于参数众多，以下只是列出部分参数，更多详细参数配置请查看 Marlin官方参数配置文档。 Configuration.h主">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-14T11:21:19.000Z">
-<meta property="article:modified_time" content="2025-03-22T05:22:57.874Z">
+<meta property="article:modified_time" content="2025-04-12T08:37:40.352Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="Marlin固件">
 <meta name="twitter:card" content="summary_large_image">
@@ -324,7 +324,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5.6k 字
+          5.7k 字
         
       </span>
     
@@ -388,7 +388,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年3月22日 下午
+                    本文最后更新于：2025年4月12日 下午
                   
                 
               </p>
@@ -397,7 +397,7 @@
               <div class="markdown-body">
                 
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在Marlin固件中，主要使用以下2个配置文件 (Configuration.h、Configuration_adv.h) 进行参数配置，其中<strong>Configuration.h</strong>包含了常用的基础参数，而<strong>Configuration_adv.h</strong>中包含了更多高级参数，请谨慎设置参数！由于参数众多，以下只是列出部分参数，更多详细参数配置请查看 <a target="_blank" rel="noopener" href="https://marlinfw.org/docs/configuration/configuration.html">Marlin官方参数配置文档</a>。</p>
-<h2 id="Configuration-h参数配置"><a href="#Configuration-h参数配置" class="headerlink" title="Configuration.h参数配置"></a>Configuration.h参数配置</h2><h3 id="主板"><a href="#主板" class="headerlink" title="主板"></a>主板</h3><h4 id="主板型号"><a href="#主板型号" class="headerlink" title="主板型号"></a>主板型号</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MOTHERBOARD BOARD_RAMPS_14_EFB</span><br></code></pre></td></tr></table></figure>
+<h2 id="Configuration-h"><a href="#Configuration-h" class="headerlink" title="Configuration.h"></a>Configuration.h</h2><h3 id="主板"><a href="#主板" class="headerlink" title="主板"></a>主板</h3><h4 id="主板型号"><a href="#主板型号" class="headerlink" title="主板型号"></a>主板型号</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MOTHERBOARD BOARD_RAMPS_14_EFB</span><br></code></pre></td></tr></table></figure>
 
 <p>更多主板型号请查看Marlin固件根目录下的 Marlin&#x2F;src&#x2F;core&#x2F;boards.h，根据自己的主板型号进行修改成对应的即可。</p>
 <h4 id="设置串口"><a href="#设置串口" class="headerlink" title="设置串口"></a>设置串口</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> SERIAL_PORT 0</span><br></code></pre></td></tr></table></figure>
@@ -412,9 +412,13 @@
 
 <p>选择一个辅助串口用于与主机通信。</p>
 <p>可选参数：<br><code>-2, -1, 0, 1, 2, 3, 4, 5, 6, 7</code><br>目前 Ethernet[-2] 仅在Teensy 4.1主板上支持。</p>
+<h4 id="辅助串口波特率设置"><a href="#辅助串口波特率设置" class="headerlink" title="辅助串口波特率设置"></a>辅助串口波特率设置</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> BAUDRATE_2 250000</span><br></code></pre></td></tr></table></figure>
+
+<p>过高的波特率可能会增加通讯失败的概率（受到环境干扰）。</p>
+<p>可选波特率：<br><code>2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000</code></p>
 <h4 id="UUID设置"><a href="#UUID设置" class="headerlink" title="UUID设置"></a>UUID设置</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MACHINE_UUID <span class="hljs-string">&quot;3682152d-530b-4428-944a-d0ab87819724&quot;</span></span><br></code></pre></td></tr></table></figure>
 
-<p>打印机唯一ID，用于区分不同的打印机。</p>
+<p>打印机唯一ID，在某些应用程序中用于区分不同的机器。</p>
 <h3 id="步进电机"><a href="#步进电机" class="headerlink" title="步进电机"></a>步进电机</h3><h4 id="电机驱动芯片型号"><a href="#电机驱动芯片型号" class="headerlink" title="电机驱动芯片型号"></a>电机驱动芯片型号</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_DRIVER_TYPE  TMC2209</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_DRIVER_TYPE  TMC2209</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_DRIVER_TYPE  TMC2209</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> E0_DRIVER_TYPE TMC2209</span><br></code></pre></td></tr></table></figure>
 
 <p>分别对应X、Y、Z、E轴的步进电机驱动芯片型号，不同的芯片型号可以混合使用。</p>
@@ -530,6 +534,14 @@
 <h4 id="归位速度"><a href="#归位速度" class="headerlink" title="归位速度"></a>归位速度</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> HOMING_FEEDRATE_MM_M &#123; (50*60), (50*60), (4*60) &#125;</span><br></code></pre></td></tr></table></figure>
 
 <p>分别代表X，Y，Z，E轴的归位速度；对于皮带传动，单位为：linear&#x3D;mm&#x2F;s，对于角度传动，单位为：rotational&#x3D;°&#x2F;s。</p>
+<h3 id="探针"><a href="#探针" class="headerlink" title="探针"></a>探针</h3><h4 id="启用探针"><a href="#启用探针" class="headerlink" title="启用探针"></a>启用探针</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN</span><br></code></pre></td></tr></table></figure>
+
+<p>启用连接到Z-MIN引脚的探针，用于Z轴归位。</p>
+<h4 id="探针类型"><a href="#探针类型" class="headerlink" title="探针类型"></a>探针类型</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br></code></pre></td></tr></table></figure>
+
+<h4 id="多次探测功能"><a href="#多次探测功能" class="headerlink" title="多次探测功能"></a>多次探测功能</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MULTIPLE_PROBING 2</span><br></code></pre></td></tr></table></figure>
+
+<p>进行2次探测可能会获得更好的结果。</p>
 <h3 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h3><h4 id="启用EEPROM"><a href="#启用EEPROM" class="headerlink" title="启用EEPROM"></a>启用EEPROM</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> EEPROM_SETTINGS</span><br></code></pre></td></tr></table></figure>
 
 <p>启用EEPROM存储功能，可以保存配置参数，并且断电不丢失；固件调试阶段建议关闭，防止将错误参数存放到EEPROM中，对后续调试造成不必要的麻烦。</p>
@@ -570,7 +582,7 @@
 
 <p>Marlin支持Prusa官方多色换料模块，更详细的配置操作请查看高级功能。</p>
 <p>可选型号：<br><code>PRUSA_MMU1, PRUSA_MMU2, PRUSA_MMU2S, EXTENDABLE_EMU_MMU2, EXTENDABLE_EMU_MMU2S</code></p>
-<h2 id="Configuration-adv-h参数配置"><a href="#Configuration-adv-h参数配置" class="headerlink" title="Configuration_adv.h参数配置"></a>Configuration_adv.h参数配置</h2><h3 id="设置挤出机热保护参数"><a href="#设置挤出机热保护参数" class="headerlink" title="设置挤出机热保护参数"></a>设置挤出机热保护参数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">if</span> ENABLED(THERMAL_PROTECTION_HOTENDS)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> THERMAL_PROTECTION_PERIOD 40        <span class="hljs-comment">// (seconds)</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> THERMAL_PROTECTION_HYSTERESIS 4     <span class="hljs-comment">// (°C)</span></span><br></code></pre></td></tr></table></figure>
+<h2 id="Configuration-adv-h"><a href="#Configuration-adv-h" class="headerlink" title="Configuration_adv.h"></a>Configuration_adv.h</h2><h3 id="设置挤出机热保护参数"><a href="#设置挤出机热保护参数" class="headerlink" title="设置挤出机热保护参数"></a>设置挤出机热保护参数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">if</span> ENABLED(THERMAL_PROTECTION_HOTENDS)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> THERMAL_PROTECTION_PERIOD 40        <span class="hljs-comment">// (seconds)</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> THERMAL_PROTECTION_HYSTERESIS 4     <span class="hljs-comment">// (°C)</span></span><br></code></pre></td></tr></table></figure>
 
 <p><code>THERMAL_PROTECTION_PERIOD</code>：加热超时时间，单位是秒(S)。<br><code>THERMAL_PROTECTION_HYSTERESIS</code>：温度值。</p>
 <p>当挤出机设定温度与实际温度差值超过<code>THERMAL_PROTECTION_PERIOD</code>且等待加热时间超过<code>THERMAL_PROTECTION_HYSTERESIS</code>时，Marlin固件会给出警告(<strong>E0 Heating failed</strong>)。</p>
@@ -591,11 +603,11 @@
 <p>设置Z探针可探测的热床区域，防止Z探针探测区域超出热床范围，导致喷嘴撞在热床上损坏。</p>
 <h3 id="电机驱动"><a href="#电机驱动" class="headerlink" title="电机驱动"></a>电机驱动</h3><h4 id="配置驱动参数"><a href="#配置驱动参数" class="headerlink" title="配置驱动参数"></a>配置驱动参数</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">if</span> AXIS_IS_TMC_CONFIG(X)</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_CURRENT       800        <span class="hljs-comment">// (mA) RMS current. Multiply by 1.414 for peak current.</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_CURRENT_HOME  X_CURRENT  <span class="hljs-comment">// (mA) RMS current for homing. (Typically lower than *_CURRENT.)</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_MICROSTEPS     16        <span class="hljs-comment">// 0..256</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_RSENSE          0.11     <span class="hljs-comment">// Multiplied x1000 for TMC26X</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_CHAIN_POS      -1        <span class="hljs-comment">// -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...</span></span><br>    <span class="hljs-comment">//#define X_INTERPOLATE  true      // Enable to override &#x27;INTERPOLATE&#x27; for the X axis</span><br>    <span class="hljs-comment">//#define X_HOLD_MULTIPLIER 0.5    // Enable to override &#x27;HOLD_MULTIPLIER&#x27; for the X axis</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
 
-<p>此处只列举X轴的驱动配置，其他轴的驱动设置以此类推；</p>
+<p>此设置只对TMC驱动才有效，上述配置只列举X轴，其他轴的驱动配置以此类推；</p>
 <p><code>X_CURRENT</code>：电机驱动电流<br><code>X_CURRENT_HOME</code>：无限位归位时的电流<br><code>X_MICROSTEPS</code>：驱动细分数<br><code>X_RSENSE</code>：采样电阻阻值<br><code>X_CHAIN_POS</code>：SPI模式的CS<br><code>X_INTERPOLATE</code>：TMC驱动插值算法（可降低打印机移动时的噪音，但是会引入少量系统位置误差）<br><code>X_HOLD_MULTIPLIER</code>：保持电流</p>
 <h4 id="TMC驱动stealthChop模式"><a href="#TMC驱动stealthChop模式" class="headerlink" title="TMC驱动stealthChop模式"></a>TMC驱动stealthChop模式</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">if</span> HAS_STEALTHCHOP</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_XY</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_Z</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_I</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_J</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_K</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_U</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_V</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_W</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_E</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
 
-<p>当Configuration.h -&gt; X_DRIVER_TYPE 驱动器型号配置为支持stealthChop模式的TMC驱动时，会启用stealthChop模式。<br>stealthChop模式：噪音更小，但是会引入系统误差。<br>spreadCycle模式：提供更大的扭矩和更高的精度，但是会有明显噪音。</p>
+<p>当Configuration.h -&gt; X_DRIVER_TYPE 驱动器型号配置为支持stealthChop模式的TMC驱动时，会默认启用stealthChop模式，如果不想使用可以注释掉对应的。<br>stealthChop模式：噪音更小，但是会引入系统误差。<br>spreadCycle模式：提供更大的扭矩和更高的精度，但是会有明显噪音。</p>
 <h3 id="优化斩波器参数"><a href="#优化斩波器参数" class="headerlink" title="优化斩波器参数"></a>优化斩波器参数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> CHOPPER_TIMING CHOPPER_DEFAULT_12V</span><br></code></pre></td></tr></table></figure>
 
 <p>使用预定义的参数集优化spreadCycle斩波器参数，请按照供电电压来设置正确的斩波器参数。</p>

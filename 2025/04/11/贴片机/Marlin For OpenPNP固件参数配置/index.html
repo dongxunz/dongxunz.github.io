@@ -1,0 +1,908 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言Smoothieboard固件项目的README概述里说该项目适用于LPC17xx微控制器，但将固件烧录到BTT SKR V1.4（LPC1768）主板后，连最基础的移动都无法执行，串口会返回答复：printe pause，使用OpenPNP软件检测固件时也会打印已弃用的警告信息：WARNING:deprecated_MCU。如果烧录到BTT SKR V1.4 Turbo（LPC1769）主板">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Marlin For OpenPNP固件参数配置">
+<meta property="og:url" content="https://dongxunz.github.io/2025/04/11/%E8%B4%B4%E7%89%87%E6%9C%BA/Marlin%20For%20OpenPNP%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言Smoothieboard固件项目的README概述里说该项目适用于LPC17xx微控制器，但将固件烧录到BTT SKR V1.4（LPC1768）主板后，连最基础的移动都无法执行，串口会返回答复：printe pause，使用OpenPNP软件检测固件时也会打印已弃用的警告信息：WARNING:deprecated_MCU。如果烧录到BTT SKR V1.4 Turbo（LPC1769）主板">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-11T04:24:14.000Z">
+<meta property="article:modified_time" content="2025-04-13T06:02:12.252Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="OpenPNP">
+<meta property="article:tag" content="Marlin">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Marlin For OpenPNP固件参数配置 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                <span>分享</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
+                    <i class="iconfont icon-apple-fill"></i>
+                    <span>电路</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    <span>结构</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/music/" target="_self">
+                    <i class="iconfont icon-music"></i>
+                    <span>音乐</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>游戏</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
+                    <i class="iconfont icon-book"></i>
+                    <span>阅读角</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Marlin For OpenPNP固件参数配置"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-11 12:24" pubdate>
+          2025年4月11日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Marlin For OpenPNP固件参数配置</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2025年4月13日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a target="_blank" rel="noopener" href="https://github.com/Smoothieware/Smoothieware">Smoothieboard固件项目</a>的README概述里说该项目适用于LPC17xx微控制器，但将固件烧录到BTT SKR V1.4（LPC1768）主板后，连最基础的移动都无法执行，串口会返回答复：<code>printe pause</code>，使用OpenPNP软件检测固件时也会打印已弃用的警告信息：<code>WARNING:deprecated_MCU</code>。<br>如果烧录到BTT SKR V1.4 Turbo（LPC1769）主板则是可以正常使用，暂不清楚导致该情况的具体原因。<br>而且该项目已经多年未维护，很多功能也不支持，所以本文章针对BTT SKR V1.4（LPC1768）主板，使用当前最新的Marlin-2.1.2.5版本进行OpenPNP配置，以下只列出部分参数，仅供参考，更多详细参数配置请查看 <a target="_blank" rel="noopener" href="https://marlinfw.org/docs/configuration/configuration.html">Marlin官方参数配置文档</a>。</p>
+<h2 id="pins-BTT-SKR-V1-4-h"><a href="#pins-BTT-SKR-V1-4-h" class="headerlink" title="pins_BTT_SKR_V1_4.h"></a>pins_BTT_SKR_V1_4.h</h2><h3 id="定义I、J轴限位引脚"><a href="#定义I、J轴限位引脚" class="headerlink" title="定义I、J轴限位引脚"></a>定义I、J轴限位引脚</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> I_STALL_SENSITIVITY</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_STOP_PIN                  Y_DIAG_PIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">if</span> I_HOME_TO_MIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MAX_PIN                      P1_26  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MIN_PIN                      P1_26  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> ENABLED(I_DUAL_ENDSTOPS)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> I_MIN_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MIN_PIN                      P1_26  <span class="hljs-comment">// Y-STOP</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> I_MAX_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MAX_PIN                      P1_26  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_STOP_PIN                       P1_26  <span class="hljs-comment">// Y-STOP</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> J_STALL_SENSITIVITY</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_STOP_PIN                  Y_DIAG_PIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">if</span> J_HOME_TO_MIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MAX_PIN                      P1_25  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MIN_PIN                      P1_25  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> ENABLED(J_DUAL_ENDSTOPS)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> J_MIN_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MIN_PIN                      P1_25  <span class="hljs-comment">// Y-STOP</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> J_MAX_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MAX_PIN                      P1_25  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_STOP_PIN                       P1_25  <span class="hljs-comment">// Y-STOP</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<p>手动新增I、J轴限位引脚定义，否则Marlin在编译时会报错，提示没有定义相应的限位引脚，在实际使用时基本上用不到该引脚。</p>
+<h2 id="Configuration-h"><a href="#Configuration-h" class="headerlink" title="Configuration.h"></a>Configuration.h</h2><h3 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> STRING_CONFIG_H_AUTHOR <span class="hljs-string">&quot;(dongxunz, openpnp config)&quot;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>固件配置作者名及当前配置的类型，可视情况进行修改。</p>
+<h3 id="UUID设置"><a href="#UUID设置" class="headerlink" title="UUID设置"></a>UUID设置</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MACHINE_UUID <span class="hljs-string">&quot;6a9922cf-9c52-4f8e-ae01-a0cb7f963f31&quot;</span></span><br></code></pre></td></tr></table></figure>
+
+<p>机器唯一ID，在某些应用程序中用于区分不同的机器。</p>
+<h3 id="主板型号"><a href="#主板型号" class="headerlink" title="主板型号"></a>主板型号</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MOTHERBOARD BOARD_BTT_SKR_V1_4            <span class="hljs-comment">//BTT SKR V1.4（LPC1768）</span></span><br><span class="hljs-comment">//#define MOTHERBOARD BOARD_BTT_SKR_V1_4_TURBO    //BTT SKR V1.4 Turbo（LPC1769）</span><br></code></pre></td></tr></table></figure>
+
+<p>其他主板型号请查看Marlin固件根目录下的 Marlin&#x2F;src&#x2F;core&#x2F;boards.h，根据自己的主板型号进行修改成对应的即可。</p>
+<h3 id="设置串口"><a href="#设置串口" class="headerlink" title="设置串口"></a>设置串口</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> SERIAL_PORT -1</span><br></code></pre></td></tr></table></figure>
+
+<p>BTT SKR V1.4（LPC1768）主板只有一个USB口，所以配置为-1，代表使用USB模拟串行端口。</p>
+<h3 id="波特率设置"><a href="#波特率设置" class="headerlink" title="波特率设置"></a>波特率设置</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> BAUDRATE 115200</span><br></code></pre></td></tr></table></figure>
+
+<p>过高的波特率可能会增加通讯失败的概率（受到环境干扰）。</p>
+<p>可选波特率：<br><code>2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000</code></p>
+<h3 id="电机驱动芯片型号"><a href="#电机驱动芯片型号" class="headerlink" title="电机驱动芯片型号"></a>电机驱动芯片型号</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_DRIVER_TYPE  TMC2209</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_DRIVER_TYPE  TMC2209</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_DRIVER_TYPE  TMC2209</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> E0_DRIVER_TYPE TMC2209</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> E1_DRIVER_TYPE TMC2209</span><br></code></pre></td></tr></table></figure>
+
+<p>对于一般的5轴贴片机来说，通常情况下需要使用5个电机驱动，所以就要指定X、Y、Z、E0、E1轴的步进电机驱动芯片型号，不同的芯片型号可以混合使用。</p>
+<p>可选电机驱动芯片型号：<br><code>&#39;A4988&#39;, &#39;A5984&#39;, &#39;DRV8825&#39;, &#39;LV8729&#39;, &#39;L6470&#39;, &#39;L6474&#39;, &#39;POWERSTEP01&#39;, &#39;TB6560&#39;, &#39;TB6600&#39;, &#39;TMC2100&#39;, &#39;TMC2130&#39;, &#39;TMC2130_STANDALONE&#39;, &#39;TMC2160&#39;, &#39;TMC2160_STANDALONE&#39;, &#39;TMC2208&#39;, &#39;TMC2208_STANDALONE&#39;, &#39;TMC2209&#39;, &#39;TMC2209_STANDALONE&#39;, &#39;TMC26X&#39;, &#39;TMC26X_STANDALONE&#39;, &#39;TMC2660&#39;, &#39;TMC2660_STANDALONE&#39;, &#39;TMC5130&#39;, &#39;TMC5130_STANDALONE&#39;, &#39;TMC5160&#39;, &#39;TMC5160_STANDALONE&#39;</code></p>
+<p>注意：<br><code>_STANDALONE</code> 后缀表示不启用UART模式，使用STEP模式。</p>
+<h3 id="挤出机数量"><a href="#挤出机数量" class="headerlink" title="挤出机数量"></a>挤出机数量</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> EXTRUDERS 2</span><br></code></pre></td></tr></table></figure>
+
+<p>在OpenPNP软件中，2个挤出机会被定义为2个旋转轴：C1和C2轴。</p>
+<h3 id="温度传感器"><a href="#温度传感器" class="headerlink" title="温度传感器"></a>温度传感器</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> TEMP_SENSOR_0 998</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> TEMP_SENSOR_1 998</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> TEMP_SENSOR_BED 998</span><br></code></pre></td></tr></table></figure>
+
+<p>将板载的3个温度传感器接口都定义为<code>998</code>，即表示让温度恒定为25°C（不使用温度功能，可视情况修改）。</p>
+<h3 id="关闭挤出机PID加热控制"><a href="#关闭挤出机PID加热控制" class="headerlink" title="关闭挤出机PID加热控制"></a>关闭挤出机PID加热控制</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//#define PIDTEMP           // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning</span><br></code></pre></td></tr></table></figure>
+
+<p>关闭挤出机的PID加热控制功能。</p>
+<h3 id="运动学"><a href="#运动学" class="headerlink" title="运动学"></a>运动学</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// Enable one of the options below for CoreXY, CoreXZ, or CoreYZ kinematics,</span><br><span class="hljs-comment">// either in the usual order or reversed</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> COREXY</span><br><span class="hljs-comment">//#define COREXZ</span><br><span class="hljs-comment">//#define COREYZ</span><br><span class="hljs-comment">//#define COREYX</span><br><span class="hljs-comment">//#define COREZX</span><br><span class="hljs-comment">//#define COREZY</span><br></code></pre></td></tr></table></figure>
+
+<p>不启用任何运动学即为默认的笛卡尔运动坐标系，请根据实际机器运动学启用对应的，我的机器为CoreXY，所以启用了对应的。</p>
+<h3 id="硬件限位"><a href="#硬件限位" class="headerlink" title="硬件限位"></a>硬件限位</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> USE_XMIN_PLUG</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> USE_YMIN_PLUG</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> USE_ZMIN_PLUG</span><br></code></pre></td></tr></table></figure>
+
+<p>启用X、Y、Z轴的最小行程限位功能，请根据实际机器限位位置来定义是使用最小限位还是最大限位。</p>
+<h3 id="限位硬件上拉"><a href="#限位硬件上拉" class="headerlink" title="限位硬件上拉"></a>限位硬件上拉</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> ENDSTOPPULLUPS</span><br><span class="hljs-meta">#<span class="hljs-keyword">if</span> DISABLED(ENDSTOPPULLUPS)</span><br>  <span class="hljs-comment">// Disable ENDSTOPPULLUPS to set pullups individually</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> ENDSTOPPULLUP_XMIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> ENDSTOPPULLUP_YMIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> ENDSTOPPULLUP_ZMIN</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_IMIN</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_JMIN</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_KMIN</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_UMIN</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_VMIN</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_WMIN</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_XMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_YMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_ZMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_IMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_JMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_KMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_UMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_VMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_WMAX</span><br>  <span class="hljs-comment">//#define ENDSTOPPULLUP_ZMIN_PROBE</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<p>对启用的限位引脚启用上拉，以防止浮动造成的异常情况。</p>
+<h3 id="硬限位判定逻辑"><a href="#硬限位判定逻辑" class="headerlink" title="硬限位判定逻辑"></a>硬限位判定逻辑</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_MIN_ENDSTOP_INVERTING false <span class="hljs-comment">// Set to true to invert the logic of the endstop.</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_MIN_ENDSTOP_INVERTING false <span class="hljs-comment">// Set to true to invert the logic of the endstop.</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_MIN_ENDSTOP_INVERTING false <span class="hljs-comment">// Set to true to invert the logic of the endstop.</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_MIN_PROBE_ENDSTOP_INVERTING false <span class="hljs-comment">// Set to true to invert the logic of the probe.</span></span><br></code></pre></td></tr></table></figure>
+
+<p>硬限位逻辑电平判定，根据实际限位接线及触发信号进行修改。</p>
+<h3 id="归位限位信号检查"><a href="#归位限位信号检查" class="headerlink" title="归位限位信号检查"></a>归位限位信号检查</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DETECT_BROKEN_ENDSTOP</span><br></code></pre></td></tr></table></figure>
+
+<p>归位时对限位进行检查，检查是否卡住或断开。</p>
+<h3 id="E轴不共用参数"><a href="#E轴不共用参数" class="headerlink" title="E轴不共用参数"></a>E轴不共用参数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DISTINCT_E_FACTORS</span><br></code></pre></td></tr></table></figure>
+
+<p>默认所有E轴都是共用参数的，启用后各E轴都单独使用各自的参数。</p>
+<h3 id="每移动1mm所需脉冲数"><a href="#每移动1mm所需脉冲数" class="headerlink" title="每移动1mm所需脉冲数"></a>每移动1mm所需脉冲数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEFAULT_AXIS_STEPS_PER_UNIT   &#123; 160, 160, 160, 500, 500 &#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>分别代表X、Y、Z、E轴每移动1mm需要多少脉冲，计算公式：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs text">同步带传动（通常是X，Y轴）：<br>(360°/步距角*细分数)/(齿间距*齿数)=(360/1.8*32)/(2*20)=160<br><br>丝杆传动（通常是Z轴）：<br>(360°/步距角*细分数)/丝杆导程=(360/1.8*16)/8=400<br><br>齿轮传动（通常是E轴）：<br>(360°/步距角*细分数)/挤出轮周长=(360/1.8*16)/(7.2Π)=141.542817<br></code></pre></td></tr></table></figure>
+
+<h3 id="默认最大进给率"><a href="#默认最大进给率" class="headerlink" title="默认最大进给率"></a>默认最大进给率</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEFAULT_MAX_FEEDRATE          &#123; 300, 300, 5, 25, 25 &#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>分别代表X，Y，Z，E0、E1轴的默认最大进给率；对于皮带传动，单位为：linear&#x3D;mm&#x2F;s，对于角度传动，单位为：rotational&#x3D;°&#x2F;s。</p>
+<h3 id="默认最大加速度"><a href="#默认最大加速度" class="headerlink" title="默认最大加速度"></a>默认最大加速度</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEFAULT_MAX_ACCELERATION      &#123; 3000, 3000, 100, 10000 &#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>分别代表X，Y，Z，E0、E1轴的默认最大加速度；对于皮带传动，单位为：linear&#x3D;mm&#x2F;(s^2)，对于角度传动，单位为：rotational&#x3D;°&#x2F;(s^2)。</p>
+<h3 id="默认加速度"><a href="#默认加速度" class="headerlink" title="默认加速度"></a>默认加速度</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEFAULT_ACCELERATION          3000</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEFAULT_RETRACT_ACCELERATION  3000</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEFAULT_TRAVEL_ACCELERATION   3000</span><br></code></pre></td></tr></table></figure>
+
+<p>分别代表打印时默认加速度，默认回抽加速度，默认空驶加速度；对于皮带传动，单位为：linear&#x3D;mm&#x2F;(s^2)，对于角度传动，单位为：rotational&#x3D;°&#x2F;(s^2)。</p>
+<h3 id="线性挤出"><a href="#线性挤出" class="headerlink" title="线性挤出"></a>线性挤出</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEFAULT_EJERK    0  <span class="hljs-comment">// May be used by Linear Advance</span></span><br></code></pre></td></tr></table></figure>
+
+<p>在3D打印里该功能俗称压力提前，贴片机无需此功能，将值改为0即可。</p>
+<h3 id="S曲线加速度"><a href="#S曲线加速度" class="headerlink" title="S曲线加速度"></a>S曲线加速度</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> S_CURVE_ACCELERATION</span><br></code></pre></td></tr></table></figure>
+
+<p>控制加速度曲线（S曲线），可以减少机器震动和共振，电机运动更安静平稳。</p>
+<h3 id="Z探针"><a href="#Z探针" class="headerlink" title="Z探针"></a>Z探针</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN</span><br></code></pre></td></tr></table></figure>
+
+<p>关闭Z探针功能。</p>
+<h3 id="喷嘴偏移"><a href="#喷嘴偏移" class="headerlink" title="喷嘴偏移"></a>喷嘴偏移</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> NOZZLE_TO_PROBE_OFFSET &#123; 0, 0, 0 &#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>贴片机用不到该功能，都设置为0即可。</p>
+<h3 id="电机使能"><a href="#电机使能" class="headerlink" title="电机使能"></a>电机使能</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_ENABLE_ON 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_ENABLE_ON 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_ENABLE_ON 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> E_ENABLE_ON 0 <span class="hljs-comment">// For all extruders</span></span><br></code></pre></td></tr></table></figure>
+
+<p>各轴电机使能的逻辑电平，0：低电平，1：高电平。</p>
+<h3 id="电机方向"><a href="#电机方向" class="headerlink" title="电机方向"></a>电机方向</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> INVERT_X_DIR true</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INVERT_Y_DIR true</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INVERT_Z_DIR true</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INVERT_E0_DIR true</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INVERT_E1_DIR true</span><br></code></pre></td></tr></table></figure>
+
+<p>各轴电机旋转方向逻辑电平，true：高电平，false：低电平。</p>
+<h3 id="归位方向"><a href="#归位方向" class="headerlink" title="归位方向"></a>归位方向</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_HOME_DIR -1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_HOME_DIR -1</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_HOME_DIR -1</span><br></code></pre></td></tr></table></figure>
+
+<p>各轴归位时的方向，-1：MIN，1：MAX。</p>
+<h3 id="机器尺寸"><a href="#机器尺寸" class="headerlink" title="机器尺寸"></a>机器尺寸</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_BED_SIZE 200</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_BED_SIZE 200</span><br></code></pre></td></tr></table></figure>
+
+<p>机器最大移动的距离，请按照实际情况修改。</p>
+<h3 id="归位坐标位置"><a href="#归位坐标位置" class="headerlink" title="归位坐标位置"></a>归位坐标位置</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_MIN_POS 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_MIN_POS 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_MIN_POS 0</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> X_MAX_POS X_BED_SIZE</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Y_MAX_POS Y_BED_SIZE</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> Z_MAX_POS 200</span><br></code></pre></td></tr></table></figure>
+
+<p>设置归位后的坐标，对应于机器实际限位开关的位置。</p>
+<h3 id="最小软限位"><a href="#最小软限位" class="headerlink" title="最小软限位"></a>最小软限位</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MIN_SOFTWARE_ENDSTOP_X</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MIN_SOFTWARE_ENDSTOP_Y</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MIN_SOFTWARE_ENDSTOP_Z</span><br></code></pre></td></tr></table></figure>
+
+<p>启用对应轴的最小软限位功能，防止硬限位损坏时机器归位发生意外情况。</p>
+<h3 id="最大软限位"><a href="#最大软限位" class="headerlink" title="最大软限位"></a>最大软限位</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MIN_SOFTWARE_ENDSTOP_X</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MIN_SOFTWARE_ENDSTOP_Y</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> MIN_SOFTWARE_ENDSTOP_Z</span><br></code></pre></td></tr></table></figure>
+
+<p>启用对应轴的最大软限位功能，防止机器移动过程中超过设定的最大值而发生意外情况。</p>
+<h3 id="启用详细记录"><a href="#启用详细记录" class="headerlink" title="启用详细记录"></a>启用详细记录</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> DEBUG_LEVELING_FEATURE</span><br></code></pre></td></tr></table></figure>
+
+<p>启用执行G28、G29、M48代码的详细记录，需要占用较大的flash空间，请按需考虑是否开启。</p>
+<h3 id="手动设置Z起始位置"><a href="#手动设置Z起始位置" class="headerlink" title="手动设置Z起始位置"></a>手动设置Z起始位置</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> MANUAL_Z_HOME_POS 0</span><br></code></pre></td></tr></table></figure>
+
+<p>对于贴片机而言，Z轴控制着2个旋转轴的高低，当Z轴归位时触发到限位后，此时2个旋转轴并不是齐平的，所以需要设置归位后，Z轴需要移动多少的距离来使2个旋转轴保持齐平，需要实测后修改。</p>
+<h2 id="Configuration-adv-h"><a href="#Configuration-adv-h" class="headerlink" title="Configuration_adv.h"></a>Configuration_adv.h</h2><h3 id="配置驱动参数"><a href="#配置驱动参数" class="headerlink" title="配置驱动参数"></a>配置驱动参数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">if</span> AXIS_IS_TMC_CONFIG(X)</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_CURRENT       800        <span class="hljs-comment">// (mA) RMS current. Multiply by 1.414 for peak current.</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_CURRENT_HOME  X_CURRENT  <span class="hljs-comment">// (mA) RMS current for homing. (Typically lower than *_CURRENT.)</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_MICROSTEPS     32        <span class="hljs-comment">// 0..256</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_RSENSE          0.11     <span class="hljs-comment">// Multiplied x1000 for TMC26X</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> X_CHAIN_POS      -1        <span class="hljs-comment">// -1..0: Not chained. 1: MCU MOSI connected. 2: Next in chain, ...</span></span><br>    <span class="hljs-comment">//#define X_INTERPOLATE  true      // Enable to override &#x27;INTERPOLATE&#x27; for the X axis</span><br>    <span class="hljs-comment">//#define X_HOLD_MULTIPLIER 0.5    // Enable to override &#x27;HOLD_MULTIPLIER&#x27; for the X axis</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<p>此设置只对TMC驱动才有效，上述配置只列举X轴，其他轴的驱动配置以此类推；</p>
+<p><code>X_CURRENT</code>：电机驱动电流<br><code>X_CURRENT_HOME</code>：无限位归位时的电流<br><code>X_MICROSTEPS</code>：驱动细分数<br><code>X_RSENSE</code>：采样电阻阻值<br><code>X_CHAIN_POS</code>：SPI模式的CS<br><code>X_INTERPOLATE</code>：TMC驱动插值算法（可降低打印机移动时的噪音，但是会引入少量系统位置误差）<br><code>X_HOLD_MULTIPLIER</code>：保持电流</p>
+<h3 id="TMC驱动stealthChop模式"><a href="#TMC驱动stealthChop模式" class="headerlink" title="TMC驱动stealthChop模式"></a>TMC驱动stealthChop模式</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">if</span> HAS_STEALTHCHOP</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_XY</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_Z</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_I</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_J</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_K</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_U</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_V</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_W</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> STEALTHCHOP_E</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<p>当Configuration.h -&gt; X_DRIVER_TYPE 驱动器型号配置为支持stealthChop模式的TMC驱动时，会默认启用stealthChop模式，如果不想使用可以注释掉对应的（实测Marlin使用spreadCycle模式时，电机运行时有细微的抖动，且噪音明显，不建议启用）。<br>stealthChop模式：噪音更小，但是会引入系统误差。<br>spreadCycle模式：提供更大的扭矩和更高的精度，但是会有明显噪音。</p>
+<h3 id="优化斩波器参数"><a href="#优化斩波器参数" class="headerlink" title="优化斩波器参数"></a>优化斩波器参数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> CHOPPER_TIMING CHOPPER_DEFAULT_24V</span><br></code></pre></td></tr></table></figure>
+
+<p>使用预定义的参数集优化spreadCycle斩波器参数，请按照驱动供电电压来设置正确的斩波器参数。</p>
+<p>可选参数：<br><code>CHOPPER_DEFAULT_12V</code><br><code>CHOPPER_DEFAULT_19V</code><br><code>CHOPPER_DEFAULT_24V</code><br><code>CHOPPER_DEFAULT_36V</code><br><code>CHOPPER_09STEP_24V   // 0.9 degree steppers (24V)</code><br><code>CHOPPER_PRUSAMK3_24V // Imported parameters from the official Průša firmware for MK3 (24V)</code><br><code>CHOPPER_MARLIN_119   // Old defaults from Marlin v1.1.9</code></p>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%B4%B4%E7%89%87%E6%9C%BA/" class="category-chain-item">贴片机</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OpenPNP/" class="print-no-link">#OpenPNP</a>
+      
+        <a href="/tags/Marlin/" class="print-no-link">#Marlin</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Marlin For OpenPNP固件参数配置</div>
+      <div>https://dongxunz.github.io/2025/04/11/贴片机/Marlin For OpenPNP固件参数配置/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月11日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/04/09/%E8%B4%B4%E7%89%87%E6%9C%BA/OpenPNP%E9%87%8C%E7%A8%8B%E7%A2%91%E9%85%8D%E7%BD%AE/" title="OpenPNP里程碑配置">
+                        <span class="hidden-mobile">OpenPNP里程碑配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>
