@@ -29,7 +29,7 @@
 <meta property="og:description" content="前言Smoothieboard固件项目的README概述里说该项目适用于LPC17xx微控制器，但将固件烧录到BTT SKR V1.4（LPC1768）主板后，连最基础的移动都无法执行，串口会返回答复：printe pause，使用OpenPNP软件检测固件时也会打印已弃用的警告信息：WARNING:deprecated_MCU。如果烧录到BTT SKR V1.4 Turbo（LPC1769）主板">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-04-11T04:24:14.000Z">
-<meta property="article:modified_time" content="2025-04-13T06:02:12.252Z">
+<meta property="article:modified_time" content="2025-04-14T15:44:26.109Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="OpenPNP">
 <meta property="article:tag" content="Marlin">
@@ -325,7 +325,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.2k 字
+          2.4k 字
         
       </span>
     
@@ -337,7 +337,7 @@
         
         
           <!-- compatible with older versions-->
-          7 分钟
+          8 分钟
         
       </span>
     
@@ -389,7 +389,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年4月13日 下午
+                    本文最后更新于：2025年4月14日 晚上
                   
                 
               </p>
@@ -398,9 +398,15 @@
               <div class="markdown-body">
                 
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a target="_blank" rel="noopener" href="https://github.com/Smoothieware/Smoothieware">Smoothieboard固件项目</a>的README概述里说该项目适用于LPC17xx微控制器，但将固件烧录到BTT SKR V1.4（LPC1768）主板后，连最基础的移动都无法执行，串口会返回答复：<code>printe pause</code>，使用OpenPNP软件检测固件时也会打印已弃用的警告信息：<code>WARNING:deprecated_MCU</code>。<br>如果烧录到BTT SKR V1.4 Turbo（LPC1769）主板则是可以正常使用，暂不清楚导致该情况的具体原因。<br>而且该项目已经多年未维护，很多功能也不支持，所以本文章针对BTT SKR V1.4（LPC1768）主板，使用当前最新的Marlin-2.1.2.5版本进行OpenPNP配置，以下只列出部分参数，仅供参考，更多详细参数配置请查看 <a target="_blank" rel="noopener" href="https://marlinfw.org/docs/configuration/configuration.html">Marlin官方参数配置文档</a>。</p>
+<blockquote>
+<p>如果主板烧录了Smoothieware固件的DFU-Bootloader，只要将主板通过USB线连接上电脑后，就会将TF卡模拟成U盘，这样每次更新新编译的firmware.bin文件时，直接将固件文件复制进去，然后弹出U盘并断电重启，就能直接刷写新固件了。😀</p>
+</blockquote>
 <h2 id="pins-BTT-SKR-V1-4-h"><a href="#pins-BTT-SKR-V1-4-h" class="headerlink" title="pins_BTT_SKR_V1_4.h"></a>pins_BTT_SKR_V1_4.h</h2><h3 id="定义I、J轴限位引脚"><a href="#定义I、J轴限位引脚" class="headerlink" title="定义I、J轴限位引脚"></a>定义I、J轴限位引脚</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> I_STALL_SENSITIVITY</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_STOP_PIN                  Y_DIAG_PIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">if</span> I_HOME_TO_MIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MAX_PIN                      P1_26  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MIN_PIN                      P1_26  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> ENABLED(I_DUAL_ENDSTOPS)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> I_MIN_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MIN_PIN                      P1_26  <span class="hljs-comment">// Y-STOP</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> I_MAX_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_MAX_PIN                      P1_26  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_STOP_PIN                       P1_26  <span class="hljs-comment">// Y-STOP</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">ifdef</span> J_STALL_SENSITIVITY</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_STOP_PIN                  Y_DIAG_PIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">if</span> J_HOME_TO_MIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MAX_PIN                      P1_25  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MIN_PIN                      P1_25  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">elif</span> ENABLED(J_DUAL_ENDSTOPS)</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> J_MIN_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MIN_PIN                      P1_25  <span class="hljs-comment">// Y-STOP</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> J_MAX_PIN</span><br>    <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_MAX_PIN                      P1_25  <span class="hljs-comment">// JDET</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">else</span></span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_STOP_PIN                       P1_25  <span class="hljs-comment">// Y-STOP</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
 
 <p>手动新增I、J轴限位引脚定义，否则Marlin在编译时会报错，提示没有定义相应的限位引脚，在实际使用时基本上用不到该引脚。</p>
+<h3 id="配置I、J轴步进控制引脚"><a href="#配置I、J轴步进控制引脚" class="headerlink" title="配置I、J轴步进控制引脚"></a>配置I、J轴步进控制引脚</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> I_STEP_PIN                        P2_13</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> I_DIR_PIN                         P0_11</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> I_ENABLE_PIN                      P2_12</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> I_CS_PIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> I_CS_PIN                        P1_04</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> J_STEP_PIN                        P1_15</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> J_DIR_PIN                         P1_14</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> J_ENABLE_PIN                      P1_16</span><br><span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> J_CS_PIN</span><br>  <span class="hljs-meta">#<span class="hljs-keyword">define</span> J_CS_PIN                        P1_01</span><br><span class="hljs-meta">#<span class="hljs-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+<p>将E0、E1的步进控制引脚修改为对应的I、J轴，虽然不修改Marlin会自动配置，但是我测试时发现电机只能朝一个方向，无法换向，暂不清楚是不是Marlin的BUG。💦</p>
 <h2 id="Configuration-h"><a href="#Configuration-h" class="headerlink" title="Configuration.h"></a>Configuration.h</h2><h3 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> STRING_CONFIG_H_AUTHOR <span class="hljs-string">&quot;(dongxunz, openpnp config)&quot;</span></span><br></code></pre></td></tr></table></figure>
 
 <p>固件配置作者名及当前配置的类型，可视情况进行修改。</p>
