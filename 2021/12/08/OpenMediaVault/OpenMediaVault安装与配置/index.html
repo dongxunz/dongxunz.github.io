@@ -21,22 +21,21 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案">
+    <meta name="description" content="OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenMediaVault安装与配置">
 <meta property="og:url" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案">
+<meta property="og:description" content="OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/flash_img.png">
 <meta property="og:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png">
 <meta property="article:published_time" content="2021-12-08T12:08:00.000Z">
-<meta property="article:modified_time" content="2022-01-21T17:07:22.269Z">
+<meta property="article:modified_time" content="2025-04-24T16:50:09.898Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="OpenMediaVault">
 <meta property="article:tag" content="NAS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/flash_img.png">
+<meta name="twitter:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -328,7 +327,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          595 字
+          603 字
         
       </span>
     
@@ -392,7 +391,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2022年1月22日 凌晨
+                    本文最后更新于：2025年4月25日 凌晨
                   
                 
               </p>
@@ -400,15 +399,11 @@
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>OpenMediaVault 是基于Debian Linux的下一代网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。<br>OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无需深入了解。</p>
-</blockquote>
-<hr>
+                <p>OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。<br>OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无需深入了解。</p>
 <h2 id="安装OpenMediaVault"><a href="#安装OpenMediaVault" class="headerlink" title="安装OpenMediaVault"></a>安装OpenMediaVault</h2><h3 id="1-下载镜像文件"><a href="#1-下载镜像文件" class="headerlink" title="1. 下载镜像文件"></a>1. 下载镜像文件</h3><p><a target="_blank" rel="noopener" href="https://www.openmediavault.org/">Openmediavault官方网站</a></p>
-<h3 id="2-烧写镜像文件"><a href="#2-烧写镜像文件" class="headerlink" title="2. 烧写镜像文件"></a>2. 烧写镜像文件</h3><p><a target="_blank" rel="noopener" href="https://www.balena.io/etcher/">烧录镜像文件工具</a></p>
-<p><img src="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/flash_img.png" srcset="/img/loading.gif" lazyload alt="烧写镜像文件操作"></p>
-<h3 id="3-开机启动"><a href="#3-开机启动" class="headerlink" title="3. 开机启动"></a>3. 开机启动</h3><hr>
-<h2 id="配置OpenMediaVault"><a href="#配置OpenMediaVault" class="headerlink" title="配置OpenMediaVault"></a>配置OpenMediaVault</h2><h3 id="开启WIFI"><a href="#开启WIFI" class="headerlink" title="开启WIFI"></a>开启WIFI</h3><h4 id="1-查看WIFI网卡名称："><a href="#1-查看WIFI网卡名称：" class="headerlink" title="1. 查看WIFI网卡名称："></a>1. 查看WIFI网卡名称：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> iwconfig<br></code></pre></td></tr></table></figure>
+<h3 id="2-烧写镜像文件"><a href="#2-烧写镜像文件" class="headerlink" title="2. 烧写镜像文件"></a>2. 烧写镜像文件</h3><p>下载并安装<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>软件，先对U盘擦除再进行镜像烧录。</p>
+<h3 id="3-开机启动"><a href="#3-开机启动" class="headerlink" title="3. 开机启动"></a>3. 开机启动</h3><h4 id="配置OpenMediaVault"><a href="#配置OpenMediaVault" class="headerlink" title="配置OpenMediaVault"></a>配置OpenMediaVault</h4><h5 id="配置WIFI"><a href="#配置WIFI" class="headerlink" title="配置WIFI"></a>配置WIFI</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> iwconfig<br></code></pre></td></tr></table></figure>
+
 <p>如下图，其中<code>wlp4s0</code>就是我的WIFI网卡名称：<br><img src="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png" srcset="/img/loading.gif" lazyload alt="查看WIFI网卡名称">.</p>
 <h4 id="2-配置相关文件："><a href="#2-配置相关文件：" class="headerlink" title="2. 配置相关文件："></a>2. 配置相关文件：</h4><ul>
 <li>由于在最新的系统中，interface文件被系统自动管理，所以我们首先需要操作一下相关服务：</li>
