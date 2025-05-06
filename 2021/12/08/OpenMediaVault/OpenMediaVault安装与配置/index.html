@@ -21,21 +21,21 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个">
+    <meta name="description" content="OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强；主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenMediaVault安装与配置">
 <meta property="og:url" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个">
+<meta property="og:description" content="OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强；主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png">
+<meta property="og:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_network_card.png">
 <meta property="article:published_time" content="2021-12-08T12:08:00.000Z">
-<meta property="article:modified_time" content="2025-04-24T16:50:09.898Z">
+<meta property="article:modified_time" content="2025-05-06T04:58:37.980Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="OpenMediaVault">
 <meta property="article:tag" content="NAS">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png">
+<meta name="twitter:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_network_card.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -327,7 +327,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          603 字
+          855 字
         
       </span>
     
@@ -339,7 +339,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -391,7 +391,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年4月25日 凌晨
+                    本文最后更新于：2025年5月6日 下午
                   
                 
               </p>
@@ -399,54 +399,124 @@
             
               <div class="markdown-body">
                 
-                <p>OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强。<br>OpenMediaVault 主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无需深入了解。</p>
-<h2 id="安装OpenMediaVault"><a href="#安装OpenMediaVault" class="headerlink" title="安装OpenMediaVault"></a>安装OpenMediaVault</h2><h3 id="1-下载镜像文件"><a href="#1-下载镜像文件" class="headerlink" title="1. 下载镜像文件"></a>1. 下载镜像文件</h3><p><a target="_blank" rel="noopener" href="https://www.openmediavault.org/">Openmediavault官方网站</a></p>
-<h3 id="2-烧写镜像文件"><a href="#2-烧写镜像文件" class="headerlink" title="2. 烧写镜像文件"></a>2. 烧写镜像文件</h3><p>下载并安装<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>软件，先对U盘擦除再进行镜像烧录。</p>
-<h3 id="3-开机启动"><a href="#3-开机启动" class="headerlink" title="3. 开机启动"></a>3. 开机启动</h3><h4 id="配置OpenMediaVault"><a href="#配置OpenMediaVault" class="headerlink" title="配置OpenMediaVault"></a>配置OpenMediaVault</h4><h5 id="配置WIFI"><a href="#配置WIFI" class="headerlink" title="配置WIFI"></a>配置WIFI</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> iwconfig<br></code></pre></td></tr></table></figure>
+                <p>OpenMediaVault是基于Debian系统进行开发的网络附加存储 (NAS) 解决方案。它包含 SSH、(S)FTP、SMB&#x2F;CIFS、DAAP媒体服务器、RSync、BitTorrent客户端等服务。由于框架的模块化设计，它可以通过插件进行增强；主要设计用于小型办公室或家庭办公室，但不限于这些场景。这是一个简单且易于使用的开箱即用解决方案，允许每个人安装和管理网络附加存储，而无需深入了解。</p>
+<h2 id="安装OpenMediaVault"><a href="#安装OpenMediaVault" class="headerlink" title="安装OpenMediaVault"></a>安装OpenMediaVault</h2><h3 id="下载镜像文件"><a href="#下载镜像文件" class="headerlink" title="下载镜像文件"></a>下载镜像文件</h3><p><a target="_blank" rel="noopener" href="https://www.openmediavault.org/">Openmediavault官方网站</a></p>
+<h3 id="烧写镜像文件"><a href="#烧写镜像文件" class="headerlink" title="烧写镜像文件"></a>烧写镜像文件</h3><p>下载并安装<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>软件，先对U盘擦除再进行镜像烧录。</p>
+<h3 id="首次开机启动"><a href="#首次开机启动" class="headerlink" title="首次开机启动"></a>首次开机启动</h3><p>首次开机需要使用root用户登录进行配置。</p>
+<h4 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h4><p>查看系统中的网卡信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ip a<br></code></pre></td></tr></table></figure>
 
-<p>如下图，其中<code>wlp4s0</code>就是我的WIFI网卡名称：<br><img src="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_wifi_card_name.png" srcset="/img/loading.gif" lazyload alt="查看WIFI网卡名称">.</p>
-<h4 id="2-配置相关文件："><a href="#2-配置相关文件：" class="headerlink" title="2. 配置相关文件："></a>2. 配置相关文件：</h4><ul>
-<li>由于在最新的系统中，interface文件被系统自动管理，所以我们首先需要操作一下相关服务：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> /etc/systemd/network/*            <span class="hljs-comment">#删除所有默认网络配置</span><br><span class="hljs-built_in">sudo</span> netplan apply                        <span class="hljs-comment">#添加新的网络计划</span><br><span class="hljs-built_in">sudo</span> omv-salt deploy run systemd-networkd <span class="hljs-comment">#禁用系统systemd-networkd服务</span><br><br><span class="hljs-built_in">sudo</span> nano /etc/network/interface          <span class="hljs-comment">#输入以下两种配置其一即可</span><br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>配置一：自动获取IP：</li>
-</ul>
-<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs nim"><span class="hljs-type">auto</span> lo<br>iface lo inet loopback            <span class="hljs-comment">#本地网络配置</span><br><br><span class="hljs-type">auto</span> &#123;wifi_card_name&#125;<br>iface &#123;wifi_card_name&#125; inet dhcp  <span class="hljs-comment">#dhcp为自动获取IP</span><br>wpa_conf /etc/wpa.conf            <span class="hljs-comment">#WIFI配置文件路径</span><br></code></pre></td></tr></table></figure>
-
+<p><img src="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_network_card.png" srcset="/img/loading.gif" lazyload alt="查看系统网卡"></p>
+<p>如图所示，我的电脑有2个网卡：<code>enp6s0</code>为板载网卡，<code>wlp4s0</code>为无线网卡。</p>
+<p>连接WIFI</p>
 <blockquote>
-<p>{wifi_card_name}：步骤1中查询到的WIFI网卡名称</p>
+<p>如果使用的网线连接，那么该步骤可跳过。</p>
 </blockquote>
-<ul>
-<li>配置二：设置静态IP：</li>
-</ul>
-<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs nim"><span class="hljs-type">auto</span> lo<br>iface lo inet loopback  <span class="hljs-comment">#本地网络配置</span><br><br><span class="hljs-type">auto</span> &#123;wifi_card_name&#125;<br>iface &#123;wifi_card_name&#125; inet <span class="hljs-keyword">static</span><br>address <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.xxx.xxx <span class="hljs-comment">#静态IP地址</span><br>netmask <span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">0</span>   <span class="hljs-comment">#子网掩码</span><br>gateway <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.xxx.xxx <span class="hljs-comment">#网关地址</span><br>wpa_conf /etc/wpa.conf  <span class="hljs-comment">#WIFI配置文件路径</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">omv-firstaid<br></code></pre></td></tr></table></figure>
 
-<p>输入完成后，按Ctrl+X，输入Y，回车保存。</p>
-<h4 id="3-保存需要连接的WIFI信息"><a href="#3-保存需要连接的WIFI信息" class="headerlink" title="3. 保存需要连接的WIFI信息"></a>3. 保存需要连接的WIFI信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">touch</span> /etc/wpa.conf                                    <span class="hljs-comment">#创建保存WIFI信息的文件</span><br><br>wpa_passphrase &#123;wifi_name&#125; &#123;wifi_password&#125; &gt;&gt; /etc/wpa.conf <span class="hljs-comment">#使用密文来保存WIFI信息</span><br></code></pre></td></tr></table></figure>
-
+<p>选择<code>Configure network interface</code>回车，然后选择无线网卡名称：<code>wlp4s0</code>，询问是否开启DHCP以及IPv6，都选择YES即可，后续输入WIFI名称及密码，系统会尝试连接，连接成功后退出即可。</p>
+<h3 id="网络代理"><a href="#网络代理" class="headerlink" title="网络代理"></a>网络代理</h3><p>详情请查看这篇文章：<a href="xxx"></a></p>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>以下只记录部分安装操作，详细安装说明请查看官网文档：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/debian/">Install Docker Engine on Debian</a>。</p>
 <blockquote>
-<p>{wifi_name}：要连接的WIFI名称<br>{wifi_password}：对应WIFI密码</p>
+<p>如果使用root用户登录，命令前不用添加<code>sudo</code>。</p>
 </blockquote>
-<h4 id="4-启动网卡"><a href="#4-启动网卡" class="headerlink" title="4. 启动网卡"></a>4. 启动网卡</h4><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">ifup </span><span class="hljs-template-variable">&#123;wifi_card_name&#125;</span><br></code></pre></td></tr></table></figure>
+<p>卸载所有冲突的软件包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> pkg <span class="hljs-keyword">in</span> docker.io docker-doc docker-compose podman-docker containerd runc; <span class="hljs-keyword">do</span> <span class="hljs-built_in">sudo</span> apt-get remove <span class="hljs-variable">$pkg</span>; <span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
+
+<p>添加Docker官网GPG密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install ca-certificates curl<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> install -m 0755 -d /etc/apt/keyrings<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> a+r /etc/apt/keyrings/docker.asc<br></code></pre></td></tr></table></figure>
+
+<p>将官方Docker存储库添加到apt源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> \<br>  <span class="hljs-string">&quot;deb [arch=<span class="hljs-subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \</span><br><span class="hljs-string">  <span class="hljs-subst">$(. /etc/os-release &amp;&amp; echo <span class="hljs-string">&quot;<span class="hljs-variable">$VERSION_CODENAME</span>&quot;</span>)</span> stable&quot;</span> | \<br>  <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br></code></pre></td></tr></table></figure>
+
+<p>安装Docker</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin<br></code></pre></td></tr></table></figure>
+
+<p>验证Docker是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker run hello-world<br></code></pre></td></tr></table></figure>
+
+<p>由于Docker默认镜像源为国外镜像源，所以这一步大概率会报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">Unable to find image <span class="hljs-string">&#x27;hello-world:latest&#x27;</span> locally<br>docker: Error response from daemon: Get <span class="hljs-string">&quot;https://registry-1.docker.io/v2/&quot;</span>: net/http: request canceled <span class="hljs-keyword">while</span> waiting <span class="hljs-keyword">for</span> connection (Client.Timeout exceeded <span class="hljs-keyword">while</span> awaiting headers)<br><br>Run <span class="hljs-string">&#x27;docker run --help&#x27;</span> <span class="hljs-keyword">for</span> more information<br></code></pre></td></tr></table></figure>
+
+<p>将默认镜像源更换为国内镜像加速</p>
 <blockquote>
-<p>{wifi_card_name}：WIFI网卡名称</p>
+<p>建议使用root用户执行，不用担心文件权限。</p>
 </blockquote>
-<hr>
-<h3 id="配置OpenMediaVault的DNS"><a href="#配置OpenMediaVault的DNS" class="headerlink" title="配置OpenMediaVault的DNS"></a>配置OpenMediaVault的DNS</h3><blockquote>
-<p>老办法是直接修改<code>/etc/resolv.conf</code>文件，在最后面添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/docker/daemon.json<br></code></pre></td></tr></table></figure>
+
+<p>输入以下内容<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[CentOS docker换镜像源](https://www.cnblogs.com/HookDing/p/18853142)">[1]</span></a></sup></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs txt">&#123;<br>    &quot;registry-mirrors&quot;: [<br>        &quot;https://docker.1ms.run&quot;,<br>        &quot;https://docker.xuanyuan.me&quot;<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>重启服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reload<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+
+<p>为docker pull 及 push 设置代理<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[docker 设置代理，以及国内加速镜像设置](https://neucrack.com/p/286)">[2]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /etc/systemd/system/docker.service.d<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/systemd/system/docker.service.d/http-proxy.conf<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[Service]<br>Environment=<span class="hljs-string">&quot;HTTP_PROXY=http://ip:port&quot;</span><br>Environment=<span class="hljs-string">&quot;HTTPS_PROXY=http://ip:port&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>查看docker环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl show --property=Environment docker<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs txt">Environment=HTTP_PROXY=http://ip:port HTTPS_PROXY=http://ip:port<br></code></pre></td></tr></table></figure>
+
+<p>为docker run设置代理</p>
+<blockquote>
+<p>在<code>run</code>命令后添加<code>-e</code>参数设置代理。</p>
 </blockquote>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">nameserver</span> <span class="hljs-number">8.8.8.8</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker compose run -e http_proxy=http://ip:port -e https_proxy=http://ip:port xxx<br></code></pre></td></tr></table></figure>
 
-<p>但是新系统，resolv.conf被系统自动管理，所以需要使用以下方法：</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">nano <span class="hljs-regexp">/etc/</span>systemd/resolved.conf<br></code></pre></td></tr></table></figure>
-<p>将<code>#DNS=</code>改为<code>DNS=8.8.8.8</code>，Ctrl+X，输入Y，回车保存退出即可。</p>
-<p>输入以下命令，重启systemd-resolved服务：</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nsis"><span class="hljs-params">system</span>ctl restart <span class="hljs-params">system</span>d-resolved<br></code></pre></td></tr></table></figure>
+<p>再次验证Docker是否安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker run hello-world<br></code></pre></td></tr></table></figure>
 
-<h3 id="开启社区插件"><a href="#开启社区插件" class="headerlink" title="开启社区插件"></a>开启社区插件</h3><h3 id="更改OpenMediaVault为国内源"><a href="#更改OpenMediaVault为国内源" class="headerlink" title="更改OpenMediaVault为国内源"></a>更改OpenMediaVault为国内源</h3><p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/openmediavault/">清华大学开源镜像网站</a></p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs txt">Hello from Docker!<br>This message shows that your installation appears to be working correctly.<br></code></pre></td></tr></table></figure>
 
+<h3 id="管理Docker"><a href="#管理Docker" class="headerlink" title="管理Docker"></a>管理Docker</h3><p>以下列出使用Docker时的一些相关操作。</p>
+<h4 id="容器管理"><a href="#容器管理" class="headerlink" title="容器管理"></a>容器管理</h4><p>列出本地容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker ps -a<br></code></pre></td></tr></table></figure>
+
+<p>停止容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker stop &lt;CONTAINER ID&gt;<br></code></pre></td></tr></table></figure>
+
+<p>删除容器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker <span class="hljs-built_in">rm</span> &lt;CONTAINER ID&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="镜像管理"><a href="#镜像管理" class="headerlink" title="镜像管理"></a>镜像管理</h4><p>列出本地镜像。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker images<br></code></pre></td></tr></table></figure>
+
+<p>（强制）删除镜像。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker rmi -f &lt;IMAGE ID&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="卷管理"><a href="#卷管理" class="headerlink" title="卷管理"></a>卷管理</h4><p>列出本地卷。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker volume list<br></code></pre></td></tr></table></figure>
+
+<p>删除卷。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> docker volume <span class="hljs-built_in">rm</span> &lt;VOLUME NAME&gt;<br></code></pre></td></tr></table></figure>
+
+<h4 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h4><p>查看运行日志。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> journalctl -u docker.service<br></code></pre></td></tr></table></figure>
+
+<h3 id="开启OMV-EXTRAS"><a href="#开启OMV-EXTRAS" class="headerlink" title="开启OMV-EXTRAS"></a>开启OMV-EXTRAS</h3><p>开启社区插件功能。<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[omv-extras.org](https://wiki.omv-extras.org/)">[3]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> wget -O - https://github.com/OpenMediaVault-Plugin-Developers/packages/raw/master/install | bash<br></code></pre></td></tr></table></figure>
+
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cnblogs.com/HookDing/p/18853142">CentOS docker换镜像源</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://neucrack.com/p/286">docker 设置代理，以及国内加速镜像设置</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://wiki.omv-extras.org/">omv-extras.org</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
