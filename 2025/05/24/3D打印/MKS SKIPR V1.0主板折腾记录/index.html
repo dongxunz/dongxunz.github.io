@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://dongxunz.github.io/2025/05/24/3D%E6%89%93%E5%8D%B0/MKS%20SKIPR%20V1.0%E4%B8%BB%E6%9D%BF%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/mks_skipr_v1.0_ddr_vref_voltage_sch.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/05/24/3D%E6%89%93%E5%8D%B0/MKS%20SKIPR%20V1.0%E4%B8%BB%E6%9D%BF%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/mks_skipr_v1.0_ddr_position_no.png">
 <meta property="article:published_time" content="2025-05-24T15:24:55.000Z">
-<meta property="article:modified_time" content="2025-05-28T14:10:28.015Z">
+<meta property="article:modified_time" content="2025-05-28T14:25:29.071Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="电路板">
 <meta name="twitter:card" content="summary_large_image">
@@ -329,7 +329,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2k 字
+          2.1k 字
         
       </span>
     
@@ -508,9 +508,10 @@
 <li><p>打开瑞芯微开发工具，可以看到底部已经显示找到一个MaskRom设备<br><img src="/2025/05/24/3D%E6%89%93%E5%8D%B0/MKS%20SKIPR%20V1.0%E4%B8%BB%E6%9D%BF%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/mks_skipr_v1.0_found_maskrom_device.png" srcset="/img/loading.gif" lazyload alt="MaskRom Device"></p>
 </li>
 </ol>
-<h4 id="排查结果2"><a href="#排查结果2" class="headerlink" title="排查结果2"></a>排查结果2</h4><p>该主板虽然可以进入MaskRom模式，但是依然读取不到任何的固件信息，看来此方法也行不通。</p>
-<h2 id="串口Log信息"><a href="#串口Log信息" class="headerlink" title="串口Log信息"></a>串口Log信息</h2><p>由于这块主板现在只能进入MaskRom模式，所以想着是不是固件损坏了，还可以查看固件启动时的打印信息进行分析，发现该主板有一个HOST-USB接口，在芯片执行相应操作时会通过该接口输出相关的Log信息，可用于判断异常情况。</p>
-<h3 id="连接操作"><a href="#连接操作" class="headerlink" title="连接操作"></a>连接操作</h3><p>首先将电脑通过Type-c线与主板HOST-USB接口进行连接，给主板接入12~24V电源，打开设备管理器查看COM端口号，然后打开MobaXtern软件，点击 Session –&gt; Serial，Serial Port选择设备管理器里对应的<strong>COM端口</strong>，Speed手动输入<strong>1500000</strong>，点击OK进行连接；接着打开瑞芯微开发工具，选择 高级功能 –&gt; 选择一个Boot文件，点击下载，此时MobaXtern软件就会抓取到Log信息；以下是我遇到的情况：</p>
+<h4 id="排查结果2"><a href="#排查结果2" class="headerlink" title="排查结果2"></a>排查结果2</h4><p>该主板虽然可以进入MaskRom模式，但是依然读取不到任何的固件信息。</p>
+<h2 id="再次排查"><a href="#再次排查" class="headerlink" title="再次排查"></a>再次排查</h2><p>由于这块主板现在只能进入MaskRom模式，所以想着是不是原厂的Loader固件损坏了，想着尝试刷入新的Loader固件看能不能恢复，在网上找寻了一番，找到了适合的Loader固件：：<a target="_blank" rel="noopener" href="https://xdaforums.com/t/rk-bl-rockchip-bootloader-collection.3739510/">[RK][BL] Rockchip Bootloader Collection MiniLoaderAll</a>，而且该主板还有一个HOST-USB接口可以用于查看固件烧录时的打印信息，在芯片执行相应操作时会通过该接口输出相关的Log信息，可用于判断异常情况。</p>
+<h3 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h3><p>串口Log：首先将电脑通过Type-c线与主板HOST-USB接口进行连接，给主板接入12~24V电源，打开设备管理器查看COM端口号，然后打开MobaXtern软件，点击 Session –&gt; Serial，Serial Port选择设备管理器里对应的<strong>COM端口</strong>，Speed手动输入<strong>1500000</strong>，点击OK进行连接；</p>
+<p>烧录新的Loader固件：打开瑞芯微开发工具，选择 高级功能 –&gt; Boot …，选择一个刚刚下载的MiniLoaderAll.bin文件，点击下载，此时MobaXtern软件就会抓取到Log信息；以下是我遇到的情况：</p>
 <p><img src="/2025/05/24/3D%E6%89%93%E5%8D%B0/MKS%20SKIPR%20V1.0%E4%B8%BB%E6%9D%BF%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/mks_skipr_v1.0_serial_log.png" srcset="/img/loading.gif" lazyload alt="串口Log信息"></p>
 <h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>Log信息只在最后显示了一个<strong>ERR</strong>，再没有其他任何信息，所以判断起来比较困难，好在网上有很多使用该芯片的网友发过Log帖<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[rock64: “Wrong Ramdisk Image Format” after upgrade to 6.12.9](https://forum.armbian.com/topic/49358-rock64-wrong-ramdisk-image-format-after-upgrade-to-6129/)">[3]</span></a></sup> <sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[PXE boot on Rock64 - UDP wrong checksum #341](https://github.com/ayufan-rock64/linux-build/issues/341)">[4]</span></a></sup> <sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[【Linux】 Consult rk3328-roc-cc kernel problem](https://bbs.t-firefly.com/forum.php?mod=viewthread&tid=3140)">[5]</span></a></sup> <sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Rock64 bricked after upgrade](https://forum.pine64.org/showthread.php?tid=9564)">[6]</span></a></sup>，其中就有一篇发布在官方Github仓库的Issue：<a target="_blank" rel="noopener" href="https://github.com/makerbase-mks/MKS-SKIPR/issues/86">mks board wont boot anymore</a>，经过对比后发现，正常情况下会输出<strong>DDR3</strong>或者<strong>LPDDR3</strong>字样，但是我遇到的情况是直接输出<strong>ERR</strong>，说明是内存DDR部分出现问题，那么接下来就需要查找主板DDR电路部分了。</p>
 <h3 id="查找问题"><a href="#查找问题" class="headerlink" title="查找问题"></a>查找问题</h3><p>由于MKS只提供了主板SCH原理图，并没有提供主板正面与背面器件的位号文档😅，所以查找起来会比较费劲了，经过一番苦苦查找后，终于发现了问题：VREF_DDR_DQ_1、VREF_DDR_CA_1、VREF_DDR_DQ_2三路参考电压其中有一路对地发生短路（具体是哪一路无法判断）；以下是我查找到的电压异常位置：</p>
