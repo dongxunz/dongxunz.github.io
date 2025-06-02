@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/view_network_card.png">
 <meta property="article:published_time" content="2021-12-08T12:08:00.000Z">
-<meta property="article:modified_time" content="2025-05-06T04:58:37.980Z">
+<meta property="article:modified_time" content="2025-06-01T10:46:38.094Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="OpenMediaVault">
 <meta property="article:tag" content="NAS">
@@ -319,7 +319,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          855 字
+          860 字
         
       </span>
     
@@ -383,7 +383,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年5月6日 下午
+                    本文最后更新于：2025年6月1日 晚上
                   
                 
               </p>
@@ -416,19 +416,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> pkg <span class="hljs-keyword">in</span> docker.io docker-doc docker-compose podman-docker containerd runc; <span class="hljs-keyword">do</span> <span class="hljs-built_in">sudo</span> apt-get remove <span class="hljs-variable">$pkg</span>; <span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
 
 <p>添加Docker官网GPG密钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install ca-certificates curl<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> install -m 0755 -d /etc/apt/keyrings<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> a+r /etc/apt/keyrings/docker.asc<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br><br><span class="hljs-built_in">sudo</span> apt-get install ca-certificates curl<br><br><span class="hljs-built_in">sudo</span> install -m 0755 -d /etc/apt/keyrings<br><br><span class="hljs-built_in">sudo</span> curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc<br><br><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> a+r /etc/apt/keyrings/docker.asc<br></code></pre></td></tr></table></figure>
 
 <p>将官方Docker存储库添加到apt源</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> \<br>  <span class="hljs-string">&quot;deb [arch=<span class="hljs-subst">$(dpkg --print-architecture)</span> signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \</span><br><span class="hljs-string">  <span class="hljs-subst">$(. /etc/os-release &amp;&amp; echo <span class="hljs-string">&quot;<span class="hljs-variable">$VERSION_CODENAME</span>&quot;</span>)</span> stable&quot;</span> | \<br>  <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/apt/sources.list.d/docker.list &gt; /dev/null<br></code></pre></td></tr></table></figure>
 
+<p>更新源</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br></code></pre></td></tr></table></figure>
 
 <p>安装Docker</p>
@@ -449,10 +442,8 @@
 <p>输入以下内容<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[CentOS docker换镜像源](https://www.cnblogs.com/HookDing/p/18853142)">[1]</span></a></sup></p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs txt">&#123;<br>    &quot;registry-mirrors&quot;: [<br>        &quot;https://docker.1ms.run&quot;,<br>        &quot;https://docker.xuanyuan.me&quot;<br>    ]<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>重启服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reload<br></code></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
+<p>重启相关服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reload<br><br><span class="hljs-built_in">sudo</span> systemctl restart docker<br></code></pre></td></tr></table></figure>
 
 <p>为docker pull 及 push 设置代理<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[docker 设置代理，以及国内加速镜像设置](https://neucrack.com/p/286)">[2]</span></a></sup></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /etc/systemd/system/docker.service.d<br></code></pre></td></tr></table></figure>
