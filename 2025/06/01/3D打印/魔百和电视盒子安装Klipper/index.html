@@ -39,11 +39,13 @@
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/adb_reboot_update.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/debian_system.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/usb_wifi_modules.png">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/mt7601_wifi_speed_test.png">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_wifi_speed_test.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/mt7601_linux_wifi_speed_test.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_linux_wifi_speed_test.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/mt7601_windows_wifi_speed_test.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_windows_wifi_speed_test.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/sysbench_s905l_h616.png">
 <meta property="article:published_time" content="2025-06-01T04:49:43.000Z">
-<meta property="article:modified_time" content="2025-06-08T05:36:44.836Z">
+<meta property="article:modified_time" content="2025-06-08T11:52:36.860Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="Klipper">
 <meta name="twitter:card" content="summary_large_image">
@@ -331,7 +333,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.7k 字
+          2.8k 字
         
       </span>
     
@@ -395,7 +397,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年6月8日 下午
+                    本文最后更新于：2025年6月8日 晚上
                   
                 
               </p>
@@ -577,8 +579,11 @@
 <p>安装<a target="_blank" rel="noopener" href="https://www.speedtest.net/zh-Hans/apps/cli">Speedtest® CLI</a>网络测速工具（仅适用于Ubuntu&#x2F;Debian）：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">## If migrating from prior bintray install instructions please first...</span><br><span class="hljs-comment"># sudo rm /etc/apt/sources.list.d/speedtest.list</span><br><span class="hljs-comment"># sudo apt-get update</span><br><span class="hljs-comment"># sudo apt-get remove speedtest</span><br><span class="hljs-comment">## Other non-official binaries will conflict with Speedtest CLI</span><br><span class="hljs-comment"># Example how to remove using apt-get</span><br><span class="hljs-comment"># sudo apt-get remove speedtest-cli</span><br><span class="hljs-built_in">sudo</span> apt-get install curl<br><br>curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | <span class="hljs-built_in">sudo</span> bash<br><br><span class="hljs-built_in">sudo</span> apt-get install speedtest<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/mt7601_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="MT7601测速结果"></p>
-<p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="RTL8192CU测速结果"></p>
+<p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/mt7601_linux_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="MT7601在Linxu系统下的测速结果"></p>
+<p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_linux_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="RTL8192CU在Linxu系统下的测速结果"></p>
+<p>嗯…上述测速结果看不出来个所以然，所以我用Windows10又测试了一遍，结果就简单明了，仅供参考。</p>
+<p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/mt7601_windows_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="MT7601在Windows系统下的测速结果"></p>
+<p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_windows_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="RTL8192CU在Windows系统下的测速结果"></p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>国内电视盒子由于三大运营商的存在，再加上第三方品牌，几乎是百花齐放，哪怕外观类似，型号一样，主板的硬件差异也是各种各样的，所以能不能成功烧录对应的Linux系统，还是有点运气的成分在里面，本人也是几经波折才勉强成功，而且板载的HDMI、网口和无线网卡均不能正常使用，还需通过USB免驱无线网卡接入互联网，并使用kiauh脚本安装了Klipper以及相关的网页Web服务，但是系统的稳定性还有待考验，不建议轻易尝试。</p>
 <p>附上一张晶晨S905L（左）和全志H616（右）的使用<code>sysbench cpu --cpu-max-prime=20000 run</code>命令测试的单核性能对比图，仅供参考：<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/sysbench_s905l_h616.png" srcset="/img/loading.gif" lazyload alt="S905L与H616单核性能对比"></p>
 <h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/2209">CM201-1-YS刷入成功，有线无线都连接成功</a><br><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/1318">CM211-1 使用6.1内核，DTB使用m302a成功写入EMMC，网络正常</a><br><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/1378#issuecomment-1537691718">如何重新U盘安装armbian</a><br><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/2499">天津联通机顶盒 中兴ZXV10 B860AV2.1 U 成功刷入</a><br><a target="_blank" rel="noopener" href="http://github.com/ophub/amlogic-s9xxx-armbian/issues/2539">CM201-1-6 YS S905L3 EMMC成功刷入，成功获取有线网络IP</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/imzlh/p/16756624.html">[s905l3]性价比神机mgv3000全网首拆，刷armbian实现更多价值！</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38189542/article/details/133758437">提取Android盒子（CM201-1 YS）dtb文件</a></p>
