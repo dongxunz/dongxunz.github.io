@@ -21,25 +21,24 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="ADB官方介绍  ADB全称为：Android Debug Bridge，可翻译为Android 调试桥(adb)，是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。   基础命令1. 查看使用帮助1adb help  2. 启动adb服务：1adb start-se">
+    <meta name="description" content="前言FASTBOOT：英文翻译为快速启动的意思；在Android手机中FASTBOOT是一种比Recovery更底层的刷机模式。 基础命令重启进入系统1fastboot reboot  解锁OEM锁对于新款设备（2015 年及之后发布的设备）： 1fastboot flashing unlock  对于老款设备（2014 年及之前发布的设备）： 1fastboot oem unlock  OEM上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Adb命令">
-<meta property="og:url" content="https://dongxunz.github.io/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="FASTBOOT命令">
+<meta property="og:url" content="https://dongxunz.github.io/2021/12/06/Android/FASTBOOT%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="ADB官方介绍  ADB全称为：Android Debug Bridge，可翻译为Android 调试桥(adb)，是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。   基础命令1. 查看使用帮助1adb help  2. 启动adb服务：1adb start-se">
+<meta property="og:description" content="前言FASTBOOT：英文翻译为快速启动的意思；在Android手机中FASTBOOT是一种比Recovery更底层的刷机模式。 基础命令重启进入系统1fastboot reboot  解锁OEM锁对于新款设备（2015 年及之后发布的设备）： 1fastboot flashing unlock  对于老款设备（2014 年及之前发布的设备）： 1fastboot oem unlock  OEM上">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-03T16:19:25.000Z">
-<meta property="article:modified_time" content="2021-12-04T15:17:23.792Z">
+<meta property="article:published_time" content="2021-12-06T14:25:42.000Z">
+<meta property="article:modified_time" content="2025-06-20T08:22:02.069Z">
 <meta property="article:author" content="dongxunz">
-<meta property="article:tag" content="Android">
-<meta property="article:tag" content="adb">
+<meta property="article:tag" content="fastboot">
 <meta name="twitter:card" content="summary_large_image">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Adb命令 - dongxunz&#39;s blogs</title>
+  <title>FASTBOOT命令 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -293,7 +292,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Adb命令"></span>
+            <span id="subtitle" data-typed-text="FASTBOOT命令"></span>
           
         </div>
 
@@ -304,8 +303,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-12-04 00:19" pubdate>
-          2021年12月4日 凌晨
+        <time datetime="2021-12-06 22:25" pubdate>
+          2021年12月6日 晚上
         </time>
       </span>
     
@@ -317,7 +316,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          501 字
+          199 字
         
       </span>
     
@@ -329,7 +328,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          1 分钟
         
       </span>
     
@@ -375,13 +374,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Adb命令</h1>
+            <h1 id="seo-header">FASTBOOT命令</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2021年12月4日 晚上
+                    本文最后更新于：2025年6月20日 下午
                   
                 
               </p>
@@ -389,66 +388,35 @@
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p><a target="_blank" rel="noopener" href="https://developer.android.com/studio/command-line/adb">ADB官方介绍</a></p>
-<blockquote>
-<p>ADB全称为：Android Debug Bridge，可翻译为Android 调试桥(adb)，是一种功能多样的命令行工具，可让您与设备进行通信。adb 命令可用于执行各种设备操作（例如安装和调试应用），并提供对 Unix shell（可用来在设备上运行各种命令）的访问权限。</p>
-</blockquote>
-</blockquote>
-<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><h3 id="1-查看使用帮助"><a href="#1-查看使用帮助" class="headerlink" title="1. 查看使用帮助"></a>1. 查看使用帮助</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb <span class="hljs-built_in">help</span><br></code></pre></td></tr></table></figure>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>FASTBOOT：英文翻译为快速启动的意思；在Android手机中FASTBOOT是一种比Recovery更底层的刷机模式。</p>
+<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><h3 id="重启进入系统"><a href="#重启进入系统" class="headerlink" title="重启进入系统"></a>重启进入系统</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot reboot<br></code></pre></td></tr></table></figure>
 
-<h3 id="2-启动adb服务："><a href="#2-启动adb服务：" class="headerlink" title="2. 启动adb服务："></a>2. 启动adb服务：</h3><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">adb <span class="hljs-keyword">start</span>-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+<h3 id="解锁OEM锁"><a href="#解锁OEM锁" class="headerlink" title="解锁OEM锁"></a>解锁OEM锁</h3><p>对于新款设备（2015 年及之后发布的设备）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flashing unlock<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-杀死adb服务："><a href="#3-杀死adb服务：" class="headerlink" title="3. 杀死adb服务："></a>3. 杀死adb服务：</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta">adb kill-<span class="hljs-keyword">server</span><br></code></pre></td></tr></table></figure>
+<p>对于老款设备（2014 年及之前发布的设备）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot oem unlock<br></code></pre></td></tr></table></figure>
 
-<h3 id="4-通过-Wi-Fi-连接到设备"><a href="#4-通过-Wi-Fi-连接到设备" class="headerlink" title="4. 通过 Wi-Fi 连接到设备"></a>4. 通过 Wi-Fi 连接到设备</h3><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lasso">adb <span class="hljs-built_in">pair</span> ipaddr:port #Android版本 &gt;= <span class="hljs-number">11</span>才支持该命令<br></code></pre></td></tr></table></figure>
+<h3 id="OEM上锁"><a href="#OEM上锁" class="headerlink" title="OEM上锁"></a>OEM上锁</h3><p>对于新款设备（2015 年及之后发布的设备）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flashing lock<br></code></pre></td></tr></table></figure>
 
-<h3 id="5-启动网络adb服务："><a href="#5-启动网络adb服务：" class="headerlink" title="5. 启动网络adb服务："></a>5. 启动网络adb服务：</h3><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">adb connect </span><span class="hljs-template-variable">&#123;ipaddr&#125;</span><span class="language-xml">:</span><span class="hljs-template-variable">&#123;port&#125;</span><br></code></pre></td></tr></table></figure>
-<blockquote>
-<p><code>&#123;ipaddr&#125;</code>：IP地址<br><code>&#123;port&#125;</code>：端口号</p>
-</blockquote>
-<h3 id="6-断开网络adb服务"><a href="#6-断开网络adb服务" class="headerlink" title="6. 断开网络adb服务:"></a>6. 断开网络adb服务:</h3><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">adb disconnent </span><span class="hljs-template-variable">&#123;ipaddr&#125;</span><span class="language-xml">:</span><span class="hljs-template-variable">&#123;port&#125;</span><br></code></pre></td></tr></table></figure>
-<blockquote>
-<p><code>&#123;ipaddr&#125;</code>：IP地址<br><code>&#123;port&#125;</code>：端口号</p>
-</blockquote>
-<h3 id="7-设置网络adb端口号"><a href="#7-设置网络adb端口号" class="headerlink" title="7. 设置网络adb端口号"></a>7. 设置网络adb端口号</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">adb</span> forward tcp:<span class="hljs-number">5555</span> tcp:<span class="hljs-number">8888</span> #更改网络adb端口号为<span class="hljs-number">8888</span><br></code></pre></td></tr></table></figure>
-<blockquote>
-<p>网络adb默认端口号为：5555</p>
-</blockquote>
-<h3 id="8-显示当前连接的全部安卓设备"><a href="#8-显示当前连接的全部安卓设备" class="headerlink" title="8. 显示当前连接的全部安卓设备"></a>8. 显示当前连接的全部安卓设备</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adb devices -l</span><br></code></pre></td></tr></table></figure>
+<p>对于老款设备（2014 年及之前发布的设备）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot oem lock<br></code></pre></td></tr></table></figure>
 
-<hr>
-<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><h3 id="1-拷贝手机里的文件到电脑上-默认拷贝路径为命令行所在路径-："><a href="#1-拷贝手机里的文件到电脑上-默认拷贝路径为命令行所在路径-：" class="headerlink" title="1. 拷贝手机里的文件到电脑上(默认拷贝路径为命令行所在路径)："></a>1. 拷贝手机里的文件到电脑上(默认拷贝路径为命令行所在路径)：</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">adb pull <span class="hljs-regexp">/system/</span>etc/hosts <span class="hljs-comment">#拷贝手机文件到电脑命令行所在路径</span><br><br>adb pull <span class="hljs-regexp">/system/</span>etc/hosts D:\ <span class="hljs-comment">#拷贝手机文件到电脑D盘根目录</span><br></code></pre></td></tr></table></figure>
+<h2 id="刷机相关"><a href="#刷机相关" class="headerlink" title="刷机相关"></a>刷机相关</h2><h3 id="切换到分区a"><a href="#切换到分区a" class="headerlink" title="切换到分区a"></a>切换到分区a</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot set_active a<br></code></pre></td></tr></table></figure>
 
-<h3 id="2-拷贝电脑的文件到手机上："><a href="#2-拷贝电脑的文件到手机上：" class="headerlink" title="2. 拷贝电脑的文件到手机上："></a>2. 拷贝电脑的文件到手机上：</h3><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">adb</span> push Markdown语法.md /storage/<span class="hljs-number">92</span>C4-<span class="hljs-number">1</span>BE6<br>    <br><span class="hljs-attribute">adb</span> push D:\hosts /storage/<span class="hljs-number">92</span>C4-<span class="hljs-number">1</span>BE6<br></code></pre></td></tr></table></figure>
+<h3 id="擦除对应分区"><a href="#擦除对应分区" class="headerlink" title="擦除对应分区"></a>擦除对应分区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot erase partition<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-在命令行中访问手机目录："><a href="#3-在命令行中访问手机目录：" class="headerlink" title="3. 在命令行中访问手机目录："></a>3. 在命令行中访问手机目录：</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile">adb <span class="hljs-keyword">shell</span><br></code></pre></td></tr></table></figure>
+<p>partition 可选参数：</p>
 <blockquote>
-<p>使用<code>adb shell</code>进入Android设备目录后，如需退出，输入<code>exit</code>即可回到cmd</p>
+<p><code>recovery</code>：Recovery分区<br><code>system</code>：系统分区<br><code>boot</code>：Boot分区<br><code>cache</code>：缓存分区<br><code>userdata</code>：用户数据分区</p>
 </blockquote>
-<h3 id="4-安装APP"><a href="#4-安装APP" class="headerlink" title="4. 安装APP"></a>4. 安装APP</h3><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">adb <span class="hljs-keyword">install</span> &#123;path_to_apk&#125;<br></code></pre></td></tr></table></figure>
-<blockquote>
-<p><code>&#123;path_to_apk&#125;</code>：安装包的路径，包含后缀名.apk</p>
-</blockquote>
-<h3 id="5-卸载APP"><a href="#5-卸载APP" class="headerlink" title="5. 卸载APP"></a>5. 卸载APP</h3><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">adb uninstall </span><span class="hljs-template-variable">&#123;apk_package_name&#125;</span><br></code></pre></td></tr></table></figure>
-<blockquote>
-<p><code>&#123;apk_package_name&#125;</code>：软件的包名</p>
-</blockquote>
-<hr>
-<h2 id="刷机相关"><a href="#刷机相关" class="headerlink" title="刷机相关"></a>刷机相关</h2><h3 id="1-使用adb重启手机进入-recovery-bootloader："><a href="#1-使用adb重启手机进入-recovery-bootloader：" class="headerlink" title="1. 使用adb重启手机进入 recovery&#x2F;bootloader："></a>1. 使用adb重启手机进入 recovery&#x2F;bootloader：</h3><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">adb reboot recovery <span class="hljs-comment">#重启到Recovery</span><br><br>adb rebot <span class="hljs-keyword">bootloader </span> <span class="hljs-comment">#重启到Fastboot</span><br></code></pre></td></tr></table></figure>
+<h3 id="刷入对应分区"><a href="#刷入对应分区" class="headerlink" title="刷入对应分区"></a>刷入对应分区</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash partition name.img<br></code></pre></td></tr></table></figure>
 
-<h3 id="2-使adb获取Root权限"><a href="#2-使adb获取Root权限" class="headerlink" title="2. 使adb获取Root权限"></a>2. 使adb获取Root权限</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">adb root</span><br></code></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="开发者相关"><a href="#开发者相关" class="headerlink" title="开发者相关"></a>开发者相关</h2><h3 id="1-启动对应包名的MainActivity"><a href="#1-启动对应包名的MainActivity" class="headerlink" title="1.启动对应包名的MainActivity"></a>1.启动对应包名的MainActivity</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">adb shell am <span class="hljs-literal">start</span> -n &#123;apk_package_name&#125; <span class="hljs-comment">#启动包名为apk_package_name的MainActivity</span><br></code></pre></td></tr></table></figure>
+<p>partition和img是配合使用的命令参数，使用方法为：</p>
 <blockquote>
-<p><code>&#123;apk_package_name&#125;</code>：应用包名</p>
+<p><code>recovery recovery.img</code>：刷入recovery<br><code>boot boot.img</code>：刷入boot<br><code>system system.img</code>：刷入system<br><code>persist persist.img</code>：刷入persist</p>
 </blockquote>
-<h3 id="2-对指定设备执行命令"><a href="#2-对指定设备执行命令" class="headerlink" title="2. 对指定设备执行命令"></a>2. 对指定设备执行命令</h3><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">adb -s </span><span class="hljs-template-variable">&#123;devices_id&#125;</span><span class="language-xml"> </span><span class="hljs-template-variable">&#123;command&#125;</span><br></code></pre></td></tr></table></figure>
-<blockquote>
-<p><code>&#123;devices_id&#125;</code>：设备ID<br><code>&#123;command&#125;</code>：命令</p>
-</blockquote>
-<h3 id="3-打印Log信息"><a href="#3-打印Log信息" class="headerlink" title="3. 打印Log信息"></a>3. 打印Log信息</h3><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">adb logcat -s <span class="hljs-keyword">tag</span> <span class="hljs-title">#在命令行中查看标签名为tag</span>的Log信息<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -467,7 +435,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%B7%E6%9C%BA/" class="category-chain-item">刷机</a>
+  <a href="/categories/Android/" class="category-chain-item">Android</a>
   
   
 
@@ -482,9 +450,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Android/" class="print-no-link">#Android</a>
-      
-        <a href="/tags/adb/" class="print-no-link">#adb</a>
+        <a href="/tags/fastboot/" class="print-no-link">#fastboot</a>
       
     </div>
   
@@ -496,8 +462,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Adb命令</div>
-      <div>https://dongxunz.github.io/2021/12/04/刷机/Adb命令/</div>
+      <div>FASTBOOT命令</div>
+      <div>https://dongxunz.github.io/2021/12/06/Android/FASTBOOT命令/</div>
     </div>
     <div class="license-meta">
       
@@ -509,7 +475,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年12月4日</div>
+          <div>2021年12月6日</div>
         </div>
       
       
@@ -541,9 +507,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/" title="Fastboot命令">
+                      <a href="/2021/12/08/OpenMediaVault/OpenMediaVault%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" title="OpenMediaVault安装与配置">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Fastboot命令</span>
+                        <span class="hidden-mobile">OpenMediaVault安装与配置</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -551,8 +517,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/03/Hexo/Hexo%E8%BF%9B%E9%98%B6/" title="Hexo进阶">
-                        <span class="hidden-mobile">Hexo进阶</span>
+                      <a href="/2021/12/04/Android/ADB%E5%91%BD%E4%BB%A4/" title="ADB命令">
+                        <span class="hidden-mobile">ADB命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -21,25 +21,32 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="Fastboot：英文翻译为快速启动的意思；在Android手机中Fastboot是一种比Recovery更底层的刷机模式；是使用USB数据线连接手机进行刷机的工具（俗称线刷）。  基础命令1. 重启进入系统1fastboot reboot  2. 解锁OEM锁 对于新款设备（2015 年及之后发布的设备）：  1fastboot flashing unlock  对于老款设备（2014 年及之">
+    <meta name="description" content="前言手里有几块搭载瑞芯微RK3328芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（SAMSUNG KLMAG1JETD-B041），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的了，测试下来都失败，所以就自己折腾编译一个合适的Loader，用于切换到eMMC存储并烧录Linux系统，这篇文章主要用于记录过程，仅供参考。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Fastboot命令">
-<meta property="og:url" content="https://dongxunz.github.io/2021/12/06/%E5%88%B7%E6%9C%BA/Fastboot%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="编译适用于RK3328芯片的Loader">
+<meta property="og:url" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="Fastboot：英文翻译为快速启动的意思；在Android手机中Fastboot是一种比Recovery更底层的刷机模式；是使用USB数据线连接手机进行刷机的工具（俗称线刷）。  基础命令1. 重启进入系统1fastboot reboot  2. 解锁OEM锁 对于新款设备（2015 年及之后发布的设备）：  1fastboot flashing unlock  对于老款设备（2014 年及之">
+<meta property="og:description" content="前言手里有几块搭载瑞芯微RK3328芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（SAMSUNG KLMAG1JETD-B041），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的了，测试下来都失败，所以就自己折腾编译一个合适的Loader，用于切换到eMMC存储并烧录Linux系统，这篇文章主要用于记录过程，仅供参考。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-06T14:25:42.000Z">
-<meta property="article:modified_time" content="2021-12-06T14:51:53.899Z">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_bootflow20181122.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/partition_table_information.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/backup_partition_image.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/system_info.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/use_absolute_path.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/create_loader_file.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/enable_emmc_support.png">
+<meta property="article:published_time" content="2025-06-16T16:20:15.000Z">
+<meta property="article:modified_time" content="2025-06-20T11:41:35.628Z">
 <meta property="article:author" content="dongxunz">
-<meta property="article:tag" content="Android">
-<meta property="article:tag" content="Fastboot">
+<meta property="article:tag" content="瑞芯微">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_bootflow20181122.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>Fastboot命令 - dongxunz&#39;s blogs</title>
+  <title>编译适用于RK3328芯片的Loader - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -293,7 +300,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Fastboot命令"></span>
+            <span id="subtitle" data-typed-text="编译适用于RK3328芯片的Loader"></span>
           
         </div>
 
@@ -304,8 +311,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-12-06 22:25" pubdate>
-          2021年12月6日 晚上
+        <time datetime="2025-06-17 00:20" pubdate>
+          2025年6月17日 凌晨
         </time>
       </span>
     
@@ -317,7 +324,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          247 字
+          1.2k 字
         
       </span>
     
@@ -329,7 +336,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -375,13 +382,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Fastboot命令</h1>
+            <h1 id="seo-header">编译适用于RK3328芯片的Loader</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2021年12月6日 晚上
+                    本文最后更新于：2025年6月20日 晚上
                   
                 
               </p>
@@ -389,41 +396,127 @@
             
               <div class="markdown-body">
                 
-                <blockquote>
-<p>Fastboot：英文翻译为快速启动的意思；在Android手机中Fastboot是一种比Recovery更底层的刷机模式；是使用USB数据线连接手机进行刷机的工具（俗称线刷）。</p>
-</blockquote>
-<h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><h3 id="1-重启进入系统"><a href="#1-重启进入系统" class="headerlink" title="1. 重启进入系统"></a>1. 重启进入系统</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">fastboot reboot</span><br></code></pre></td></tr></table></figure>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>手里有几块搭载<a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_RK3328">瑞芯微RK3328</a>芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（<a target="_blank" rel="noopener" href="https://item.szlcsc.com/datasheet/KLMAG1JETD-B041/512099.html?spm=sc.gbn.xds.a___sc.hm.hd.ss&lcsc_vid=Q1cLAwUFQgQNUFcDFVFcAlNQRgRYVQZQTlcNAgAHQFQxVlNTR1FZXlxRQFFaUTtW">SAMSUNG KLMAG1JETD-B041</a>），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的了，测试下来都失败，所以就自己折腾编译一个合适的Loader，用于切换到eMMC存储并烧录Linux系统，这篇文章主要用于记录过程，仅供参考。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[U-Boot 使用](https://wiki.t-firefly.com/zh_CN/ROC-RK3399-PC/uboot_introduction.html#qian-yan)">[1]</span></a></sup></p>
+<h2 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h2><p>瑞芯微芯片启动流程：<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Boot option](https://opensource.rock-chips.com/wiki_Boot_option)">[2]</span></a></sup> <sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[RK33XX/RK35XX系列设备启动流程、写入系统及编译流程](https://github.com/ophub/amlogic-s9xxx-armbian/discussions/1634)">[3]</span></a></sup></p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_bootflow20181122.jpg" srcset="/img/loading.gif" lazyload alt="RKChip Boot flow"></p>
+<p>观察上图可发现瑞芯微的芯片有2条启动流程，而对于使用USB刷写系统，需要使用mini。</p>
+<p>查阅官方手册<a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/images/d/d5/RK3328_Linux-Debian_V1.1_Development_Guide-20170711.pdf">RK3328_Linux-Debian_V1.1_Development_Guide-20170711.pdf</a>可知，在RK3328芯片上运行Linux系统，需要以下文件：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Address</th>
+<th align="center">Name</th>
+<th align="center">Path</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center">Boot</td>
+<td align="center">rkbin&#x2F;rk33&#x2F;rk3328_loader_v1.21.250.bin</td>
+</tr>
+<tr>
+<td align="center">0x00000040</td>
+<td align="center">loader1</td>
+<td align="center">idbloader.img</td>
+</tr>
+<tr>
+<td align="center">0x00004000</td>
+<td align="center">loader2</td>
+<td align="center">uboot.img</td>
+</tr>
+<tr>
+<td align="center">0x00006000</td>
+<td align="center">atf</td>
+<td align="center">trust.img</td>
+</tr>
+<tr>
+<td align="center">0x00008000</td>
+<td align="center">boot</td>
+<td align="center">boot.img</td>
+</tr>
+<tr>
+<td align="center">0x00040000</td>
+<td align="center">rootfs</td>
+<td align="center">linaro.img</td>
+</tr>
+</tbody></table>
+<h2 id="备份系统"><a href="#备份系统" class="headerlink" title="备份系统"></a>备份系统</h2><p>备份好原系统，可用于后续的救砖以及分析原系统的分区情况；对于瑞芯微的芯片，需要先使用新版本 AndroidTool_Release_v2.71 读取分区信息，然后使用旧版本 AndroidTool_Release_v2.38 导出镜像，可以在<a target="_blank" rel="noopener" href="https://www.t-firefly.com/doc/download/71.html">RKDevTool</a>下载这2个版本的工具。</p>
+<p>按住主板上的Recovery按钮，使用USB公对公数据线将主板的USB OTG接口与电脑进行连接，此时打开AndroidTool_Release_v2.71软件，会显示<strong>发现一个Loader设备</strong>，然后点击<strong>读取分区</strong>，信息如下：</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/partition_table_information.png" srcset="/img/loading.gif" lazyload alt="分区信息"></p>
+<p>请自行截图保存上述的分区信息，关闭新版本软件后打开AndroidTool_Release_v2.38软件，点击 高级功能，<strong>起始扇区</strong>对应上图中的<strong>LBA</strong>，<strong>扇区数</strong>对应的<strong>Size</strong>，点击<strong>导出镜像</strong>备份，请依次对各Name进行备份并手动修改Output目录中的导出镜像文件名与之对应，其中userdata可以不用导出（非常占用空间！！！）：</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/backup_partition_image.png" srcset="/img/loading.gif" lazyload alt="导出镜像"></p>
+<h2 id="编译环境"><a href="#编译环境" class="headerlink" title="编译环境"></a>编译环境</h2><p>我使用的是Windows10自带的Linux环境进行后续编译操作，方便快捷又好用~（就是占用C盘空间😒）</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/system_info.png" srcset="/img/loading.gif" lazyload alt="编译系统信息"></p>
+<h2 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h2><h3 id="安装所需工具"><a href="#安装所需工具" class="headerlink" title="安装所需工具"></a>安装所需工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br><br><span class="hljs-built_in">sudo</span> apt-get upgrade<br><br><span class="hljs-built_in">sudo</span> apt-get install git gitk git-core git-gui bc bison flex make gcc-arm-linux-gnueabihf u-boot-tools device-tree-compiler gcc-aarch64-linux-gnu mtools parted libudev-dev libusb-1.0-0-dev libssl-dev android-tools-adb android-tools-fastboot<br></code></pre></td></tr></table></figure>
 
-<h3 id="2-解锁OEM锁"><a href="#2-解锁OEM锁" class="headerlink" title="2. 解锁OEM锁"></a>2. 解锁OEM锁</h3><ul>
-<li>对于新款设备（2015 年及之后发布的设备）：</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">fastboot flashing unlock</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>对于老款设备（2014 年及之前发布的设备）：</li>
-</ul>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">fastboot oem unlock</span><br></code></pre></td></tr></table></figure>
+<h2 id="编译最新的Linux内核"><a href="#编译最新的Linux内核" class="headerlink" title="编译最新的Linux内核"></a>编译最新的Linux内核</h2><p>下载最新稳定版的Linux内核<a target="_blank" rel="noopener" href="https://www.kernel.org/">The Linux Kernel Archives</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.2.tar.xz<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-OEM上锁"><a href="#3-OEM上锁" class="headerlink" title="3. OEM上锁"></a>3. OEM上锁</h3><ul>
-<li>对于新款设备（2015 年及之后发布的设备）：</li>
-</ul>
-<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">fastboot flashing <span class="hljs-keyword">lock</span><br></code></pre></td></tr></table></figure>
-<ul>
-<li>对于老款设备（2014 年及之前发布的设备）：</li>
-</ul>
-<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">fastboot oem <span class="hljs-keyword">lock</span><br></code></pre></td></tr></table></figure>
+<h3 id="编译Loader"><a href="#编译Loader" class="headerlink" title="编译Loader"></a>编译Loader</h3><p>克隆官方SDK源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/rkbin<br></code></pre></td></tr></table></figure>
 
-<hr>
-<h2 id="刷机相关"><a href="#刷机相关" class="headerlink" title="刷机相关"></a>刷机相关</h2><h3 id="1-切换到分区a"><a href="#1-切换到分区a" class="headerlink" title="1. 切换到分区a"></a>1. 切换到分区a</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">fastboot set_active <span class="hljs-selector-tag">a</span><br></code></pre></td></tr></table></figure>
+<p>进入rkbin项目中，首先需要修改相应芯片型号的配置文件，进入<strong>RKBOOT</strong>目录，修改<strong>RK3328MINIALL.ini</strong>文件，需要将以下地方的文件路径修改为绝对路径，否则后续编译时会提示找不到对应文件（默认的路径无法识别疑似是BUG）：</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/use_absolute_path.png" srcset="/img/loading.gif" lazyload alt="文件路径需要使用绝对路径"></p>
+<p>进入&#x2F;rkbin&#x2F;tools目录，执行以下代码生成Loader文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./boot_merger ~/rkbin/RKBOOT/RK3328MINIALL.ini<br></code></pre></td></tr></table></figure>
 
-<h3 id="2-擦除对应分区"><a href="#2-擦除对应分区" class="headerlink" title="2. 擦除对应分区"></a>2. 擦除对应分区</h3><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">fastboot <span class="hljs-built_in">erase</span> &#123;partition&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/create_loader_file.png" srcset="/img/loading.gif" lazyload alt="编译生成Loader文件"></p>
 <blockquote>
-<p>{partition} 可选参数：<br><code>recovery</code>：Recovery分区<br><code>system</code>：系统分区<br><code>boot</code>：Boot分区<br><code>cache</code>：缓存分区<br><code>userdata</code>：用户数据分区</p>
+<p>u-boot项目和rkbin项目需要放到同一目录下，不然后续操作可能会报错。<br>使用不同的系统时，Loader对应的烧录地址不一样，请注意区分，对于Android系统：Adress：<code>0x00000000</code>，Name：<code>loader</code>；对于Linux系统：Adress：<code>0xCCCCCCCC</code>，Name：<code>Boot</code>。</p>
 </blockquote>
-<h3 id="3-刷入对应分区"><a href="#3-刷入对应分区" class="headerlink" title="3. 刷入对应分区"></a>3. 刷入对应分区</h3><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">fastboot flash </span><span class="hljs-template-variable">&#123;partition&#125;</span><span class="language-xml"> </span><span class="hljs-template-variable">&#123;img&#125;</span><span class="language-xml">：刷入对应分区的镜像文件</span><br></code></pre></td></tr></table></figure>
-<blockquote>
-<p>{partition} 和 {img} 是配合使用的命令参数，使用方法为：<br><code>recovery recovery.img</code>：刷入recovery<br><code>boot boot.img</code>：刷入boot<br><code>system system.img</code>：刷入system<br><code>persist persist.img</code>：刷入persist  </p>
-</blockquote>
+<h3 id="编译IDBLoader"><a href="#编译IDBLoader" class="headerlink" title="编译IDBLoader"></a>编译IDBLoader</h3><p>进入&#x2F;rkbin&#x2F;tools目录，执行以下代码生成IDBLoader文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./mkimage -n rk3328 -T rksd -d /home/dongxun2zc/u-boot/tpl/u-boot-tpl.bin idbloader.img<br></code></pre></td></tr></table></figure>
 
+<blockquote>
+<p>Address：<code>0x00000040</code>，Name：<code>loader1</code>。</p>
+</blockquote>
+<h3 id="编译U-Boot"><a href="#编译U-Boot" class="headerlink" title="编译U-Boot"></a>编译U-Boot</h3><p>克隆官方SDK源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/u-boot<br></code></pre></td></tr></table></figure>
+
+<p>在u-boot项目中，已经包含各芯片的u-boot示例配置文件，稍作修改即可进行使用，默认的配置文件路径为：<strong>&#x2F;u-boot&#x2F;configs&#x2F;</strong>，本文章使用的示例文件为：<strong>rk3328_defconfig</strong>，将该文件复制到u-boot根目录下，并重命名为：<strong>.config</strong>，然后使用<code>make menuconfig</code>修改配置保存即可。</p>
+<p>修改的地方：</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/enable_emmc_support.png" srcset="/img/loading.gif" lazyload alt="开启eMMC存储支持功能"></p>
+<p>开始编译生成u-boot.img文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm KCFLAGS=<span class="hljs-string">&quot;-ffixed-x18&quot;</span> -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>执行上述代码后，会在u-boot目录下生成以<code>u-boot</code>名称开头的一系列文件，其中就有u-boot.img文件。<br>Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
+</blockquote>
+<h3 id="编译Trust"><a href="#编译Trust" class="headerlink" title="编译Trust"></a>编译Trust</h3><p>进入&#x2F;rkbin&#x2F;tools目录，执行以下代码生成Trust文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./trust_merger ~/rkbin/RKTRUST/RK3328TRUST.ini<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Address：<code>0x00006000</code>，Name：<code>atf</code>。</p>
+</blockquote>
+<h3 id="编译BOOT"><a href="#编译BOOT" class="headerlink" title="编译BOOT"></a>编译BOOT</h3><p>首先克隆官方kernel源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> -b develop-6.1 https://github.com/rockchip-linux/kernel.git<br></code></pre></td></tr></table></figure>
+
+<p>查看是否切换到<code>develop-6.1</code>分支，项目默认为<code>develop-4.4</code>分支，后续编译时会报错，暂不清楚具体原因；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -a<br></code></pre></td></tr></table></figure>
+
+<p>导出环境变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> ARCH=arm64<br><br><span class="hljs-built_in">export</span> CROSS_COMPILE=aarch64-linux-gnu-<br></code></pre></td></tr></table></figure>
+
+<p>进入kernel目录，先将官方提供的配置文件复制到项目根目录中并重命名为 <strong>.config</strong>，然后运行<code>make menuconfig</code>后退出保存一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> ~/kernel/arch/arm64/configs/rockchip_linux_defconfig .config<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于官方kernel项目中没有适用于RK3328芯片的配置文件，所以这里使用了瑞芯微芯片Linux的通用配置文件。</p>
+</blockquote>
+<p>编译boot.img</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make rk3328-evb.img<br></code></pre></td></tr></table></figure>
+
+<p>等待编译完成，会生成以下文件：<br>Image:  resource.img (with rk3328-evb.dtb logo.bmp logo_kernel.bmp) is ready<br>Image:  boot.img (with Image  resource.img) is ready<br>Image:  zboot.img (with Image.lz4  resource.img) is ready</p>
+<blockquote>
+<p>Address：<code>0x00008000</code>，Name：<code>boot</code>。</p>
+</blockquote>
+<h3 id="编译ROOTFS"><a href="#编译ROOTFS" class="headerlink" title="编译ROOTFS"></a>编译ROOTFS</h3><blockquote>
+<p>Address：<code>0x00040000</code>，Name：<code>rootfs</code>。</p>
+</blockquote>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://wiki.t-firefly.com/zh_CN/ROC-RK3399-PC/uboot_introduction.html#qian-yan">U-Boot 使用</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Boot_option">Boot option</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/discussions/1634">RK33XX&#x2F;RK35XX系列设备启动流程、写入系统及编译流程</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -441,7 +534,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%88%B7%E6%9C%BA/" class="category-chain-item">刷机</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -456,9 +549,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Android/" class="print-no-link">#Android</a>
-      
-        <a href="/tags/Fastboot/" class="print-no-link">#Fastboot</a>
+        <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/" class="print-no-link">#瑞芯微</a>
       
     </div>
   
@@ -470,8 +561,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Fastboot命令</div>
-      <div>https://dongxunz.github.io/2021/12/06/刷机/Fastboot命令/</div>
+      <div>编译适用于RK3328芯片的Loader</div>
+      <div>https://dongxunz.github.io/2025/06/17/瑞芯微/编译适用于RK3328芯片的Loader/</div>
     </div>
     <div class="license-meta">
       
@@ -483,7 +574,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年12月6日</div>
+          <div>2025年6月17日</div>
         </div>
       
       
@@ -515,9 +606,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/06/%E5%88%B7%E6%9C%BA/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E7%AC%94%E8%AE%B0/" title="一加6刷机笔记">
+                      <a href="/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" title="一加6刷机操作指南">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一加6刷机笔记</span>
+                        <span class="hidden-mobile">一加6刷机操作指南</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -525,8 +616,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/04/%E5%88%B7%E6%9C%BA/Adb%E5%91%BD%E4%BB%A4/" title="Adb命令">
-                        <span class="hidden-mobile">Adb命令</span>
+                      <a href="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/" title="魔百和电视盒子安装Klipper">
+                        <span class="hidden-mobile">魔百和电视盒子安装Klipper</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
