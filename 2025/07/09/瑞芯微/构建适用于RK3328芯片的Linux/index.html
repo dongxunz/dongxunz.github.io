@@ -1,0 +1,1139 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。 知识补充瑞芯微芯片启动流程：[1]  上图可以看出瑞芯微的芯片有2条启动流程： Boot Flow 1 &#x2F;  Boot Flow 2，每条流程对应的loader1、loader2文件在构成方式上有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建适用于RK3328芯片的Linux">
+<meta property="og:url" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。 知识补充瑞芯微芯片启动流程：[1]  上图可以看出瑞芯微的芯片有2条启动流程： Boot Flow 1 &#x2F;  Boot Flow 2，每条流程对应的loader1、loader2文件在构成方式上有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/rockchip_boot_flow_20181122.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/system_info.png">
+<meta property="article:published_time" content="2025-07-09T07:27:15.000Z">
+<meta property="article:modified_time" content="2025-07-14T16:58:26.478Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="瑞芯微">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/rockchip_boot_flow_20181122.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>构建适用于RK3328芯片的Linux - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                <span>分享</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
+                    <i class="iconfont icon-apple-fill"></i>
+                    <span>电路</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    <span>结构</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>游戏</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
+                    <i class="iconfont icon-book"></i>
+                    <span>阅读角</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="构建适用于RK3328芯片的Linux"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-09 15:27" pubdate>
+          2025年7月9日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">构建适用于RK3328芯片的Linux</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2025年7月15日 凌晨
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。</p>
+<h2 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h2><p>瑞芯微芯片启动流程：<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Boot option ](https://opensource.rock-chips.com/wiki_Boot_option)">[1]</span></a></sup></p>
+<p><img src="/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/rockchip_boot_flow_20181122.jpg" srcset="/img/loading.gif" lazyload alt="RKChip Boot Flow"></p>
+<p>上图可以看出瑞芯微的芯片有2条启动流程：<font color="#008000"> <b>Boot Flow 1</b></font> &#x2F; <font color="#fe0000"> <b>Boot Flow 2</b></font>，每条流程对应的loader1、loader2文件在构成方式上有所不同，而trust、kernel、rootfs基本一致，后续操作仅对不同的地方进行单独记录，而相同的部分会放在一起。</p>
+<p>查阅<a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/images/d/d5/RK3328_Linux-Debian_V1.1_Development_Guide-20170711.pdf">RK3328_Linux-Debian_V1.1_Development_Guide-20170711官方手册</a>可知，在RK3328芯片上运行Linux系统，需要以下文件：</p>
+<!-- 让表格居中显示的风格 -->
+<style>
+.center
+{
+  width: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<div class="center">
+
+<table>
+<thead>
+<tr>
+<th align="center">Address</th>
+<th align="center">Name</th>
+<th align="center">Path</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center">Boot</td>
+<td align="center">rk3328_loader_v1.21.250.bin</td>
+</tr>
+<tr>
+<td align="center">0x00000040</td>
+<td align="center">loader1</td>
+<td align="center">idbloader.img</td>
+</tr>
+<tr>
+<td align="center">0x00004000</td>
+<td align="center">loader2</td>
+<td align="center">uboot.img</td>
+</tr>
+<tr>
+<td align="center">0x00006000</td>
+<td align="center">atf</td>
+<td align="center">trust.img</td>
+</tr>
+<tr>
+<td align="center">0x00008000</td>
+<td align="center">boot</td>
+<td align="center">boot.img</td>
+</tr>
+<tr>
+<td align="center">0x00040000</td>
+<td align="center">rootfs</td>
+<td align="center">rootfs.img</td>
+</tr>
+</tbody></table>
+</div>
+
+<h2 id="主板信息"><a href="#主板信息" class="headerlink" title="主板信息"></a>主板信息</h2><p>主芯片：<a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_RK3328">瑞芯微RK3288</a><br>内存颗粒：<a target="_blank" rel="noopener" href="https://www.absunshine.com/en/parts/K4B2G0446C-HYH9-SAMSUNG-3886027">K4B2G0446C-HYH9</a> * 8：2GB<br>eMMC芯片：<a target="_blank" rel="noopener" href="https://semiconductor.samsung.cn/estorage/emmc/emmc-5-1/klmag1jetd-b041/">KLMAG1JETD-B041</a>：16G<br>设备树文件：<a target="_blank" rel="noopener" href="https://github.com/unifreq/linux-6.0.y/tree/main/arch/arm64/boot/dts/rockchip">rk3328-beikeyun-1296mhz.dts form linux-6.0.y</a></p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p><img src="/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/system_info.png" srcset="/img/loading.gif" lazyload alt="系统信息"></p>
+<p>安装所需工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br><br><span class="hljs-built_in">sudo</span> apt-get upgrade<br><br><span class="hljs-built_in">sudo</span> apt-get install git gitk git-core git-gui bc bison flex make gcc-arm-linux-gnueabihf u-boot-tools device-tree-compiler gcc-aarch64-linux-gnu mtools parted libudev-dev libusb-1.0-0-dev libssl-dev android-tools-adb android-tools-fastboot python-is-python3 python3 python3-distutils swig python3-dev python3-pyelftools python3-all-dev python3-setuptools liblz4-tool libgnutls28-dev gcc-aarch64-linux-gnu device-tree-compiler libncurses5 libncurses5-dev build-essential libssl-dev mtools bc python2 dosfstools libelf-dev elfutils dwarves<br></code></pre></td></tr></table></figure>
+
+<h2 id="构建相关文件"><a href="#构建相关文件" class="headerlink" title="构建相关文件"></a>构建相关文件</h2><h3 id="Boot-Flow-1"><a href="#Boot-Flow-1" class="headerlink" title="Boot Flow 1"></a>Boot Flow 1</h3><h4 id="使用radxa构建工具-2-3"><a href="#使用radxa构建工具-2-3" class="headerlink" title="使用radxa构建工具 [2] [3]"></a>使用radxa构建工具 <sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ ROCK Pi E Build Debian ](https://wiki.radxa.com/RockpiE/dev/Debian)">[2]</span></a></sup> <sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Beelink-IPC-R(rk3588)支持使用OpenWrt和Armbian ](https://github.com/ophub/amlogic-s9xxx-openwrt/issues/415#issuecomment-1508234307)">[3]</span></a></sup></h4><ol>
+<li><p>克隆构建工具</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br>git <span class="hljs-built_in">clone</span> -b stable-4.4-rockpie https://github.com/radxa/rockchip-bsp.git<br><br><span class="hljs-built_in">cd</span> rockchip-bsp<br><br>git submodule init<br><br>git submodule update<br></code></pre></td></tr></table></figure>
+
+<p> 执行上述命令会拉取radxa配置的相关子模块项目，如果不想使用其中的u-boot、kernel项目（版本过于老旧），可以删掉相关目录并克隆其他仓库的源码到rockchip-bsp目录中（注意文件夹名称需保持一致，否则后续执行脚本会报错）；我使用的u-boot是官方u-boot，kernel则来自unifreq：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-built_in">rm</span> -rf u-boot kernel<br><br>git <span class="hljs-built_in">clone</span> https://github.com/u-boot/u-boot.git<br><br>git <span class="hljs-built_in">clone</span> https://github.com/unifreq/linux-6.1.y-rockchip.git<br><br><span class="hljs-built_in">mv</span> linux-6.1.y-rockchip kernel<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>配置设备树</p>
+<p> 将rk3328-beikeyun-1296mhz.dts文件开头的 <strong><code>#include &quot;rk3328.dtsi</code>“</strong> 改为 <strong><code>#include &quot;rk3328-u-boot.dtsi&quot;</code></strong> 后放入路径：u-boot&#x2F;arch&#x2F;arm&#x2F;dts中，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">dONFIG_ROCKCHIP_RK3328) += \<br>        rk3328-beikeyun-1296mhz.dtb \<br>        rk3328-nanopi-r2s-u-boot.dtb \<br>        rk3328-rock-pi-e-v3.dtb \<br>        rk3328-evb-u-boot.dtb \<br>        rk3328-orangepi-r1-plus-lts-u-boot.dtb \<br>        rk3328-rock-pi-e-v3-u-boot.dtb \<br>        rk3328-generic.dtb \<br>        rk3328-orangepi-r1-plus-u-boot.dtb \<br>        rk3328-sdram-ddr3-666.dtb \<br>        rk3328-generic-u-boot.dtb \<br>        rk3328-roc-cc-u-boot.dtb \<br>        rk3328-sdram-ddr4-666.dtb \<br>        rk3328-nanopi-r2c-plus-u-boot.dtb \<br>        rk3328-rock64-u-boot.dtb \<br>        rk3328-sdram-lpddr3-1600.dtb \<br>        rk3328-nanopi-r2c-u-boot.dtb \<br>        rk3328-rock-pi-e-base-u-boot.dtb \<br>        rk3328-sdram-lpddr3-666.dtb \<br>        rk3328-nanopi-r2s-plus-u-boot.dtb \<br>        rk3328-rock-pi-e-u-boot.dtb \<br>        rk3328-u-boot.dtb<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>新增主板信息</p>
+<p> 修改build&#x2F;board_configs.sh文件，在适当位置新增主板配置信息：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-string">&quot;rk3328-beikeyun&quot;</span>)<br>    DEFCONFIG=rockchip_linux_defconfig<br>    UBOOT_DEFCONFIG=evb-rk3328_defconfig<br>    DTB=rk3328-beikeyun-1296mhz.dtb<br>    <span class="hljs-built_in">export</span> ARCH=arm64<br>    <span class="hljs-built_in">export</span> CROSS_COMPILE=aarch64-linux-gnu-<br>    CHIP=<span class="hljs-string">&quot;rk3328&quot;</span><br>    ;;<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>DEFCONFIG</code>：kernel配置文件<br><code>UBOOT_DEFCONFIG</code>：u-boot配置文件<br><code>DTB</code>：设备树文件<br><code>ARCH</code>：核心架构<br><code>CROSS_COMPILE</code>：交叉编译工具链<br><code>CHIP</code>：芯片型号</p>
+</blockquote>
+</li>
+<li><p>配置BL31文件环境</p>
+<p> 下载该项目中的<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/tree/master/rk3328">rk3328_bl31_v1.39.bin</a>文件，将其放入路径：rkbin&#x2F;bin&#x2F;rk33&#x2F;，使用以下命令配置BL31文件环境：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> BL31=/home/dongxun/Desktop/rockchip-linux/radxa/rockchip-bsp/rkbin/bin/rk33/rk3328_bl31_v1.39.bin<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>U-Boot 需要 ARM Trusted Firmware (ATF) 的 BL31 二进制文件作为安全固件组件才能生成完整可用的启动镜像</p>
+</blockquote>
+</li>
+<li><p>开始构建u-boot</p>
+<p> 切换到rockchip-bsp根目录使用以下命令开始构建u-boot：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-uboot.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
+
+<p> 等待构建完成，会在out&#x2F;u-boot目录生成<font color="#008000"> <b>Boot Flow 1</b></font>所需的文件：</p>
+ <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs text">.<br>└── u-boot<br>    ├── idbloader.img<br>    ├── rk3328_loader_ddr333_v1.16.250.bin<br>    ├── spi/<br>    ├── trust.img<br>    └── uboot.img<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="手动构建相关文件-1"><a href="#手动构建相关文件-1" class="headerlink" title="手动构建相关文件 [1]"></a>手动构建相关文件 <sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Boot option ](https://opensource.rock-chips.com/wiki_Boot_option)">[1]</span></a></sup></h4><p>手动构建使用的源码大部分均来自瑞芯微官方Github仓库：<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux">rockchip-linux</a>，只有<a target="_blank" rel="noopener" href="https://github.com/radxa/u-boot/tree/stable-4.4-rockpie">u-boot</a>源码来自radxa，因为官方u-boot构建时会有各种报错，而且无法生成u-boot-tpl.bin文件，暂不清楚具体原因。</p>
+<h5 id="loader1"><a href="#loader1" class="headerlink" title="loader1"></a>loader1</h5><p><strong>idbloader.img(miniloader)</strong> 由2个文件组成：ddr.bin + miniloader.bin，均由瑞芯微官方提供，而这2个文件都保存在<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/rkbin">rkbin仓库</a>中，首先将仓库克隆到本地：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/rkbin<br></code></pre></td></tr></table></figure>
+
+<p>对于RK3328而言，在rkbin&#x2F;bin&#x2F;rk33目录中没有提供rk3328_miniloader_vx.xx.bin文件，不过我发现了一个Github仓库：<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/tree/master">uboot_builder</a>，里面有适用于RK3328芯片的miniloader文件（本次操作暂未使用）。</p>
+<p>通过查看rkbin&#x2F;RKBOOT&#x2F;RK3328MINIALL.ini配置信息得知可使用：rk322xh_miniloader_v2.50.bin，路径如下：rkbin&#x2F;bin&#x2F;rk33&#x2F;rk322xh_miniloader_v2.50.bin，在rkbin根目录执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/mkimage -n rk3328 -T rksd -d /home/dongxun/Desktop/rockchip-linux/rkbin/bin/rk33/rk3328_ddr_333MHz_v1.21.bin idbloader.img<br><br><span class="hljs-built_in">cat</span> /home/dongxun/Desktop/rockchip-linux/rkbin/bin/rk33/rk322xh_miniloader_v2.50.bin &gt;&gt; idbloader.img<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-n &#x3D;&#x3D;&gt; set image name to ‘name’ ：指定镜像名称，一般是芯片型号或者主板型号<br>-T &#x3D;&#x3D;&gt; set image type to ‘type’ ：指定镜像类型，可以输入tools&#x2F;mkimage -T list查看更多类型，这里使用的类型为：rksd : Rockchip SD Boot Image<br>-d &#x3D;&#x3D;&gt; use image data from ‘datafile’ ：使用的二进制数据文件，这里使用对应芯片的rkxx_ddr_vx.xx.bin二进制文件<br>rkxx_miniloader_vx.xx.bin ：对应芯片miniloader二进制文件</p>
+</blockquote>
+<p>烧录地址：Address：<code>0x00000040</code>，Name：<code>loader1</code>。</p>
+<h5 id="loader2"><a href="#loader2" class="headerlink" title="loader2"></a>loader2</h5><p><strong>uboot.img</strong> 需要使用u-boot和rkbin两个项目的文件，先克隆u-boot仓库，然后将rkbin仓库的文件全部复制到u-boot中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> -b stable-4.4-rockpie https://github.com/radxa/u-boot.git<br><br><span class="hljs-built_in">cp</span> -r rkbin/* u-boot/<br></code></pre></td></tr></table></figure>
+
+<div class="note note-warning">
+            <p><font color="#ff0000"><b>需要修改scripts&#x2F;dtc&#x2F;dtc-lexer.l文件，将<code>YYLTYPE yylloc;</code>改为<code>extern YYLTYPE yylloc;</code>，否则后续构建会报错：multiple definition of &#96;yylloc’</b></font></p>
+          </div>
+
+<p>在u-boot项目中，已经包含各种芯片的u-boot示例配置文件，存放路径为：u-boot&#x2F;configs&#x2F;，对于RK3328，使用以下命令加载默认配置并开始构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>make menuconfig<br><br>make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+
+<p>等待构建完成，会在根目录下生成以<code>u-boot</code>名称开头的一系列文件，对于<font color="#008000"><b>Boot Flow 1</b></font>，还需将生成的u-boot.bin转换成miniloader可识别文件uboot.img才能烧录到主板，执行以下命令即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/loaderimage --pack --uboot u-boot.bin uboot.img<br></code></pre></td></tr></table></figure>
+
+<p>烧录地址：Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
+<h3 id="Boot-Flow-2"><a href="#Boot-Flow-2" class="headerlink" title="Boot Flow 2"></a>Boot Flow 2</h3><h4 id="loader1-1"><a href="#loader1-1" class="headerlink" title="loader1"></a>loader1</h4><p><strong>idbloader.img(TPL&#x2F;SPL)</strong> 由2个文件组成：u-boot-tpl.bin + u-boot-spl.bin，在构建u-boot项目时会自动生成，也可以使用以下操作进行手动生成。</p>
+<p>进入u-boot目录，执行以下命令开始配置u-boot然后开始构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>make menuconfig<br><br>make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+
+<p>等待构建完成，会在u-boot根目录下生成以<code>u-boot</code>名称开头的一系列文件，以及2个核心文件：<code>spl/u-boot-spl.bin</code>、<code>tpl/u-boot-tpl.bin</code>。</p>
+<p>执行以下命令即可得到idbloader.img(TPL&#x2F;SPL)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/mkimage -n rk3328 -T rksd -d tpl/u-boot-tpl.bin idbloader.img<br><span class="hljs-built_in">cat</span> spl/u-boot-spl.bin &gt;&gt; idbloader.img<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>-n &#x3D;&#x3D;&gt; set image name to ‘name’ ：指定镜像名称，一般是芯片型号或者主板型号<br>-T &#x3D;&#x3D;&gt; set image type to ‘type’ ：指定镜像类型，可以输入tools&#x2F;mkimage -T list查看更多类型，这里使用的类型为：rksd : Rockchip SD Boot Image<br>-d &#x3D;&#x3D;&gt; use image data from ‘datafile’ ：使用的二进制数据文件，这里使用u-boot编译生成的u-boot-tol.bin二进制文件<br>u-boot-spl.bin.bin ：这里使用u-boot编译生成的u-boot-spl.bin二进制文件</p>
+</blockquote>
+<p>烧录地址：Address：<code>0x00000040</code>，Name：<code>loader1</code>。</p>
+<h4 id="loader2-1"><a href="#loader2-1" class="headerlink" title="loader2"></a>loader2</h4><p><strong>u-boot.itb</strong> 由bl31.elf, u-boot-nodtb.bin, u-boot.dtb文件组成，第一个文件可以下载该项目中的<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/blob/master/rk3328">rk3328&#x2F;rk3328_bl31_v1.42.elf</a>文件，后2个文件均是u-boot项目构建时生成的，将这3个文件放入u-boot根目录，执行以下命令开始构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> rk3328/rk3328_bl31_v1.42.elf bl31.elf<br><br>make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm u-boot.itb<br></code></pre></td></tr></table></figure>
+
+<p>烧录地址：Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
+<h3 id="trust"><a href="#trust" class="headerlink" title="trust"></a>trust</h3><p>进入rkbin目录，使用以下命令，通过rkbin&#x2F;RKTRUSRT&#x2F;目录中对应芯片的配置文件来生成trust.img：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/trust_merger /home/dongxun/Desktop/rockchip-linux/rkbin/RKTRUST/RK3328TRUST.ini<br></code></pre></td></tr></table></figure>
+
+<p>烧录地址：Address：<code>0x00006000</code>，Name：<code>atf</code>。</p>
+<h3 id="kernel"><a href="#kernel" class="headerlink" title="kernel"></a>kernel</h3><h4 id="瑞芯微kernel-4"><a href="#瑞芯微kernel-4" class="headerlink" title="瑞芯微kernel [4]"></a>瑞芯微kernel <sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Rockchip Kernel ](https://opensource.rock-chips.com/wiki_Rockchip_Kernel#Install_Boot.2Fkernel)">[4]</span></a></sup></h4><p>首先克隆官方kernel源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> -b develop-6.1 https://github.com/rockchip-linux/kernel.git<br></code></pre></td></tr></table></figure>
+
+<p>使用以下命令查看当前项目是否为<code>develop-6.1</code>分支，默认为<code>develop-4.4</code>分支，后续构建时会报错，暂不清楚具体原因；</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -a<br></code></pre></td></tr></table></figure>
+
+<p>在kernel项目中，已经包含各芯片的kernel示例配置文件，稍作修改即可进行使用，对于RK3328而言，其芯片架构为<strong>arm64</strong>，对应的示例配置文件路径为：kernel&#x2F;arch&#x2F;arm64&#x2F;configs，但是该路径下没有RK3328专属的示例配置文件，所以使用以下命令加载通用配置到 <strong>.config</strong>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- rockchip_linux_defconfig<br></code></pre></td></tr></table></figure>
+
+<p>将rk3328-beikeyun-1296mhz.dts放入以下路径：kernel&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip，然后修改该目录下的MakeFile，在适当位置新增一行填入以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-beikeyun-1296mhz.dtb<br></code></pre></td></tr></table></figure>
+
+<p>切换到kernel根目录，开始编译官方kernel文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+
+<p>等待编译完成，会生成以下文件：<br>OBJCOPY arch&#x2F;arm64&#x2F;boot&#x2F;Image<br>GZIP    arch&#x2F;arm64&#x2F;boot&#x2F;Image.gz</p>
+<blockquote>
+<p>对于32位架构的核心，编译时会生成zImage文件<br>对于64位架构的核心，编译会生成Image文件</p>
+</blockquote>
+<p>根据对应设备树编译boot.img文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make rk3328-beikeyun-1296mhz.img -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+
+<p>等待编译完成，会生成以下文件：<br>Image:  resource.img (with rk3328-beikeyun-1296mhz.dtb logo.bmp logo_kernel.bmp) is ready<br>Image:  boot.img (with Image  resource.img) is ready<br>Image:  zboot.img (with Image.lz4  resource.img) is ready</p>
+<p>生成的上述文件都是独立存在的，无法烧录到主板，还需要根据设备树二进制文件以及extlinux.conf文件打包成boot.img才行，依次执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> boot<br><br><span class="hljs-built_in">cp</span> <span class="hljs-built_in">arch</span>/arm64/boot/dts/rockchip/rk3328-beikeyun-1296mhz.dtb boot/rk3328.dtb<br><br><span class="hljs-built_in">cp</span> <span class="hljs-built_in">arch</span>/arm64/boot/Image boot/<br><br><span class="hljs-built_in">mkdir</span> boot/extlinux<br><br>wget http://opensource.rock-chips.com/images/6/60/Boot_extlinux.zip<br><br>unzip Boot_extlinux.zip boot/extlinux<br><br>nano boot/extlinux/extlinux.conf<br><br><span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=boot.img bs=1M count=32<br><br><span class="hljs-built_in">sudo</span> mkfs.fat boot.img<br><br><span class="hljs-built_in">mkdir</span> tmp<br><br><span class="hljs-built_in">sudo</span> mount boot.img tmp/<br><br><span class="hljs-built_in">cp</span> -r boot/* tmp/<br><br>umount tmp<br></code></pre></td></tr></table></figure>
+
+<p>extlinux.conf文件需要根据对应芯片进行修改：设备树文件名、调试UART的基地址、主板的根分区等信息，否则可能无法正常启动。<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Partitions ](https://opensource.rock-chips.com/wiki_Partitions)">[5]</span></a></sup></p>
+<p>经过上述操作，boot.img文件才可以烧录到主板的kernel分区。</p>
+<p>烧录地址：Address：<code>0x00008000</code>，Name：<code>boot</code>。</p>
+<h4 id="最新版kernel"><a href="#最新版kernel" class="headerlink" title="最新版kernel"></a>最新版kernel</h4><h5 id="raxda工具"><a href="#raxda工具" class="headerlink" title="raxda工具"></a>raxda工具</h5><p>请先按照本文章目录 Boot Flow 1 -&gt; 使用radxa构建工具 配置好工具。</p>
+<p>首先需要配置设备树，将rk3328-beikeyun-1296mhz.dts文件放入以下路径：kernel&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-beikeyun-1296mhz.dtb<br></code></pre></td></tr></table></figure>
+
+<p>切换到kernel目录，配置构建环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> ARCH=arm64<br><br><span class="hljs-built_in">export</span> CROSS_COMPILE=aarch64-linux-gnu-<br></code></pre></td></tr></table></figure>
+
+<p>加载默认配置信息并修改配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">make rockchip_linux_defconfig<br><br>make menuconfig<br></code></pre></td></tr></table></figure>
+
+<p>切换到rockchip-bsp根目录，使用以下命令开始构建kernel：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-kernel.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
+
+<p>等待构建完成，会在out&#x2F;kernel目录生成所需的文件：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">.<br>├── boot.img<br>├── kernel<br>│   ├── Image<br>│   └── rk3328-beikeyun-1296mhz.dtb<br></code></pre></td></tr></table></figure>
+
+<p>烧录地址：Address：<code>0x00008000</code>，Name：<code>boot</code>。</p>
+<h5 id="手动构建"><a href="#手动构建" class="headerlink" title="手动构建"></a>手动构建</h5><p>本次构建使用官方Linux Kernel：<a target="_blank" rel="noopener" href="https://www.kernel.org/">The Linux Kernel Archives</a>。</p>
+<div class="note note-warning">
+            <p><font color="#ff0000"> <b>⚠官方最新内核不一定适配当前芯片，甚至可能造成不兼容等后果，请慎重操作！</b></font></p>
+          </div>
+
+<p>下载Linux 6.15.5内核源码并解压：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.5.tar.xz<br><br>tar -xf linux-6.15.5.tar.xz<br></code></pre></td></tr></table></figure>
+
+<p>在Linux官方内核中，并不包含瑞芯微芯片的配置文件，需要使用以下命令从瑞芯微官方kernel中复制一份通用配置文件到最新的Linux内核中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> ~/Desktop/rockchip-linux/kernel/arch/arm64/configsrockchip_linux_defconfig ~/Desktop/linux-kernel/linux-6.15.5/arch/arm64/configs/rockchip_linux_defconfig<br></code></pre></td></tr></table></figure>
+
+<p>还需配置设备树文件，先将<a target="_blank" rel="noopener" href="https://github.com/unifreq/linux-6.1.y-rockchip/blob/main/arch/arm64/boot/dts/rockchip/rk3328.dtsi">rk3328.dtsi</a>文件下载下来，和rk3328-beikeyun-1296mhz.dts文件一起放入以下路径：linux-6.15.5&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip&#x2F;，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p>
+<blockquote>
+<p>如果不使用unifreq仓库的rk3328.dtsi文件，后续构建会报错。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-beikeyun-1296mhz.dtb<br></code></pre></td></tr></table></figure>
+
+<p>进入linux-6.15.5目录，使用以下命令配置构建环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> ARCH=arm64<br><br><span class="hljs-built_in">export</span> CROSS_COMPILE=aarch64-linux-gnu-<br></code></pre></td></tr></table></figure>
+
+<p>使用以下命令加载通用配置到 <strong>.config</strong>文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- rockchip_linux_defconfig<br></code></pre></td></tr></table></figure>
+
+<p>使用<code>make menuconfig</code>修改配置并保存退出，即可开始构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+
+<p>等待构建完成，可看到以下信息，其中Image就是需要的文件，但是还需要进一步处理才能生成boot.img。<br>SORTTAB vmlinux<br>OBJCOPY arch&#x2F;arm64&#x2F;boot&#x2F;Image<br>GZIP    arch&#x2F;arm64&#x2F;boot&#x2F;Image.gz</p>
+<p>切换到kernel上一级目录新建一个3328文件夹，使用以下命令打包kernel-dtb文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> 3328<br><br><span class="hljs-built_in">cd</span> 3328<br><br><span class="hljs-built_in">cat</span> ../linux-6.15.5/arch/arm64/boot/Image ../linux-6.15.5/arch/arm64/boot/dts/rockchip/rk3328-beikeyun-1296mhz.dtb &gt; kernel-dtb<br></code></pre></td></tr></table></figure>
+
+<p>克隆rockchip-mkbootimg项目并编译相关工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/neo-technologies/rockchip-mkbootimg.git<br><br><span class="hljs-built_in">sudo</span> apt-get install libssl-dev<br><br><span class="hljs-built_in">cd</span> rockchip-mkbootimg<br><br>make<br><br><span class="hljs-built_in">sudo</span> make install<br></code></pre></td></tr></table></figure>
+
+<p>在3328目录执行以下命令生成boot.img：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkbootimg --kernel kernel-dtb -o boot.img<br></code></pre></td></tr></table></figure>
+
+<p>烧录地址：Address：<code>0x00008000</code>，Name：<code>boot</code>。</p>
+<h3 id="rootfs"><a href="#rootfs" class="headerlink" title="rootfs"></a>rootfs</h3><p>一般简称根文件系统。</p>
+<h4 id="使用现有rootfs"><a href="#使用现有rootfs" class="headerlink" title="使用现有rootfs"></a>使用现有rootfs</h4><p>可查看<a target="_blank" rel="noopener" href="https://mirrors.cernet.edu.cn/list">校园网联合镜像站</a>，<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/">清华大学开源软件镜像站</a>获取更多系统镜像源码文件，以下只列出部分Linux镜像源码下载地址：</p>
+<p>Armbian：<a target="_blank" rel="noopener" href="https://rsync.armbian.com/apt/dists/">Index of &#x2F;apt&#x2F;dists&#x2F;</a><br>Debian：<a target="_blank" rel="noopener" href="https://images.linuxcontainers.org/">Image server for Incus and LXC</a><br>Ubuntu：<a target="_blank" rel="noopener" href="https://cdimage.ubuntu.com/ubuntu-base/releases/">Index of &#x2F;ubuntu-base&#x2F;releases</a></p>
+<blockquote>
+<p>需要根据芯片架构选择合适的版本</p>
+</blockquote>
+<p>以下操作使用的Linux镜像源码文件为：ubuntu-base-22.04-base-arm64.tar.gz <sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ 创建 Ubuntu 根文件系统 ](https://wiki.t-firefly.com/zh_CN/ROC-RK3328-PC/linux_build_ubuntu_rootfs.html)">[6]</span></a></sup></p>
+<p>配置根文件系统：</p>
+<ol>
+<li><p>安装qemu</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install qemu-user-static<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建临时文件夹并将下载的镜像源码文件解压到其中</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> temp<br><br><span class="hljs-built_in">sudo</span> tar -xpf ubuntu-base-22.04-base-arm64.tar.gz -C temp<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>准备网络工作</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> -b /etc/resolv.conf temp/etc/resolv.conf<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>准备qemu</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /usr/bin/qemu-aarch64-static temp/usr/bin/<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>挂载主机&#x2F;dev</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> mount --<span class="hljs-built_in">bind</span> /dev /home/dongxun/Desktop/temp/dev<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果不执行该操作，后续apt update会有报错：&#x2F;usr&#x2F;bin&#x2F;apt-key: 95: cannot create &#x2F;dev&#x2F;null: Permission denied</p>
+</blockquote>
+</li>
+<li><p>进入根文件系统</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chroot</span> temp<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>更换软件源</p>
+<p> 系统使用的官方默认源，在国内更新、下载时很不方便，以下将<code>/etc/apt/sources.list</code>更换为清华源：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</span><br><br>deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware</span><br><br>deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware</span><br><br>deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里强制使用HTTP，而不是官方推荐的HTTPS，是因为使用HTTPS更新时会有CA证书报错：Certificate verification failed<br>后续正常进入系统，请更换为HTTPS即可</p>
+</blockquote>
+</li>
+<li><p>更新软件包</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br><br>apt upgrade<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>安装所需工具</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install man-db <span class="hljs-built_in">sudo</span> openssh-server net-tools network-manager iputils-ping bash-completion kmod cpio initramfs-tools linux-base netplan.io git systemd-timesyncd<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>开启ssh远程访问</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -i <span class="hljs-string">&#x27;/PasswordAuthentication /c PasswordAuthentication yes&#x27;</span> /etc/ssh/ssh_config<br><br>sed -i <span class="hljs-string">&#x27;/PermitRootLogin /c PermitRootLogin yes&#x27;</span> /etc/ssh/sshd_config<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>添加用户并设置密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">useradd -s <span class="hljs-string">&#x27;/bin/bash&#x27;</span> -m -G adm,<span class="hljs-built_in">sudo</span> username<br><br>passwd username<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>给root用户设置密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">passwd root<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>退出根文件系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">exit</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>安装内核模块</p>
+<p>此操作需要在kernel目录下执行，会将构建的.ko文件复制到根文件系统中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> make INSTALL_MOD_PATH=~/Desktop/temp modules_install<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>制作根文件系统镜像：</p>
+<ol>
+<li><p>创建根文件系统目录</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> rootfs<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看temp文件夹大小</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">du</span> -sh temp/<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>创建一个linuxroot.img文件</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=linuxroot.img bs=1M count=1000<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>count的数值需要根据步骤2中查询到的temp文件夹大小进行相应的调整</p>
+</blockquote>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">actual_size=$(<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">du</span> -s /temp | <span class="hljs-built_in">cut</span> -f1)<br><br>img_size=$((actual_size * <span class="hljs-number">11</span> / <span class="hljs-number">10</span>))<br><br><span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=linuxroot.img bs=1K count=<span class="hljs-variable">$img_size</span><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>自动计算temp大小并创建合适的大小文件</p>
+</blockquote>
+</li>
+<li><p>格式化文件格式</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkfs.ext4 linuxroot.img<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>将文件挂在到目录</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> mount linuxroot.img rootfs/<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>复制根文件系统</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> -rfp temp/*  rootfs/<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>取消挂载目录</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> umount rootfs/<br><br><span class="hljs-built_in">sudo</span> umount /home/dongxun/Desktop/temp/dev<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此操作会删除rootfs文件夹内的所有文件，但相关文件已经保存到了linuxroot.img中</p>
+</blockquote>
+</li>
+<li><p>检查文件系统</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">e2fsck -p -f linuxroot.img<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>调整镜像到最小尺寸</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">resize2fs -M linuxroot.img<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>将linuxroot.img拷贝到radxa工具的rootfs目录中，并修改文件名为：linaro-rootfs.img</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> linuxroot.img ~/Desktop/rockchip-linux/radxa/rockchip-bsp/rootfs/linaro-rootfs.img<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>切换到rockchip-bsp目录，开始生成可以烧录的system.img</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">build/mk-image.sh -c rk3328 -t system -r rootfs/linaro-rootfs.img<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>烧录地址：Address：<code>0x00000000</code>，Name：<code>system</code>。</p>
+<p>根文件系统烧录到eMMC后，上电启动后使用<code>df -h</code>查看磁盘大小发现不正常，未占满整个分区，可以执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">resize2fs /dev/mtd/by-name/linuxroot<br></code></pre></td></tr></table></figure>
+
+<h4 id="手动构建rootfs"><a href="#手动构建rootfs" class="headerlink" title="手动构建rootfs"></a>手动构建rootfs</h4><p>使用<a target="_blank" rel="noopener" href="https://buildroot.org/">Buildroot</a>项目进行构建。</p>
+<p>首先下载Buildroot源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://buildroot.org/downloads/buildroot-2025.02.4.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>解压源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxvf buildroot-2025.02.4.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>后续有需求再补充…</p>
+<p>烧录地址：Address：<code>0x00040000</code>，Name：<code>rootfs</code>。</p>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Boot_option"> Boot option </a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://wiki.radxa.com/RockpiE/dev/Debian"> ROCK Pi E Build Debian </a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-openwrt/issues/415#issuecomment-1508234307"> Beelink-IPC-R(rk3588)支持使用OpenWrt和Armbian </a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Rockchip_Kernel#Install_Boot.2Fkernel">Rockchip Kernel </a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Partitions"> Partitions </a>
+<a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://wiki.t-firefly.com/zh_CN/ROC-RK3328-PC/linux_build_ubuntu_rootfs.html"> 创建 Ubuntu 根文件系统 </a>
+<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/" class="print-no-link">#瑞芯微</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>构建适用于RK3328芯片的Linux</div>
+      <div>https://dongxunz.github.io/2025/07/09/瑞芯微/构建适用于RK3328芯片的Linux/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" title="Linux基础配置">
+                        <span class="hidden-mobile">Linux基础配置</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

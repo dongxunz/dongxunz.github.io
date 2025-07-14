@@ -21,32 +21,27 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言手里有几块搭载瑞芯微RK3328芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（SAMSUNG KLMAG1JETD-B041），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的了，测试下来都失败，所以就自己折腾编译一个合适的Loader，用于切换到eMMC存储并烧录Linux系统，这篇文章主要用于记录过程，仅供参考。">
+    <meta name="description" content="前言本文章对各Linux系统的基础配置（代理，apt源）进行记录，以防不时之需。 apt代理临时代理： 123export http_proxy&#x3D;http:&#x2F;&#x2F;ip:portsudo apt-get update  永久代理： 修改&#x2F;etc&#x2F;apt&#x2F;apt.conf（或者&#x2F;etc&#x2F;envrionment），在适当位置新增以下内容： 123Acqui">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编译适用于RK3328芯片的Loader">
-<meta property="og:url" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/index.html">
+<meta property="og:title" content="Linux基础配置">
+<meta property="og:url" content="https://dongxunz.github.io/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言手里有几块搭载瑞芯微RK3328芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（SAMSUNG KLMAG1JETD-B041），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的了，测试下来都失败，所以就自己折腾编译一个合适的Loader，用于切换到eMMC存储并烧录Linux系统，这篇文章主要用于记录过程，仅供参考。">
+<meta property="og:description" content="前言本文章对各Linux系统的基础配置（代理，apt源）进行记录，以防不时之需。 apt代理临时代理： 123export http_proxy&#x3D;http:&#x2F;&#x2F;ip:portsudo apt-get update  永久代理： 修改&#x2F;etc&#x2F;apt&#x2F;apt.conf（或者&#x2F;etc&#x2F;envrionment），在适当位置新增以下内容： 123Acqui">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_bootflow20181122.jpg">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/partition_table_information.png">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/backup_partition_image.png">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/system_info.png">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/use_absolute_path.png">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/create_loader_file.png">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/enable_emmc_support.png">
-<meta property="article:published_time" content="2025-06-16T16:20:15.000Z">
-<meta property="article:modified_time" content="2025-06-20T11:41:35.628Z">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/disk_expansion_1.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/disk_expansion_2.png">
+<meta property="article:published_time" content="2025-07-08T13:53:19.000Z">
+<meta property="article:modified_time" content="2025-07-11T13:30:26.318Z">
 <meta property="article:author" content="dongxunz">
-<meta property="article:tag" content="瑞芯微">
+<meta property="article:tag" content="Linux配置">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_bootflow20181122.jpg">
+<meta name="twitter:image" content="https://dongxunz.github.io/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/disk_expansion_1.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>编译适用于RK3328芯片的Loader - dongxunz&#39;s blogs</title>
+  <title>Linux基础配置 - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -300,7 +295,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="编译适用于RK3328芯片的Loader"></span>
+            <span id="subtitle" data-typed-text="Linux基础配置"></span>
           
         </div>
 
@@ -311,8 +306,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-17 00:20" pubdate>
-          2025年6月17日 凌晨
+        <time datetime="2025-07-08 21:53" pubdate>
+          2025年7月8日 晚上
         </time>
       </span>
     
@@ -324,7 +319,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.2k 字
+          685 字
         
       </span>
     
@@ -336,7 +331,7 @@
         
         
           <!-- compatible with older versions-->
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -382,13 +377,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">编译适用于RK3328芯片的Loader</h1>
+            <h1 id="seo-header">Linux基础配置</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年6月20日 晚上
+                    本文最后更新于：2025年7月11日 晚上
                   
                 
               </p>
@@ -396,126 +391,75 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>手里有几块搭载<a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_RK3328">瑞芯微RK3328</a>芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（<a target="_blank" rel="noopener" href="https://item.szlcsc.com/datasheet/KLMAG1JETD-B041/512099.html?spm=sc.gbn.xds.a___sc.hm.hd.ss&lcsc_vid=Q1cLAwUFQgQNUFcDFVFcAlNQRgRYVQZQTlcNAgAHQFQxVlNTR1FZXlxRQFFaUTtW">SAMSUNG KLMAG1JETD-B041</a>），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的了，测试下来都失败，所以就自己折腾编译一个合适的Loader，用于切换到eMMC存储并烧录Linux系统，这篇文章主要用于记录过程，仅供参考。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[U-Boot 使用](https://wiki.t-firefly.com/zh_CN/ROC-RK3399-PC/uboot_introduction.html#qian-yan)">[1]</span></a></sup></p>
-<h2 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h2><p>瑞芯微芯片启动流程：<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Boot option](https://opensource.rock-chips.com/wiki_Boot_option)">[2]</span></a></sup> <sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[RK33XX/RK35XX系列设备启动流程、写入系统及编译流程](https://github.com/ophub/amlogic-s9xxx-armbian/discussions/1634)">[3]</span></a></sup></p>
-<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_bootflow20181122.jpg" srcset="/img/loading.gif" lazyload alt="RKChip Boot flow"></p>
-<p>观察上图可发现瑞芯微的芯片有2条启动流程，而对于使用USB刷写系统，需要使用mini。</p>
-<p>查阅官方手册<a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/images/d/d5/RK3328_Linux-Debian_V1.1_Development_Guide-20170711.pdf">RK3328_Linux-Debian_V1.1_Development_Guide-20170711.pdf</a>可知，在RK3328芯片上运行Linux系统，需要以下文件：</p>
-<table>
-<thead>
-<tr>
-<th align="center">Address</th>
-<th align="center">Name</th>
-<th align="center">Path</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"></td>
-<td align="center">Boot</td>
-<td align="center">rkbin&#x2F;rk33&#x2F;rk3328_loader_v1.21.250.bin</td>
-</tr>
-<tr>
-<td align="center">0x00000040</td>
-<td align="center">loader1</td>
-<td align="center">idbloader.img</td>
-</tr>
-<tr>
-<td align="center">0x00004000</td>
-<td align="center">loader2</td>
-<td align="center">uboot.img</td>
-</tr>
-<tr>
-<td align="center">0x00006000</td>
-<td align="center">atf</td>
-<td align="center">trust.img</td>
-</tr>
-<tr>
-<td align="center">0x00008000</td>
-<td align="center">boot</td>
-<td align="center">boot.img</td>
-</tr>
-<tr>
-<td align="center">0x00040000</td>
-<td align="center">rootfs</td>
-<td align="center">linaro.img</td>
-</tr>
-</tbody></table>
-<h2 id="备份系统"><a href="#备份系统" class="headerlink" title="备份系统"></a>备份系统</h2><p>备份好原系统，可用于后续的救砖以及分析原系统的分区情况；对于瑞芯微的芯片，需要先使用新版本 AndroidTool_Release_v2.71 读取分区信息，然后使用旧版本 AndroidTool_Release_v2.38 导出镜像，可以在<a target="_blank" rel="noopener" href="https://www.t-firefly.com/doc/download/71.html">RKDevTool</a>下载这2个版本的工具。</p>
-<p>按住主板上的Recovery按钮，使用USB公对公数据线将主板的USB OTG接口与电脑进行连接，此时打开AndroidTool_Release_v2.71软件，会显示<strong>发现一个Loader设备</strong>，然后点击<strong>读取分区</strong>，信息如下：</p>
-<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/partition_table_information.png" srcset="/img/loading.gif" lazyload alt="分区信息"></p>
-<p>请自行截图保存上述的分区信息，关闭新版本软件后打开AndroidTool_Release_v2.38软件，点击 高级功能，<strong>起始扇区</strong>对应上图中的<strong>LBA</strong>，<strong>扇区数</strong>对应的<strong>Size</strong>，点击<strong>导出镜像</strong>备份，请依次对各Name进行备份并手动修改Output目录中的导出镜像文件名与之对应，其中userdata可以不用导出（非常占用空间！！！）：</p>
-<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/backup_partition_image.png" srcset="/img/loading.gif" lazyload alt="导出镜像"></p>
-<h2 id="编译环境"><a href="#编译环境" class="headerlink" title="编译环境"></a>编译环境</h2><p>我使用的是Windows10自带的Linux环境进行后续编译操作，方便快捷又好用~（就是占用C盘空间😒）</p>
-<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/system_info.png" srcset="/img/loading.gif" lazyload alt="编译系统信息"></p>
-<h2 id="编译文件"><a href="#编译文件" class="headerlink" title="编译文件"></a>编译文件</h2><h3 id="安装所需工具"><a href="#安装所需工具" class="headerlink" title="安装所需工具"></a>安装所需工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br><br><span class="hljs-built_in">sudo</span> apt-get upgrade<br><br><span class="hljs-built_in">sudo</span> apt-get install git gitk git-core git-gui bc bison flex make gcc-arm-linux-gnueabihf u-boot-tools device-tree-compiler gcc-aarch64-linux-gnu mtools parted libudev-dev libusb-1.0-0-dev libssl-dev android-tools-adb android-tools-fastboot<br></code></pre></td></tr></table></figure>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文章对各Linux系统的基础配置（代理，apt源）进行记录，以防不时之需。</p>
+<h2 id="apt代理"><a href="#apt代理" class="headerlink" title="apt代理"></a>apt代理</h2><p>临时代理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> http_proxy=http://ip:port<br><br><span class="hljs-built_in">sudo</span> apt-get update<br></code></pre></td></tr></table></figure>
 
-<h2 id="编译最新的Linux内核"><a href="#编译最新的Linux内核" class="headerlink" title="编译最新的Linux内核"></a>编译最新的Linux内核</h2><p>下载最新稳定版的Linux内核<a target="_blank" rel="noopener" href="https://www.kernel.org/">The Linux Kernel Archives</a>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.15.2.tar.xz<br></code></pre></td></tr></table></figure>
+<p>永久代理：</p>
+<p>修改&#x2F;etc&#x2F;apt&#x2F;apt.conf（或者&#x2F;etc&#x2F;envrionment），在适当位置新增以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">Acquire::http::proxy <span class="hljs-string">&quot;http://ip:port/&quot;</span>;<br>Acquire::ftp::proxy <span class="hljs-string">&quot;ftp://ip:port/&quot;</span>;<br>Acquire::https::proxy <span class="hljs-string">&quot;https://ip:port/&quot;</span>;<br></code></pre></td></tr></table></figure>
 
-<h3 id="编译Loader"><a href="#编译Loader" class="headerlink" title="编译Loader"></a>编译Loader</h3><p>克隆官方SDK源码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/rkbin<br></code></pre></td></tr></table></figure>
+<p>命令行单次代理：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get -o Acquire::http::proxy=<span class="hljs-string">&quot;http://ip:port/&quot;</span> update<br></code></pre></td></tr></table></figure>
 
-<p>进入rkbin项目中，首先需要修改相应芯片型号的配置文件，进入<strong>RKBOOT</strong>目录，修改<strong>RK3328MINIALL.ini</strong>文件，需要将以下地方的文件路径修改为绝对路径，否则后续编译时会提示找不到对应文件（默认的路径无法识别疑似是BUG）：</p>
-<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/use_absolute_path.png" srcset="/img/loading.gif" lazyload alt="文件路径需要使用绝对路径"></p>
-<p>进入&#x2F;rkbin&#x2F;tools目录，执行以下代码生成Loader文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./boot_merger ~/rkbin/RKBOOT/RK3328MINIALL.ini<br></code></pre></td></tr></table></figure>
+<h2 id="sudo代理"><a href="#sudo代理" class="headerlink" title="sudo代理"></a>sudo代理</h2><p>使用<code>export</code>对系统进行临时代理时，如果执行<code>sudo</code>命令，这种代理方式会失效，就需要使用以下方法进行设置，启用sudo代理。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[修复sudo中http_proxy等环境变量的缺失](https://note.qidong.name/2020/12/sudo-env/)">[1]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> visudo<br>    or<br><span class="hljs-built_in">sudo</span> vim /etc/sudoers<br></code></pre></td></tr></table></figure>
 
-<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/create_loader_file.png" srcset="/img/loading.gif" lazyload alt="编译生成Loader文件"></p>
+<p>在文件适当位置新增以下字段：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">Defaults        env_keep += <span class="hljs-string">&quot;http_proxy https_proxy ftp_proxy no_proxy&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="磁盘扩容"><a href="#磁盘扩容" class="headerlink" title="磁盘扩容"></a>磁盘扩容</h2><p>当磁盘不足时可以使用以下方法快速完成磁盘扩容操作。<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Ubuntu开启ssh访问-虚拟机开启ssh访问方法](https://blog.csdn.net/qq_40669895/article/details/139940223)">[2]</span></a></sup></p>
+<ol>
+<li><p>安装所需工具</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install gparted<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>打开应用程序GParted</p>
 <blockquote>
-<p>u-boot项目和rkbin项目需要放到同一目录下，不然后续操作可能会报错。<br>使用不同的系统时，Loader对应的烧录地址不一样，请注意区分，对于Android系统：Adress：<code>0x00000000</code>，Name：<code>loader</code>；对于Linux系统：Adress：<code>0xCCCCCCCC</code>，Name：<code>Boot</code>。</p>
+<p>磁盘扩容的前提是有一块未分配的磁盘空间才行。</p>
 </blockquote>
-<h3 id="编译IDBLoader"><a href="#编译IDBLoader" class="headerlink" title="编译IDBLoader"></a>编译IDBLoader</h3><p>进入&#x2F;rkbin&#x2F;tools目录，执行以下代码生成IDBLoader文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./mkimage -n rk3328 -T rksd -d /home/dongxun2zc/u-boot/tpl/u-boot-tpl.bin idbloader.img<br></code></pre></td></tr></table></figure>
+<p> <img src="/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/disk_expansion_1.png" srcset="/img/loading.gif" lazyload alt="对需要扩容的磁盘右键选择调整大小"></p>
+<p> <img src="/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/disk_expansion_2.png" srcset="/img/loading.gif" lazyload alt="调整扩容后的磁盘大小"></p>
+<p> 调整好之后点击工具栏的 ✔<strong>应用全部操作</strong> 即可完成磁盘扩容。</p>
+</li>
+</ol>
+<h2 id="开启SSH"><a href="#开启SSH" class="headerlink" title="开启SSH"></a>开启SSH</h2><p>对于桌面版的Linux系统，默认都是关闭SSH服务的，需要执行以下操作材料开始SSH远程访问。<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[VMware虚拟机扩展磁盘空间Ubuntu（超简单）](https://blog.csdn.net/qq_26226375/article/details/129613744)">[3]</span></a></sup></p>
+<ol>
+<li><p>安装SSH服务器及客户端</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt install openssh-server openssh-client<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>配置SSH</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/ssh/ssh_config<br></code></pre></td></tr></table></figure>
 
-<blockquote>
-<p>Address：<code>0x00000040</code>，Name：<code>loader1</code>。</p>
-</blockquote>
-<h3 id="编译U-Boot"><a href="#编译U-Boot" class="headerlink" title="编译U-Boot"></a>编译U-Boot</h3><p>克隆官方SDK源码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/u-boot<br></code></pre></td></tr></table></figure>
+<p> 启用：<code>PasswordAuthentication yes</code>。</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> nano /etc/ssh/sshd_config<br></code></pre></td></tr></table></figure>
 
-<p>在u-boot项目中，已经包含各芯片的u-boot示例配置文件，稍作修改即可进行使用，默认的配置文件路径为：<strong>&#x2F;u-boot&#x2F;configs&#x2F;</strong>，本文章使用的示例文件为：<strong>rk3328_defconfig</strong>，将该文件复制到u-boot根目录下，并重命名为：<strong>.config</strong>，然后使用<code>make menuconfig</code>修改配置保存即可。</p>
-<p>修改的地方：</p>
-<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/enable_emmc_support.png" srcset="/img/loading.gif" lazyload alt="开启eMMC存储支持功能"></p>
-<p>开始编译生成u-boot.img文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm KCFLAGS=<span class="hljs-string">&quot;-ffixed-x18&quot;</span> -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+<p> 启用：<code>PermitRootLogin yes</code>。</p>
+</li>
+<li><p>重启SSH服务器</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> /etc/init.d/ssh restart<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查看IP地址</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ip a<br></code></pre></td></tr></table></figure>
 
-<blockquote>
-<p>执行上述代码后，会在u-boot目录下生成以<code>u-boot</code>名称开头的一系列文件，其中就有u-boot.img文件。<br>Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
-</blockquote>
-<h3 id="编译Trust"><a href="#编译Trust" class="headerlink" title="编译Trust"></a>编译Trust</h3><p>进入&#x2F;rkbin&#x2F;tools目录，执行以下代码生成Trust文件：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./trust_merger ~/rkbin/RKTRUST/RK3328TRUST.ini<br></code></pre></td></tr></table></figure>
+<p> 打开SSH软件，填入步骤4中查看的IP地址，即可进行远程SSH访问。</p>
+</li>
+</ol>
+<h2 id="Debian"><a href="#Debian" class="headerlink" title="Debian"></a>Debian</h2><h2 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h2><p>本人使用的Ubuntu 22.04系统会根据选择的语言及地区进行设置apt源，所以一般无需手动设置。</p>
+<h2 id="Armbian"><a href="#Armbian" class="headerlink" title="Armbian"></a>Armbian</h2><p>config源文件：<code>armbian-config.sources</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">Types: deb<br>URIs: https://github.armbian.com/configng<br>Suites: stable<br>Components: main<br>Signed-By: /usr/share/keyrings/armbian.gpg<br></code></pre></td></tr></table></figure>
 
-<blockquote>
-<p>Address：<code>0x00006000</code>，Name：<code>atf</code>。</p>
-</blockquote>
-<h3 id="编译BOOT"><a href="#编译BOOT" class="headerlink" title="编译BOOT"></a>编译BOOT</h3><p>首先克隆官方kernel源码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> -b develop-6.1 https://github.com/rockchip-linux/kernel.git<br></code></pre></td></tr></table></figure>
+<p>apt源文件：<code>/etc/apt/sources.list.d/armbian.list</code></p>
+<p>修改为清华源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">Types: deb<br>URIs: https://mirrors.tuna.tsinghua.edu.cn/armbian<br>Suites: bookworm<br>Components: main bookworm-utils bookworm-desktop<br>Signed-By: /usr/share/keyrings/armbian-archive-keyring.gpg<br></code></pre></td></tr></table></figure>
 
-<p>查看是否切换到<code>develop-6.1</code>分支，项目默认为<code>develop-4.4</code>分支，后续编译时会报错，暂不清楚具体原因；</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git branch -a<br></code></pre></td></tr></table></figure>
+<p>debian-security源文件：</p>
+<p>修改为清华源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash">Types: deb<br>URIs: https://mirrors.tuna.tsinghua.edu.cn/debian<br>Suites: bookworm bookworm-updates bookworm-backports<br>Components: main contrib non-free non-free-firmware<br>Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg<br><br><span class="hljs-comment"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span><br><span class="hljs-comment"># Types: deb-src</span><br><span class="hljs-comment"># URIs: https://mirrors.tuna.tsinghua.edu.cn/debian</span><br><span class="hljs-comment"># Suites: bookworm bookworm-updates bookworm-backports</span><br><span class="hljs-comment"># Components: main contrib non-free non-free-firmware</span><br><span class="hljs-comment"># Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg</span><br><br><span class="hljs-comment"># 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换</span><br>Types: deb<br>URIs: https://mirrors.tuna.tsinghua.edu.cn/debian-security<br>Suites: bookworm-security<br>Components: main contrib non-free non-free-firmware<br>Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg<br><br><span class="hljs-comment"># Types: deb-src</span><br><span class="hljs-comment"># URIs: https://security.debian.org/debian-security</span><br><span class="hljs-comment"># Suites: bookworm-security</span><br><span class="hljs-comment"># Components: main contrib non-free non-free-firmware</span><br><span class="hljs-comment"># Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg</span><br></code></pre></td></tr></table></figure>
 
-<p>导出环境变量：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> ARCH=arm64<br><br><span class="hljs-built_in">export</span> CROSS_COMPILE=aarch64-linux-gnu-<br></code></pre></td></tr></table></figure>
 
-<p>进入kernel目录，先将官方提供的配置文件复制到项目根目录中并重命名为 <strong>.config</strong>，然后运行<code>make menuconfig</code>后退出保存一下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> ~/kernel/arch/arm64/configs/rockchip_linux_defconfig .config<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>由于官方kernel项目中没有适用于RK3328芯片的配置文件，所以这里使用了瑞芯微芯片Linux的通用配置文件。</p>
-</blockquote>
-<p>编译boot.img</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make rk3328-evb.img<br></code></pre></td></tr></table></figure>
-
-<p>等待编译完成，会生成以下文件：<br>Image:  resource.img (with rk3328-evb.dtb logo.bmp logo_kernel.bmp) is ready<br>Image:  boot.img (with Image  resource.img) is ready<br>Image:  zboot.img (with Image.lz4  resource.img) is ready</p>
-<blockquote>
-<p>Address：<code>0x00008000</code>，Name：<code>boot</code>。</p>
-</blockquote>
-<h3 id="编译ROOTFS"><a href="#编译ROOTFS" class="headerlink" title="编译ROOTFS"></a>编译ROOTFS</h3><blockquote>
-<p>Address：<code>0x00040000</code>，Name：<code>rootfs</code>。</p>
-</blockquote>
-<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://wiki.t-firefly.com/zh_CN/ROC-RK3399-PC/uboot_introduction.html#qian-yan">U-Boot 使用</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Boot_option">Boot option</a>
-<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/discussions/1634">RK33XX&#x2F;RK35XX系列设备启动流程、写入系统及编译流程</a>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://note.qidong.name/2020/12/sudo-env/">修复sudo中http_proxy等环境变量的缺失</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40669895/article/details/139940223">Ubuntu开启ssh访问-虚拟机开启ssh访问方法</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_26226375/article/details/129613744">VMware虚拟机扩展磁盘空间Ubuntu（超简单）</a>
 <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
@@ -549,7 +493,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/" class="print-no-link">#瑞芯微</a>
+        <a href="/tags/Linux%E9%85%8D%E7%BD%AE/" class="print-no-link">#Linux配置</a>
       
     </div>
   
@@ -561,8 +505,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>编译适用于RK3328芯片的Loader</div>
-      <div>https://dongxunz.github.io/2025/06/17/瑞芯微/编译适用于RK3328芯片的Loader/</div>
+      <div>Linux基础配置</div>
+      <div>https://dongxunz.github.io/2025/07/08/Linux/Linux基础配置/</div>
     </div>
     <div class="license-meta">
       
@@ -574,7 +518,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年6月17日</div>
+          <div>2025年7月8日</div>
         </div>
       
       
@@ -606,9 +550,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" title="一加6刷机操作指南">
+                      <a href="/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/" title="构建适用于RK3328芯片的Linux">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一加6刷机操作指南</span>
+                        <span class="hidden-mobile">构建适用于RK3328芯片的Linux</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -616,8 +560,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/" title="魔百和电视盒子安装Klipper">
-                        <span class="hidden-mobile">魔百和电视盒子安装Klipper</span>
+                      <a href="/2025/06/24/DIY/KNOMI%E5%9B%BA%E4%BB%B6%E7%83%A7%E5%BD%95%E8%AF%B4%E6%98%8E/" title="KNOMI固件烧录说明">
+                        <span class="hidden-mobile">KNOMI固件烧录说明</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

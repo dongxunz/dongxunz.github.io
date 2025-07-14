@@ -21,12 +21,12 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言偶尔在闲鱼捡到一款魔百和的电视盒子，型号为：CM201-1（YS），在网上搜寻一番后，发现可以烧录Linux系统，所以想着试试能不能安装Klipper来给3D打印机当上位机。 硬件信息我手上这款电视盒子主板的硬件信息如下：主芯片：晶晨S905-L3（GXLX2）运行内存：三星K4B4G1646E-BCMA * 2 （1GB）存储芯片：深圳佰维BWCMGSC11G08G（8GB）无线网卡：瑞昱R">
+    <meta name="description" content="前言偶尔在闲鱼捡到一款魔百和的电视盒子，型号为：CM201-1（YS），在网上搜寻一番后，发现可以烧录Linux系统，所以想着试试能不能安装Klipper来给3D打印机当上位机，本文章用于记录折腾过程。 硬件信息我手上这款电视盒子主板的硬件信息如下：主芯片：晶晨S905-L3（GXLX2）运行内存：三星K4B4G1646E-BCMA * 2 （1GB）存储芯片：深圳佰维BWCMGSC11G08G（">
 <meta property="og:type" content="article">
 <meta property="og:title" content="魔百和电视盒子安装Klipper">
 <meta property="og:url" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言偶尔在闲鱼捡到一款魔百和的电视盒子，型号为：CM201-1（YS），在网上搜寻一番后，发现可以烧录Linux系统，所以想着试试能不能安装Klipper来给3D打印机当上位机。 硬件信息我手上这款电视盒子主板的硬件信息如下：主芯片：晶晨S905-L3（GXLX2）运行内存：三星K4B4G1646E-BCMA * 2 （1GB）存储芯片：深圳佰维BWCMGSC11G08G（8GB）无线网卡：瑞昱R">
+<meta property="og:description" content="前言偶尔在闲鱼捡到一款魔百和的电视盒子，型号为：CM201-1（YS），在网上搜寻一番后，发现可以烧录Linux系统，所以想着试试能不能安装Klipper来给3D打印机当上位机，本文章用于记录折腾过程。 硬件信息我手上这款电视盒子主板的硬件信息如下：主芯片：晶晨S905-L3（GXLX2）运行内存：三星K4B4G1646E-BCMA * 2 （1GB）存储芯片：深圳佰维BWCMGSC11G08G（">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/cm201-1-ys-top.jpg">
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/cm201-1-ys-bottom.jpg">
@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_windows_wifi_speed_test.png">
 <meta property="og:image" content="https://dongxunz.github.io/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/sysbench_s905l_h616.png">
 <meta property="article:published_time" content="2025-06-01T04:49:43.000Z">
-<meta property="article:modified_time" content="2025-06-08T11:52:36.860Z">
+<meta property="article:modified_time" content="2025-07-12T19:29:31.021Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="Klipper">
 <meta name="twitter:card" content="summary_large_image">
@@ -397,7 +397,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年6月8日 晚上
+                    本文最后更新于：2025年7月13日 凌晨
                   
                 
               </p>
@@ -405,7 +405,7 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>偶尔在闲鱼捡到一款魔百和的电视盒子，型号为：CM201-1（YS），在网上搜寻一番后，发现可以烧录Linux系统，所以想着试试能不能安装Klipper来给3D打印机当上位机。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>偶尔在闲鱼捡到一款魔百和的电视盒子，型号为：CM201-1（YS），在网上搜寻一番后，发现可以烧录Linux系统，所以想着试试能不能安装Klipper来给3D打印机当上位机，本文章用于记录折腾过程。</p>
 <h2 id="硬件信息"><a href="#硬件信息" class="headerlink" title="硬件信息"></a>硬件信息</h2><p>我手上这款电视盒子主板的硬件信息如下：<br>主芯片：晶晨S905-L3（GXLX2）<br>运行内存：三星<a target="_blank" rel="noopener" href="https://semiconductor.samsung.com/dram/ddr/ddr3/k4b4g1646e-bcma/">K4B4G1646E-BCMA</a> * 2 （1GB）<br>存储芯片：深圳佰维<a target="_blank" rel="noopener" href="https://bbs.16rd.com/thread-454241-1-1.html">BWCMGSC11G08G</a>（8GB）<br>无线网卡：瑞昱<a target="_blank" rel="noopener" href="https://www.semiee.com/1c4e23a6-d0de-46f8-8591-7fe2d3dbb2c3.html">RLT8822BS</a></p>
 <p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/cm201-1-ys-top.jpg" srcset="/img/loading.gif" lazyload alt="主板顶面"></p>
 <p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/cm201-1-ys-bottom.jpg" srcset="/img/loading.gif" lazyload alt="主板底面"></p>
@@ -427,18 +427,22 @@
 <li><p>启动底包系统<br>给盒子插上网线，接入电源，观察MobaXterm软件TTL跑码信息，没有意外情况就顺利进入刷好的Android系统，且自动登录已获取root权限的adb界面，然后使用浏览器登录路由器后台查看电视盒子是否获取到IP地址（确认网口能否识别）。</p>
 </li>
 </ol>
-<h2 id="烧录Linux"><a href="#烧录Linux" class="headerlink" title="烧录Linux"></a>烧录Linux</h2><p>针对晶晨的芯片，找到2个优秀的开源Linux项目：<a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian">amlogic-s9xxx-armbian</a>，<a target="_blank" rel="noopener" href="https://github.com/devmfc/debian-on-amlogic">debian-on-amlogic</a>，前者拥有大量已成功案例，支持的电视盒子型号众多，系统版本维护快，请优先选择该项目进行尝试烧录；而后者首次启动不会破坏原有的底包系统，而是通过升级操作引导进入U盘里的系统，后续成功启动后使用相应的命令将U盘里的Linux系统烧录到eMMC芯片。</p>
+<h2 id="烧录Linux"><a href="#烧录Linux" class="headerlink" title="烧录Linux"></a>烧录Linux</h2><p>针对晶晨的芯片，找到2个优秀的开源Linux项目：<a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian">amlogic-s9xxx-armbian</a>，<a target="_blank" rel="noopener" href="https://github.com/devmfc/debian-on-amlogic">debian-on-amlogic</a>，前者拥有大量已成功案例，支持的电视盒子型号众多，系统版本维护快，请优先选择该项目进行尝试烧录；后者系统极度精简，只保留最核心的功能与软件包，对于存储空间不足的主板极度友好，首次启动后可以使用相应的命令将U盘里的Linux系统烧录到板载的eMMC芯片（由于适配的型号较少，不一定能成功）。</p>
 <h3 id="amlogic-s9xxx-armbian"><a href="#amlogic-s9xxx-armbian" class="headerlink" title="amlogic-s9xxx-armbian"></a>amlogic-s9xxx-armbian</h3><p>amlogic-s9xxx-armbian项目的Release里每种电视盒子型号的镜像会提供2种版本：<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/armbian_bookworm_cm211.png" srcset="/img/loading.gif" lazyload alt="每种电视盒子会提供2种镜像文件"></p>
-<p>版本区别：<br>6.12.31版本内置一个u-boot.ext文件（其实就是U盘BOOT根目录里其中一个u-boot-xxx.bin文件改名而来，可以手动修改其他的bin文件进行尝试），该文件会在启动时接管系统自带的u-boot引导程序，但是这种接管操作往往比较看运气，因为新的u-boot引导程序不一定适用于当前的dtb系统分区，也存在eMMC芯片无法识别等情况而出现引导失败，所以如果该系统无法正常启动，请尝试使用6.1.140版本，和debian-on-amlogic项目原理一样，只使用原有的u-boot引导程序进入U盘里的Linux系统，待成功启动后使用命令将系统烧录到eMMC芯片中。</p>
+<p>版本区别：<br>6.12.31版本内置一个u-boot.ext文件（其实就是U盘BOOT根目录里其中一个u-boot-xxx.bin文件改名而来，可以手动修改其他的bin文件进行尝试），该文件会在启动时接管系统自带的u-boot引导程序，但这种接管操作往往比较看运气，因为新的u-boot引导程序不一定适用于当前设备，也存在eMMC芯片无法识别等情况而出现引导失败，所以如果使用这个版本的系统无法正常启动，请尝试使用6.1.140版本，和debian-on-amlogic项目原理一样，只使用原有的u-boot引导程序进入U盘里的Linux系统，待成功启动后使用命令将系统烧录到eMMC芯片中。</p>
 <p>操作步骤：</p>
 <ol>
-<li><p>制作Linux系统启动盘<br>准备一个U盘，格式化为<strong>FAT32</strong>格式，将下载好的镜像文件（.img,gz）通过<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>软件写入即可。</p>
+<li><p>制作Linux系统启动盘</p>
+<p> 准备一个U盘，格式化为<strong>FAT32</strong>格式，将下载好的镜像文件（.img,gz）通过<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>软件写入即可。</p>
 </li>
-<li><p>启动底包系统<br>在MobaXterm软件使用<code>reboot update</code>命令重启进行升级，在断电重启的那一刻，插入写好Linux系统的U盘（切记不可提前插入U盘，否则Andorid系统会修改部分文件的权限，导致引导失败）<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/adb_reboot_update.png" srcset="/img/loading.gif" lazyload alt="adb升级命令"></p>
+<li><p>启动底包系统</p>
+<p> 在MobaXterm软件使用<code>reboot update</code>命令重启进行升级，在断电重启的那一刻，插入写好Linux系统的U盘（切记不可提前插入U盘，否则Andorid系统会修改部分文件的权限，导致引导失败）<br> <img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/adb_reboot_update.png" srcset="/img/loading.gif" lazyload alt="adb升级命令"></p>
 </li>
-<li><p>查看网络信息<br>成功引导进入U盘的Linux系统后，有一个初始化流程需要操作：新建root账户密码 -&gt; 创建普通用户及密码 -&gt; 系统语言 -&gt; 地区 -&gt; 时区，按照自己喜好设置即可，执行完操作后，在命令行后使用<code>nmcli dev status</code>命令查询网络硬件设备状态，以下是我的情况，自带的网络硬件设备基本都无法正常使用，后续只能通过USB免驱的无线网卡进行网络连接了：<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/nmcli_dev_status.png" srcset="/img/loading.gif" lazyload alt="网络硬件设备状态"></p>
+<li><p>查看网络信息</p>
+<p> 成功引导进入U盘的Linux系统后，有一个初始化流程需要操作：新建root账户密码 -&gt; 创建普通用户及密码 -&gt; 系统语言 -&gt; 地区 -&gt; 时区，按照自己喜好设置即可，执行完操作后，在命令行后使用<code>nmcli dev status</code>命令查询网络硬件设备状态，以下是我的情况，自带的网络硬件设备基本都无法正常使用，后续只能通过USB免驱的无线网卡进行网络连接了：<br> <img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/nmcli_dev_status.png" srcset="/img/loading.gif" lazyload alt="网络硬件设备状态"></p>
 </li>
-<li><p>烧录Linux系统<br>使用<code>armbian-install</code>命令进行烧录操作，需要输入对应DTB文件的ID，等待烧录完成后使用<code>poweroff</code>命令关机。<br>以下是我尝试过的DTB情况：</p>
+<li><p>烧录Linux系统</p>
+<p> 使用<code>armbian-install</code>命令进行烧录操作，需要输入对应DTB文件的ID，等待烧录完成后使用<code>poweroff</code>命令关机。<br> 以下是我尝试过的DTB情况：</p>
 <table>
 <thead>
 <tr>
@@ -516,9 +520,11 @@
 </tr>
 </tbody></table>
 </li>
-<li><p>启动eMMC系统<br>拔掉U盘，插入USB免驱无线网卡，重新上电，等待系统启动后，使用root用户登录，输入<code>nmcli dev status</code>命令再次查看网络硬件信息，可以看到有一个<strong>wlan0</strong>设备，使用<code>nmtui</code>命令连接WIFI即可，这样就能成功访问互联网。<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/nmtui_connect_wifi.png" srcset="/img/loading.gif" lazyload alt="成功连接WIFI"></p>
+<li><p>启动eMMC系统</p>
+<p> 拔掉U盘，插入USB免驱无线网卡，重新上电，等待系统启动后，使用root用户登录，输入<code>nmcli dev status</code>命令再次查看网络硬件信息，可以看到有一个<strong>wlan0</strong>设备，使用<code>nmtui</code>命令连接WIFI即可，这样就能成功访问互联网。<br> <img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/nmtui_connect_wifi.png" srcset="/img/loading.gif" lazyload alt="成功连接WIFI"></p>
 </li>
-<li><p>更好系统源<br>默认源为官方源，国内访问不方便，所以以下替换为清华源（对于armbian系统，有多个源文件需要修改）：</p>
+<li><p>更好系统源</p>
+<p> 默认源为官方源，国内访问不方便，所以以下替换为清华源（对于armbian系统，有多个源文件需要修改）：</p>
 <ul>
 <li>编辑<code>/etc/apt/sources.list.d/armbian.list</code>，将<code>http://apt.armbian.com</code>替换为以下链接</li>
 </ul>
@@ -529,7 +535,8 @@
 </ul>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash">Types: deb<br>URIs: https://mirrors.tuna.tsinghua.edu.cn/debian<br>Suites: bookworm bookworm-updates bookworm-backports<br>Components: main contrib non-free non-free-firmware<br>Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg<br><br><span class="hljs-comment"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span><br><span class="hljs-comment"># Types: deb-src</span><br><span class="hljs-comment"># URIs: https://mirrors.tuna.tsinghua.edu.cn/debian</span><br><span class="hljs-comment"># Suites: bookworm bookworm-updates bookworm-backports</span><br><span class="hljs-comment"># Components: main contrib non-free non-free-firmware</span><br><span class="hljs-comment"># Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg</span><br><br><span class="hljs-comment"># 以下安全更新软件源包含了官方源与镜像站配置，如有需要可自行修改注释切换</span><br>Types: deb<br>URIs: https://security.debian.org/debian-security<br>Suites: bookworm-security<br>Components: main contrib non-free non-free-firmware<br>Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg<br><br><span class="hljs-comment"># Types: deb-src</span><br><span class="hljs-comment"># URIs: https://security.debian.org/debian-security</span><br><span class="hljs-comment"># Suites: bookworm-security</span><br><span class="hljs-comment"># Components: main contrib non-free non-free-firmware</span><br><span class="hljs-comment"># Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg</span><br></code></pre></td></tr></table></figure>
 </li>
-<li><p>更新软件<br>执行以下<code>apt-get update &amp;&amp; upgarde</code>命令即可。</p>
+<li><p>更新软件</p>
+<p> 执行以下<code>apt-get update &amp;&amp; upgarde</code>命令即可。</p>
 <blockquote>
 <p>可能会存在<strong>NO_PUBKEY</strong>报错，附上解决方法：<a target="_blank" rel="noopener" href="https://github.com/mainsail-crew/moonraker-timelapse/issues/176#issuecomment-2560710047">Fails to install (Neptune 4 Plus) due to no pubkey available</a></p>
 </blockquote>
@@ -551,18 +558,24 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> http_proxy=http://ip:port<br><br><span class="hljs-built_in">export</span> https_proxy=http://ip:port<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>安装kiauh</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~ &amp;&amp; git <span class="hljs-built_in">clone</span> https://github.com/dw-0/kiauh.git<br></code></pre></td></tr></table></figure></li>
-</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~ &amp;&amp; git <span class="hljs-built_in">clone</span> https://github.com/dw-0/kiauh.git<br></code></pre></td></tr></table></figure>
+
 <p>最后附上一张成功进入系统的截图：<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/armbian_system.png" srcset="/img/loading.gif" lazyload alt="amlogic-s9xxx-armbian系统"></p>
+</li>
+</ol>
 <h3 id="debian-on-amlogic"><a href="#debian-on-amlogic" class="headerlink" title="debian-on-amlogic"></a>debian-on-amlogic</h3><p>操作步骤：</p>
 <ol>
-<li><p>制作Linux系统启动盘<br>准备一个U盘，格式化为<strong>FAT32</strong>格式，将下载好的镜像文件（.img,gz）通过<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>软件写入即可。</p>
+<li><p>制作Linux系统启动盘</p>
+<p> 准备一个U盘，格式化为<strong>FAT32</strong>格式，将下载好的镜像文件（.img,gz）通过<a target="_blank" rel="noopener" href="https://www.raspberrypi.com/software/">Raspberry Pi Imager</a>软件写入即可。</p>
 </li>
-<li><p>启动底包系统<br>在MobaXterm软件使用<code>reboot update</code>命令重启进行升级，在断电重启的那一刻，插入写入好Linux系统的U盘（切记不可提前插入U盘，否则Andorid系统会修改部分文件的权限，导致引导失败）<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/adb_reboot_update.png" srcset="/img/loading.gif" lazyload alt="adb升级命令"></p>
+<li><p>启动底包系统</p>
+<p> 在MobaXterm软件使用<code>reboot update</code>命令重启进行升级，在断电重启的那一刻，插入写入好Linux系统的U盘（切记不可提前插入U盘，否则Andorid系统会修改部分文件的权限，导致引导失败）<br> <img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/adb_reboot_update.png" srcset="/img/loading.gif" lazyload alt="adb升级命令"></p>
 </li>
-<li><p>烧录Linux系统<br>成功引导进入U盘的Linux系统后，使用默认账户登录系统：用户名：<code>root</code>，密码：<code>tvbox</code>，进入命令行后使用<code>./aml-multiboot-setup.sh</code>命令修改系统引导为从U盘启动，否则断电重启后会优先启动原来的Android系统，而且U盘里的文件也会被Android系统篡改，U盘里的Linux系统基本就废了；由于我这款主板执行该命令时无法成功识别eMMC芯片，所以无法修改引导…但是可以执行后续步骤浅尝一下。</p>
+<li><p>烧录Linux系统</p>
+<p> 成功引导进入U盘的Linux系统后，使用默认账户登录系统：用户名：<code>root</code>，密码：<code>tvbox</code>，进入命令行后使用<code>./aml-multiboot-setup.sh</code>命令修改系统引导为从U盘启动，否则断电重启后会优先启动原来的Android系统，而且U盘里的文件也会被Android系统篡改，U盘里的Linux系统基本就废了；由于我这款主板执行该命令时无法成功识别eMMC芯片，所以无法修改引导…但是可以执行后续步骤浅尝一下。</p>
 </li>
-<li><p>更换系统源<br>该系统为debian，可参考清华源修改方法即可。</p>
+<li><p>更换系统源</p>
+<p> 该系统为debian，可参考清华源修改方法即可。</p>
 </li>
 <li><p>安装sudo工具</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install <span class="hljs-built_in">sudo</span> -y<br></code></pre></td></tr></table></figure>
@@ -571,9 +584,9 @@
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adduser newusername<br></code></pre></td></tr></table></figure>
 
 <p> 后续步骤请参考amlogic-s9xxx-armbian中的步骤8~12即可。</p>
+<p> 最后附上一张成功进入系统的截图：<br> <img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/debian_system.png" srcset="/img/loading.gif" lazyload alt="debian-on-amlogic系统"></p>
 </li>
 </ol>
-<p>最后附上一张成功进入系统的截图：<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/debian_system.png" srcset="/img/loading.gif" lazyload alt="debian-on-amlogic系统"></p>
 <h2 id="WIFI测速"><a href="#WIFI测速" class="headerlink" title="WIFI测速"></a>WIFI测速</h2><p>手里刚好有2种USB无线网卡模块：MT7601（150Mbps），RTL8192CU（300Mbps），在amlogic-s9xxx-armbian系统里都是免驱动，即插即用，以下是对他们进行网速测试，仅供参考。</p>
 <p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/usb_wifi_modules.png" srcset="/img/loading.gif" lazyload alt="2种USB无线网卡模块实物对比"></p>
 <p>安装<a target="_blank" rel="noopener" href="https://www.speedtest.net/zh-Hans/apps/cli">Speedtest® CLI</a>网络测速工具（仅适用于Ubuntu&#x2F;Debian）：</p>
@@ -584,7 +597,7 @@
 <p>嗯…上述测速结果看不出来个所以然，所以我用Windows10又测试了一遍，结果就简单明了，仅供参考。</p>
 <p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/mt7601_windows_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="MT7601在Windows系统下的测速结果"></p>
 <p><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/rtl8192cu_windows_wifi_speed_test.png" srcset="/img/loading.gif" lazyload alt="RTL8192CU在Windows系统下的测速结果"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>国内电视盒子由于三大运营商的存在，再加上第三方品牌，几乎是百花齐放，哪怕外观类似，型号一样，主板的硬件差异也是各种各样的，所以能不能成功烧录对应的Linux系统，还是有点运气的成分在里面，本人也是几经波折才勉强成功，而且板载的HDMI、网口和无线网卡均不能正常使用，还需通过USB免驱无线网卡接入互联网，并使用kiauh脚本安装了Klipper以及相关的网页Web服务，但是系统的稳定性还有待考验，不建议轻易尝试。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>国内电视盒子由于有三大运营商的存在，再加上各种第三方厂家，几乎是百花齐放，哪怕电视盒子外观类似，型号一样，主板的硬件差异也是各种各样的，所以能不能成功烧录对应的Linux系统有点运气成分，本人也是几经波折才勉强成功，而且板载的HDMI、网口和无线网卡均不能正常使用，想要使用网络还需通过USB免驱无线网卡才行，虽然可以使用kiauh脚本安装Klipper以及相关的网页Web服务，但是系统的稳定性还有待考验，不建议轻易尝试。</p>
 <p>附上一张晶晨S905L（左）和全志H616（右）的使用<code>sysbench cpu --cpu-max-prime=20000 run</code>命令测试的单核性能对比图，仅供参考：<br><img src="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/sysbench_s905l_h616.png" srcset="/img/loading.gif" lazyload alt="S905L与H616单核性能对比"></p>
 <h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><p><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/2209">CM201-1-YS刷入成功，有线无线都连接成功</a><br><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/1318">CM211-1 使用6.1内核，DTB使用m302a成功写入EMMC，网络正常</a><br><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/1378#issuecomment-1537691718">如何重新U盘安装armbian</a><br><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/issues/2499">天津联通机顶盒 中兴ZXV10 B860AV2.1 U 成功刷入</a><br><a target="_blank" rel="noopener" href="http://github.com/ophub/amlogic-s9xxx-armbian/issues/2539">CM201-1-6 YS S905L3 EMMC成功刷入，成功获取有线网络IP</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/imzlh/p/16756624.html">[s905l3]性价比神机mgv3000全网首拆，刷armbian实现更多价值！</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38189542/article/details/133758437">提取Android盒子（CM201-1 YS）dtb文件</a></p>
 
@@ -677,9 +690,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/" title="编译适用于RK3328芯片的Loader">
+                      <a href="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/" title="生成适用于RK3328芯片的Loader">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">编译适用于RK3328芯片的Loader</span>
+                        <span class="hidden-mobile">生成适用于RK3328芯片的Loader</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     

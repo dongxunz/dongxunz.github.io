@@ -21,26 +21,30 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言之前一加6刷的Project Sakura系统，但是最近一段时间不知道出现什么情况，莫名其妙自动重启卡在开机画面进不去系统，而这手机发售距今已经有7年的时间了，很多OS都已经没人维护，找了一圈发现LineageOS for OnePlus 6还在更新，本文章将指导刷入该系统的过程，以防时间太长忘记了… 解锁 开启ADB调试模式手机正常开机，进入 系统设置 &gt; 关于手机，多次连续点击版本号">
+    <meta name="description" content="前言手里有几块搭载瑞芯微RK3328芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（SAMSUNG KLMAG1JETD-B041），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的，版本各种各样，挨个测试下来都失败，所以打算自己折腾用于切换eMMC存储的Loader。 后续发现Loader文件其实是一系列官方提供的bin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一加6刷机操作指南">
-<meta property="og:url" content="https://dongxunz.github.io/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:title" content="生成适用于RK3328芯片的Loader">
+<meta property="og:url" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言之前一加6刷的Project Sakura系统，但是最近一段时间不知道出现什么情况，莫名其妙自动重启卡在开机画面进不去系统，而这手机发售距今已经有7年的时间了，很多OS都已经没人维护，找了一圈发现LineageOS for OnePlus 6还在更新，本文章将指导刷入该系统的过程，以防时间太长忘记了… 解锁 开启ADB调试模式手机正常开机，进入 系统设置 &gt; 关于手机，多次连续点击版本号">
+<meta property="og:description" content="前言手里有几块搭载瑞芯微RK3328芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（SAMSUNG KLMAG1JETD-B041），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的，版本各种各样，挨个测试下来都失败，所以打算自己折腾用于切换eMMC存储的Loader。 后续发现Loader文件其实是一系列官方提供的bin">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://dongxunz.github.io/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/adb_and_fastboot_version.png">
-<meta property="article:published_time" content="2025-06-19T05:34:24.000Z">
-<meta property="article:modified_time" content="2025-06-24T04:10:31.405Z">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_boot_flow_20181122.jpg">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/partition_table_information.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/backup_partition_image.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/system_info.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/use_absolute_path.png">
+<meta property="article:published_time" content="2025-06-16T16:20:15.000Z">
+<meta property="article:modified_time" content="2025-07-11T07:41:34.857Z">
 <meta property="article:author" content="dongxunz">
-<meta property="article:tag" content="刷机">
+<meta property="article:tag" content="瑞芯微">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://dongxunz.github.io/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/adb_and_fastboot_version.png">
+<meta name="twitter:image" content="https://dongxunz.github.io/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_boot_flow_20181122.jpg">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>一加6刷机操作指南 - dongxunz&#39;s blogs</title>
+  <title>生成适用于RK3328芯片的Loader - dongxunz&#39;s blogs</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -294,7 +298,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="一加6刷机操作指南"></span>
+            <span id="subtitle" data-typed-text="生成适用于RK3328芯片的Loader"></span>
           
         </div>
 
@@ -305,8 +309,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-06-19 13:34" pubdate>
-          2025年6月19日 下午
+        <time datetime="2025-06-17 00:20" pubdate>
+          2025年6月17日 凌晨
         </time>
       </span>
     
@@ -318,7 +322,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          977 字
+          670 字
         
       </span>
     
@@ -330,7 +334,7 @@
         
         
           <!-- compatible with older versions-->
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -376,13 +380,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">一加6刷机操作指南</h1>
+            <h1 id="seo-header">生成适用于RK3328芯片的Loader</h1>
             
               <p id="updated-time" class="note note-info" style="">
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年6月24日 中午
+                    本文最后更新于：2025年7月11日 下午
                   
                 
               </p>
@@ -390,59 +394,37 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前一加6刷的<a target="_blank" rel="noopener" href="https://github.com/projectsakura">Project Sakura</a>系统，但是最近一段时间不知道出现什么情况，莫名其妙自动重启卡在开机画面进不去系统，而这手机发售距今已经有7年的时间了，很多OS都已经没人维护，找了一圈发现<a target="_blank" rel="noopener" href="https://wiki.lineageos.org/devices/enchilada/">LineageOS for OnePlus 6</a>还在更新，本文章将指导刷入该系统的过程，以防时间太长忘记了…</p>
-<h2 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a>解锁</h2><ol>
-<li><p>开启ADB调试模式<br>手机正常开机，进入 系统设置 &gt; 关于手机，多次连续点击<strong>版本号</strong>，即可开启<strong>开发者选项</strong>功能，进入后<strong>打开USB调试</strong>即可。</p>
-</li>
-<li><p>电脑驱动及工具配置<br>下载并安装驱动：<a target="_blank" rel="noopener" href="https://yun.daxiaamu.com/files/Tool/adb%E5%92%8Cfastboot%E9%A9%B1%E5%8A%A8/">ADB &amp; FASTBOOT Driver</a>，下载工具包：<a target="_blank" rel="noopener" href="https://developer.android.com/tools/releases/platform-tools?hl=zh-cn">SDK 平台工具版本说明</a>，解压到已知路径，添加其路径到Windows系统环境变量中，然后打开CMD窗口，输入<code>adb version</code> 和 <code>fastboot --version</code> 有信息打印即表示配置正常。<br><img src="/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/adb_and_fastboot_version.png" srcset="/img/loading.gif" lazyload alt="ADB &amp; FASTBOOT Version"></p>
-</li>
-<li><p>解OEM锁<br>手机关机，同时按住<strong>开机键+音量下键</strong>进入FASTBOOT模式，使用USB数据线将手机与电脑进行连接，在CMD窗口输入<code>fastboot oem unlock</code>，此时手机屏幕上会显示解锁风险信息，使用音量上下键移动光标，选择最下面的选项，按一下开机键确认解锁，之后系统会擦除原有手机的所有数据，完成解锁。<br> 还可以使用ADB工具进入FASTBOOT模式：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb reboot fastboot<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h2><ol>
-<li><p>刷入第三方Recovery</p>
-<p> 第三方Recovery推荐下载：<a target="_blank" rel="noopener" href="https://twrp.me/oneplus/oneplus6.html">TWRP for OnePlus 6 (enchilada)</a>，也可以去<a target="_blank" rel="noopener" href="https://xdaforums.com/c/oneplus-6.7609/">OnePlus 6 XDA论坛</a>下载。</p>
-<p> 以前的刷机方法：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash recovery recovery.img<br></code></pre></td></tr></table></figure>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>手里有几块搭载<a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_RK3328">瑞芯微RK3328</a>芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（<a target="_blank" rel="noopener" href="https://item.szlcsc.com/datasheet/KLMAG1JETD-B041/512099.html?spm=sc.gbn.xds.a___sc.hm.hd.ss&lcsc_vid=Q1cLAwUFQgQNUFcDFVFcAlNQRgRYVQZQTlcNAgAHQFQxVlNTR1FZXlxRQFFaUTtW">SAMSUNG KLMAG1JETD-B041</a>），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的，版本各种各样，挨个测试下来都失败，所以打算自己折腾用于切换eMMC存储的Loader。</p>
+<p>后续发现Loader文件其实是一系列官方提供的bin文件生成的，基本上没法修改，更别谈切换eMMC操作了🙄</p>
+<h2 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h2><p>瑞芯微芯片启动流程：<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Boot option](https://opensource.rock-chips.com/wiki_Boot_option)">[1]</span></a></sup></p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rockchip_boot_flow_20181122.jpg" srcset="/img/loading.gif" lazyload alt="RKChip Boot Flow"></p>
+<p>观察上图可发现，需要<strong>rkxx_loader_vxxx.xxx.bin</strong>文件才能通过USB对eMMC进行烧录系统。</p>
+<h2 id="备份系统"><a href="#备份系统" class="headerlink" title="备份系统"></a>备份系统</h2><p>备份好原系统，可用于后续的救砖以及分析原系统的分区情况；对于瑞芯微的芯片，需要先使用高版本 AndroidTool_Release_v2.71 读取分区信息，然后使用低版本 AndroidTool_Release_v2.38 导出镜像，可以在<a target="_blank" rel="noopener" href="https://www.t-firefly.com/doc/download/71.html">RKDevTool</a>下载这2个版本的工具。</p>
+<p>按住主板上的Recovery按钮，使用USB公对公数据线将主板的USB OTG接口与电脑进行连接，此时打开AndroidTool_Release_v2.71软件，会显示<strong>发现一个Loader设备</strong>，然后点击<strong>读取分区</strong>，信息如下：</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/partition_table_information.png" srcset="/img/loading.gif" lazyload alt="分区信息"></p>
+<p>请自行截图保存上述的分区信息，关闭新版本软件后打开AndroidTool_Release_v2.38软件，点击 高级功能，<strong>起始扇区</strong>对应上图中的<strong>LBA</strong>，<strong>扇区数</strong>对应的<strong>Size</strong>，点击<strong>导出镜像</strong>备份，请依次对各Name进行备份并手动修改Output目录中的导出镜像文件名与之对应，其中userdata可以不用导出（非常占用空间！！！）：</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/backup_partition_image.png" srcset="/img/loading.gif" lazyload alt="导出镜像"></p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>我使用的是Windows10自带的Linux环境进行后续编译操作，方便快捷又好用~（就是占用C盘空间😒）</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/system_info.png" srcset="/img/loading.gif" lazyload alt="系统信息"></p>
+<h2 id="生成Loader"><a href="#生成Loader" class="headerlink" title="生成Loader"></a>生成Loader</h2><p>克隆官方SDK源码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/rkbin<br></code></pre></td></tr></table></figure>
 
-<p> 一加6由于采用双槽位系统分区（a&#x2F;b），以前的方法已经不适用，需要在刷机前先确定好刷入的槽位，再进行相关操作；以下我将第三方Recovery刷入b分区的操作流程，仅供参考：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot set_active b<br></code></pre></td></tr></table></figure>
+<p>进入rkbin目录，首先需要修改对应芯片型号的配置文件：<strong>rkbin&#x2F;RKBOOT&#x2F;RK3328MINIALL.ini</strong>，将各文件路径修改为绝对路径，否则后续操作时会提示找不到对应文件：</p>
+<p><img src="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/use_absolute_path.png" srcset="/img/loading.gif" lazyload alt="文件路径使用绝对路径"></p>
+<p>在rkbin根目录执行以下命令即可生成适用于RK3328芯片的Loader文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/boot_merger ~/rkbin/RKBOOT/RK3328MINIALL.ini<br></code></pre></td></tr></table></figure>
 
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash boot twrp-3.7.0_11-0-enchilada.img<br></code></pre></td></tr></table></figure>
+<div class="note note-warning">
+            <p><font color="#ff0000"> <b>⚠提供适用于RK3328的Loader文件，可供下载学习使用，造成的任何后果和本人无关，请谨慎操作。</b></font> <a href="./%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/rk3328_loader_v1.21.250.bin">rk3328_loader_v1.21.250.bin</a></p>
+          </div>
 
+<p>使用不同的系统时，Loader对应的烧录地址不一样，请注意区分：<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[RK33XX/RK35XX系列设备启动流程、写入系统及编译流程](https://github.com/ophub/amlogic-s9xxx-armbian/discussions/1634)">[2]</span></a></sup></p>
 <blockquote>
-<p>如果将第三方Recovery刷入a分区，那么后续刷入第三方系统的槽位为b分区。<br>如果将第三方Recovery刷入b分区，那么后续刷入第三方系统的槽位为a分区。</p>
+<p>对于Android系统：Adress：<code>0x00000000</code>，Name：<code>loader</code><br>对于Linux系统：Adress：<code>0xCCCCCCCC</code>，Name：<code>Boot</code></p>
 </blockquote>
-<p> 然后使用<code>fastboot reboot recovery</code>重启进入第三方Recovery。</p>
-</li>
-<li><p>刷入第三方刷机包</p>
-<p> 进入Recovery后，先对原有的系统数据进行双清，然后将CMD的路径cd到存放第三方刷机包文件的位置，使用以下命令将其上传到手机存储中：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">adb push lineage-22.2-20250618-nightly-enchilada-signed.zip /storage/emulated/0/<br></code></pre></td></tr></table></figure>
-
-<p> 等待上传完成，进入安装界面，找到刚刚上传的zip文件，点击刷入后正常重启开机即可进入系统。</p>
-</li>
-<li><p>刷入Google apps</p>
-<p> 原版LineageOS没有Google服务框架及Play应用，所以如果需要可以按以下操作刷入：</p>
-<p> 下载适用于对应Android版本的<a target="_blank" rel="noopener" href="https://wiki.lineageos.org/gapps/">Google apps</a>，手机重启进入Recovery，使用<code>adb sideload MindTheGapps-15.0.0-arm64-20250214_082511.zip</code>刷入即可。</p>
-</li>
-</ol>
-<h2 id="ROOT"><a href="#ROOT" class="headerlink" title="ROOT"></a>ROOT</h2><ol>
-<li><p>下载Magisk App</p>
-<p> Magisk官方仓库：<a target="_blank" rel="noopener" href="https://github.com/topjohnwu/Magisk">Magisk: The Magic Mask for Android</a>，进入Releases下载最新的apk进行安装。</p>
-</li>
-<li><p>修补Recovery</p>
-<p> 最新版的Magisk通过App对Recovery IMG文件进行修补来获取ROOT权限，而在LineageOS下载页面已经提供了boot,img文件，我们下载到手机中，然后打开Magisk App，点击<strong>安装 -&gt; 选择并修补一个文件</strong>，选择刚刚下载的boot.img文件，等待修补完成，将修补后的文件复制到电脑中，手机进入FASTBOOT模式，使用以下命令刷入新的Recovery：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fastboot flash boot magisk_patched-29000_ciTRj.img<br></code></pre></td></tr></table></figure>
-
-<p> 完成后重启系统，再次打开Magisk App，即可显示当前版本信息，代表刷入ROOT成功。</p>
-</li>
-</ol>
-<h2 id="LSPosed"><a href="#LSPosed" class="headerlink" title="LSPosed"></a>LSPosed</h2><p>使用LSPosed需要开启Zygisk功能，默认情况下Magisk App不开启该功能，需要进入设置里打开即可；由于原版<a target="_blank" rel="noopener" href="https://github.com/LSPosed/LSPosed">LSPosed</a>仓库已经很久没有维护，这里找到一个替代<a target="_blank" rel="noopener" href="https://github.com/JingMatrix/LSPosed">LSPosed</a>，感谢各位大佬的付出❤</p>
-<h2 id="LSPosed插件"><a href="#LSPosed插件" class="headerlink" title="LSPosed插件"></a>LSPosed插件</h2><p>LSPosed非常强大，可以安装很多辅助插件，以下只列出部分插件：</p>
-<ul>
-<li>芝麻粒-TK：<a target="_blank" rel="noopener" href="https://github.com/myblsky/Sesame-TK">Sesame-TK</a></li>
-</ul>
-
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Boot_option">Boot option</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian/discussions/1634">RK33XX&#x2F;RK35XX系列设备启动流程、写入系统及编译流程</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -460,7 +442,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
   
   
 
@@ -475,7 +457,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%88%B7%E6%9C%BA/" class="print-no-link">#刷机</a>
+        <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/" class="print-no-link">#瑞芯微</a>
       
     </div>
   
@@ -487,8 +469,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>一加6刷机操作指南</div>
-      <div>https://dongxunz.github.io/2025/06/19/Android/一加6刷机操作指南/</div>
+      <div>生成适用于RK3328芯片的Loader</div>
+      <div>https://dongxunz.github.io/2025/06/17/瑞芯微/生成适用于RK3328芯片的Loader/</div>
     </div>
     <div class="license-meta">
       
@@ -500,7 +482,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年6月19日</div>
+          <div>2025年6月17日</div>
         </div>
       
       
@@ -532,9 +514,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/06/24/DIY/KNOMI%E5%9B%BA%E4%BB%B6%E7%83%A7%E5%BD%95%E8%AF%B4%E6%98%8E/" title="KNOMI固件烧录说明">
+                      <a href="/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" title="一加6刷机操作指南">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">KNOMI固件烧录说明</span>
+                        <span class="hidden-mobile">一加6刷机操作指南</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -542,8 +524,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/" title="生成适用于RK3328芯片的Loader">
-                        <span class="hidden-mobile">生成适用于RK3328芯片的Loader</span>
+                      <a href="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/" title="魔百和电视盒子安装Klipper">
+                        <span class="hidden-mobile">魔百和电视盒子安装Klipper</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
