@@ -21,17 +21,17 @@
   <meta name="author" content="dongxunz">
   <meta name="keywords" content="写作,记录,发现,感悟">
   
-    <meta name="description" content="前言网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。 知识补充瑞芯微芯片启动流程：[1]  上图可以看出瑞芯微的芯片有2条启动流程： Boot Flow 1 &#x2F;  Boot Flow 2，每条流程对应的loader1、loader2文件在构成方式上有">
+    <meta name="description" content="前言网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。 启动流程 上图可以看出瑞芯微的芯片有2条启动流程： Boot Flow 1 &#x2F;  Boot Flow 2，每条流程只有loader1、loader2在构成方式上有所不同，而trust、kernel">
 <meta property="og:type" content="article">
 <meta property="og:title" content="构建适用于RK3328芯片的Linux">
 <meta property="og:url" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/index.html">
 <meta property="og:site_name" content="dongxunz&#39;s blogs">
-<meta property="og:description" content="前言网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。 知识补充瑞芯微芯片启动流程：[1]  上图可以看出瑞芯微的芯片有2条启动流程： Boot Flow 1 &#x2F;  Boot Flow 2，每条流程对应的loader1、loader2文件在构成方式上有">
+<meta property="og:description" content="前言网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。 启动流程 上图可以看出瑞芯微的芯片有2条启动流程： Boot Flow 1 &#x2F;  Boot Flow 2，每条流程只有loader1、loader2在构成方式上有所不同，而trust、kernel">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/rockchip_boot_flow_20181122.jpg">
 <meta property="og:image" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/system_info.png">
 <meta property="article:published_time" content="2025-07-09T07:27:15.000Z">
-<meta property="article:modified_time" content="2025-07-14T18:08:59.289Z">
+<meta property="article:modified_time" content="2025-07-18T16:15:35.938Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="瑞芯微">
 <meta name="twitter:card" content="summary_large_image">
@@ -319,7 +319,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4k 字
+          4.4k 字
         
       </span>
     
@@ -331,7 +331,7 @@
         
         
           <!-- compatible with older versions-->
-          13 分钟
+          14 分钟
         
       </span>
     
@@ -383,7 +383,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年7月15日 凌晨
+                    本文最后更新于：2025年7月19日 凌晨
                   
                 
               </p>
@@ -392,10 +392,9 @@
               <div class="markdown-body">
                 
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>网上能找到适用于瑞芯微RK3328芯片的Linux系统版本都有些旧了，有些功能内核不支持，于是打算自己折腾构建最新版本的Linux系统，开启一些新的功能，顺便学习一下嵌入式开发，仅供参考。</p>
-<h2 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h2><p>瑞芯微芯片启动流程：<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Boot option ](https://opensource.rock-chips.com/wiki_Boot_option)">[1]</span></a></sup></p>
-<p><img src="/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/rockchip_boot_flow_20181122.jpg" srcset="/img/loading.gif" lazyload alt="RKChip Boot Flow"></p>
-<p>上图可以看出瑞芯微的芯片有2条启动流程：<font color="#008000"> <b>Boot Flow 1</b></font> &#x2F; <font color="#fe0000"> <b>Boot Flow 2</b></font>，每条流程对应的loader1、loader2文件在构成方式上有所不同，而trust、kernel、rootfs基本一致，后续操作仅对不同的地方进行单独记录，而相同的部分会放在一起。</p>
-<p>查阅<a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/images/d/d5/RK3328_Linux-Debian_V1.1_Development_Guide-20170711.pdf">RK3328_Linux-Debian_V1.1_Development_Guide-20170711官方手册</a>可知，在RK3328芯片上运行Linux系统，需要以下文件：</p>
+<h2 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h2><p><img src="/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/rockchip_boot_flow_20181122.jpg" srcset="/img/loading.gif" lazyload alt="RKChip Boot Flow"></p>
+<p>上图可以看出瑞芯微的芯片有2条启动流程：<font color="#008000"> <b>Boot Flow 1</b></font> &#x2F; <font color="#fe0000"> <b>Boot Flow 2</b></font>，每条流程只有loader1、loader2在构成方式上有所不同，而trust、kernel、rootfs基本一致，后续操作会对不同的地方进行单独记录，而相同的部分则放在一起。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Boot option ](https://opensource.rock-chips.com/wiki_Boot_option)">[1]</span></a></sup></p>
+<h2 id="烧录地址"><a href="#烧录地址" class="headerlink" title="烧录地址"></a>烧录地址</h2><p>查阅<a target="_blank" rel="noopener" href="http://opensource.rock-chips.com/images/d/d5/RK3328_Linux-Debian_V1.1_Development_Guide-20170711.pdf">RK3328_Linux-Debian_V1.1_Development_Guide-20170711官方手册</a>可知，在RK3328芯片上运行Linux系统，需要将所需文件烧录到对应的地址中：</p>
 <!-- 让表格居中显示的风格 -->
 <style>
 .center
@@ -455,7 +454,7 @@
 <p>安装所需工具：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get update<br><br><span class="hljs-built_in">sudo</span> apt-get upgrade<br><br><span class="hljs-built_in">sudo</span> apt-get install git gitk git-core git-gui bc bison flex make gcc-arm-linux-gnueabihf u-boot-tools device-tree-compiler gcc-aarch64-linux-gnu mtools parted libudev-dev libusb-1.0-0-dev libssl-dev android-tools-adb android-tools-fastboot python-is-python3 python3 python3-distutils swig python3-dev python3-pyelftools python3-all-dev python3-setuptools liblz4-tool libgnutls28-dev gcc-aarch64-linux-gnu device-tree-compiler libncurses5 libncurses5-dev build-essential libssl-dev mtools bc python2 dosfstools libelf-dev elfutils dwarves<br></code></pre></td></tr></table></figure>
 
-<h2 id="构建相关文件"><a href="#构建相关文件" class="headerlink" title="构建相关文件"></a>构建相关文件</h2><h3 id="Boot-Flow-1"><a href="#Boot-Flow-1" class="headerlink" title="Boot Flow 1"></a>Boot Flow 1</h3><h4 id="使用radxa构建工具"><a href="#使用radxa构建工具" class="headerlink" title="使用radxa构建工具"></a>使用radxa构建工具</h4><p>参考资料：<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ ROCK Pi E Build Debian ](https://wiki.radxa.com/RockpiE/dev/Debian)">[2]</span></a></sup> <sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Beelink-IPC-R(rk3588)支持使用OpenWrt和Armbian ](https://github.com/ophub/amlogic-s9xxx-openwrt/issues/415#issuecomment-1508234307)">[3]</span></a></sup></p>
+<h2 id="构建文件"><a href="#构建文件" class="headerlink" title="构建文件"></a>构建文件</h2><h3 id="loader1"><a href="#loader1" class="headerlink" title="loader1"></a>loader1</h3><h4 id="Boot-Flow-1"><a href="#Boot-Flow-1" class="headerlink" title="Boot Flow 1"></a>Boot Flow 1</h4><h5 id="使用构建工具"><a href="#使用构建工具" class="headerlink" title="使用构建工具"></a>使用构建工具</h5><p>瑞莎官方提供了适用于瑞芯微芯片的<a target="_blank" rel="noopener" href="https://github.com/radxa/rockchip-bsp">rockchip-bsp构建工具</a>，可以很轻松方便的构建出<font color="#008000"> <b>Boot Flow 1</b></font>所需的idbloader、uboot以及trust文件，参考资料：<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ ROCK Pi E Build Debian ](https://wiki.radxa.com/RockpiE/dev/Debian)">[2]</span></a></sup> <sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Beelink-IPC-R(rk3588)支持使用OpenWrt和Armbian ](https://github.com/ophub/amlogic-s9xxx-openwrt/issues/415#issuecomment-1508234307)">[3]</span></a></sup></p>
 <ol>
 <li><p>克隆构建工具</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> -b stable-4.4-rockpie https://github.com/radxa/rockchip-bsp.git<br><br><span class="hljs-built_in">cd</span> rockchip-bsp<br><br>git submodule init<br><br>git submodule update<br></code></pre></td></tr></table></figure>
@@ -463,12 +462,8 @@
 <p> 执行上述命令会拉取radxa配置的相关子模块项目，如果不想使用其中的u-boot、kernel项目（版本过于老旧），可以删掉相关目录并克隆其他仓库的源码到rockchip-bsp目录中（注意文件夹名称需保持一致，否则后续执行脚本会报错）；我使用的u-boot是官方u-boot，kernel则来自unifreq：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> -rf u-boot kernel<br><br>git <span class="hljs-built_in">clone</span> https://github.com/u-boot/u-boot.git<br><br>git <span class="hljs-built_in">clone</span> https://github.com/unifreq/linux-6.1.y-rockchip.git<br><br><span class="hljs-built_in">mv</span> linux-6.1.y-rockchip kernel<br></code></pre></td></tr></table></figure>
 </li>
-<li><p>配置设备树</p>
-<p> 将rk3328-beikeyun-1296mhz.dts文件开头的 <strong><code>#include &quot;rk3328.dtsi</code>“</strong> 改为 <strong><code>#include &quot;rk3328-u-boot.dtsi&quot;</code></strong> 后放入路径：u-boot&#x2F;arch&#x2F;arm&#x2F;dts中，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">dONFIG_ROCKCHIP_RK3328) += \<br>        rk3328-beikeyun-1296mhz.dtb \<br>        rk3328-nanopi-r2s-u-boot.dtb \<br>        rk3328-rock-pi-e-v3.dtb \<br>        rk3328-evb-u-boot.dtb \<br>        rk3328-orangepi-r1-plus-lts-u-boot.dtb \<br>        rk3328-rock-pi-e-v3-u-boot.dtb \<br>        rk3328-generic.dtb \<br>        rk3328-orangepi-r1-plus-u-boot.dtb \<br>        rk3328-sdram-ddr3-666.dtb \<br>        rk3328-generic-u-boot.dtb \<br>        rk3328-roc-cc-u-boot.dtb \<br>        rk3328-sdram-ddr4-666.dtb \<br>        rk3328-nanopi-r2c-plus-u-boot.dtb \<br>        rk3328-rock64-u-boot.dtb \<br>        rk3328-sdram-lpddr3-1600.dtb \<br>        rk3328-nanopi-r2c-u-boot.dtb \<br>        rk3328-rock-pi-e-base-u-boot.dtb \<br>        rk3328-sdram-lpddr3-666.dtb \<br>        rk3328-nanopi-r2s-plus-u-boot.dtb \<br>        rk3328-rock-pi-e-u-boot.dtb \<br>        rk3328-u-boot.dtb<br></code></pre></td></tr></table></figure>
-</li>
 <li><p>新增主板信息</p>
-<p> 修改build&#x2F;board_configs.sh文件，在适当位置新增主板配置信息：</p>
+<p> 修改rockchip-bsp&#x2F;build&#x2F;board_configs.sh文件，在适当位置新增主板配置信息：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-string">&quot;rk3328-beikeyun&quot;</span>)<br>    DEFCONFIG=rockchip_linux_defconfig<br>    UBOOT_DEFCONFIG=evb-rk3328_defconfig<br>    DTB=rk3328-beikeyun-1296mhz.dtb<br>    <span class="hljs-built_in">export</span> ARCH=arm64<br>    <span class="hljs-built_in">export</span> CROSS_COMPILE=aarch64-linux-gnu-<br>    CHIP=<span class="hljs-string">&quot;rk3328&quot;</span><br>    ;;<br></code></pre></td></tr></table></figure>
 
  
@@ -484,24 +479,36 @@
     </div>
 </li>
 <li><p>配置BL31文件环境</p>
-<p> 下载该项目中的<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/tree/master/rk3328">rk3328_bl31_v1.39.bin</a>文件，将其放入路径：rkbin&#x2F;bin&#x2F;rk33&#x2F;，使用以下命令配置BL31文件环境：</p>
+<p> 下载该项目中的<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/tree/master/rk3328">rk3328_bl31_v1.39.bin</a>文件，将其放入路径：rockchip-bsp&#x2F;rkbin&#x2F;bin&#x2F;rk33&#x2F;，使用以下命令配置BL31文件环境：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> BL31=/home/dongxun/Desktop/rockchip-linux/radxa/rockchip-bsp/rkbin/bin/rk33/rk3328_bl31_v1.39.bin<br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>U-Boot 需要 ARM Trusted Firmware (ATF) 的 BL31 二进制文件作为安全固件组件才能生成完整可用的启动镜像</p>
 </blockquote>
 </li>
-<li><p>开始构建u-boot</p>
-<p> 切换到rockchip-bsp根目录使用以下命令开始构建u-boot：</p>
+<li><p>开始构建</p>
+<p> 切换到rockchip-bsp目录执行以下命令开始构建u-boot：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-uboot.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
 
-<p> 等待构建完成，会在out&#x2F;u-boot目录生成<font color="#008000"> <b>Boot Flow 1</b></font>所需的文件：</p>
+<p> 等待构建完成，会在rockchip-bsp&#x2F;out&#x2F;u-boot目录生成<font color="#008000"> <b>Boot Flow 1</b></font>所需的文件：</p>
  <div class="note note-success">
             <p>.<br>├── idbloader.img<br>├── rk3328_loader_ddr333_v1.16.250.bin<br>├── spi&#x2F;<br>├── trust.img<br>└── uboot.img</p>
           </div></li>
 </ol>
-<h4 id="手动构建相关文件"><a href="#手动构建相关文件" class="headerlink" title="手动构建相关文件"></a>手动构建相关文件</h4><p>手动构建使用的源码大部分均来自瑞芯微官方Github仓库：<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux">rockchip-linux</a>，只有<a target="_blank" rel="noopener" href="https://github.com/radxa/u-boot/tree/stable-4.4-rockpie">u-boot</a>源码来自radxa，因为官方u-boot构建时会有各种报错，而且无法生成u-boot-tpl.bin文件，暂不清楚具体原因。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Boot option ](https://opensource.rock-chips.com/wiki_Boot_option)">[1]</span></a></sup></p>
-<h5 id="loader1"><a href="#loader1" class="headerlink" title="loader1"></a>loader1</h5><p><strong>idbloader.img(miniloader)</strong> 由2个文件组成：ddr.bin + miniloader.bin，均由瑞芯微官方提供，而这2个文件都保存在<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/rkbin">rkbin仓库</a>中，首先将仓库克隆到本地：</p>
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-0850a68d" role="button" aria-expanded="false" aria-controls="collapse-0850a68d">
+        <div class="fold-arrow">▶</div>根据设备树进行构建u-boot
+      </div>
+      <div class="fold-collapse collapse" id="collapse-0850a68d">
+        <div class="fold-content">
+          <p><font color="#ff0000"> <b>该方法在最新的u-boot项目中构建未成功…</b></font></p><p>将rk3328-beikeyun-1296mhz.dts文件开头的 <strong><code>#include &quot;rk3328.dtsi</code>“</strong> 改为 <strong><code>#include &quot;rk3328-u-boot.dtsi&quot;</code></strong> 后放入路径：u-boot&#x2F;arch&#x2F;arm&#x2F;dts中，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">dONFIG_ROCKCHIP_RK3328) += \<br>        rk3328-beikeyun-1296mhz.dtb \<br>        rk3328-nanopi-r2s-u-boot.dtb \<br>        rk3328-rock-pi-e-v3.dtb \<br>        rk3328-evb-u-boot.dtb \<br>        rk3328-orangepi-r1-plus-lts-u-boot.dtb \<br>        rk3328-rock-pi-e-v3-u-boot.dtb \<br>        rk3328-generic.dtb \<br>        rk3328-orangepi-r1-plus-u-boot.dtb \<br>        rk3328-sdram-ddr3-666.dtb \<br>        rk3328-generic-u-boot.dtb \<br>        rk3328-roc-cc-u-boot.dtb \<br>        rk3328-sdram-ddr4-666.dtb \<br>        rk3328-nanopi-r2c-plus-u-boot.dtb \<br>        rk3328-rock64-u-boot.dtb \<br>        rk3328-sdram-lpddr3-1600.dtb \<br>        rk3328-nanopi-r2c-u-boot.dtb \<br>        rk3328-rock-pi-e-base-u-boot.dtb \<br>        rk3328-sdram-lpddr3-666.dtb \<br>        rk3328-nanopi-r2s-plus-u-boot.dtb \<br>        rk3328-rock-pi-e-u-boot.dtb \<br>        rk3328-u-boot.dtb<br></code></pre></td></tr></table></figure><p>执行以下命令加载RK3328默认配置文件到 <strong>.config</strong>，并查询默认设备树名称在该文件中哪几个行出现过：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>grep -n <span class="hljs-string">&quot;rk3328-evb&quot;</span> .config<br></code></pre></td></tr></table></figure><div class="note note-info">            <p>212:CONFIG_DEFAULT_DEVICE_TREE&#x3D;”rockchip&#x2F;rk3328-evb”<br>554:CONFIG_DEFAULT_FDT_FILE&#x3D;”rockchip&#x2F;rk3328-evb.dtb”<br>1112:CONFIG_OF_LIST&#x3D;”rockchip&#x2F;rk3328-evb”<br>1116:CONFIG_SPL_OF_LIST&#x3D;”rockchip&#x2F;rk3328-evb”</p>          </div><p>将上述查询结果中出现rk3328-evb的地方名称改为当前主板的设备树名称：</p><div class="note note-success">            <p>212:CONFIG_DEFAULT_DEVICE_TREE&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”<br>554:CONFIG_DEFAULT_FDT_FILE&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz.dtb”<br>1112:CONFIG_OF_LIST&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”<br>1116:CONFIG_SPL_OF_LIST&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”</p>          </div><p>将rk3328-beikeyun-1296mhz.dts文件放入以下路径：u-boot&#x2F;dts&#x2F;upstream&#x2F;src&#x2F;arm64&#x2F;rockchip，然后保存当前配置到defconfig，并复制到u-boot&#x2F;configs文件夹中重命名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">nano .config<br><br>make savedefconfig<br><br><span class="hljs-built_in">cp</span> defconfig configs/rk3328_beikeyun_defconfig<br></code></pre></td></tr></table></figure><p>修改build&#x2F;board_configs.sh文件，修改主板信息的UBOOT配置文件名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-string">&quot;rk3328-beikeyun&quot;</span>)<br>    ...<br>    UBOOT_DEFCONFIG=rk3328_beikeyun_defconfig<br>    ...<br></code></pre></td></tr></table></figure><p>切换到rockchip-bsp目录，执行以下命令开始构建u-boot：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-uboot.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
+        </div>
+      </div>
+    </div>
+
+<h5 id="单独构建文件"><a href="#单独构建文件" class="headerlink" title="单独构建文件"></a>单独构建文件</h5><p>单独构建各文件使用的源码大部分均来自瑞芯微官方Github仓库：<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux">rockchip-linux</a>，只有<a target="_blank" rel="noopener" href="https://github.com/radxa/u-boot/tree/stable-4.4-rockpie">u-boot</a>源码来自radxa，因为官方u-boot构建时会有各种报错，而且无法生成u-boot-tpl.bin文件，暂不清楚具体原因。<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ Boot option ](https://opensource.rock-chips.com/wiki_Boot_option)">[1]</span></a></sup></p>
+<h6 id="loader1-idbloader-img-miniloader"><a href="#loader1-idbloader-img-miniloader" class="headerlink" title="loader1 - idbloader.img(miniloader)"></a>loader1 - idbloader.img(miniloader)</h6><p><strong>idbloader.img(miniloader)</strong> 由2个文件组成：ddr.bin + miniloader.bin，均由瑞芯微官方提供，而这2个文件都保存在<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux/rkbin">rkbin仓库</a>中，首先将仓库克隆到本地：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/rkbin<br></code></pre></td></tr></table></figure>
 
 <p>对于RK3328而言，在rkbin&#x2F;bin&#x2F;rk33目录中没有提供rk3328_miniloader_vx.xx.bin文件，不过我发现了一个Github仓库：<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/tree/master">uboot_builder</a>，里面有适用于RK3328芯片的miniloader文件（本次操作暂未使用）。</p>
@@ -524,24 +531,7 @@
             <p>烧录地址：Address：<code>0x00000040</code>，Name：<code>loader1</code>。</p>
           </div>
 
-<h5 id="loader2"><a href="#loader2" class="headerlink" title="loader2"></a>loader2</h5><p><strong>uboot.img</strong> 需要使用u-boot和rkbin两个项目的文件，先克隆u-boot仓库，然后将rkbin仓库的文件全部复制到u-boot中：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> -b stable-4.4-rockpie https://github.com/radxa/u-boot.git<br><br><span class="hljs-built_in">cp</span> -r rkbin/* u-boot/<br></code></pre></td></tr></table></figure>
-
-<div class="note note-warning">
-            <p><font color="#ff0000"><b>需要修改scripts&#x2F;dtc&#x2F;dtc-lexer.l文件，将<code>YYLTYPE yylloc;</code>改为<code>extern YYLTYPE yylloc;</code>，否则后续构建会报错：multiple definition of &#96;yylloc’</b></font></p>
-          </div>
-
-<p>在u-boot项目中，已经包含各种芯片的u-boot示例配置文件，存放路径为：u-boot&#x2F;configs&#x2F;，对于RK3328，使用以下命令加载默认配置并开始构建：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>make menuconfig<br><br>make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
-
-<p>等待构建完成，会在根目录下生成以<code>u-boot</code>名称开头的一系列文件，对于<font color="#008000"><b>Boot Flow 1</b></font>，还需将生成的u-boot.bin转换成miniloader可识别文件uboot.img才能烧录到主板，执行以下命令即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/loaderimage --pack --uboot u-boot.bin uboot.img<br></code></pre></td></tr></table></figure>
-
-<div class="note note-info">
-            <p>烧录地址：Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
-          </div>
-
-<h3 id="Boot-Flow-2"><a href="#Boot-Flow-2" class="headerlink" title="Boot Flow 2"></a>Boot Flow 2</h3><h4 id="loader1-1"><a href="#loader1-1" class="headerlink" title="loader1"></a>loader1</h4><p><strong>idbloader.img(TPL&#x2F;SPL)</strong> 由2个文件组成：u-boot-tpl.bin + u-boot-spl.bin，在构建u-boot项目时会自动生成，也可以使用以下操作进行手动生成。</p>
+<h6 id="loader1-idbloader-img-TPL-SPL"><a href="#loader1-idbloader-img-TPL-SPL" class="headerlink" title="loader1 - idbloader.img(TPL&#x2F;SPL)"></a>loader1 - idbloader.img(TPL&#x2F;SPL)</h6><p><strong>idbloader.img(TPL&#x2F;SPL)</strong> 由2个文件组成：u-boot-tpl.bin + u-boot-spl.bin，在构建u-boot项目时会自动生成，也可以使用以下操作进行手动生成。</p>
 <p>进入u-boot目录，执行以下命令开始配置u-boot然后开始构建：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>make menuconfig<br><br>make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
 
@@ -565,10 +555,30 @@
             <p>烧录地址：Address：<code>0x00000040</code>，Name：<code>loader1</code>。</p>
           </div>
 
-<h4 id="loader2-1"><a href="#loader2-1" class="headerlink" title="loader2"></a>loader2</h4><p><strong>u-boot.itb</strong> 由bl31.elf, u-boot-nodtb.bin, u-boot.dtb文件组成，第一个文件可以下载该项目中的<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/blob/master/rk3328">rk3328&#x2F;rk3328_bl31_v1.42.elf</a>文件，后2个文件均是u-boot项目构建时生成的，将这3个文件放入u-boot根目录，执行以下命令开始构建：</p>
+<h3 id="loader2"><a href="#loader2" class="headerlink" title="loader2"></a>loader2</h3><h4 id="Boot-Flow-2"><a href="#Boot-Flow-2" class="headerlink" title="Boot Flow 2"></a>Boot Flow 2</h4><h5 id="单独构建文件-1"><a href="#单独构建文件-1" class="headerlink" title="单独构建文件"></a>单独构建文件</h5><h6 id="loader2-uboot-img"><a href="#loader2-uboot-img" class="headerlink" title="loader2 - uboot.img"></a>loader2 - uboot.img</h6><p><strong>uboot.img</strong> 需要使用u-boot和rkbin两个项目的文件，先克隆u-boot仓库，然后将rkbin仓库的文件全部复制到u-boot中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> -b stable-4.4-rockpie https://github.com/radxa/u-boot.git<br><br><span class="hljs-built_in">cp</span> -r rkbin/* u-boot/<br></code></pre></td></tr></table></figure>
+
+<div class="note note-warning">
+            <p><font color="#ff0000"><b>需要修改scripts&#x2F;dtc&#x2F;dtc-lexer.l文件，将<code>YYLTYPE yylloc;</code>改为<code>extern YYLTYPE yylloc;</code>，否则后续构建会报错：multiple definition of &#96;yylloc’</b></font></p>
+          </div>
+
+<p>在u-boot项目中，已经包含各种芯片的u-boot示例配置文件，存放路径为：u-boot&#x2F;configs&#x2F;，对于RK3328，使用以下命令加载默认配置并开始构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>make menuconfig<br><br>make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+
+<p>等待构建完成，会在根目录下生成以<code>u-boot</code>名称开头的一系列文件，对于<font color="#008000"><b>Boot Flow 1</b></font>，还需将生成的u-boot.bin转换成miniloader可识别文件uboot.img才能烧录到主板，执行以下命令即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/loaderimage --pack --uboot u-boot.bin uboot.img<br></code></pre></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>烧录地址：Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
+          </div>
+
+<h6 id="loader2-u-boot-itb"><a href="#loader2-u-boot-itb" class="headerlink" title="loader2 - u-boot.itb"></a>loader2 - u-boot.itb</h6><p><strong>u-boot.itb</strong> 由bl31.elf, u-boot-nodtb.bin, u-boot.dtb文件组成，第一个文件可以下载该项目中的<a target="_blank" rel="noopener" href="https://github.com/mrfixit2001/uboot_builder/blob/master/rk3328">rk3328&#x2F;rk3328_bl31_v1.42.elf</a>文件，后2个文件均是u-boot项目构建时生成的，将这3个文件放入u-boot根目录，执行以下命令开始构建：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> rk3328/rk3328_bl31_v1.42.elf bl31.elf<br><br>make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm u-boot.itb<br></code></pre></td></tr></table></figure>
 
-<p>烧录地址：Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
+<div class="note note-info">
+            <p>烧录地址：Address：<code>0x00004000</code>，Name：<code>loader2</code>。</p>
+          </div>
+
 <h3 id="trust"><a href="#trust" class="headerlink" title="trust"></a>trust</h3><p>进入rkbin目录，使用以下命令，通过rkbin&#x2F;RKTRUSRT&#x2F;目录中对应芯片的配置文件来生成trust.img：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tools/trust_merger /home/dongxun/Desktop/rockchip-linux/rkbin/RKTRUST/RK3328TRUST.ini<br></code></pre></td></tr></table></figure>
 
@@ -602,7 +612,11 @@
 <p>根据对应设备树编译boot.img文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make rk3328-beikeyun-1296mhz.img -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
 
-<p>等待编译完成，会生成以下文件：<br>Image:  resource.img (with rk3328-beikeyun-1296mhz.dtb logo.bmp logo_kernel.bmp) is ready<br>Image:  boot.img (with Image  resource.img) is ready<br>Image:  zboot.img (with Image.lz4  resource.img) is ready</p>
+<p>等待编译完成，会生成以下文件：</p>
+<div class="note note-success">
+            <p>Image:  resource.img (with rk3328-beikeyun-1296mhz.dtb logo.bmp logo_kernel.bmp) is ready<br>Image:  boot.img (with Image  resource.img) is ready<br>Image:  zboot.img (with Image.lz4  resource.img) is ready</p>
+          </div>
+
 <p>生成的上述文件都是独立存在的，无法烧录到主板，还需要根据设备树二进制文件以及extlinux.conf文件打包成boot.img才行，依次执行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> boot<br><br><span class="hljs-built_in">cp</span> <span class="hljs-built_in">arch</span>/arm64/boot/dts/rockchip/rk3328-beikeyun-1296mhz.dtb boot/rk3328.dtb<br><br><span class="hljs-built_in">cp</span> <span class="hljs-built_in">arch</span>/arm64/boot/Image boot/<br><br><span class="hljs-built_in">mkdir</span> boot/extlinux<br><br>wget http://opensource.rock-chips.com/images/6/60/Boot_extlinux.zip<br><br>unzip Boot_extlinux.zip boot/extlinux<br><br>nano boot/extlinux/extlinux.conf<br><br><span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=boot.img bs=1M count=32<br><br><span class="hljs-built_in">sudo</span> mkfs.fat boot.img<br><br><span class="hljs-built_in">mkdir</span> tmp<br><br><span class="hljs-built_in">sudo</span> mount boot.img tmp/<br><br><span class="hljs-built_in">cp</span> -r boot/* tmp/<br><br>umount tmp<br></code></pre></td></tr></table></figure>
 
@@ -612,8 +626,8 @@
             <p>烧录地址：Address：<code>0x00008000</code>，Name：<code>boot</code>。</p>
           </div>
 
-<h4 id="最新版kernel"><a href="#最新版kernel" class="headerlink" title="最新版kernel"></a>最新版kernel</h4><h5 id="raxda工具"><a href="#raxda工具" class="headerlink" title="raxda工具"></a>raxda工具</h5><p>请先按照本文章目录 Boot Flow 1 -&gt; 使用radxa构建工具 配置好工具。</p>
-<p>首先需要配置设备树，将rk3328-beikeyun-1296mhz.dts文件放入以下路径：kernel&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p>
+<h4 id="最新版kernel"><a href="#最新版kernel" class="headerlink" title="最新版kernel"></a>最新版kernel</h4><h5 id="使用构建工具-1"><a href="#使用构建工具-1" class="headerlink" title="使用构建工具"></a>使用构建工具</h5><p>请先完成本文章目录：构建文件 -&gt; loader1 -&gt; Boot Flow 1 -&gt; 使用构建工具 的相关操作及配置。</p>
+<p>首先需要配置kernel中用到的设备树文件，将rk3328-beikeyun-1296mhz.dts文件放入以下路径：kernel&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-beikeyun-1296mhz.dtb<br></code></pre></td></tr></table></figure>
 
 <p>切换到kernel目录，配置构建环境：</p>
@@ -625,14 +639,16 @@
 <p>切换到rockchip-bsp根目录，使用以下命令开始构建kernel：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-kernel.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
 
-<p>等待构建完成，会在out&#x2F;kernel目录生成所需的文件：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">.<br>├── boot.img<br>├── kernel<br>│   ├── Image<br>│   └── rk3328-beikeyun-1296mhz.dtb<br></code></pre></td></tr></table></figure>
+<p>等待构建完成，会在rockchip-bsp&#x2F;out&#x2F;kernel目录生成所需的文件：</p>
+<div class="note note-success">
+            <p>.<br>├── boot.img<br>├── kernel<br>│   ├── Image<br>│   └── rk3328-beikeyun-1296mhz.dtb</p>
+          </div>
 
 <div class="note note-info">
             <p>烧录地址：Address：<code>0x00008000</code>，Name：<code>boot</code>。</p>
           </div>
 
-<h5 id="手动构建"><a href="#手动构建" class="headerlink" title="手动构建"></a>手动构建</h5><p>本次构建使用官方Linux Kernel：<a target="_blank" rel="noopener" href="https://www.kernel.org/">The Linux Kernel Archives</a>。</p>
+<h5 id="单独构建Kernel"><a href="#单独构建Kernel" class="headerlink" title="单独构建Kernel"></a>单独构建Kernel</h5><p>本次构建使用官方Linux Kernel：<a target="_blank" rel="noopener" href="https://www.kernel.org/">The Linux Kernel Archives</a>。</p>
 <div class="note note-danger">
             <p><font color="#ff0000"> <b>⚠官方最新内核不一定适配当前芯片，甚至可能造成不兼容等后果，请慎重操作！</b></font></p>
           </div>
@@ -655,10 +671,14 @@
 <p>使用以下命令加载通用配置到 <strong>.config</strong>文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- rockchip_linux_defconfig<br></code></pre></td></tr></table></figure>
 
-<p>使用<code>make menuconfig</code>修改配置并保存退出，即可开始构建：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">make -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
+<p>根据需求修改默认配置并保存退出，然后开始构建kernel：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">make menuconfig<br><br>make -j$(<span class="hljs-built_in">nproc</span>)<br></code></pre></td></tr></table></figure>
 
-<p>等待构建完成，可看到以下信息，其中Image就是需要的文件，但是还需要进一步处理才能生成boot.img。<br>SORTTAB vmlinux<br>OBJCOPY arch&#x2F;arm64&#x2F;boot&#x2F;Image<br>GZIP    arch&#x2F;arm64&#x2F;boot&#x2F;Image.gz</p>
+<p>等待构建完成，可看到以下信息，其中Image就是需要的文件，但是还需要进一步处理才能生成boot.img。</p>
+<div class="note note-success">
+            <p>SORTTAB vmlinux<br>OBJCOPY arch&#x2F;arm64&#x2F;boot&#x2F;Image<br>GZIP    arch&#x2F;arm64&#x2F;boot&#x2F;Image.gz</p>
+          </div>
+
 <p>切换到kernel上一级目录新建一个3328文件夹，使用以下命令打包kernel-dtb文件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> 3328<br><br><span class="hljs-built_in">cd</span> 3328<br><br><span class="hljs-built_in">cat</span> ../linux-6.15.5/arch/arm64/boot/Image ../linux-6.15.5/arch/arm64/boot/dts/rockchip/rk3328-beikeyun-1296mhz.dtb &gt; kernel-dtb<br></code></pre></td></tr></table></figure>
 
@@ -715,7 +735,7 @@
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br><br>apt upgrade<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>安装所需工具</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install man-db <span class="hljs-built_in">sudo</span> openssh-server net-tools network-manager iputils-ping bash-completion kmod cpio initramfs-tools linux-base netplan.io git systemd-timesyncd<br></code></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install man-db <span class="hljs-built_in">sudo</span> openssh-server net-tools network-manager iputils-ping bash-completion kmod cpio initramfs-tools linux-base netplan.io git systemd-timesyncd apt-utils dialog vim ifupdown ethtool wireless-tools network-manager rsync udev htop rsyslog bluetooth* bluez* blueman* language-pack-en-base language-pack-gnome-en-base language-pack-zh-hans-base language-pack-gnome-zh-hans-base<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>开启ssh远程访问</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -i <span class="hljs-string">&#x27;/PasswordAuthentication /c PasswordAuthentication yes&#x27;</span> /etc/ssh/ssh_config<br><br>sed -i <span class="hljs-string">&#x27;/PermitRootLogin /c PermitRootLogin yes&#x27;</span> /etc/ssh/sshd_config<br></code></pre></td></tr></table></figure>
@@ -725,6 +745,9 @@
 </li>
 <li><p>给root用户设置密码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">passwd root<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改主机名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Ubuntu&quot;</span> &gt; /etc/hostname<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>退出根文件系统</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">exit</span><br></code></pre></td></tr></table></figure>
