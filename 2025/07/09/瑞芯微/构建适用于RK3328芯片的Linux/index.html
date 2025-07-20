@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/rockchip_boot_flow_20181122.jpg">
 <meta property="og:image" content="https://dongxunz.github.io/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/system_info.png">
 <meta property="article:published_time" content="2025-07-09T07:27:15.000Z">
-<meta property="article:modified_time" content="2025-07-18T16:15:35.938Z">
+<meta property="article:modified_time" content="2025-07-20T12:55:11.615Z">
 <meta property="article:author" content="dongxunz">
 <meta property="article:tag" content="瑞芯微">
 <meta name="twitter:card" content="summary_large_image">
@@ -319,7 +319,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4.4k 字
+          5.2k 字
         
       </span>
     
@@ -331,7 +331,7 @@
         
         
           <!-- compatible with older versions-->
-          14 分钟
+          17 分钟
         
       </span>
     
@@ -383,7 +383,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：2025年7月19日 凌晨
+                    本文最后更新于：2025年7月20日 晚上
                   
                 
               </p>
@@ -497,12 +497,12 @@
 </ol>
 
     <div class="fold">
-      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-0850a68d" role="button" aria-expanded="false" aria-controls="collapse-0850a68d">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-90e3b1f3" role="button" aria-expanded="false" aria-controls="collapse-90e3b1f3">
         <div class="fold-arrow">▶</div>根据设备树进行构建u-boot
       </div>
-      <div class="fold-collapse collapse" id="collapse-0850a68d">
+      <div class="fold-collapse collapse" id="collapse-90e3b1f3">
         <div class="fold-content">
-          <p><font color="#ff0000"> <b>该方法在最新的u-boot项目中构建未成功…</b></font></p><p>将rk3328-beikeyun-1296mhz.dts文件开头的 <strong><code>#include &quot;rk3328.dtsi</code>“</strong> 改为 <strong><code>#include &quot;rk3328-u-boot.dtsi&quot;</code></strong> 后放入路径：u-boot&#x2F;arch&#x2F;arm&#x2F;dts中，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">dONFIG_ROCKCHIP_RK3328) += \<br>        rk3328-beikeyun-1296mhz.dtb \<br>        rk3328-nanopi-r2s-u-boot.dtb \<br>        rk3328-rock-pi-e-v3.dtb \<br>        rk3328-evb-u-boot.dtb \<br>        rk3328-orangepi-r1-plus-lts-u-boot.dtb \<br>        rk3328-rock-pi-e-v3-u-boot.dtb \<br>        rk3328-generic.dtb \<br>        rk3328-orangepi-r1-plus-u-boot.dtb \<br>        rk3328-sdram-ddr3-666.dtb \<br>        rk3328-generic-u-boot.dtb \<br>        rk3328-roc-cc-u-boot.dtb \<br>        rk3328-sdram-ddr4-666.dtb \<br>        rk3328-nanopi-r2c-plus-u-boot.dtb \<br>        rk3328-rock64-u-boot.dtb \<br>        rk3328-sdram-lpddr3-1600.dtb \<br>        rk3328-nanopi-r2c-u-boot.dtb \<br>        rk3328-rock-pi-e-base-u-boot.dtb \<br>        rk3328-sdram-lpddr3-666.dtb \<br>        rk3328-nanopi-r2s-plus-u-boot.dtb \<br>        rk3328-rock-pi-e-u-boot.dtb \<br>        rk3328-u-boot.dtb<br></code></pre></td></tr></table></figure><p>执行以下命令加载RK3328默认配置文件到 <strong>.config</strong>，并查询默认设备树名称在该文件中哪几个行出现过：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>grep -n <span class="hljs-string">&quot;rk3328-evb&quot;</span> .config<br></code></pre></td></tr></table></figure><div class="note note-info">            <p>212:CONFIG_DEFAULT_DEVICE_TREE&#x3D;”rockchip&#x2F;rk3328-evb”<br>554:CONFIG_DEFAULT_FDT_FILE&#x3D;”rockchip&#x2F;rk3328-evb.dtb”<br>1112:CONFIG_OF_LIST&#x3D;”rockchip&#x2F;rk3328-evb”<br>1116:CONFIG_SPL_OF_LIST&#x3D;”rockchip&#x2F;rk3328-evb”</p>          </div><p>将上述查询结果中出现rk3328-evb的地方名称改为当前主板的设备树名称：</p><div class="note note-success">            <p>212:CONFIG_DEFAULT_DEVICE_TREE&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”<br>554:CONFIG_DEFAULT_FDT_FILE&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz.dtb”<br>1112:CONFIG_OF_LIST&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”<br>1116:CONFIG_SPL_OF_LIST&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”</p>          </div><p>将rk3328-beikeyun-1296mhz.dts文件放入以下路径：u-boot&#x2F;dts&#x2F;upstream&#x2F;src&#x2F;arm64&#x2F;rockchip，然后保存当前配置到defconfig，并复制到u-boot&#x2F;configs文件夹中重命名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">nano .config<br><br>make savedefconfig<br><br><span class="hljs-built_in">cp</span> defconfig configs/rk3328_beikeyun_defconfig<br></code></pre></td></tr></table></figure><p>修改build&#x2F;board_configs.sh文件，修改主板信息的UBOOT配置文件名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-string">&quot;rk3328-beikeyun&quot;</span>)<br>    ...<br>    UBOOT_DEFCONFIG=rk3328_beikeyun_defconfig<br>    ...<br></code></pre></td></tr></table></figure><p>切换到rockchip-bsp目录，执行以下命令开始构建u-boot：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-uboot.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
+          <p>上述通用的构建方法足矣满足正常启动Linux系统；如果想在u-boot阶段对设备完成硬件初始化以及执行更多操作，就需要使用对应的设备树构建u-boot，属于高级功能。</p><p><font color="#ff0000"> <b>该方法在最新的u-boot项目中构建未成功…</b></font></p><p>将rk3328-beikeyun-1296mhz.dts文件开头的 <strong><code>#include &quot;rk3328.dtsi</code>“</strong> 改为 <strong><code>#include &quot;rk3328-u-boot.dtsi&quot;</code></strong> 后放入路径：u-boot&#x2F;arch&#x2F;arm&#x2F;dts中，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs bash">dONFIG_ROCKCHIP_RK3328) += \<br>        rk3328-beikeyun-1296mhz.dtb \<br>        rk3328-nanopi-r2s-u-boot.dtb \<br>        rk3328-rock-pi-e-v3.dtb \<br>        rk3328-evb-u-boot.dtb \<br>        rk3328-orangepi-r1-plus-lts-u-boot.dtb \<br>        rk3328-rock-pi-e-v3-u-boot.dtb \<br>        rk3328-generic.dtb \<br>        rk3328-orangepi-r1-plus-u-boot.dtb \<br>        rk3328-sdram-ddr3-666.dtb \<br>        rk3328-generic-u-boot.dtb \<br>        rk3328-roc-cc-u-boot.dtb \<br>        rk3328-sdram-ddr4-666.dtb \<br>        rk3328-nanopi-r2c-plus-u-boot.dtb \<br>        rk3328-rock64-u-boot.dtb \<br>        rk3328-sdram-lpddr3-1600.dtb \<br>        rk3328-nanopi-r2c-u-boot.dtb \<br>        rk3328-rock-pi-e-base-u-boot.dtb \<br>        rk3328-sdram-lpddr3-666.dtb \<br>        rk3328-nanopi-r2s-plus-u-boot.dtb \<br>        rk3328-rock-pi-e-u-boot.dtb \<br>        rk3328-u-boot.dtb<br></code></pre></td></tr></table></figure><p>执行以下命令加载RK3328默认配置文件到 <strong>.config</strong>，并查询默认设备树名称在该文件中哪几个行出现过：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm evb-rk3328_defconfig<br><br>grep -n <span class="hljs-string">&quot;rk3328-evb&quot;</span> .config<br></code></pre></td></tr></table></figure><div class="note note-info">            <p>212:CONFIG_DEFAULT_DEVICE_TREE&#x3D;”rockchip&#x2F;rk3328-evb”<br>554:CONFIG_DEFAULT_FDT_FILE&#x3D;”rockchip&#x2F;rk3328-evb.dtb”<br>1112:CONFIG_OF_LIST&#x3D;”rockchip&#x2F;rk3328-evb”<br>1116:CONFIG_SPL_OF_LIST&#x3D;”rockchip&#x2F;rk3328-evb”</p>          </div><p>将上述查询结果中出现rk3328-evb的地方名称改为当前主板的设备树名称：</p><div class="note note-success">            <p>212:CONFIG_DEFAULT_DEVICE_TREE&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”<br>554:CONFIG_DEFAULT_FDT_FILE&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz.dtb”<br>1112:CONFIG_OF_LIST&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”<br>1116:CONFIG_SPL_OF_LIST&#x3D;”rockchip&#x2F;rk3328-beikeyun-1296mhz”</p>          </div><p>将rk3328-beikeyun-1296mhz.dts文件放入以下路径：u-boot&#x2F;dts&#x2F;upstream&#x2F;src&#x2F;arm64&#x2F;rockchip，然后保存当前配置到defconfig，并复制到u-boot&#x2F;configs文件夹中重命名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">nano .config<br><br>make savedefconfig<br><br><span class="hljs-built_in">cp</span> defconfig configs/rk3328_beikeyun_defconfig<br></code></pre></td></tr></table></figure><p>修改build&#x2F;board_configs.sh文件，修改主板信息的UBOOT配置文件名：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-string">&quot;rk3328-beikeyun&quot;</span>)<br>    ...<br>    UBOOT_DEFCONFIG=rk3328_beikeyun_defconfig<br>    ...<br></code></pre></td></tr></table></figure><p>切换到rockchip-bsp目录，执行以下命令开始构建u-boot：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-uboot.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
         </div>
       </div>
     </div>
@@ -630,12 +630,6 @@
 <p>首先需要配置kernel中用到的设备树文件，将rk3328-beikeyun-1296mhz.dts文件放入以下路径：kernel&#x2F;arch&#x2F;arm64&#x2F;boot&#x2F;dts&#x2F;rockchip，然后修改该目录下的MakeFile，在适当位置新增以下内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3328-beikeyun-1296mhz.dtb<br></code></pre></td></tr></table></figure>
 
-<p>切换到kernel目录，配置构建环境：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> ARCH=arm64<br><br><span class="hljs-built_in">export</span> CROSS_COMPILE=aarch64-linux-gnu-<br></code></pre></td></tr></table></figure>
-
-<p>加载默认配置信息并修改配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">make rockchip_linux_defconfig<br><br>make menuconfig<br></code></pre></td></tr></table></figure>
-
 <p>切换到rockchip-bsp根目录，使用以下命令开始构建kernel：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-kernel.sh rk3328-beikeyun<br></code></pre></td></tr></table></figure>
 
@@ -705,7 +699,9 @@
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install qemu-user-static<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>创建临时文件夹并将下载的镜像源码文件解压到其中</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> temp<br><br><span class="hljs-built_in">sudo</span> tar -xpf ubuntu-base-22.04-base-arm64.tar.gz -C temp<br></code></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> temp<br><br><span class="hljs-built_in">sudo</span> tar -zxvf ubuntu-base-22.04-base-arm64.tar.gz -C temp<br></code></pre></td></tr></table></figure>
+
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> tar -xvf rootfs.tar.xz -C temp<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>准备网络工作</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> -b /etc/resolv.conf temp/etc/resolv.conf<br></code></pre></td></tr></table></figure>
@@ -724,8 +720,8 @@
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chroot</span> temp<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>更换软件源</p>
-<p> 系统使用的官方默认源，在国内更新、下载时很不方便，以下将<code>/etc/apt/sources.list</code>更换为清华源：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</span><br><br>deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware</span><br><br>deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware</span><br><br>deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware</span><br></code></pre></td></tr></table></figure>
+<p> 系统源地址默认为官方源，在国内更新、下载时很不方便，使用<code>vi</code>工具编辑<code>/etc/apt/sources.list</code>，将其更换为清华源：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm main contrib non-free non-free-firmware</span><br><br>deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-updates main contrib non-free non-free-firmware</span><br><br>deb http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian/ bookworm-backports main contrib non-free non-free-firmware</span><br><br>deb http://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware<br><span class="hljs-comment"># deb-src http://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware</span><br></code></pre></td></tr></table></figure>
 
 <blockquote>
 <p>这里强制使用HTTP，而不是官方推荐的HTTPS，是因为使用HTTPS更新时会有CA证书报错：Certificate verification failed<br>后续正常进入系统，请更换为HTTPS即可</p>
@@ -735,7 +731,7 @@
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt update<br><br>apt upgrade<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>安装所需工具</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install man-db <span class="hljs-built_in">sudo</span> openssh-server net-tools network-manager iputils-ping bash-completion kmod cpio initramfs-tools linux-base netplan.io git systemd-timesyncd apt-utils dialog vim ifupdown ethtool wireless-tools network-manager rsync udev htop rsyslog bluetooth* bluez* blueman* language-pack-en-base language-pack-gnome-en-base language-pack-zh-hans-base language-pack-gnome-zh-hans-base<br></code></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt install usbutils fdisk man-db <span class="hljs-built_in">sudo</span> nano openssh-server net-tools network-manager iputils-ping bash-completion kmod initramfs-tools linux-base netplan.io git systemd-timesyncd apt-utils dialog vim ifupdown ethtool wireless-tools udev htop rsyslog lsb-release<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>开启ssh远程访问</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">sed -i <span class="hljs-string">&#x27;/PasswordAuthentication /c PasswordAuthentication yes&#x27;</span> /etc/ssh/ssh_config<br><br>sed -i <span class="hljs-string">&#x27;/PermitRootLogin /c PermitRootLogin yes&#x27;</span> /etc/ssh/sshd_config<br></code></pre></td></tr></table></figure>
@@ -747,7 +743,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">passwd root<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>修改主机名</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Ubuntu&quot;</span> &gt; /etc/hostname<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ubuntu&quot;</span> &gt; /etc/hostname<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>退出根文件系统</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">exit</span><br></code></pre></td></tr></table></figure>
@@ -802,14 +798,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> linuxroot.img ~/Desktop/rockchip-linux/radxa/rockchip-bsp/rootfs/linaro-rootfs.img<br></code></pre></td></tr></table></figure>
 </li>
 <li><p>切换到rockchip-bsp目录，开始生成可以烧录的system.img</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">build/mk-image.sh -c rk3328 -t system -r rootfs/linaro-rootfs.img<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./build/mk-image.sh -c rk3328 -t system -r rootfs/linaro-rootfs.img<br></code></pre></td></tr></table></figure></li>
 </ol>
 <div class="note note-info">
             <p>烧录地址：Address：<code>0x00000000</code>，Name：<code>system</code>。</p>
           </div>
-
-<p>根文件系统烧录到eMMC后，上电启动后使用<code>df -h</code>查看磁盘大小发现不正常，未占满整个分区，可以执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">resize2fs /dev/mtd/by-name/linuxroot<br></code></pre></td></tr></table></figure>
 
 <h4 id="手动构建rootfs"><a href="#手动构建rootfs" class="headerlink" title="手动构建rootfs"></a>手动构建rootfs</h4><p>使用<a target="_blank" rel="noopener" href="https://buildroot.org/">Buildroot</a>项目进行构建。</p>
 <p>首先下载Buildroot源码：</p>
@@ -820,13 +813,70 @@
 
 <p>后续有需求再补充…</p>
 <p>烧录地址：Address：<code>0x00040000</code>，Name：<code>rootfs</code>。</p>
+<h2 id="适配驱动"><a href="#适配驱动" class="headerlink" title="适配驱动"></a>适配驱动</h2><h3 id="USB无线网卡"><a href="#USB无线网卡" class="headerlink" title="USB无线网卡"></a>USB无线网卡</h3><h4 id="MT7601U"><a href="#MT7601U" class="headerlink" title="MT7601U"></a>MT7601U</h4><p>官方Linux Kernel中已经包含了该芯片的驱动源码，使用<code>make menuconfig</code>打开配置菜单页面，在 <strong>Device Drivers &gt; Network device support &gt; Wireless LAN</strong> 下就能找到 <strong>MediaTek MT7601U (USB) support</strong>，开启后重新构建内核（重新烧录内核）或者单独编译驱动（手动加载驱动）即可正常使用。</p>
+<h4 id="RTL8192CU"><a href="#RTL8192CU" class="headerlink" title="RTL8192CU"></a>RTL8192CU</h4><p>官方Linux Kernel中已经包含了该芯片的驱动源码，使用<code>make menuconfig</code>打开配置菜单页面，在 <strong>Device Drivers &gt; Network device support &gt; Wireless LAN &gt; Realtek rtlwifi family of devices</strong> 下就能找到 <strong>Realtek RTL8192CU&#x2F;RTL8188CU USB Wireless Network Adapter</strong>，开启后重新构建内核（重新烧录内核）或者单独编译驱动（手动加载驱动）即可正常使用。</p>
+<h3 id="SDIO无线网卡"><a href="#SDIO无线网卡" class="headerlink" title="SDIO无线网卡"></a>SDIO无线网卡</h3><h4 id="RTL8189ETV"><a href="#RTL8189ETV" class="headerlink" title="RTL8189ETV"></a>RTL8189ETV</h4><p>官方Linux Kernel中目前没有适配该芯片的驱动，可以使用<a target="_blank" rel="noopener" href="https://github.com/jwrdegoede/rtl8189ES_linux">rtl8189ES_linux仓库</a>提供的驱动源码自行编译。<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ 网络驱动移植（RTL8189） ](https://blog.csdn.net/m0_54929728/article/details/140646790)">[7]</span></a></sup></p>
+<p>先将仓库克隆到kernel&#x2F;drivers&#x2F;net&#x2F;wireless&#x2F;realtek中并重命名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/jwrdegoede/rtl8189ES_linux.git<br><br><span class="hljs-built_in">mv</span> rtl8189ES_linux rtl8189es<br></code></pre></td></tr></table></figure>
+
+<p>编辑该目录下的Kconfig，在适当位置新增以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> <span class="hljs-string">&quot;drivers/net/wireless/realtek/rtl8189es/Kconfig&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>编辑该目录下的Makefile，在适当位置新增以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">obj-$(CONFIG_RTL8187)		+= rtl8189es/<br></code></pre></td></tr></table></figure>
+
+<p>进入rtl8189es目录，编辑Kconfig，改为以下格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">config RTL8189ES<br>	tristate <span class="hljs-string">&quot;Realtek 8189E SDIO WiFi&quot;</span><br>	depends on USB<br>	<span class="hljs-built_in">help</span><br>	  Help message of RTL8189ES<br></code></pre></td></tr></table></figure>
+
+<p>切换到kernel根目录，使用<code>make menuconfig</code>打开配置菜单页面，在 <strong>Device Drivers &gt; Network device support &gt; Wireless LAN</strong> 下就能找到 <strong>Realtek 8189E SDIO WIFI</strong>，开启后重新构建内核（重新烧录内核）或者单独编译驱动（手动加载驱动）即可正常使用。</p>
+<h2 id="eMMC扩容"><a href="#eMMC扩容" class="headerlink" title="eMMC扩容"></a>eMMC扩容</h2><p>对于自己构建的Linux系统，烧录到板载eMMC芯片后上电启动，一般情况下系统分区是未完全占满eMMC的所有磁盘空间，需要根据以下操作对磁盘进行扩容。</p>
+<p>查看磁盘存储情况：<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span class="hint--top hint--rounded" aria-label="[ linux arm fdisk, 对未使用emmc分区扩容 ](https://blog.csdn.net/shliang310/article/details/125907840)">[8]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">df</span> -h<br></code></pre></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>Filesystem      Size  Used Avail Use% Mounted on<br>&#x2F;dev&#x2F;root       966M  836M   65M  93% &#x2F;<br>devtmpfs        975M     0  975M   0% &#x2F;dev<br>tmpfs           987M     0  987M   0% &#x2F;dev&#x2F;shm<br>tmpfs           395M  784K  394M   1% &#x2F;run<br>tmpfs           5.0M     0  5.0M   0% &#x2F;run&#x2F;lock<br>tmpfs           198M     0  198M   0% &#x2F;run&#x2F;user&#x2F;0</p>
+          </div>
+
+<p>查看当前系统分区磁盘信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fdisk -l<br></code></pre></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>Disk &#x2F;dev&#x2F;ram0: 4 MiB, 4194304 bytes, 8192 sectors<br>Units: sectors of 1 * 512 &#x3D; 512 bytes<br>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 4096 bytes<br>I&#x2F;O size (minimum&#x2F;optimal): 4096 bytes &#x2F; 4096 bytes<br>GPT PMBR size mismatch (3131391 !&#x3D; <font color="#00ff00">30535679</font>) will be corrected by write.<br>The backup GPT table is not on the end of the device.</p><p>Disk &#x2F;dev&#x2F;mmcblk1: 14.56 GiB, 15634268160 bytes, 30535680 sectors<br>Units: sectors of 1 * 512 &#x3D; 512 bytes<br>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes<br>I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes<br>Disklabel type: gpt<br>Disk identifier: 81FFA5A3-EA0D-4276-94EE-1FE84A77ACB0</p><p>Device           Start     End Sectors  Size Type<br>&#x2F;dev&#x2F;mmcblk1p1   32768 1081343 1048576  512M EFI System<br>&#x2F;dev&#x2F;mmcblk1p2 <font color="#ff0000"> <b>1081344</b></font> 3131358 2050015 1001M Linux filesystem</p><p>Disk &#x2F;dev&#x2F;mmcblk1boot0: 4 MiB, 4194304 bytes, 8192 sectors<br>Units: sectors of 1 * 512 &#x3D; 512 bytes<br>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes<br>I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes</p><p>Disk &#x2F;dev&#x2F;mmcblk1boot1: 4 MiB, 4194304 bytes, 8192 sectors<br>Units: sectors of 1 * 512 &#x3D; 512 bytes<br>Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes<br>I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes</p>
+          </div>
+
+<blockquote>
+<p><font color="#00ff00">30535679</font>：eMMC最大扇区数<br><font color="#ff0000"> <b>1081344</b></font>：系统起始扇区数</p>
+</blockquote>
+<p>记下系统起始扇区数，使用fdisk工具新建分区时会使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">fdisk /dev/mmcblk1<br></code></pre></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>Welcome to fdisk (util-linux 2.38.1).<br>Changes will remain in memory only, until you decide to write them.<br>Be careful before using the write command.</p><p>GPT PMBR size mismatch (3131391 !&#x3D; 30535679) will be corrected by write.<br>The backup GPT table is not on the end of the device. This problem will be corrected by write.<br>This disk is currently in use - repartitioning is probably a bad idea.<br>It’s recommended to umount all file systems, and swapoff all swap<br>partitions on this disk.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Command (m <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): d<br>Partition number (1,2, default 2): 2<br></code></pre></td></tr></table></figure><p>Partition 2 has been deleted.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">Command (m <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): n<br>Partition number (2-128, default 2):<br>First sector (34-30535646, default 1081344): 1081344<br>Last sector, +/-sectors or +/-size&#123;K,M,G,T,P&#125; (1081344-30535646, default 30533631):<br></code></pre></td></tr></table></figure><p>Created a new partition 2 of type ‘Linux filesystem’ and of size 14 GiB.<br>Partition #2 contains a ext4 signature.</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">Do you want to remove the signature? [Y]es/[N]o: n<br>Command (m <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>): w<br></code></pre></td></tr></table></figure><p>The partition table has been altered.<br>Syncing disks.</p>
+          </div>
+
+<p>更新系统分区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">resize2fs /dev/mmcblk1p2<br></code></pre></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>resize2fs 1.47.0 (5-Feb-2023)<br>Filesystem at &#x2F;dev&#x2F;mmcblk1p2 is mounted on &#x2F;; on[  521.217845] EXT4-fs (mmcblk1p2): resizing filesystem from 256000 to 3681536 blocks<br>-line resizing required<br>old_desc_blocks &#x3D; 1, new_desc_blocks &#x3D; 2<br>[  521.300662] EXT4-fs (mmcblk1p2): resized filesystem to 3681536<br>The filesystem on &#x2F;dev&#x2F;mmcblk1p2 is now 3681536 (4k) blocks long.</p>
+          </div>
+
+<p>再次查询磁盘情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">df</span> -h<br></code></pre></td></tr></table></figure>
+
+<div class="note note-info">
+            <p>Filesystem      Size  Used Avail Use% Mounted on<br>&#x2F;dev&#x2F;root        14G  836M   13G   7% &#x2F;<br>devtmpfs        975M     0  975M   0% &#x2F;dev<br>tmpfs           987M     0  987M   0% &#x2F;dev&#x2F;shm<br>tmpfs           395M  784K  394M   1% &#x2F;run<br>tmpfs           5.0M     0  5.0M   0% &#x2F;run&#x2F;lock<br>tmpfs           198M     0  198M   0% &#x2F;run&#x2F;user&#x2F;0</p>
+          </div>
+
 <h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Boot_option"> Boot option </a>
 <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://wiki.radxa.com/RockpiE/dev/Debian"> ROCK Pi E Build Debian </a>
 <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-openwrt/issues/415#issuecomment-1508234307"> Beelink-IPC-R(rk3588)支持使用OpenWrt和Armbian </a>
 <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Rockchip_Kernel#Install_Boot.2Fkernel">Rockchip Kernel </a>
 <a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://opensource.rock-chips.com/wiki_Partitions"> Partitions </a>
 <a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://wiki.t-firefly.com/zh_CN/ROC-RK3328-PC/linux_build_ubuntu_rootfs.html"> 创建 Ubuntu 根文件系统 </a>
-<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_54929728/article/details/140646790"> 网络驱动移植（RTL8189） </a>
+<a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:8" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/shliang310/article/details/125907840"> linux arm fdisk, 对未使用emmc分区扩容 </a>
+<a href="#fnref:8" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -915,6 +965,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/07/19/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E4%BB%8E%E5%A4%87%E4%BB%BD%E7%9A%84%E5%88%86%E5%8C%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E6%96%87%E4%BB%B6/" title="从备份的分区文件中提取设备树文件">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">从备份的分区文件中提取设备树文件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

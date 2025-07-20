@@ -1,0 +1,878 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言本文章主要针对使用瑞芯微芯片的主板或设备，通过AndroidTool_Release工具对原系统进行备份后，将其中可能包含了设备树的文件（resource.img、boot.img、kernel.img）进行解包，得到其设备树文件，仅供参考。 提取设备树resource.img克隆瑞芯微官方提供的rkbin工具： 1git clone https:&#x2F;&#x2F;github.com&#x2F;rockchip-l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从备份的分区文件中提取设备树文件">
+<meta property="og:url" content="https://dongxunz.github.io/2025/07/19/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E4%BB%8E%E5%A4%87%E4%BB%BD%E7%9A%84%E5%88%86%E5%8C%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言本文章主要针对使用瑞芯微芯片的主板或设备，通过AndroidTool_Release工具对原系统进行备份后，将其中可能包含了设备树的文件（resource.img、boot.img、kernel.img）进行解包，得到其设备树文件，仅供参考。 提取设备树resource.img克隆瑞芯微官方提供的rkbin工具： 1git clone https:&#x2F;&#x2F;github.com&#x2F;rockchip-l">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-07-19T13:16:24.000Z">
+<meta property="article:modified_time" content="2025-07-19T14:55:24.426Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="瑞芯微">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>从备份的分区文件中提取设备树文件 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                <span>分享</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
+                    <i class="iconfont icon-apple-fill"></i>
+                    <span>电路</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    <span>结构</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>游戏</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
+                    <i class="iconfont icon-book"></i>
+                    <span>阅读角</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="从备份的分区文件中提取设备树文件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-19 21:16" pubdate>
+          2025年7月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">从备份的分区文件中提取设备树文件</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2025年7月19日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文章主要针对使用瑞芯微芯片的主板或设备，通过AndroidTool_Release工具对原系统进行备份后，将其中可能包含了设备树的文件（resource.img、boot.img、kernel.img）进行解包，得到其设备树文件，仅供参考。</p>
+<h2 id="提取设备树"><a href="#提取设备树" class="headerlink" title="提取设备树"></a>提取设备树</h2><h3 id="resource-img"><a href="#resource-img" class="headerlink" title="resource.img"></a>resource.img</h3><p>克隆瑞芯微官方提供的rkbin工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/rockchip-linux/rkbin.git<br></code></pre></td></tr></table></figure>
+
+<p>进入rkbin&#x2F;tools目录，执行以下命令解包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./resource_tool --unpack --image=/home/dongxun2zc/rk3328/resource.img<br></code></pre></td></tr></table></figure>
+
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-c27fdf4c" role="button" aria-expanded="false" aria-controls="collapse-c27fdf4c">
+        <div class="fold-arrow">▶</div>参数含义
+      </div>
+      <div class="fold-collapse collapse" id="collapse-c27fdf4c">
+        <div class="fold-content">
+          <p><code>--unpack</code>：将给定img文件解包到当前目录<br><code>--image=path</code>：存放resource.img文件的路径</p>
+        </div>
+      </div>
+    </div>
+
+<p>解包成功信息（相关文件在rkbin&#x2F;tools&#x2F;out目录中）：</p>
+<div class="note note-success">
+            <p>Dump header:<br>partition version:0.0<br>header size:1<br>index tbl:<br>        offset:1        entry size:1    entry num:3<br>Dump Index table:<br>entry(0):<br>        path:rk-kernel.dtb<br>        offset:4        size:108215<br>entry(1):<br>        path:logo.bmp<br>        offset:216      size:6220854<br>entry(2):<br>        path:logo_kernel.bmp<br>        offset:12367    size:6220854<br>Unack &#x2F;home&#x2F;dongxun2zc&#x2F;rk3328&#x2F;resource.img to out successed!</p>
+          </div>
+
+<h3 id="boot-img"><a href="#boot-img" class="headerlink" title="boot.img"></a>boot.img</h3><p>下载Google提供的工具：<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[How to extract boot.img?](https://unix.stackexchange.com/questions/64628/how-to-extract-boot-img)">[1]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/android-serialport-api/android_bootimg_tools.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>解压：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar xvzf android_bootimg_tools.tar.gz <br></code></pre></td></tr></table></figure>
+
+<p>进入xxx目录，执行以下命令解包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./unpackbootimg -i boot.img -o boot_unpacked/<br></code></pre></td></tr></table></figure>
+
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-9bcf1fa7" role="button" aria-expanded="false" aria-controls="collapse-9bcf1fa7">
+        <div class="fold-arrow">▶</div>参数含义
+      </div>
+      <div class="fold-collapse collapse" id="collapse-9bcf1fa7">
+        <div class="fold-content">
+          <p><code>-i</code>：存放boot.img文件的路径<br><code>-o</code>：输出文件夹名称，省略即使用当前目录</p>
+        </div>
+      </div>
+    </div>
+
+<p>由于是使用瑞芯微提供的AndroidTool_Release工具备份的文件，这个boot.img文件格式其实是瑞芯微的格式文件（RKFW），所以使用Android官方工具解包时会提示格式错误：</p>
+<div class="note note-info">
+            <p>-bash: .&#x2F;unpackbootimg: cannot execute binary file: Exec format error</p>
+          </div>
+
+<h3 id="kernel-img"><a href="#kernel-img" class="headerlink" title="kernel.img"></a>kernel.img</h3><p>使用pip安装<a target="_blank" rel="noopener" href="https://pypi.org/project/extract-dtb/">extract-dtb工具</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">pip install extract-dtb<br></code></pre></td></tr></table></figure>
+
+<p>将第三方工具添加到PATH中：<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[WARNING: The scripts ... are installed in /home/.../.local/bin which is not on PATH. 警告之解决](https://blog.csdn.net/iprobobo/article/details/123306771)">[2]</span></a></sup></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export PATH=/home/dongxun2zc/.local/bin:$PATH&#x27;</span> &gt;&gt;~/.bashrc<br><br><span class="hljs-built_in">source</span> ~/.bashrc<br></code></pre></td></tr></table></figure>
+
+<p>执行以下命令解包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">extract-dtb kernel.img -o kernel_dtb<br></code></pre></td></tr></table></figure>
+
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-8bd116f4" role="button" aria-expanded="false" aria-controls="collapse-8bd116f4">
+        <div class="fold-arrow">▶</div>参数含义
+      </div>
+      <div class="fold-collapse collapse" id="collapse-8bd116f4">
+        <div class="fold-content">
+          <p><code>-o</code>：输出文件夹名称，省略即使用当前目录</p>
+        </div>
+      </div>
+    </div>
+
+<p>输出以下信息表示kernel.img中没有包含设备树文件：</p>
+<div class="note note-info">
+            <p>No appended dtbs found</p>
+          </div>
+
+<h2 id="反编译设备树"><a href="#反编译设备树" class="headerlink" title="反编译设备树"></a>反编译设备树</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">dtc -I dtb -O dts -o rk3328-j15.dts rk-kernel.dtb<br></code></pre></td></tr></table></figure>
+
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-b30ac1b6" role="button" aria-expanded="false" aria-controls="collapse-b30ac1b6">
+        <div class="fold-arrow">▶</div>参数含义
+      </div>
+      <div class="fold-collapse collapse" id="collapse-b30ac1b6">
+        <div class="fold-content">
+          <p><code>-I</code>：输入文件格式，有三种文件格式可选：dts - 设备树源文件格式、dtb - 设备树二进制文件格式、fs  - 指定设备树示例文件夹<br><code>-O</code>：输出文件格式，有四种文件格式可选：dts - 设备树源文件格式、dtb - 设备树二进制文件格式、yaml - YAML格式编码的文件格式、asm - 汇编源代码格式<br><code>-o</code>：输出文件名</p>
+        </div>
+      </div>
+    </div>
+
+<p>终端打印了一些警告信息，并生成了对应的设备树源文件：</p>
+<div class="note note-info">
+            <p>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;clocks&#x2F;clock_regs: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;clocks&#x2F;special_regs&#x2F;clk_gmac2io_mux: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;clocks&#x2F;special_regs&#x2F;clk_gmac2phy_mux: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;cpu: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;gpu0: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;gpu1: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;emmc: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;gmac2io: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;sdio: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;sdmmc: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;usbhost0: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;usb3otg: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;usbotg: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;gmac2phy: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;sdmmc_ext: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;dma: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;crypto: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;tsp: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;rkvdec_r: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;rkvdec_w: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;hdcp: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;vop: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;iep: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;vip: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;rga_r: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;rga_w: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;h265: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;h264: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;cpu_axi_bus&#x2F;qos&#x2F;vpu: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;ion&#x2F;rockchip,ion-heap@0: node has a unit name, but no reg property<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;syscon@ff450000&#x2F;usb2-phy@104: node has a unit name, but no reg property<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;syscon@ff450000&#x2F;usb2-phy@104&#x2F;host-port: node has a reg or ranges property, but no unit name<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;usb@ff600000: node has a unit name, but no reg property<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;regulators&#x2F;regulator@0: node has a unit name, but no reg property<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;regulators&#x2F;regulator@1: node has a unit name, but no reg property<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;pwm-regulator0&#x2F;regulators&#x2F;regulator@0: node has a unit name, but no reg property<br>rk3328-j15.dts: Warning (unit_address_vs_reg): &#x2F;pwm-regulator1&#x2F;regulators&#x2F;regulator@1: node has a unit name, but no reg property<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;pll_cons&#x2F;pll-clk@0000: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;pll_cons&#x2F;pll-clk@0020: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;pll_cons&#x2F;pll-clk@0040: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;pll_cons&#x2F;pll-clk@0060: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;pll_cons&#x2F;pll-clk@00a0: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0100: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0104: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0108: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@010c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0110: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0114: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0118: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@011c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0120: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0124: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0128: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@012c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0130: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0134: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0138: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@013c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0140: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0144: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0148: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@014c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0150: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0154: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0158: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@015c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0160: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0164: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0168: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@016c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0170: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0174: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0178: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@017c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0180: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0184: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0188: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@018c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0190: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0194: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0198: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@019c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01a0: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01a8: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01ac: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01b0: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01b4: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01c0: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01c4: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01c8: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01cc: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01d0: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0084: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0200: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0204: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0208: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@020c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0210: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0214: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0218: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@021c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0220: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0224: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0228: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@022c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0230: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0234: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0238: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@023c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0240: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0244: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0248: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@024c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0254: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0258: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@025c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0260: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0264: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0268: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@026c: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (unit_address_format): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_gate_cons&#x2F;gate-clk@0270: unit name should not have leading 0s<br>rk3328-j15.dts: Warning (simple_bus_reg): &#x2F;regulators&#x2F;regulator@0: missing or empty reg&#x2F;ranges property<br>rk3328-j15.dts: Warning (simple_bus_reg): &#x2F;regulators&#x2F;regulator@1: missing or empty reg&#x2F;ranges property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0100: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0104: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0108: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@010c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0110: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0114: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0118: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@011c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0120: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0124: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0128: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@012c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0130: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0134: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0138: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@013c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0140: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0144: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0148: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@014c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0150: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0154: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0158: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@015c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0160: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0164: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0168: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@016c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0170: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0174: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0178: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@017c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0180: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0184: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0188: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@018c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0190: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0194: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0198: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@019c: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01a0: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01a8: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01ac: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01b0: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01b4: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01c0: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01c4: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01c8: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01cc: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@01d0: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;clocks&#x2F;clock_regs&#x2F;clk_sel_cons&#x2F;sel-con@0084: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;regulators: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;pwm-regulator0&#x2F;regulators: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (avoid_unnecessary_addr_size): &#x2F;pwm-regulator1&#x2F;regulators: unnecessary #address-cells&#x2F;#size-cells without “ranges” or child “reg” property<br>rk3328-j15.dts: Warning (gpios_property): &#x2F;leds&#x2F;net-green: Missing property ‘#gpio-cells’ in node &#x2F;i2c@ff160000&#x2F;rk805@18 or bad phandle (referred from gpios[0])<br>rk3328-j15.dts: Warning (gpios_property): &#x2F;leds&#x2F;red: Missing property ‘#gpio-cells’ in node &#x2F;i2c@ff160000&#x2F;rk805@18 or bad phandle (referred from gpios[0])</p>
+          </div>
+
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/64628/how-to-extract-boot-img">How to extract boot.img?</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/iprobobo/article/details/123306771">WARNING: The scripts … are installed in &#x2F;home&#x2F;…&#x2F;.local&#x2F;bin which is not on PATH. 警告之解决</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/" class="print-no-link">#瑞芯微</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>从备份的分区文件中提取设备树文件</div>
+      <div>https://dongxunz.github.io/2025/07/19/瑞芯微/从备份的分区文件中提取设备树文件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/09/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Linux/" title="构建适用于RK3328芯片的Linux">
+                        <span class="hidden-mobile">构建适用于RK3328芯片的Linux</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>
