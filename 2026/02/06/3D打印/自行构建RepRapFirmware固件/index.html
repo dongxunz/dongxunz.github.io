@@ -1,0 +1,855 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言RepRapFirmware是一款开源且功能全面的运动控制固件，广泛用于各种DIY机器，常见于CNC和3D打印，也可以自定义各种复杂运动学，并且无需其他硬件，全部控制由ARM芯片完成，进一步提升了机器运行时的稳定性。 该官方固件目前只适配了Duet出品的主板，而第三方开源主板并不能使用，好在gloomyandy对其进行了扩展，适配了部分开源3D打印主板，但是随着RRF源码变得越来越复杂，构建的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自行构建RepRapFirmware固件">
+<meta property="og:url" content="https://dongxunz.github.io/2026/02/06/3D%E6%89%93%E5%8D%B0/%E8%87%AA%E8%A1%8C%E6%9E%84%E5%BB%BARepRapFirmware%E5%9B%BA%E4%BB%B6/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言RepRapFirmware是一款开源且功能全面的运动控制固件，广泛用于各种DIY机器，常见于CNC和3D打印，也可以自定义各种复杂运动学，并且无需其他硬件，全部控制由ARM芯片完成，进一步提升了机器运行时的稳定性。 该官方固件目前只适配了Duet出品的主板，而第三方开源主板并不能使用，好在gloomyandy对其进行了扩展，适配了部分开源3D打印主板，但是随着RRF源码变得越来越复杂，构建的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-06T07:07:52.000Z">
+<meta property="article:modified_time" content="2026-05-22T13:22:50.000Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="RepRapFirmware">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>自行构建RepRapFirmware固件 - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                <span>分享</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
+                    <i class="iconfont icon-apple-fill"></i>
+                    <span>电路</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    <span>结构</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>游戏</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
+                    <i class="iconfont icon-book"></i>
+                    <span>阅读角</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="自行构建RepRapFirmware固件"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-02-06 15:07" pubdate>
+          2026年2月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">自行构建RepRapFirmware固件</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2026年5月22日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a target="_blank" rel="noopener" href="https://docs.duet3d.com/User_manual/RepRapFirmware/RepRapFirmware_overview">RepRapFirmware</a>是一款开源且功能全面的运动控制固件，广泛用于各种DIY机器，常见于CNC和3D打印，也可以自定义各种复杂运动学，并且无需其他硬件，全部控制由ARM芯片完成，进一步提升了机器运行时的稳定性。</p>
+<p>该官方固件目前只适配了<a target="_blank" rel="noopener" href="https://docs.duet3d.com/en/Duet3D_hardware/Hardware_overview">Duet</a>出品的主板，而第三方开源主板并不能使用，好在<a target="_blank" rel="noopener" href="https://github.com/gloomyandy/RepRapFirmware">gloomyandy</a>对其进行了扩展，适配了部分开源3D打印主板，但是随着RRF源码变得越来越复杂，构建的固件体积也越来越大，截止到目前稳定版本（v3.6），已经有相当一部分的主板由于芯片Flash空间只有512Kb而被淘汰（仅可以使用之前的老版本），当前最新稳定版仅支持Flash空间大于或等于1024Kb的芯片才可使用。</p>
+<p>其实还有一小部分支持的主板可以使用当前最新版的RRF固件，例如：<a target="_blank" rel="noopener" href="https://github.com/makerbase-mks/MKS-Robin-Nano-V3.X/tree/main/hardware/MKS%20Robin%20Nano%20V3.0_003">MKS Robin Nano V3.0（STM32F407VGT6）</a>，可不知为何gloomyandy并未发布相关固件，所以在查阅大量资料后，打算自己在本地来构建该主板可用的RRF固件，并对过程进行记录，仅供参考。</p>
+<h2 id="安装工具"><a href="#安装工具" class="headerlink" title="安装工具"></a>安装工具</h2><p>安装构建所需工具请查看网页说明：<a target="_blank" rel="noopener" href="https://teamgloomy.github.io/firmware_build.html">Firmware Building Instructions</a><br>对于编译工具链请查看以下说明：<a target="_blank" rel="noopener" href="https://github.com/Duet3D/RepRapFirmware/wiki/Building-RepRapFirmware#instructions-for-building-under-windows">Instructions for building under Windows</a>，请根据具体构建的RRF版本选择合适的工具链版本，否则后续构建可能会报错。</p>
+<h2 id="项目分析"><a href="#项目分析" class="headerlink" title="项目分析"></a>项目分析</h2><h3 id="构建流程"><a href="#构建流程" class="headerlink" title="构建流程"></a>构建流程</h3><blockquote>
+<p>以下构建流程分析来自DeepSeek AI，请注意甄别。</p>
+</blockquote>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs txt">testbuild.sh<br>│<br>├─ 设置变量 (BUILD=Debug, NETWORK=COMBINED, VARIANT=STM32F4, ...)<br>│<br>└─ make -j8 firmware ...<br>        │<br>        └─ 根目录 makefile<br>            │<br>            └─ include RepRapFirmware/makefiles/STM32F4/makefile<br>                    │<br>                    ├─ include Core.mk          → 定义 CORE_OBJS, CORE_INCLUDES<br>                    ├─ include FreeRTOS.mk      → 定义 RRFLIBC_OBJS<br>                    ├─ include RRFLibraries.mk  → 定义 RRFLIBRARIES_OBJS, ...<br>                    ├─ include CANLib.mk        → 定义 CANLIB_OBJS, ...<br>                    ├─ include RepRapFirmware.mk→ 定义 RRF_OBJS, ...<br>                    │<br>                    ├─ 编译所有对象文件 (.o) 到 build/ 下<br>                    │     ├─ RepRapFirmware/src/*.cpp<br>                    │     ├─ RRFLibraries/*.cpp<br>                    │     ├─ CoreN2G/*.cpp<br>                    │     ├─ CANlib/*.cpp<br>                    │     ├─ FreeRTOS/*.c<br>                    │     └─ 汇编文件<br>                    │<br>                    ├─ 打包静态库 (libSTMCore.a, libRRFLibraries.a)<br>                    │<br>                    └─ 链接 → build/base_stm32f4.elf → build/base_stm32f4.bin<br>                            │<br>                            └─ staticMemStats.sh (内存统计)<br>        │<br>        └─ make 返回，testbuild.sh 继续<br>            │<br>            ├─ cp build/base_stm32f4.bin build/firmware_octopuspro1_0_f4.bin<br>            │<br>            └─ CrcAppender.exe build/firmware_octopuspro1_0_f4.bin boards/btt/octopuspro1_0_f4<br>                    └─ 输出带 CRC 的固件到 boards/btt/octopuspro1_0_f4/<br></code></pre></td></tr></table></figure>
+
+<p>观察并打开各流程的文件进行查看，暂时不要修改任何文件，直接在Git Bash终端运行任务<code>build octopus pro f4 firmware</code>进行初次构建，留意构建日志信息。</p>
+<h3 id="构建日志"><a href="#构建日志" class="headerlink" title="构建日志"></a>构建日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs bash">正在执行任务: bash ./testbuild.sh Debug STM32 STM32F4 STM32F4 COMBINED btt octopuspro1_0_f4<br><br>Debug STM32 STM32F4 STM32F4 COMBINED btt octopuspro1_0_f4<br>Debug STM32 STM32F4 STM32F4 COMBINED btt octopuspro1_0_f4<br>Building RepRapFirmware <span class="hljs-keyword">for</span> STM32F4 based boards:<br>- MAKE_DIR: RepRapFirmware/makefiles/STM32F4<br>- Build: Debug<br>- Linker Script used: ./RepRapFirmware/src/Hardware/STM32/variants/STM32F407/ldscript.ld<br>- Networking: WIFI + SBC<br>- Smart Drivers: TMC22XX<br>- Smart Drivers: TMC51XX<br>- Output name: base_stm32f4<br><br>...<br><br>\nBuilt STMCore\n<br>\nBuilt RRF Libraries\n<br>\nCreating base_stm32f4.bin<br>   text○   data○    bss○    dec○    hex○filename 719988○    644○  56804○ 777436○  bdcdc○./build/base_stm32f4.elf<br>----------Flash Memory Usage----------<br>             Start     End       Size<br>Bootloader  8000000  8007fff   8000 (32Kb)<br>Vectors     8008000  800bfff   4000 (16Kb)<br>Reset data  800c000  800ffff   4000 (16Kb)<br>Text        8010000  809e744  8e744 (569Kb)<br>ROData      809e744  80bfbbc  21478 (133Kb)<br>Total Flash 8000000  80bfbbc  bfbbc (766Kb)<br><br>------------ROData Detail-------------<br>                                 Size<br>Strings                       296e6 (165Kb)<br>ARM.exidx                      19b0 (6Kb)<br>ARM.extab                      15cc (5Kb)<br>Fill                            b15 (2Kb)<br>Const                          aa96 (42Kb)<br>Firmware binary: H:\RepRapFirmware\RRFBuild\build\firmware_octopuspro1_0_f4.bin<br>FS root directory: H:\RepRapFirmware\RRFBuild\boards\btt\octopuspro1_0_f4<br>Embedding file H:\RepRapFirmware\RRFBuild\boards\btt\octopuspro1_0_f4\rrfboot.txt (846 bytes @ 64)<br>Embedding file H:\RepRapFirmware\RRFBuild\boards\btt\octopuspro1_0_f4\rrfpins.txt (790 bytes @ 912)<br>CRC32 = 0x5C81400A<br> *  终端将被任务重用，按任意键关闭。<br></code></pre></td></tr></table></figure>
+
+<p>RRFBuild项目已经对源码进行了封装与集中化管理，在编译构建时不涉及任何PIN引脚功能配置（默认硬件核心功能除外），生成的base_stm32f4.bin文件对于STM32F4系列芯片为通用文件（可搭配SD卡sys文件夹中的board.txt、rrfboot.txt、rrfpins.txt进行自定义使用），只在最后步骤使用CrcAppender工具对相应boards文件夹下的板级描述文件（rrfboot.txt、rrfpins.txt）进行打包合并，生成适用于对应主板的firmware_octopuspro1_0_f4.bin文件。</p>
+<p>这也体现了RepRapFirmware固件的一个特点：<strong>编译时硬件无关，运行时动态选择</strong>，所以接下来我们只需要编写一个适合MKS Robin Nano V3.0（STM32F407VGT6）主板的板级描述文件，然后让工具打包生成所需固件即可。</p>
+<h2 id="构建便捷固件"><a href="#构建便捷固件" class="headerlink" title="构建便捷固件"></a>构建便捷固件</h2><p>便捷固件构建简单快捷，无需过多修改原项目的文件即可构建出RRF固件，但是需要先使用Jlink等工具通过SWD接口烧录一个其他相同芯片型号的主板Bootloader（对于本次使用的主板可以选择<a target="_blank" rel="noopener" href="https://teamgloomy.github.io/fly_e3_v2_bootloader_3_5.html">Fly E3 V2</a>），然后再根据Bootloader的偏移量烧录RRF固件，但这种与主板不匹配的Bootloader可能会在实际使用过程造成启动失败，请谨慎操作，该方法仅作为实验性质。<br>如需专用且匹配的Bootloader，请查看后续构建稳定固件方法。</p>
+<h3 id="新建板级描述文件"><a href="#新建板级描述文件" class="headerlink" title="新建板级描述文件"></a>新建板级描述文件</h3><p>在boards文件夹下，新建一个mks&#x2F;robin_nano_f4文件夹，新建以下文件并填入相应内容：</p>
+<p>boards\mks\robin_nano_f4\rrfboot.txt</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs txt">board=robin_nano_f4<br>board.longName=&quot;MKS Robin Nano V3.0 STM32F4&quot;<br>sdcard.internal.type=3<br>SPI0.pins=&#123;A.5,A.6,A.7&#125;<br>SPI1.pins=&#123;B.13,C.2,C.3&#125;<br>SPI2.pins=&#123;C.10,C.11,C.12&#125;<br>SPI3.pins=&#123;NoPin,NoPin,NoPin&#125;<br>SPI4.pins=&#123;NoPin,NoPin,NoPin&#125;<br>SPI5.pins=&#123;NoPin,NoPin,NoPin&#125;<br>stepper.powerEnablePin=NoPin<br>stepper.enablePins=&#123;E.4,E.1,B.8,B.3,A.3&#125;<br>stepper.stepPins=&#123;E.3,E.0,B.5,D.6,D.15&#125;<br>stepper.directionPins=&#123;E.2,B.9,B.4,D.3,A.1&#125;<br>stepper.numSmartDrivers=5<br>stepper.TmcUartPins=&#123;D.5,D.7,D.4,D.9,D.8&#125;<br>sbc.TfrReadyPin=NoPin<br>sbc.csPin=NoPin<br>sbc.spiChannel=255<br>wifi.espDataReadyPin=C.13<br>wifi.TfrReadyPin=C.7<br>wifi.espResetPin=E.9<br>wifi.csPin=C.15<br>wifi.spiChannel=1<br>wifi.serialRxTxPins=&#123;A.10,A.9&#125;<br>wifi.moduleType=esp32<br>heat.tempSensePins=&#123;C.0,C.1,A.2&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-8735e3f2" role="button" aria-expanded="false" aria-controls="collapse-8735e3f2">
+        <div class="fold-arrow">▶</div>参数含义
+      </div>
+      <div class="fold-collapse collapse" id="collapse-8735e3f2">
+        <div class="fold-content">
+          <blockquote><p>以下内容来自RepRapFirmware\src\Hardware\STM32\BoardConfig.cpp文件，并对其中各项参数进行中文注释，翻译不一定准确，具体参数功能请查阅项目源码。</p><p>由于RRF固件是逐行解析rrfboot.txt文件，所以对参数定义顺序有要求，部分重要参数不能随意调换位置，可查看boards文件夹下的其他板级描述文件作为参考。</p><p>请注意，不是每个参数必须定义然后对其进行配置，部分参数有其默认值，详情请查阅项目源码。</p></blockquote><ul><li><p><strong>Nomal</strong></p><p>  <code>board</code>：主板型号<br>  <code>board.longName</code>：主板名称<br>  <code>leds.diagnostic</code>：LED诊断指示灯引脚<br>  <code>leds.diagnosticOn</code>：是否开启LED诊断指示灯功能，默认值为true<br>  <code>leds.activity</code>：LED运行指示灯引脚<br>  <code>leds.activityOn</code>：是否开启LED运行指示灯，默认值为true</p></li><li><p><strong>Pin States</strong></p><p>  <code>pins.SetHigh</code>：设置引脚初始化为高电平<br>  <code>pins.SetLow</code>：设置引脚初始化为低电平</p></li><li><p><strong>Internal SDCard</strong></p><p>  <code>sdcard.internal.type</code>：内部SD卡通道组，默认值为SD_UNKNOWN，可配置为以下选项（输入<strong>分析结论</strong>中的数字即可）：</p>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//以下内容来自RepRapFirmware\src\Hardware\STM32\BoardConfig.cpp文件的第58行</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">enum</span> &#123;<br>    SD_SPI1_A, <span class="hljs-comment">//enum SDConfigs::SD_SPI1_A = 0</span><br>    SD_SPI1_B, <span class="hljs-comment">//enum SDConfigs::SD_SPI1_B = 1</span><br>    SD_SDIO,   <span class="hljs-comment">//enum SDConfigs::SD_SDIO   = 2</span><br>    SD_SPI3_A, <span class="hljs-comment">//enum SDConfigs::SD_SPI3_A = 3</span><br>    SD_SPI3_B, <span class="hljs-comment">//enum SDConfigs::SD_SPI3_B = 4</span><br>    SD_SPI2_A, <span class="hljs-comment">//enum SDConfigs::SD_SPI2_A = 5</span><br>    SD_UNKNOWN = <span class="hljs-number">0xfe</span>, <span class="hljs-comment">//enum SDConfigs::SD_UNKNOWN = 254</span><br>    SD_NONE = <span class="hljs-number">0xff</span> <span class="hljs-comment">//enum SDConfigs::SD_NONE = 255</span><br>&#125; SDConfigs;<br><br><span class="hljs-comment">/*以下分析结论来自RepRapFirmware\src\Hardware\STM32\BoardConfig.cpp文件的第59行与第598行</span><br><span class="hljs-comment">0：SD_SPI1_A 对应的引脚号为：PA5(SCK)、PA6(MISO)、PB5(MOSI)、PA4(CS)</span><br><span class="hljs-comment">1：SD_SPI1_B 对应的引脚号为：PA5(SCK)、PA6(MISO)、PA7(MOSI)、PA4(CS)</span><br><span class="hljs-comment">2：SD_SDIO   对应的引脚号为：PC8(SDIO_D0)、PC9(SDIO_D1)、PC10(SDIO_D2)、PC11(SDIO_D3)、PC12(SDIO_CK)、PD2(SDIO_CMD)</span><br><span class="hljs-comment">3：SD_SPI3_A 对应的引脚号为：PC10(SCK)、PC11(MISO)、PC12(MOSI)、PC9(CS)</span><br><span class="hljs-comment">4：SD_SPI3_B 对应的引脚号为：PC10(SCK)、PC11(MISO)、PC12(MOSI)、PA15(CS)</span><br><span class="hljs-comment">5：SD_SPI2_A 对应的引脚号为：PB13(SCK)、PB14(MISO)、PB15(MOSI)、PB12(CS)</span><br><span class="hljs-comment">254：SD_UNKNOWN 未知SD卡</span><br><span class="hljs-comment">255：SD_NONE 无SD卡</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure><p>  <code>sdCard.internal.spiFrequencyHz</code>：内部SD卡SPI通道频率，默认值为25000000，即频率为25MHz</p></li><li><p><strong>External SDCard</strong></p><p>  <code>sdCard.external.csPin</code>：外部SD卡Cs引脚，默认值为PA4（SD_SPI1_A CS）<br>  <code>sdCard.external.cardDetectPin</code>：外部SD卡检测引脚，默认值为NoPin<br>  <code>sdCard.external.spiFrequencyHz</code>：外部SD卡SPI通道频率，默认值为4000000，即频率为4MHz<br>  <code>sdCard.external.spiChannel</code>：外部SD卡使用的SPI通道组，既可以配置为<strong>SPI Channel</strong>中的SPI通道组，也可以配置为以下源码内置的通道组，默认值为SSPNONE</p>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//以下内容来自CoreN2G\src\STM32\SharedSPI\SPI.h文件的第22行</span><br><span class="hljs-keyword">enum</span> <span class="hljs-title class_">SSPChannel</span> : <span class="hljs-type">uint8_t</span><br>&#123;<br>    <span class="hljs-comment">//Hardware SPI</span><br>    SSP1 = <span class="hljs-number">0</span>,<br>    SSP2,<br>    SSP3,<br>    <span class="hljs-comment">//Software SPI</span><br>    SWSPI0,<br>    SWSPI1,<br>    SWSPI2,<br>    <span class="hljs-comment">//Additional Hardware devices</span><br><span class="hljs-meta"># <span class="hljs-keyword">if</span> STM32H7</span><br>    SSP4,<br>    SSP5,<br>    SSP6,<br><span class="hljs-meta"># <span class="hljs-keyword">endif</span></span><br>    SSPMAX,<br>    <span class="hljs-comment">// Hardware SDIO</span><br>    SSPSDIO = <span class="hljs-number">0xef</span>, <span class="hljs-comment">//239</span><br>    <span class="hljs-comment">// Not defined</span><br>    SSPNONE = <span class="hljs-number">0xff</span>  <span class="hljs-comment">//255</span><br>&#125;;<br><br><span class="hljs-comment">//以下内容来自RepRapFirmware\src\Hardware\STM32\BoardConfig.cpp文件的第598行</span><br>&#123;SSP1, &#123;PA_5, PA_6, PB_5, PA_4, NoPin, NoPin&#125;, &#123;<span class="hljs-number">0x502</span>, <span class="hljs-number">0x502</span>, <span class="hljs-number">0x502</span>, <span class="hljs-number">0x1</span>&#125;&#125;, <span class="hljs-comment">// SKR Pro</span><br>&#123;SSP1, &#123;PA_5, PA_6, PA_7, PA_4, NoPin, NoPin&#125;, &#123;<span class="hljs-number">0x502</span>, <span class="hljs-number">0x502</span>, <span class="hljs-number">0x502</span>, <span class="hljs-number">0x1</span>&#125;&#125;, <span class="hljs-comment">// GTR</span><br>&#123;SSPSDIO, &#123;PC_8, PC_9, PC_10, PC_11, PC_12, PD_2&#125;, &#123;<span class="hljs-number">0xc02</span>, <span class="hljs-number">0xc02</span>, <span class="hljs-number">0xc02</span>, <span class="hljs-number">0xc02</span>, <span class="hljs-number">0xc02</span>, <span class="hljs-number">0xc02</span>&#125;&#125;, <span class="hljs-comment">// Fly/SDIO</span><br>&#123;SSP3, &#123;PC_10, PC_11, PC_12, PC_9, NoPin, NoPin&#125;, &#123;<span class="hljs-number">0x602</span>, <span class="hljs-number">0x602</span>, <span class="hljs-number">0x602</span>, <span class="hljs-number">0x1</span>&#125;&#125;, <span class="hljs-comment">// MKS?</span><br>&#123;SSP3, &#123;PC_10, PC_11, PC_12, PA_15, NoPin, NoPin&#125;, &#123;<span class="hljs-number">0x602</span>, <span class="hljs-number">0x602</span>, <span class="hljs-number">0x602</span>, <span class="hljs-number">0x1</span>&#125;&#125;, <span class="hljs-comment">// BTT BX</span><br>&#123;SSP2, &#123;PB_13, PB_14, PB_15, PB_12, NoPin, NoPin&#125;, &#123;<span class="hljs-number">0x502</span>, <span class="hljs-number">0x502</span>, <span class="hljs-number">0x502</span>, <span class="hljs-number">0x1</span>&#125;&#125;, <span class="hljs-comment">// BTT kraken?</span><br></code></pre></td></tr></table></figure></li><li><p><strong>SPI Channel</strong></p><p>  <code>SPI0.pins</code><br>  <code>SPI1.pins</code><br>  <code>SPI2.pins</code><br>  <code>SPI3.pins</code><br>  <code>SPI4.pins</code><br>  <code>SPI5.pins</code><br>  SPI通道组，严格遵循以下定义顺序：<strong>SCK，MISO，MOSI</strong>；对于构建STM32F4系列芯片，最多有6个SPI通道，所以为了程序上的最大兼容性，必须申明0~5所有的SPI通道组，若实际芯片没有这么多SPI通道，剩余部分可以填写NoPin</p></li><li><p><strong>Steppers</strong></p><p>  <code>stepper.powerEnablePin</code>：电机驱动电源开启引脚，没有则填写NoPin<br>  <code>stepper.enablePins</code>：电机驱动Enable引脚组<br>  <code>stepper.stepPins</code>：电机驱动Step引脚组<br>  <code>stepper.directionPins</code>：电机驱动Dir引脚组<br>  <code>stepper.digipotFactor</code>：数字电位器系数（电路板是否内置了通过数字电位器实现的电流控制？）<br>  <code>stepper.numSmartDrivers</code>：支持TMC电机驱动总个数<br>  <code>stepper.TmcUartPins</code>：TMC驱动Uart引脚组<br>  <code>stepper.DriverType</code>：电机驱动类型组，可配置为以下选项：</p>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//以下选项来自以下RepRapFirmware\src\Hardware\STM32\Pins_STM32.h文件的第202行</span><br><br><span class="hljs-built_in">NamedEnum</span>(DriverType, <span class="hljs-type">uint8_t</span>,<br>      unknown,<br>      none,<br>      stepdir,<br>      tmcuartauto,<br>      tmc2208,<br>      tmc2209,<br>      tmc2660,<br>      tmcspiauto,<br>      tmc5160,<br>      tmc2240,<br>      tmcauto,<br>      invalid);<br></code></pre></td></tr></table></figure><p>  <code>stepper.num5160Drivers</code>：支持TMC5160电机驱动总个数<br>  <code>stepper.spiChannel</code>：电机驱动使用的SPI通道组，详细配置说明请查看<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>，默认值为SSPNONE</p><p>  <code>stepper.csDelay</code>：电机驱动SPI通道Cs延迟时间<br>  <code>stepper.TmcDiagPins</code>：TMC驱动Diag引脚组</p></li><li><p><strong>ATX Power</strong></p><p>  <code>atx.powerPin</code>：ATX电源引脚，没有则填写NoPin<br>  <code>atx.powerPinInverted</code>：ATX电源引脚信号反相<br>  <code>atx.initialPowerOn</code>：ATX电源初始化时开启引脚，默认值为true</p></li><li><p><strong>Power</strong></p><p>  <code>power.VInDetectPin</code>：电源供电检测引脚，没有就填写NoPin<br>  <code>power.voltage</code>：电源供电电压，默认值为24</p></li><li><p><strong>SBC Cofig</strong></p><p>  <code>sbc.TfrReadyPin</code>：SBC模式Tfr就绪引脚<br>  <code>sbc.csPin</code>：SBC模式Cs引脚，默认值为PB12（SD_SPI2_A CS）<br>  <code>sbc.spiChannel</code>：SBC模式使用的SPI通道组，详细配置说明请查看<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>，默认值为SSP2</p><p>  <code>sbc.loadConfig</code>：SBC模式是否从单板计算机加载配置，默认值为true</p><blockquote><ul><li>该选项为true，且<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>配置为SSPNONE，代表没有外部SD卡，因此处于SBC模式从单板计算机加载配置</li><li>该选项为true，且<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>配置外部SD卡，不管外部SD卡是否存放配置文件，都会优先从单板计算机上进行加载，如果没有则从外部SD卡加载</li><li>该选项为false，且<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>配置外部SD卡，则从外部SD卡加载配置</li></ul></blockquote><p>  <code>sbc.sbcMode</code>：是否开启SBC模式，0为关闭，1为开启</p></li><li><p><strong>WIFI Cofig</strong></p><ul><li><p><strong>ESP8266</strong></p><p>  <code>8266wifi.espDataReadyPin</code>：ESP8266模块数据就绪引脚<br>  <code>8266wifi.TfrReadyPin</code>：ESP8266模块Tfr就绪引脚<br>  <code>8266wifi.lpcTfrReadyPin</code>：ESP8266模块Tfr就绪引脚，该配置和上述<code>8266wifi.TfrReadyPin</code>其实是一样的，仅作为兼容性被保留<br>  <code>8266wifi.espResetPin</code>：ESP8266模块复位引脚<br>  <code>8266wifi.csPin</code>：ESP8266模块SPI Cs引脚，默认为PB12（SD_SPI2_A CS）<br>  <code>8266wifi.serialRxTxPins</code>：ESP8266模块Rx、Tx引脚，严格遵循以下定义顺序：<strong>RX,TX</strong><br>  <code>8266wifi.spiChannel</code>：ESP8266模块使用的SPI通道组，详细配置说明请查看<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>，默认值为SSP2</p><p>  <code>8266wifi.clockReg</code>：ESP8266模块时钟寄存器<br>  <code>8266wifi.moduleType</code>：WIFI模块类型，可配置为以下选项：</p>  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//以下选项来自以下RepRapFirmware\src\Hardware\STM32\Pins_STM32.h文件的第350行</span><br><span class="hljs-comment">//目前该项目仅支持esp8266或者esp32，其他类型可能是测试用途，请注意区分</span><br><span class="hljs-built_in">NamedEnum</span>(NetworkModuleType, <span class="hljs-type">uint8_t</span>,<br>    espauto,<br>    none,<br>    esp8266,<br>    esp32,<br>    esp32eth,<br>    esp32s3,<br>    esp32c3,<br>    esp32c5);<br></code></pre></td></tr></table></figure></li><li><p><strong>ESP32</strong></p><p>  <code>wifi.espDataReadyPin</code>：ESP32模块数据就绪引脚<br>  <code>wifi.TfrReadyPin</code>：ESP32模块Tfr就绪引脚<br>  <code>wifi.espResetPin</code>：ESP32模块复位引脚<br>  <code>wifi.csPin</code>：ESP32模块SPI Cs引脚，默认为PB12（SD_SPI2_A CS）<br>  <code>wifi.serialRxTxPins</code>：ESP32模块Rx、Tx引脚，严格遵循以下定义顺序：<strong>RX,TX</strong><br>  <code>wifi.spiChannel</code>：ESP32模块使用的SPI通道组，详细配置说明请查看<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>，默认值为SSP2</p><p>  <code>wifi.clockReg</code>：ESP32模块时钟寄存器<br>  <code>wifi.moduleType</code>：WIFI模块类型，详细配置说明请查看<strong>WIFI Cofig</strong> -&gt; <strong>ESP8266</strong> -&gt; <code>8266wifi.moduleType</code></p></li></ul></li><li><p><strong>Heater &amp; Sensors</strong></p><p>  <code>heat.tempSensePins</code>：热敏引脚组<br>  <code>heat.spiTempSensorCSPins</code>：SPI通道热敏Cs引脚组<br>  <code>heat.spiTempSensorChannel</code>：SPI通道热敏通道组，默认值为255<br>  <code>heat.thermistorSeriesResistor</code>：热敏上拉电阻阻值，默认值为4700.0</p></li><li><p><strong>MINI12864</strong></p><p>  <code>lcd.lcdCSPin</code>：LCD片选引脚<br>  <code>lcd.lcdBeepPin</code>：LCD蜂鸣器引脚<br>  <code>lcd.encoderPinA</code>：LCD编码器引脚A<br>  <code>lcd.encoderPinB</code>：LCD编码器引脚B<br>  <code>lcd.encoderPinSw</code>：LCD编码器按钮引脚<br>  <code>lcd.lcdDCPin</code>：LCD数据&#x2F;指令引脚<br>  <code>lcd.panelButtonPin</code>：LCD面板按钮引脚<br>  <code>lcd.spiChannel</code>：LCD使用的SPI通道组，详细配置说明请查看<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>，默认值为SSP2，默认值为255，即未配置SPI通道</p></li><li><p><strong>Serial</strong></p><p>  <code>serial.aux.rxTxPins</code>：辅助串口组，严格遵循以下定义顺序：<strong>RX,TX</strong>，默认值为PA10、PA9<br>  <code>serial.aux2.rxTxPins</code>：辅助2串口组，严格遵循以下定义顺序：<strong>RX,TX</strong></p></li><li><p><strong>RGB</strong></p><p>  <code>led.neopixelPin</code>：RGB信号引脚</p></li><li><p><strong>accelerometer</strong></p><p>  <code>accelerometer.spiChannel</code>：加速度计使用的SPI通道组，详细配置说明请查看<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code>，默认值为255，即没有加速度计</p></li><li><p><strong>CAN Bus</strong></p><p>  <code>can.spiChannel</code>CAN Bus使用的SPI通道组，详细配置说明请查看<strong>External SDCard</strong> -&gt; <code>sdCard.external.spiChannel</code></p><p>  <code>can.csPin</code>CAN Bus片选引脚<br>  <code>can.spiFrequencyHz</code>CAN Bus SPI通道频率，默认值为15000000，即为15MHz<br>  <code>can.readPin</code>CAN Bus数据读取引脚，仅STM32H7系列芯片支持，默认值为PB8<br>  <code>can.writePin</code>CAN Bus数据写入引脚，仅STM32H7系列芯片支持，默认值为PB9<br>  <code>can.exp.address</code>CAN Bus扩展地址，默认地址为255</p></li></ul>
+        </div>
+      </div>
+    </div>
+
+<p>boards\mks\robin_nano_f4\rrfpins.txt</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs txt">C.1 e1temp,t1<br>A.2 e2temp,t2<br>C.0 bedtemp,tb<br>A.15 xmin,xstop<br>D.2 ymin,ystop<br>C.8 zmin,zstop<br>C.4 zmax<br>A.13 servo0<br>A.8 probe<br>A.0 bed,hbed<br>E.5 e0heat,he0<br>B.0 e1heat,he1<br>C.14 fan1,fan<br>B.1 fan2<br>C.5 beep<br>E.13 btnenc<br>D.13 lcden<br>C.6 tx6,lcdrs<br>E.15 lcdd5<br>E.14 lcdd4<br>D.11 lcdd6<br>D.10 lcdd7<br>A.6 lcdmiso<br>A.5 lcdsck<br>E.11 btnen2<br>E.10 lcdss<br>E.8 btnen1<br>A.7 lcdmosi<br>E.12 spirs<br>D.12 sdcd,status<br><br></code></pre></td></tr></table></figure>
+
+
+    <div class="fold">
+      <div class="fold-title fold-info collapsed" data-toggle="collapse" href="#collapse-6442bed9" role="button" aria-expanded="false" aria-controls="collapse-6442bed9">
+        <div class="fold-arrow">▶</div>申明格式
+      </div>
+      <div class="fold-collapse collapse" id="collapse-6442bed9">
+        <div class="fold-content">
+          <p><code>A.1 e0temp,t0</code></p><p>前面为对应引脚号，后面则为引脚别名，有多个别名使用逗号分隔，便于在sys&#x2F;config.g中使用</p>
+        </div>
+      </div>
+    </div>
+
+<h3 id="修改构建脚本"><a href="#修改构建脚本" class="headerlink" title="修改构建脚本"></a>修改构建脚本</h3><ul>
+<li><p>.vscode\tasks.json<br>  在适当位置添加以下内容：</p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build robin nano f4 firmware&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bash ./testbuild.sh Debug STM32 STM32F4 STM32F4 COMBINED mks robin_nano_f4&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;osx&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;env&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;PATH&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;env:PATH&#125;&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;linux&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;env&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;PATH&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;env:PATH&#125;&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;windows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;env&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;PATH&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$&#123;env:PATH&#125;&quot;</span><br>      <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;$gcc&quot;</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="开始构建常规固件"><a href="#开始构建常规固件" class="headerlink" title="开始构建常规固件"></a>开始构建常规固件</h3><p>在git bash终端运行任务：<code>build robin nano f4 firmware</code>，等待构建完成就会生成firmware_robin_nano_f4.bin文件。</p>
+<h2 id="构建稳定固件"><a href="#构建稳定固件" class="headerlink" title="构建稳定固件"></a>构建稳定固件</h2><p>稳定固件需要使用MKS曾经为该主板适配的早期版本（v3.2）<a target="_blank" rel="noopener" href="https://github.com/makerbase-mks/RepRapFirmware-for-MKS-Boards">RepRapFirmware-for-MKS-Boards</a>中的Bootloader文件，该文件对使用RRF固件做了适配，并且提供SD卡更新固件的功能，方便后续升级。<br>但是该文件的Bootloader偏移量为48KB，而原项目默认为32KB，所以想要构建的RRF固件正常使用，就需要修改以下部分文件内容。</p>
+<h3 id="修改文件记录"><a href="#修改文件记录" class="headerlink" title="修改文件记录"></a>修改文件记录</h3><p>先按文章前面部分<strong>构建便捷固件</strong>中的<strong>新建板级描述文件</strong>以及<strong>修改构建脚本</strong>进行操作，再执行以下修改！</p>
+<ul>
+<li><p>RepRapFirmware\src\Hardware\STM32\variants\STM32F407\ldscript.ld<br>  原文件：</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">VECTOR</span> (rx) : ORIGIN = <span class="hljs-number">0x8008000</span>, LENGTH = <span class="hljs-number">16</span>K<br><span class="hljs-built_in">RESETDATA</span> (rx) : ORIGIN = <span class="hljs-number">0x800C000</span>, LENGTH = <span class="hljs-number">16</span>K<br><span class="hljs-built_in">FLASH</span> (rx)      : ORIGIN = <span class="hljs-number">0x8010000</span>, LENGTH = <span class="hljs-number">1024</span>K - <span class="hljs-number">64</span>K<br></code></pre></td></tr></table></figure>
+
+<p>  修改为：</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">VECTOR</span> (rx) : ORIGIN = <span class="hljs-number">0x800C000</span>, LENGTH = <span class="hljs-number">16</span>K<br><span class="hljs-built_in">RESETDATA</span> (rx) : ORIGIN = <span class="hljs-number">0x8010000</span>, LENGTH = <span class="hljs-number">64</span>K<br><span class="hljs-built_in">FLASH</span> (rx)      : ORIGIN = <span class="hljs-number">0x8020000</span>, LENGTH = <span class="hljs-number">1024</span>K - <span class="hljs-number">128</span>K<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>RepRapFirmware\src\Hardware\STM32\Pins_STM32.h<br>  原文件：</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta"># <span class="hljs-keyword">define</span> FIRMWARE_NAME <span class="hljs-string">&quot;RepRapFirmware for STM32F4 based Boards&quot;</span></span><br>...<br><br><span class="hljs-meta"># <span class="hljs-keyword">define</span> FLASH_DATA_LENGTH (16*1024) <span class="hljs-comment">//size of the Software Reset Data in Flash</span></span><br></code></pre></td></tr></table></figure>
+
+<p>  修改为：</p>
+  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta"># <span class="hljs-keyword">define</span> FIRMWARE_NAME <span class="hljs-string">&quot;RepRapFirmware for STM32F4 based Boards&quot;</span></span><br>...<br><br><span class="hljs-meta"># <span class="hljs-keyword">define</span> FLASH_DATA_LENGTH (64*1024) <span class="hljs-comment">//size of the Software Reset Data in Flash</span></span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="开始构建稳定固件"><a href="#开始构建稳定固件" class="headerlink" title="开始构建稳定固件"></a>开始构建稳定固件</h3><p>在Git Bash终端运行任务：<code>build robin nano f4 firmware</code>，等待构建完成就会生成firmware_robin_nano_f4.bin文件。</p>
+<h2 id="特别鸣谢"><a href="#特别鸣谢" class="headerlink" title="特别鸣谢"></a>特别鸣谢</h2><p><a target="_blank" rel="noopener" href="https://github.com/Duet3D/RepRapFirmware/wiki/Building-RepRapFirmware">Building RepRapFirmware</a><br><a target="_blank" rel="noopener" href="https://github.com/makerbase-mks/RepRapFirmware-for-MKS-Boards">RepRapFirmware-for-MKS-Boards</a><br><a target="_blank" rel="noopener" href="https://github.com/gloomyandy/RepRapFirmware/issues/100">[FR] Robin Nano v3 support?</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-chain-item">3D打印</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/RepRapFirmware/" class="print-no-link">#RepRapFirmware</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>自行构建RepRapFirmware固件</div>
+      <div>https://dongxunz.github.io/2026/02/06/3D打印/自行构建RepRapFirmware固件/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年2月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/03/18/3D%E6%89%93%E5%8D%B0/ATMEGA32U4%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" title="ATMEGA32U4刷入Klipper固件">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ATMEGA32U4刷入Klipper固件</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/11/05/3D%E6%89%93%E5%8D%B0/%E4%BD%BF%E7%94%A8Katapult%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ESTM32F103%E7%9A%84Bootloader/" title="使用Katapult编译适用于STM32F103的Bootloader">
+                        <span class="hidden-mobile">使用Katapult编译适用于STM32F103的Bootloader</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>

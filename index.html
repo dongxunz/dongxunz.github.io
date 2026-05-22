@@ -322,6 +322,494 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/2026/03/18/3D%E6%89%93%E5%8D%B0/ATMEGA32U4%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" target="_self">
+          ATMEGA32U4刷入Klipper固件
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/03/18/3D%E6%89%93%E5%8D%B0/ATMEGA32U4%E5%88%B7%E5%85%A5Klipper%E5%9B%BA%E4%BB%B6/" target="_self">
+        <div>
+          前言之前复刻了一张Prusa MMU的主板，想着后面等有一台Prusa I3 MK3S+机皇时再搭配MMU进行多色打印，但是实际测试发现Prusa对该固件进行了细致的调参，使用不匹配的硬件是无法正常使用的，会一直报错：Unknown ERRO，检查串口信息为：echo:MMU2:Command Error, last bytes: 00 00 00 00 00 00 00 00 00 00 00
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-03-18 21:43" pubdate>
+              2026-03-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Arduino/" class="category-chain-item">Arduino</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/ATMEGA32U4/">#ATMEGA32U4</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/02/06/3D%E6%89%93%E5%8D%B0/%E8%87%AA%E8%A1%8C%E6%9E%84%E5%BB%BARepRapFirmware%E5%9B%BA%E4%BB%B6/" target="_self">
+          自行构建RepRapFirmware固件
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/02/06/3D%E6%89%93%E5%8D%B0/%E8%87%AA%E8%A1%8C%E6%9E%84%E5%BB%BARepRapFirmware%E5%9B%BA%E4%BB%B6/" target="_self">
+        <div>
+          前言RepRapFirmware是一款开源且功能全面的运动控制固件，广泛用于各种DIY机器，常见于CNC和3D打印，也可以自定义各种复杂运动学，并且无需其他硬件，全部控制由ARM芯片完成，进一步提升了机器运行时的稳定性。 该官方固件目前只适配了Duet出品的主板，而第三方开源主板并不能使用，好在gloomyandy对其进行了扩展，适配了部分开源3D打印主板，但是随着RRF源码变得越来越复杂，构建的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-02-06 15:07" pubdate>
+              2026-02-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-chain-item">3D打印</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RepRapFirmware/">#RepRapFirmware</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/11/05/3D%E6%89%93%E5%8D%B0/%E4%BD%BF%E7%94%A8Katapult%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ESTM32F103%E7%9A%84Bootloader/" target="_self">
+          使用Katapult编译适用于STM32F103的Bootloader
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/11/05/3D%E6%89%93%E5%8D%B0/%E4%BD%BF%E7%94%A8Katapult%E7%BC%96%E8%AF%91%E9%80%82%E7%94%A8%E4%BA%8ESTM32F103%E7%9A%84Bootloader/" target="_self">
+        <div>
+          前言由于STM32F103系列芯片没有官方DFU模式，如果想烧录Klipper固件或者升级则需要借助JLINK或者USB TO TTL串口线等工具，这属实有点难用了😓本人经过一番网上搜寻与查资料，发现Katapult项目可以很轻松构建适用于该芯片的Bootloader，后续进行烧录或者升级Klipper固件只需要复位两次即可，大大省去了接线的繁琐操作。 首次烧录Bootloader 克隆Kata
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-11-05 22:32" pubdate>
+              2025-11-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-chain-item">3D打印</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Klipper/">#Klipper</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/25/%E5%85%A8%E5%BF%97/%E5%85%A8%E5%BF%97H618%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/" target="_self">
+          全志H618电视盒子刷机记录
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/25/%E5%85%A8%E5%BF%97/%E5%85%A8%E5%BF%97H618%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%88%B7%E6%9C%BA%E8%AE%B0%E5%BD%95/" target="_self">
+        <div>
+          前言全志 H616 TF CardEMMCFEI模式安装驱动，短接电视盒子主板上的短接点，使主板进入USB烧录模式。 进入FEI模式： 下载使用于全志H618芯片的 USB烧录镜像到eMMC(Linux镜像) 下载Zadig工具： Zadig Allwinner Soc in FEL mode .\sunxi-fel.exe -v ver
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-25 20:01" pubdate>
+              2025-08-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%85%A8%E5%BF%97/">#全志</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/23/Linux/Armbian-Build%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/" target="_self">
+          Armbian-Build项目配置解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/23/Linux/Armbian-Build%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          前言对于可以运行Linux系统的ARM设备，Armbian一定是首选的，该项目成立之初就是为了解决这一难题，而且官方一直在维护更新，各大Linux开发板也有适配，提供的Build脚本还支持民间魔改，自行适配，极大的方便了普通折腾爱好者；但是目前还没有在网上找到一篇相关文章指导如何适配其他Linux开发板，所以本文章将对其过程进行记录，不一定包含所有内容，更多信息请查看官方文档：Armbian Do
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-23 14:28" pubdate>
+              2025-08-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Armbian/">#Armbian</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/05/%E5%85%A8%E5%BF%97/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8E%E5%85%A8%E5%BF%97H616&amp;H618%E8%8A%AF%E7%89%87%E7%9A%84Linux/" target="_self">
+          构建适用于全志H616/H618芯片的Linux
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/05/%E5%85%A8%E5%BF%97/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8E%E5%85%A8%E5%BF%97H616&amp;H618%E8%8A%AF%E7%89%87%E7%9A%84Linux/" target="_self">
+        <div>
+          前言网上对于全志 H616&#x2F;H618 芯片构建Linux系统的文章太少了，于是打算摸索其中的方法，经过多次失败与漫长测试后，从中总结出了一些知识，于是写下这篇文章进行记录，仅供参考。 本文章使用Ubuntu 22.04.5系统进行构建，其他系统请查看文档：Toolchain。 手动构建各分区文件交叉编译工具链使用apt源的交叉编译工具链： 对于32位架构： 12345sudo apt-g
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-05 23:20" pubdate>
+              2025-08-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%85%A8%E5%BF%97/">#全志</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/02/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E5%8F%8D%E7%BC%96%E8%AF%91%E8%AE%BE%E5%A4%87%E6%A0%91%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+          反编译设备树代码解析
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/02/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E5%8F%8D%E7%BC%96%E8%AF%91%E8%AE%BE%E5%A4%87%E6%A0%91%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_self">
+        <div>
+          前言特别鸣谢
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-02 14:12" pubdate>
+              2025-08-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/">#瑞芯微</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/" target="_self">
+          构建适用于RK3399芯片的Armbian
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/" target="_self">
+        <div>
+          前言偶尔在小黄鱼收到一块主板，版本号为：ZYSJ1739A2-V3.0，核心是瑞芯微RK3399，但是刷入ophub适配的zysj镜像之后，网口无法正常使用，通过查看设备树文件，发现适配的其实是zysj另一款同核心型号的主板：ZYSJ1739A-V1.3，以太网PHY芯片型号：RTL8211E（千兆）；而我这块主板的以太网PHY芯片型号：RTL8201F（百兆），所以本文章将对原设备树进行小幅修改
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-07-28 16:21" pubdate>
+              2025-07-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/">#瑞芯微</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/2025/07/19/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E4%BB%8E%E5%A4%87%E4%BB%BD%E7%9A%84%E5%88%86%E5%8C%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E6%96%87%E4%BB%B6/" target="_self">
           从备份的分区文件中提取设备树文件
         </a>
@@ -431,496 +919,6 @@
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/">#瑞芯微</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" target="_self">
-          Linux基础配置
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/07/08/Linux/Linux%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" target="_self">
-        <div>
-          前言本文章对各Linux系统的基础配置（代理，apt源）进行记录，以防不时之需。 修改系统时区默认时区是UTC，使用以下命令修改时区为亚洲（CST）： 1sudo timedatectl list-timezones  1sudo timedatectl set-timezone Asia/Shanghai  1date  apt代理临时代理： 123export http_proxy=http:
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-07-08 21:53" pubdate>
-              2025-07-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Linux%E9%85%8D%E7%BD%AE/">#Linux配置</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/06/24/DIY/KNOMI%E5%9B%BA%E4%BB%B6%E7%83%A7%E5%BD%95%E8%AF%B4%E6%98%8E/" target="_self">
-          KNOMI固件烧录说明
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/24/DIY/KNOMI%E5%9B%BA%E4%BB%B6%E7%83%A7%E5%BD%95%E8%AF%B4%E6%98%8E/" target="_self">
-        <div>
-          前言本项目使用的硬件是SisST大佬发布在立创开源广场的项目：BTT KNOMI 打印头屏幕；偶然发现Bigtreetech给Klipper固件使用的Knomi1与拓竹使用的Panda Knomi硬件资源其实是一样的（供电接口座方向不一样），只需要烧录对应固件即可进行切换使用，本文章主要记录各自烧录固件的步骤。 工具下载地址：Flash 下载工具用户指南 KNOMI1 下载Bigtreetech
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-06-24 11:22" pubdate>
-              2025-06-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/DIY/" class="category-chain-item">DIY</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/KNOMI/">#KNOMI</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" target="_self">
-          一加6刷机操作指南
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/19/Android/%E4%B8%80%E5%8A%A06%E5%88%B7%E6%9C%BA%E6%93%8D%E4%BD%9C%E6%8C%87%E5%8D%97/" target="_self">
-        <div>
-          前言之前一加6刷的Project Sakura系统，但是最近一段时间不知道出现什么情况，莫名其妙自动重启卡在开机画面进不去系统，而这手机发售距今已经有7年的时间了，很多OS都已经没人维护，找了一圈发现LineageOS for OnePlus 6还在更新，本文章将指导刷入该系统的过程，以防时间太长忘记了… 解锁 开启ADB调试模式手机正常开机，进入 系统设置 &gt; 关于手机，多次连续点击版本号
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-06-19 13:34" pubdate>
-              2025-06-19
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Android/" class="category-chain-item">Android</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%88%B7%E6%9C%BA/">#刷机</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/" target="_self">
-          生成适用于RK3328芯片的Loader
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/17/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E7%94%9F%E6%88%90%E9%80%82%E7%94%A8%E4%BA%8ERK3328%E8%8A%AF%E7%89%87%E7%9A%84Loader/" target="_self">
-        <div>
-          前言手里有几块搭载瑞芯微RK3328芯片的主板，使用瑞芯微官方工具RKDevTool一直切换不到板载的eMMC存储（SAMSUNG KLMAG1JETD-B041），显示Loader不支持切换到eMMC存储，而网上找到的现成Loader文件都已经是很多年前的，版本各种各样，挨个测试下来都失败，所以打算自己折腾用于切换eMMC存储的Loader。 后续发现Loader文件其实是一系列官方提供的bin
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-06-17 00:20" pubdate>
-              2025-06-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/">#瑞芯微</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/" target="_self">
-          魔百和电视盒子安装Klipper
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/06/01/3D%E6%89%93%E5%8D%B0/%E9%AD%94%E7%99%BE%E5%92%8C%E7%94%B5%E8%A7%86%E7%9B%92%E5%AD%90%E5%AE%89%E8%A3%85Klipper/" target="_self">
-        <div>
-          前言偶尔在闲鱼捡到一款魔百和的电视盒子，型号为：CM201-1（YS），在网上搜寻一番后，发现可以烧录Linux系统，所以想着试试能不能安装Klipper来给3D打印机当上位机，本文章用于记录折腾过程。 硬件信息我手上这款电视盒子主板的硬件信息如下：主芯片：晶晨S905-L3（GXLX2）运行内存：三星K4B4G1646E-BCMA * 2 （1GB）存储芯片：深圳佰维BWCMGSC11G08G（
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-06-01 12:49" pubdate>
-              2025-06-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-chain-item">3D打印</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Klipper/">#Klipper</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/24/3D%E6%89%93%E5%8D%B0/MKS%20SKIPR%20V1.0%E4%B8%BB%E6%9D%BF%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/" target="_self">
-          MKS SKIPR V1.0主板折腾记录
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/24/3D%E6%89%93%E5%8D%B0/MKS%20SKIPR%20V1.0%E4%B8%BB%E6%9D%BF%E6%8A%98%E8%85%BE%E8%AE%B0%E5%BD%95/" target="_self">
-        <div>
-          前言本人遇到一块MKS SKIPR V1.0主板出现不加载TF卡系统的异常情况，查阅相关资料以及排查硬件电路后，终于找到问题：主板上的一根DDR信号线与GND发生了短路；问题算是找到了，但是这期间的折腾过程还是比较曲折的，于是就用这篇文章来记录吧，仅供参考👨🏻‍🔧 相关知识该主板上位机采用瑞芯微RK3328芯片，首先了解一下该芯片启动流程及相关模式：[1] 加载模式：  SPI模式  EMM
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-24 23:24" pubdate>
-              2025-05-24
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/3D%E6%89%93%E5%8D%B0/" class="category-chain-item">3D打印</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%94%B5%E8%B7%AF%E6%9D%BF/">#电路板</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/05/05/%E4%BB%93%E5%82%A8/%E6%90%AD%E5%BB%BAInvenTree%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" target="_self">
-          搭建InvenTree库存管理系统
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/05/05/%E4%BB%93%E5%82%A8/%E6%90%AD%E5%BB%BAInvenTree%E5%BA%93%E5%AD%98%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F/" target="_self">
-        <div>
-          对于电子爱好者来说，随着购买的电子器件种类繁多，缺少整理会造成不必要的浪费，所以需要一款软件对各种器件进行记录与整理；市面上有面向企业的付费软件，但是对于个人使用而言，这无疑是负担不起的，在网上搜索了一些开源并且免费的软件，发现InvenTree开源仓储管理系统符合本人使用场景，并且搭建方式多种，对使用环境要求不高，本篇文章将指导如何在OpenMediaVault系统中使用Docker搭建Inve
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-05-05 16:54" pubdate>
-              2025-05-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E4%BB%93%E5%82%A8/" class="category-chain-item">仓储</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/InvenTree/">#InvenTree</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/2025/04/11/%E8%B4%B4%E7%89%87%E6%9C%BA/Marlin%20For%20OpenPNP%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/" target="_self">
-          Marlin For OpenPNP固件参数配置
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2025/04/11/%E8%B4%B4%E7%89%87%E6%9C%BA/Marlin%20For%20OpenPNP%E5%9B%BA%E4%BB%B6%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/" target="_self">
-        <div>
-          前言Smoothieboard固件项目的README概述里说该项目适用于LPC17xx微控制器，但将固件烧录到BTT SKR V1.4（LPC1768）主板后，连最基础的移动都无法执行，串口会返回答复：printe pause，使用OpenPNP软件检测固件时也会打印已弃用的警告信息：WARNING:deprecated_MCU。 如果烧录到BTT SKR V1.4 Turbo（LPC1769）主
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2025-04-11 12:24" pubdate>
-              2025-04-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%B4%B4%E7%89%87%E6%9C%BA/" class="category-chain-item">贴片机</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OpenPNP/">#OpenPNP</a>
-            
-              <a href="/tags/Marlin/">#Marlin</a>
             
           </div>
         

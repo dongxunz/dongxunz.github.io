@@ -1,0 +1,890 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="dongxunz">
+  <meta name="keywords" content="写作,记录,发现,感悟">
+  
+    <meta name="description" content="前言偶尔在小黄鱼收到一块主板，版本号为：ZYSJ1739A2-V3.0，核心是瑞芯微RK3399，但是刷入ophub适配的zysj镜像之后，网口无法正常使用，通过查看设备树文件，发现适配的其实是zysj另一款同核心型号的主板：ZYSJ1739A-V1.3，以太网PHY芯片型号：RTL8211E（千兆）；而我这块主板的以太网PHY芯片型号：RTL8201F（百兆），所以本文章将对原设备树进行小幅修改">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建适用于RK3399芯片的Armbian">
+<meta property="og:url" content="https://dongxunz.github.io/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/index.html">
+<meta property="og:site_name" content="dongxunz&#39;s blogs">
+<meta property="og:description" content="前言偶尔在小黄鱼收到一块主板，版本号为：ZYSJ1739A2-V3.0，核心是瑞芯微RK3399，但是刷入ophub适配的zysj镜像之后，网口无法正常使用，通过查看设备树文件，发现适配的其实是zysj另一款同核心型号的主板：ZYSJ1739A-V1.3，以太网PHY芯片型号：RTL8211E（千兆）；而我这块主板的以太网PHY芯片型号：RTL8201F（百兆），所以本文章将对原设备树进行小幅修改">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/fork_linux-6.12.y_kernel.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/build_kernel.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/build_armbian.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/network_device_info.png">
+<meta property="og:image" content="https://dongxunz.github.io/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/usb_hub_info.png">
+<meta property="article:published_time" content="2025-07-28T08:21:05.000Z">
+<meta property="article:modified_time" content="2025-08-23T06:20:31.194Z">
+<meta property="article:author" content="dongxunz">
+<meta property="article:tag" content="瑞芯微">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dongxunz.github.io/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/fork_linux-6.12.y_kernel.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>构建适用于RK3399芯片的Armbian - dongxunz&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"dongxunz.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":80,"cursorChar":"🍀","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"c524bca28dcbbfa00ddaa02b141c7bbf","google":null,"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null},"gtag":null,"woyaola":null,"cnzz":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?c524bca28dcbbfa00ddaa02b141c7bbf";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>dongxunz&#39;s blogs💬</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-cliplist"></i>
+                <span>分享</span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/circuitry/" target="_self">
+                    <i class="iconfont icon-apple-fill"></i>
+                    <span>电路</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/construction/" target="_self">
+                    <i class="iconfont icon-codepen-fill"></i>
+                    <span>结构</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/game/" target="_self">
+                    <i class="iconfont icon-steam"></i>
+                    <span>游戏</span>
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/share/reading-corner/" target="_self">
+                    <i class="iconfont icon-book"></i>
+                    <span>阅读角</span>
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/clover.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="构建适用于RK3399芯片的Armbian"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-28 16:21" pubdate>
+          2025年7月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          5 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">构建适用于RK3399芯片的Armbian</h1>
+            
+              <p id="updated-time" class="note note-info" style="">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：2025年8月23日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>偶尔在小黄鱼收到一块主板，版本号为：<strong>ZYSJ1739A2-V3.0</strong>，核心是瑞芯微RK3399，但是刷入ophub适配的zysj镜像之后，网口无法正常使用，通过查看设备树文件，发现适配的其实是zysj另一款同核心型号的主板：<strong>ZYSJ1739A-V1.3</strong>，以太网PHY芯片型号：<strong>RTL8211E</strong>（千兆）；而我这块主板的以太网PHY芯片型号：<strong>RTL8201F</strong>（百兆），所以本文章将对原设备树进行小幅修改，使其网口能够正常工作，并自行构建对应的Armbian，仅供参考。</p>
+<p>使用的项目主要是 <a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian">ophub amlogic-s9xxx-armbian</a> 以及 <a target="_blank" rel="noopener" href="https://github.com/unifreq">unifreq linux</a> 等Github开源项目，配合Actions进行云上编译操作，可以方便快速构建适用于瑞芯微RK3399芯片的Kernel以及Armbian。</p>
+<h2 id="U-Boot"><a href="#U-Boot" class="headerlink" title="U-Boot"></a>U-Boot</h2><p>在构建amlogic-s9xxx-armbian时会自动下载<a target="_blank" rel="noopener" href="https://github.com/ophub/u-boot">ophub u-boot</a>仓库的文件，无法修改成其他仓库。</p>
+<h2 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h2><p>Github上有很多适用于瑞芯微芯片的kernel项目，以下只列出部分：<a target="_blank" rel="noopener" href="https://github.com/rockchip-linux">rockchip-linux</a>、<a target="_blank" rel="noopener" href="https://github.com/radxa">radxa computer</a>、<a target="_blank" rel="noopener" href="https://github.com/unifreq">unifreq</a>、<a target="_blank" rel="noopener" href="https://github.com/codesnas">codesnas</a>。</p>
+<p>本文章使用的是<code>unifreq/linux-6.12.y</code>，先Fork该项目到自己的仓库（记得给unifreq大佬一个⭐️）。</p>
+<p><img src="/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/fork_linux-6.12.y_kernel.png" srcset="/img/loading.gif" lazyload alt="Fork Kernel"></p>
+<ol>
+<li><p>修改设备树</p>
+<blockquote>
+<p>对于不同核心架构的瑞芯微芯片而言，设备树路径会有所不同：<br>32位：<code>arch/arm/boot/dts/rockchip</code><br>64位：<code>arch/arm64/boot/dts/rockchip</code></p>
+</blockquote>
+<p> zysj的设备树路径为：<code>arch/arm64/boot/dts/rockchip/rk3399-zysj.dts</code></p>
+<p> 修改<code>&amp;gmac</code>代码：</p>
+ <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-comment">// ZYSJ1739A2-V3.0使用的是百兆以太网收发器（大部分源码来自原版ZYSJ1739A-V1.3，其中部分为DeepSeek生成）</span><br><span class="hljs-variable">&amp;gmac</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">// 新增以下复位配置</span><br>    <span class="hljs-attr">resets</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;cru</span> SRST_A_GMAC&gt;</span><span class="hljs-punctuation">;</span>              <span class="hljs-comment">// 根据SoC手册确定复位控制器名称</span><br>    <span class="hljs-attr">reset-names</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;stmmaceth&quot;</span><span class="hljs-punctuation">;</span>                <span class="hljs-comment">// 标准复位名称</span><br>    <span class="hljs-attr">snps,reset-active-low</span><span class="hljs-punctuation">;</span>                    <span class="hljs-comment">// 复位信号低电平有效（根据硬件调整）</span><br>    <span class="hljs-attr">snps,reset-delays-us</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">0</span> <span class="hljs-number">10000</span> <span class="hljs-number">50000</span>&gt;</span><span class="hljs-punctuation">;</span>   <span class="hljs-comment">// 复位时序：延迟、脉宽、释放后延迟</span><br>    <span class="hljs-attr">assigned-clock-rates</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">50000000</span>&gt;</span><span class="hljs-punctuation">;</span>        <span class="hljs-comment">// RMII必须的50MHz时钟</span><br><br>    <span class="hljs-attr">assigned-clocks</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;cru</span> SCLK_RMII_SRC&gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">assigned-clock-parents</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;clkin_gmac</span>&gt;</span><span class="hljs-punctuation">;</span><br>    clock_in_<span class="hljs-attr">out</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;output&quot;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">phy-supply</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;vcc_phy</span>&gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">phy-mode</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;rmii&quot;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">phy-handle</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;rtl8201f</span>&gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">pinctrl-names</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">;</span><br>    pinctrl<span class="hljs-number">-0</span> = <span class="hljs-params">&lt;<span class="hljs-variable">&amp;rgmii_pins</span>&gt;</span>, <span class="hljs-params">&lt;<span class="hljs-variable">&amp;phy_intb</span>&gt;</span>, <span class="hljs-params">&lt;<span class="hljs-variable">&amp;phy_rstb</span>&gt;</span><span class="hljs-punctuation">;</span><br>    tx_<span class="hljs-attr">delay</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">0x30</span>&gt;</span><span class="hljs-punctuation">;</span><br>    rx_<span class="hljs-attr">delay</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">0x20</span>&gt;</span><span class="hljs-punctuation">;</span><br>    <span class="hljs-attr">status</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;okay&quot;</span><span class="hljs-punctuation">;</span><br> <br>    <span class="hljs-title class_">mdio</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">compatible</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;snps,dwmac-mdio&quot;</span><span class="hljs-punctuation">;</span><br>        <span class="hljs-meta">#address-cells = &lt;1&gt;;</span><br>        <span class="hljs-meta">#size-cells = &lt;0&gt;;</span><br><span class="hljs-symbol"></span><br><span class="hljs-symbol">        rtl8201f:</span> <span class="hljs-title class_">ethernet-phy@1</span> <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">compatible</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;ethernet-phy-id001c.c816&quot;</span><span class="hljs-punctuation">;</span>          <span class="hljs-comment">// RTL8201F PHY ID</span><br>            <span class="hljs-attr">reg</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">1</span>&gt;</span><span class="hljs-punctuation">;</span><br>            <span class="hljs-attr">interrupt-parent</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;gpio3</span>&gt;</span><span class="hljs-punctuation">;</span><br>            <span class="hljs-attr">interrupts</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;RK_PB2 IRQ_TYPE_LEVEL_LOW&gt;</span><span class="hljs-punctuation">;</span><br>            <span class="hljs-attr">reset-assert-us</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">10000</span>&gt;</span><span class="hljs-punctuation">;</span><br>            <span class="hljs-attr">reset-deassert-us</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-number">30000</span>&gt;</span><span class="hljs-punctuation">;</span><br>            <span class="hljs-attr">reset-gpios</span> <span class="hljs-operator">=</span> <span class="hljs-params">&lt;<span class="hljs-variable">&amp;gpio3</span> RK_PB7 GPIO_ACTIVE_LOW&gt;</span><span class="hljs-punctuation">;</span>    <span class="hljs-comment">// bsp</span><br>        <span class="hljs-punctuation">&#125;;</span><br>    <span class="hljs-punctuation">&#125;;</span><br><span class="hljs-punctuation">&#125;;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>适配驱动</p>
+<p> 暂未涉及…</p>
+</li>
+</ol>
+<h2 id="Build-Kernel"><a href="#Build-Kernel" class="headerlink" title="Build Kernel"></a>Build Kernel</h2><p>Fork <a target="_blank" rel="noopener" href="https://github.com/ophub/kernel">ophub kernel</a> 项目到自己的仓库（记得给opbub大佬一个⭐️）。</p>
+<h3 id="配置Actions脚本"><a href="#配置Actions脚本" class="headerlink" title="配置Actions脚本"></a>配置Actions脚本</h3><p>路径：<code>.github/workflows/compile-mainline-kernel-on-a-server.yml</code></p>
+<ol>
+<li><p>新增kernel源码</p>
+<p> Fork Kernel源码后的仓库用户名（账号用户名），在构建时会去对应仓库寻找源码进行构建。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">kernel_source:</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Select the kernel source&quot;</span><br>  <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;dongxunz&quot;</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>  <span class="hljs-attr">options:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">unifreq</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">codesnas</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">dongxunz</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>设置kernel版本</p>
+<p> <code>y</code>代表通配符，也可以指定具体版本，我这里选择的<code>6.12.39</code>，与Fork Kernel版本要对应。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">kernel_version:</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Select kernel version&quot;</span><br>  <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;6.12.39&quot;</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>  <span class="hljs-attr">options:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.4</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.10</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.15</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.1</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.6</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.12</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.12</span><span class="hljs-number">.39</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.4</span><span class="hljs-string">.y_5.10.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.15</span><span class="hljs-string">.y_6.1.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.6</span><span class="hljs-string">.y_6.12.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.4</span><span class="hljs-string">.y_5.10.y_5.15.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.1</span><span class="hljs-string">.y_6.6.y_6.12.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">all</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>新增kernel签名</p>
+<p> 在登录Armbian时终端会打印 kernel_version - signature 信息。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">kernel_sign:</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Set the kernel custom signature&quot;</span><br>  <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;-dongxunz&quot;</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>  <span class="hljs-attr">options:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">-ophub</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">-dongxunz</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">-yourname</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改映射路径名称</p>
+<p> 在<code>- name: Create a mapped directory</code>任务中，将以下两条代码其中的<code>ophub</code>改为你的用户名称，以下是我修改的示例：</p>
+<blockquote>
+<p>这一步不修改好像也可以~</p>
+</blockquote>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">ln</span> <span class="hljs-string">-sf</span> <span class="hljs-string">/builder/kernel</span> <span class="hljs-string">/home/runner/work/_actions/dongxunz/amlogic-s9xxx-armbian/main/compile-kernel/kernel</span><br><span class="hljs-string">ln</span> <span class="hljs-string">-sf</span> <span class="hljs-string">/builder/output</span> <span class="hljs-string">/home/runner/work/_actions/dongxunz/amlogic-s9xxx-armbian/main/compile-kernel/output</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改内核使用的配置</p>
+<p> 在<code>- name: Compile the kernel [ $&#123;&#123; inputs.kernel_version &#125;&#125; ]</code>任务中，将<code>uses:</code>中的<code>ophub</code>修改成你的用户名称，以下是我修改的示例：</p>
+<blockquote>
+<p>这一步不修改好像也可以~</p>
+</blockquote>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">uses:</span> <span class="hljs-string">dongxunz/amlogic-s9xxx-armbian@main</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>执行上述操作后，就可以开始使用Actions构建Kernel了，以下是操作示意图：</p>
+<p><img src="/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/build_kernel.png" srcset="/img/loading.gif" lazyload alt="Build Kernel"></p>
+<p>等待构建完成，会在该仓库的Releases中生成后续构建Armbian时所需的kernel_version.tar.gz文件。</p>
+<h2 id="Build-Armbian"><a href="#Build-Armbian" class="headerlink" title="Build Armbian"></a>Build Armbian</h2><p>Fork <a target="_blank" rel="noopener" href="https://github.com/ophub/amlogic-s9xxx-armbian">ophub amlogic-s9xxx-armbian</a> 项目到自己的仓库（记得给opbub大佬一个⭐️）。</p>
+<h3 id="修改Actions脚本"><a href="#修改Actions脚本" class="headerlink" title="修改Actions脚本"></a>修改Actions脚本</h3><p>路径：<code>.github/workflows/build-armbian-server-image.yml</code></p>
+<ol>
+<li><p>配置Release版本</p>
+<p> 我选择的是<code>bookworm</code>。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">set_release:</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Select OS Release.&quot;</span><br>  <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;bookworm&quot;</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>  <span class="hljs-attr">options:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">jammy</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">noble</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">bookworm</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">bullseye</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改主板型号</p>
+<p> 我选择的是<code>zysj</code>。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">armbian_board:</span><br>        <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Select device board.&quot;</span><br>        <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>        <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;zysj&quot;</span><br>        <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>        <span class="hljs-attr">options:</span><br>          <span class="hljs-bullet">-</span> <span class="hljs-string">all</span><br>            <span class="hljs-string">...</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>配置kernel版本</p>
+<p> 与Build Kernel里的Release版本要对应，我选择的是<code>6.12.39</code>。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">armbian_kernel:</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Select kernel version.&quot;</span><br>  <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;6.12.39&quot;</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>  <span class="hljs-attr">options:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.4</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.10</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.15</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.1</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.1</span><span class="hljs-number">.147</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.6</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.12</span><span class="hljs-string">.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.12</span><span class="hljs-number">.39</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.4</span><span class="hljs-string">.y_5.10.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">5.15</span><span class="hljs-string">.y_6.1.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.1</span><span class="hljs-string">.y_6.12.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.1</span><span class="hljs-string">.y_6.6.y</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-number">6.6</span><span class="hljs-string">.y_6.12.y</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>配置kernel源码仓库</p>
+<p> Build Kernel源码仓库。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">kernel_repo:</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Set the kernel repository.&quot;</span><br>  <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;dongxunz/kernel&quot;</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>  <span class="hljs-attr">options:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">ophub/kernel</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">dongxunz/kernel</span> <br></code></pre></td></tr></table></figure>
+</li>
+<li><p>新增Armbian签名</p>
+<p> 可以在系统里查询构建人签名信息。</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">builder_name:</span><br>  <span class="hljs-attr">description:</span> <span class="hljs-string">&quot;Set Armbian builder signature.&quot;</span><br>  <span class="hljs-attr">required:</span> <span class="hljs-literal">false</span><br>  <span class="hljs-attr">default:</span> <span class="hljs-string">&quot;dongxunz&quot;</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">choice</span><br>  <span class="hljs-attr">options:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">ophub</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">angel</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">dongxunz</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改下载源码存放路径</p>
+<p> 在 <code>- name: Download source code</code> 任务中，将以下两条代码其中的<code>ophub</code>改为你的用户名称，以下是我修改的示例：</p>
+<blockquote>
+<p>这一步不修改好像也可以~</p>
+</blockquote>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-string">ln</span> <span class="hljs-string">-sf</span> <span class="hljs-string">/builder/build</span> <span class="hljs-string">/home/runner/work/_actions/dongxunz/amlogic-s9xxx-armbian/main/build</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改重建时的配置</p>
+<p> 在 <code>- name: Rebuild Armbian</code>任务中，将<code>uses:</code>中的<code>ophub</code>修改成你的用户名称，以下是我修改的示例：</p>
+ <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">uses:</span> <span class="hljs-string">dongxunz/amlogic-s9xxx-armbian@main</span><br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>执行上述操作后，就可以开始使用Actions构建Armbian了，以下是操作示意图：</p>
+<p><img src="/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/build_armbian.png" srcset="/img/loading.gif" lazyload alt="Build Armbian"></p>
+<blockquote>
+<p>注意：其中的<code>Auto use the latest kernel.</code>请慎重勾选。</p>
+</blockquote>
+<p>等待构建完成，会在该仓库的Releases中生成对应主板的Armbian.img文件。</p>
+<h2 id="硬件修改"><a href="#硬件修改" class="headerlink" title="硬件修改"></a>硬件修改</h2><p>主板上有一个FE2.1 USB HUB芯片，但是其XRSTJ引脚其实是被某个GPIO控制的，默认上电是低电平，导致该芯片一直处于复位状态无法正常工作，目前暂未从原厂dtb中找到对应的引脚，索性将该引脚与GPIO相连的电阻直接去掉，再次上电即可正常工作。</p>
+<h2 id="烧录测试"><a href="#烧录测试" class="headerlink" title="烧录测试"></a>烧录测试</h2><p>网络设备情况：</p>
+<p><img src="/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/network_device_info.png" srcset="/img/loading.gif" lazyload alt="Network Device Info"></p>
+<p>USB HUB情况：</p>
+<p><img src="/2025/07/28/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E6%9E%84%E5%BB%BA%E9%80%82%E7%94%A8%E4%BA%8ERK3399%E8%8A%AF%E7%89%87%E7%9A%84Armbian/usb_hub_info.png" srcset="/img/loading.gif" lazyload alt="USB Hub Info"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.cyqsd.cn/9505.html">ZYSJ-RK3399移植armbian</a><br><a target="_blank" rel="noopener" href="https://wiki.t-firefly.com/zh_CN/ROC-RK3568-PC/driver_gpio.html">GPIO 使用</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/tccxy/p/13384287.html">rk3399修改调试串口</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zyly/category/2211698.html">大奥特曼打小怪兽-rk3399</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%91%9E%E8%8A%AF%E5%BE%AE/" class="print-no-link">#瑞芯微</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>构建适用于RK3399芯片的Armbian</div>
+      <div>https://dongxunz.github.io/2025/07/28/瑞芯微/构建适用于RK3399芯片的Armbian/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>dongxunz</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年7月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/02/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E5%8F%8D%E7%BC%96%E8%AF%91%E8%AE%BE%E5%A4%87%E6%A0%91%E4%BB%A3%E7%A0%81%E8%A7%A3%E6%9E%90/" title="反编译设备树代码解析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">反编译设备树代码解析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/19/%E7%91%9E%E8%8A%AF%E5%BE%AE/%E4%BB%8E%E5%A4%87%E4%BB%BD%E7%9A%84%E5%88%86%E5%8C%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E6%8F%90%E5%8F%96%E8%AE%BE%E5%A4%87%E6%A0%91%E6%96%87%E4%BB%B6/" title="从备份的分区文件中提取设备树文件">
+                        <span class="hidden-mobile">从备份的分区文件中提取设备树文件</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/shizuku.model.json"},"display":{"position":"left","width":210,"height":340,"hOffset":40},"mobile":{"show":false,"scale":0.8},"name":{"canvas":"live2dcanvas","div":"live2d-widget"},"dialog":{"enable":true,"hitokoto":true,"script":{"every idle 10s":"$hitokoto$","tap body":"🈲","tap face":"🤞"}},"react":{"opacity":1},"dev":{"border":false},"log":false});</script></body>
+</html>
